@@ -1,0 +1,98 @@
+@import 'assets/styles/mixins.scss';
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  background: $gray-lighten-more;
+}
+
+.header {
+  align-self: flex-start;
+  width: 100%;
+  color: $white;
+  padding: rem(40);
+
+  @media (max-width: $md-max-width) {
+    padding: rem(40) rem(20) rem(40);
+  }
+}
+
+.logo {
+  img {
+    max-width: rem(150);
+    max-height: rem(50);
+  }
+}
+
+.menu {
+  text-align: right;
+  margin-top: rem(10);
+
+  @media (max-width: $md-max-width) {
+    text-align: left;
+  }
+
+  ul {
+    font-size: rem(16);
+    li {
+      margin-right: rem(20);
+      text-transform: uppercase;
+      &:last-child {
+        margin-right: 0;
+      }
+      &.active {
+        a {
+          border-bottom: 1px solid rgba($white, 0.5);
+        }
+      }
+      a {
+        color: $white !important;
+        line-height: 1.4;
+        display: inline-block;
+        margin-right: rem(10);
+        font-weight: bold;
+        &:hover {
+          border-bottom: 1px solid rgba($white, 0.5);
+        }
+      }
+    }
+  }
+}
+
+.content {
+  align-self: middle;
+}
+
+.footer {
+  align-self: flex-end;
+  width: 100%;
+  color: $text;
+  padding: rem(40);
+
+  @media (max-width: $md-max-width) {
+    padding: rem(40) rem(20) rem(40);
+  }
+
+  ul {
+    margin-bottom: 0;
+    li {
+      margin-right: rem(20);
+      text-transform: uppercase;
+      &:last-child {
+        margin-right: 0;
+      }
+      a {
+        color: $text;
+        opacity: 0.7;
+        line-height: 1.4;
+        display: inline-block;
+        margin-right: rem(10);
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
