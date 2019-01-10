@@ -2,13 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import { routerMiddleware, ConnectedRouter } from 'connected-react-router'
+import { routerMiddleware } from 'connected-react-router'
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { createHashHistory } from 'history'
 import * as serviceWorker from './serviceWorker'
-import reducers from 'ducks/reducers'
-//import sagas from 'ducks/sagas'
+import reducers from 'redux/reducers'
+//import sagas from 'redux/sagas'
 import Router from 'router'
 
 // app styles
@@ -27,9 +27,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Router history={history} />
-    </ConnectedRouter>
+    <Router history={history} />
   </Provider>,
   document.getElementById('root')
 )
@@ -38,3 +36,4 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister()
+export { store, history }

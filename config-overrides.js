@@ -1,4 +1,4 @@
-// Overriding CreateReactApp, ref: https://github.com/arackaf/customize-cra
+// Overriding CreateReactApp settings, ref: https://github.com/arackaf/customize-cra
 const antdTheme = require('./src/theme.js')
 const {
   override,
@@ -12,7 +12,7 @@ module.exports = override(
   addDecoratorsLegacy(),
   useEslintRc(),
   fixBabelImports('import', {
-    libraryName: 'antd', libraryDirectory: 'es', style: true // change importing css to less
+    libraryName: 'antd', libraryDirectory: 'es', style: true
   }),
   addLessLoader({
     javascriptEnabled: true,
