@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Form, Input, Button } from 'antd'
 import { Helmet } from 'react-helmet'
-import Link from 'umi/link'
-import { connect } from 'dva'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import styles from './style.module.scss'
 
 @Form.create()

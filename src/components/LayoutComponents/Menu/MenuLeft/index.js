@@ -1,6 +1,6 @@
 import React from 'react'
-import { connect } from 'dva'
-import { Link, withRouter } from 'dva/router'
+import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom'
 import { Menu, Layout } from 'antd'
 import store from 'store'
 import { Scrollbars } from 'react-custom-scrollbars'

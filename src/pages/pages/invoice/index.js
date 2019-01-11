@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Invoice from '@/components/CleanUIComponents/Invoice'
+import Invoice from 'components/CleanUIComponents/Invoice'
 
 class InvoicePage extends React.Component {
   render() {

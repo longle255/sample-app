@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tabs, Input, Menu, Dropdown, Button, Icon } from 'antd'
 import { Helmet } from 'react-helmet'
-import Avatar from '@/components/CleanUIComponents/Avatar'
+import Avatar from 'components/CleanUIComponents/Avatar'
 import styles from './style.module.scss'
 import data from './data.json'
 

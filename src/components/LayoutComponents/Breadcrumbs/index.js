@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link, withRouter } from 'dva/router'
-import { connect } from 'dva'
+import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { reduce } from 'lodash'
 import styles from './style.module.scss'
 

@@ -124,7 +124,8 @@ class MailList extends React.Component {
                   <TabPane
                     tab={
                       <span>
-                        <Icon type="home" /> Primary
+                        <Icon type="home" />
+                        Primary
                       </span>
                     }
                     key="1"
@@ -132,7 +133,8 @@ class MailList extends React.Component {
                   <TabPane
                     tab={
                       <span>
-                        <Icon type="message" /> Social
+                        <Icon type="message" />
+                        Social
                       </span>
                     }
                     key="2"
@@ -140,7 +142,8 @@ class MailList extends React.Component {
                   <TabPane
                     tab={
                       <span>
-                        <Icon type="tags" /> Promotion
+                        <Icon type="tags" />
+                        Promotion
                       </span>
                     }
                     key="3"

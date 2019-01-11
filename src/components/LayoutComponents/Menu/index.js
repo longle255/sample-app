@@ -1,8 +1,8 @@
 import 'rc-drawer/assets/index.css'
 import React from 'react'
 import DrawerMenu from 'rc-drawer'
-import { connect } from 'dva'
-import { withRouter } from 'dva/router'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import MenuLeft from './MenuLeft'
 import MenuTop from './MenuTop'
 

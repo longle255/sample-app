@@ -1,7 +1,7 @@
 import React from 'react'
 import { Checkbox, Dropdown, Icon, Menu, Input, Button } from 'antd'
 import { Helmet } from 'react-helmet'
-import Avatar from '@/components/CleanUIComponents/Avatar'
+import Avatar from 'components/CleanUIComponents/Avatar'
 import styles from './style.module.scss'
 import data from './data.json'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import PricingItem from '@/components/CleanUIComponents/PricingItem'
+import PricingItem from 'components/CleanUIComponents/PricingItem'
 import styles from './styles.scss'
 
 class PricingTable extends React.Component {

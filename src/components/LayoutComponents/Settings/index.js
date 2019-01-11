@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'dva'
+import { connect } from 'react-redux'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Switch } from 'antd'
 import styles from './style.module.scss'

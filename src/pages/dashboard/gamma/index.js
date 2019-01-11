@@ -4,9 +4,9 @@ import ChartistGraph from 'react-chartist'
 import Chartist from 'chartist'
 import ChartistTooltip from 'chartist-plugin-tooltips-updated'
 import { Table } from 'antd'
-import ProgressCard from '@/components/CleanUIComponents/ProgressCard'
-import ShortItemInfo from '@/components/CleanUIComponents/ShortItemInfo'
-import Donut from '@/components/CleanUIComponents/Donut'
+import ProgressCard from 'components/CleanUIComponents/ProgressCard'
+import ShortItemInfo from 'components/CleanUIComponents/ShortItemInfo'
+import Donut from 'components/CleanUIComponents/Donut'
 
 import {
   progressCardsData,

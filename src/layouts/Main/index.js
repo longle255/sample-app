@@ -1,13 +1,13 @@
 import React from 'react'
 import { BackTop, Layout } from 'antd'
-import { connect } from 'dva'
-import { withRouter } from 'dva/router'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
-import TopBar from '@/components/LayoutComponents/TopBar'
-import Menu from '@/components/LayoutComponents/Menu'
-import Footer from '@/components/LayoutComponents/Footer'
-import Breadcrumbs from '@/components/LayoutComponents/Breadcrumbs'
-import Settings from '@/components/LayoutComponents/Settings'
+import TopBar from 'components/LayoutComponents/TopBar'
+import Menu from 'components/LayoutComponents/Menu'
+import Footer from 'components/LayoutComponents/Footer'
+import Breadcrumbs from 'components/LayoutComponents/Breadcrumbs'
+import Settings from 'components/LayoutComponents/Settings'
 
 const mapStateToProps = ({ settings }) => ({
   isBorderless: settings.isBorderless,

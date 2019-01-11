@@ -1,8 +1,9 @@
 import React from 'react'
 import { Layout } from 'antd'
-import Link from 'umi/link'
+import { Link, withRouter } from 'react-router-dom'
 import styles from './style.module.scss'
 
+@withRouter
 export default class LoginLayout extends React.PureComponent {
   render() {
     const { children } = this.props

@@ -2,8 +2,8 @@ import React from 'react'
 import { Tabs, Select, Table } from 'antd'
 import { Helmet } from 'react-helmet'
 import ChartistGraph from 'react-chartist'
+import InfoCard from 'components/CleanUIComponents/InfoCard'
 import data from './data.json'
-import InfoCard from '@/components/CleanUIComponents/InfoCard'
 
 const { TabPane } = Tabs
 const { Option } = Select

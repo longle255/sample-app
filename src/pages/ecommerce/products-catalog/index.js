@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import InfoCard from '@/components/CleanUIComponents/InfoCard'
-import ProductCard from '@/components/CleanUIComponents/ProductCard'
+import InfoCard from 'components/CleanUIComponents/InfoCard'
+import ProductCard from 'components/CleanUIComponents/ProductCard'
 
 class ProductsCatalog extends React.Component {
   static defaultProps = {

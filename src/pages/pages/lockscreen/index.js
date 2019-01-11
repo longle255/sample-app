@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button } from 'antd'
 import { Helmet } from 'react-helmet'
-import styles from './styles.scss'
+import Avatar from 'components/CleanUIComponents/Avatar'
 import UnlockForm from './UnlockForm'
-import Avatar from '@/components/CleanUIComponents/Avatar'
+import styles from './styles.scss'
 
 class Lockscreen extends React.Component {
   state = {

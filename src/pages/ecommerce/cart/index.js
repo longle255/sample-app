@@ -1,8 +1,8 @@
 import React from 'react'
 import { Steps, Button, message, Icon, Table, InputNumber } from 'antd'
 import { Helmet } from 'react-helmet'
+import Invoice from 'components/CleanUIComponents/Invoice'
 import WrappedCartCheckoutForm from './CheckoutForm/index'
-import Invoice from '@/components/CleanUIComponents/Invoice'
 import data from './data.json'
 import styles from './style.module.scss'
 

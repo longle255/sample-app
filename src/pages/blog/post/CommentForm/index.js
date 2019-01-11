@@ -36,7 +36,8 @@ class CommentForm extends React.Component {
           </Button>
           <Upload>
             <Button>
-              <Icon type="upload" /> Attach File
+              <Icon type="upload" />
+              Attach File
             </Button>
           </Upload>
         </FormItem>

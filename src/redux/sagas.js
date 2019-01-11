@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux'
-import { connectRouter } from 'connected-react-router'
-import { pendingTasksReducer } from 'react-redux-spinner'
+import { all } from 'redux-saga/effects'
+import user from './user/sagas'
+import menu from './menu/sagas'
+import settings from './settings/sagas'
 
-export default (history) => combineReducers({
-  router: connectRouter(history),
-  pendingTasks: pendingTasksReducer,
-})
+export default function* rootSaga() {
+  yield all([user(), menu(), settings()])
+}

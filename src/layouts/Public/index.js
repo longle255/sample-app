@@ -1,8 +1,12 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
-export default class PublicLayout extends React.PureComponent {
+@withRouter
+class PublicLayout extends React.PureComponent {
   render() {
     const { children } = this.props
     return children
   }
 }
+
+export default PublicLayout

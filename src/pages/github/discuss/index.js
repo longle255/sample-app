@@ -2,7 +2,7 @@ import React from 'react'
 import { Tabs, Menu, Dropdown, Icon, Button } from 'antd'
 import { Helmet } from 'react-helmet'
 import { Editor } from 'react-draft-wysiwyg'
-import Avatar from '@/components/CleanUIComponents/Avatar'
+import Avatar from 'components/CleanUIComponents/Avatar'
 import styles from './style.module.scss'
 import data from './data.json'
 

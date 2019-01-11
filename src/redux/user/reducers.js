@@ -1,4 +1,4 @@
-import actions from "./actions";
+import actions from './actions'
 
 const initialState = {
   id: '',
@@ -7,13 +7,14 @@ const initialState = {
   email: '',
   avatar: '',
   authorized: false,
+  loading: false,
 }
 
-export default SET_STATE = (state = initialState, action) => {
+export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    case SET_STATE: 
+    case actions.SET_STATE:
       return { ...state, ...action.payload }
-    default: 
+    default:
       return state
   }
 }

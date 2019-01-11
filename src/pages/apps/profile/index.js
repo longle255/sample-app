@@ -1,12 +1,12 @@
 import React from 'react'
 import { Button, Progress, Calendar, Tabs, Upload, Icon, Input, Menu, Dropdown } from 'antd'
 import { Helmet } from 'react-helmet'
+import Avatar from 'components/CleanUIComponents/Avatar'
+import Donut from 'components/CleanUIComponents/Donut'
+import Chat from 'components/CleanUIComponents/Chat'
+import SettingsForm from './SettingsForm'
 import data from './data.json'
 import style from './style.module.scss'
-import Avatar from '@/components/CleanUIComponents/Avatar'
-import Donut from '@/components/CleanUIComponents/Donut'
-import Chat from '@/components/CleanUIComponents/Chat'
-import SettingsForm from './SettingsForm'
 
 const { TabPane } = Tabs
 const { TextArea } = Input
