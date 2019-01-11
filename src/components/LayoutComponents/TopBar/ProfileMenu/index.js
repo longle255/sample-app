@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Menu, Dropdown, Avatar, Badge } from 'antd'
-// import { formatMessage } from 'umi/locale'
+import { FormattedMessage } from 'react-intl'
 import styles from './style.module.scss'
 
 @connect(({ user }) => ({ user }))
@@ -32,26 +32,32 @@ class ProfileMenu extends React.Component {
       <Menu selectable={false}>
         <Menu.Item>
           <strong>
-            {/* {formatMessage({ id: 'topBar.profileMenu.hello' })}, {user.name || 'Anonymous'} */}
+            <FormattedMessage id="topBar.profileMenu.hello" />, {user.name || 'Anonymous'}
           </strong>
           <div>
             <strong className="mr-1">
-              {/* {formatMessage({ id: 'topBar.profileMenu.billingPlan' })}: */}
+              <FormattedMessage id="topBar.profileMenu.billingPlan" />:{' '}
             </strong>
             Professional
           </div>
           <div>
-            {/* <strong className="mr-1">{formatMessage({ id: 'topBar.profileMenu.role' })}:</strong> */}
+            <strong>
+              <FormattedMessage id="topBar.profileMenu.role" />:{' '}
+            </strong>
             {user.role}
           </div>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
           <div>
-            {/* <strong className="mr-1">{formatMessage({ id: 'topBar.profileMenu.email' })}:</strong> */}
+            <strong>
+              <FormattedMessage id="topBar.profileMenu.email" />:{' '}
+            </strong>
             {user.email}
             <br />
-            {/* <strong className="mr-1">{formatMessage({ id: 'topBar.profileMenu.phone' })}:</strong> */}
+            <strong>
+              <FormattedMessage id="topBar.profileMenu.phone" />:{' '}
+            </strong>
             {user.phone || '-'}
           </div>
         </Menu.Item>
@@ -59,15 +65,14 @@ class ProfileMenu extends React.Component {
         <Menu.Item>
           <a href="javascript: void(0);">
             <i className={`${styles.menuIcon} icmn-user`} />
-            {/* {formatMessage({ id: 'topBar.profileMenu.editProfile' })} */}
+            <FormattedMessage id="topBar.profileMenu.editProfile" />
           </a>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
           <a href="javascript: void(0);" onClick={this.logout}>
             <i className={`${styles.menuIcon} icmn-exit`} />
-            {/* {formatMessage({ id: 'topBar.profileMenu.logout' })} */}
-            logout
+            <FormattedMessage id="topBar.profileMenu.logout" />
           </a>
         </Menu.Item>
       </Menu>

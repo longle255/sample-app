@@ -1,4 +1,7 @@
-export default {
+import antdData from 'antd/lib/locale-provider/en_US'
+import localeData from 'react-intl/locale-data/en'
+
+const messages = {
   'topBar.issuesHistory': 'Issues History',
   'topBar.projectManagement': 'Project Management',
   'topBar.typeToSearch': 'Type to search...',
@@ -11,4 +14,11 @@ export default {
   'topBar.profileMenu.phone': 'Phone',
   'topBar.profileMenu.editProfile': 'Edit Profile',
   'topBar.profileMenu.logout': 'Logout',
+}
+
+export default {
+  locale: 'en-US',
+  antdData,
+  localeData,
+  messages,
 }

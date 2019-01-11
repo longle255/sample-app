@@ -1,8 +1,9 @@
 import React from 'react'
 import { Input, Icon, Checkbox } from 'antd'
-import { formatMessage } from 'umi/locale'
+import { injectIntl } from 'react-intl'
 import styles from './style.module.scss'
 
+@injectIntl
 class LiveSearch extends React.Component {
   state = {
     showSearch: false,
@@ -50,7 +51,9 @@ class LiveSearch extends React.Component {
 
   render() {
     const { showSearch, searchText } = this.state
-
+    const {
+      intl: { formatMessage },
+    } = this.props
     return (
       <div className="d-inline-block mr-4">
         <Input

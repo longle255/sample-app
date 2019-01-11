@@ -1,7 +1,7 @@
 import React from 'react'
 import { Menu, Dropdown } from 'antd'
-import { formatMessage } from 'umi/locale'
-import Link from 'umi/link'
+import { FormattedMessage } from 'react-intl'
+import { Link } from 'react-router-dom'
 import styles from './style.module.scss'
 
 class IssuesHistory extends React.Component {
@@ -15,40 +15,38 @@ class IssuesHistory extends React.Component {
           <Link to="/">Search for issues</Link>
         </Menu.Item>
         <Menu.Divider />
-        <span className={styles.title}>
-          <strong>Opened</strong>
-        </span>
-        <Menu.Item>
-          <Link to="/">
-            <i className={`${styles.menuIcon} icmn-checkmark`} />
-            CLNUI-253 Project implemen...
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link to="/">
-            <i className={`${styles.menuIcon} icmn-checkmark`} />
-            CLNUI-234 Active history iss...
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link to="/">
-            <i className={`${styles.menuIcon} icmn-clock`} />
-            CLNUI-424 Ionicons intergrat...
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link to="/">More...</Link>
-        </Menu.Item>
+        <Menu.ItemGroup title="Opened">
+          <Menu.Item>
+            <Link to="/">
+              <i className={`${styles.menuIcon} icmn-checkmark`} />
+              CLNUI-253 Project implemen...
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/">
+              <i className={`${styles.menuIcon} icmn-checkmark`} />
+              CLNUI-234 Active history iss...
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/">
+              <i className={`${styles.menuIcon} icmn-clock`} />
+              CLNUI-424 Ionicons intergrat...
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/">More...</Link>
+          </Menu.Item>
+        </Menu.ItemGroup>
         <Menu.Divider />
-        <span className={styles.title}>
-          <strong>Filters</strong>
-        </span>
-        <Menu.Item>
-          <Link to="/">My open issues</Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link to="/">Reported by me</Link>
-        </Menu.Item>
+        <Menu.ItemGroup title="Filters">
+          <Menu.Item>
+            <Link to="/">My open issues</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/">Reported by me</Link>
+          </Menu.Item>
+        </Menu.ItemGroup>
         <Menu.Divider />
         <Menu.Item>
           <Link to="/">
@@ -62,7 +60,9 @@ class IssuesHistory extends React.Component {
         <div className={styles.dropdown}>
           <i className={`${styles.icon} icmn-folder-open`} />
           <span className="d-none d-xl-inline">
-            <strong>{formatMessage({ id: 'topBar.issuesHistory' })}</strong>
+            <strong>
+              <FormattedMessage id="topBar.issuesHistory" />
+            </strong>
           </span>
         </div>
       </Dropdown>

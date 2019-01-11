@@ -5,7 +5,7 @@ const {
   fixBabelImports,
   addLessLoader,
   useEslintRc,
-  addDecoratorsLegacy
+  addDecoratorsLegacy,
 } = require('customize-cra')
 
 module.exports = override(

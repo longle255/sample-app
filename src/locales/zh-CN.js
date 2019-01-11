@@ -1,4 +1,6 @@
-export default {
+import localeData from 'react-intl/locale-data/zh'
+
+const messages = {
   'topBar.issuesHistory': '发布历史',
   'topBar.projectManagement': '项目管理',
   'topBar.typeToSearch': '搜索...',
@@ -11,4 +13,11 @@ export default {
   'topBar.profileMenu.phone': '电话',
   'topBar.profileMenu.editProfile': '编辑个人资料',
   'topBar.profileMenu.logout': '登出',
+}
+
+export default {
+  locale: 'zh-CH',
+  antdData: null,
+  localeData,
+  messages,
 }

@@ -32,12 +32,12 @@ export function* LOAD_CURRENT_ACCOUNT() {
   })
   const response = yield call(currentAccount)
   if (response) {
-    const { uid: id, displayName: name, email, photoURL: avatar } = response
+    const { uid: id, email, photoURL: avatar } = response
     yield put({
       type: 'user/SET_STATE',
       payload: {
         id,
-        name,
+        name: 'Administrator',
         email,
         avatar,
         role: 'admin',

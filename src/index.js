@@ -10,6 +10,7 @@ import { createHashHistory } from 'history'
 import reducers from 'redux/reducers'
 import sagas from 'redux/sagas'
 import Router from 'router'
+import Localization from 'components/LayoutComponents/Localization'
 import * as serviceWorker from './serviceWorker'
 
 // app styles
@@ -23,19 +24,16 @@ if (process.env.NODE_ENV === 'development' && true) {
   middlewares.push(logger)
 }
 const store = createStore(reducers(history), compose(applyMiddleware(...middlewares)))
-
 sagaMiddleware.run(sagas)
-console.log(process.env)
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history} />
+    <Localization>
+      <Router history={history} />
+    </Localization>
   </Provider>,
   document.getElementById('root'),
 )
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister()
+serviceWorker.register()
 export { store, history }

@@ -1,19 +1,29 @@
 import React from 'react'
-import { setLocale, getLocale } from 'umi/locale'
 import { Menu, Dropdown } from 'antd'
+import { connect } from 'react-redux'
 import styles from './style.module.scss'
 
+@connect(({ settings }) => ({ settings }))
 class LanguageSelector extends React.Component {
   changeLang = ({ key }) => {
-    setLocale(key)
+    const { dispatch } = this.props
+    dispatch({
+      type: 'settings/CHANGE_SETTING',
+      payload: {
+        setting: 'locale',
+        value: key,
+      },
+    })
   }
 
   render() {
-    const selectedLocale = getLocale()
-    const selectedLang = selectedLocale.substr(0, 2)
+    const {
+      settings: { locale },
+    } = this.props
+    const language = locale.substr(0, 2)
 
     const langMenu = (
-      <Menu className={styles.menu} selectedKeys={[selectedLocale]} onClick={this.changeLang}>
+      <Menu className={styles.menu} selectedKeys={[locale]} onClick={this.changeLang}>
         <Menu.Item key="en-US">
           <span role="img" aria-label="English" className="mr-2">
             🇬🇧
@@ -43,7 +53,7 @@ class LanguageSelector extends React.Component {
     return (
       <Dropdown overlay={langMenu} trigger={['click']}>
         <div className={styles.dropdown}>
-          <strong className="text-uppercase">{selectedLang}</strong>
+          <strong className="text-uppercase">{language}</strong>
         </div>
       </Dropdown>
     )
