@@ -3,7 +3,7 @@ import { Button } from 'antd'
 import { Helmet } from 'react-helmet'
 import Avatar from 'components/CleanUIComponents/Avatar'
 import UnlockForm from './UnlockForm'
-import styles from './styles.scss'
+import styles from './style.module.scss'
 
 class Lockscreen extends React.Component {
   state = {

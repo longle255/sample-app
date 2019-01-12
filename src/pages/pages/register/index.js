@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'antd'
 import { Helmet } from 'react-helmet'
-import styles from './styles.scss'
+import styles from './style.module.scss'
 import RegisterForm from './RegisterForm'
 
 class Register extends React.Component {

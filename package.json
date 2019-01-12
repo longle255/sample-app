@@ -29,9 +29,6 @@
       "stylelint"
     ]
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "dependencies": {
     "@rowno/sparkline": "^3.0.1",
     "antd": "^3.12.1",
