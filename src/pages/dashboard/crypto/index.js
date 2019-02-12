@@ -423,7 +423,7 @@ class DashboardCrypto extends React.Component {
                         scroll={{ x: '100%' }}
                         columns={ordersSellColumns}
                         dataSource={orderBook.sell}
-                        pagination
+                        pagination={{ position: 'bottom' }}
                         size="small"
                       />
                     </div>
@@ -556,7 +556,7 @@ class DashboardCrypto extends React.Component {
                       <Table
                         columns={ordersBuyColumns}
                         dataSource={orderBook.buy}
-                        pagination
+                        pagination={{ position: 'bottom' }}
                         size="small"
                         scroll={{ x: true }}
                       />
@@ -576,7 +576,7 @@ class DashboardCrypto extends React.Component {
                     scroll={{ x: '100%' }}
                     columns={marketHistoryColumns}
                     dataSource={marketHistory.data}
-                    pagination
+                    pagination={{ position: 'bottom' }}
                     size="small"
                   />
                 </div>
@@ -606,7 +606,7 @@ class DashboardCrypto extends React.Component {
                         scroll={{ x: '100%' }}
                         columns={myOrderColumns}
                         dataSource={myOpenOrders.data}
-                        pagination
+                        pagination={{ position: 'bottom' }}
                         size="small"
                       />
                     </div>
@@ -638,7 +638,7 @@ class DashboardCrypto extends React.Component {
                         scroll={{ x: '100%' }}
                         columns={myOrderColumns}
                         dataSource={myOpenOrders.data}
-                        pagination
+                        pagination={{ position: 'bottom' }}
                         size="small"
                       />
                     </div>
