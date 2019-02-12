@@ -357,8 +357,8 @@ export async function getTopMenuData() {
       icon: 'icmn icmn-books',
     },
     {
-      title: 'Dashboards',
-      key: 'dashboards',
+      title: 'Pages',
+      key: 'pages',
       icon: 'icmn icmn-stack',
       children: [
         {
@@ -386,38 +386,44 @@ export async function getTopMenuData() {
           key: 'dashboardDocs',
           url: '/dashboard/docs',
         },
-      ],
-    },
-    {
-      title: 'AntDesign Components',
-      key: 'antComponents',
-      icon: 'icmn icmn-menu',
-      url: '/antd',
-    },
-    {
-      title: 'Apps',
-      key: 'apps',
-      icon: 'icmn icmn-star-full',
-      children: [
         {
-          title: 'Messaging',
-          key: 'messaging',
-          url: '/apps/messaging',
+          divider: true,
         },
         {
-          title: 'Mail',
-          key: 'mail',
-          url: '/apps/mail',
-        },
-        {
-          title: 'Profile',
-          key: 'profile',
-          url: '/apps/profile',
-        },
-        {
-          title: 'Gallery',
-          key: 'gallery',
-          url: '/apps/gallery',
+          title: 'Default Pages',
+          key: 'defaultPages',
+          children: [
+            {
+              key: 'loginAlpha',
+              title: 'Login Alpha',
+              url: '/pages/login-alpha',
+            },
+            {
+              key: 'loginBeta',
+              title: 'Login Beta',
+              url: '/pages/login-beta',
+            },
+            {
+              key: 'register',
+              title: 'Register',
+              url: '/pages/register',
+            },
+            {
+              key: 'lockscreen',
+              title: 'Lockscreen',
+              url: '/pages/lockscreen',
+            },
+            {
+              key: 'pricingTable',
+              title: 'Pricing Table',
+              url: '/pages/pricing-table',
+            },
+            {
+              key: 'invoice',
+              title: 'Invoice',
+              url: '/pages/invoice',
+            },
+          ],
         },
         {
           title: 'Ecommerce',
@@ -457,6 +463,32 @@ export async function getTopMenuData() {
               title: 'Cart',
               key: 'cart',
               url: '/ecommerce/cart',
+            },
+          ],
+        },
+        {
+          title: 'Apps',
+          key: 'apps',
+          children: [
+            {
+              title: 'Messaging',
+              key: 'messaging',
+              url: '/apps/messaging',
+            },
+            {
+              title: 'Mail',
+              key: 'mail',
+              url: '/apps/mail',
+            },
+            {
+              title: 'Profile',
+              key: 'profile',
+              url: '/apps/profile',
+            },
+            {
+              title: 'Gallery',
+              key: 'gallery',
+              url: '/apps/gallery',
             },
           ],
         },
@@ -516,46 +548,16 @@ export async function getTopMenuData() {
       ],
     },
     {
-      title: 'Pages & Blocks',
+      title: 'AntDesign',
+      key: 'antComponents',
+      icon: 'icmn icmn-menu',
+      url: '/antd',
+    },
+    {
+      title: 'Components',
       key: 'pagesBlocks',
       icon: 'icmn icmn-stack',
       children: [
-        {
-          title: 'Default Pages',
-          key: 'defaultPages',
-          children: [
-            {
-              key: 'loginAlpha',
-              title: 'Login Alpha',
-              url: '/pages/login-alpha',
-            },
-            {
-              key: 'loginBeta',
-              title: 'Login Beta',
-              url: '/pages/login-beta',
-            },
-            {
-              key: 'register',
-              title: 'Register',
-              url: '/pages/register',
-            },
-            {
-              key: 'lockscreen',
-              title: 'Lockscreen',
-              url: '/pages/lockscreen',
-            },
-            {
-              key: 'pricingTable',
-              title: 'Pricing Table',
-              url: '/pages/pricing-table',
-            },
-            {
-              key: 'invoice',
-              title: 'Invoice',
-              url: '/pages/invoice',
-            },
-          ],
-        },
         {
           title: 'Charts',
           key: 'charts',

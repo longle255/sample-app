@@ -8,10 +8,6 @@
     float: left;
   }
 
-  .title {
-    padding-right: 25px;
-  }
-
   :global(.ant-menu-dark) {
     :global(.ant-menu-item-divider) {
       background: $text-darken-more !important;
