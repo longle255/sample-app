@@ -15,7 +15,9 @@ class LiveSearch extends React.Component {
   }
 
   showLiveSearch = () => {
-    this.searchInput.focus()
+    setTimeout(() => {
+      this.searchInput.focus()
+    }, 100)
     this.setState({
       showSearch: true,
     })
@@ -64,7 +66,9 @@ class LiveSearch extends React.Component {
           onFocus={this.showLiveSearch}
         />
         <div
-          className={`${showSearch ? styles.livesearchShowed : styles.livesearchHidden}`}
+          className={`${
+            showSearch ? `${styles.livesearch} ${styles.livesearchVisible}` : styles.livesearch
+          }`}
           id="livesearch"
         >
           <button className={styles.close} type="button" onClick={this.hideLiveSearch}>

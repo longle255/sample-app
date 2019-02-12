@@ -1,25 +1,21 @@
 @import 'assets/styles/mixins.scss';
 
-%livesearch {
+.livesearch {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: $white;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
   @include transition-slow;
 }
 
-.livesearchHidden {
-  @extend %livesearch;
-  opacity: 0;
-  z-index: -100;
-}
-
-.livesearchShowed {
-  @extend %livesearch;
+.livesearchVisible {
   opacity: 1;
-  z-index: 100;
+  visibility: visible;
 }
 
 .extInput {
@@ -75,7 +71,7 @@
 }
 
 .logo {
-  width: rem(160);
+  height: rem(45);
 }
 
 .searchInput {
