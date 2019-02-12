@@ -220,6 +220,18 @@ class MenuLeft extends React.Component {
         </div>
         <Scrollbars
           className={isMobileView ? styles.scrollbarMobile : styles.scrollbarDesktop}
+          renderThumbVertical={({ style, ...props }) => (
+            <div
+              {...props}
+              style={{
+                ...style,
+                width: '4px',
+                borderRadius: 'inherit',
+                backgroundColor: '#c5cdd2',
+                left: '2px',
+              }}
+            />
+          )}
           autoHide
         >
           <Menu

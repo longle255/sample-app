@@ -6,7 +6,7 @@
   cursor: pointer;
 
   &::after {
-    color: inherit;
+    color: $gray;
     position: absolute;
     top: 50%;
     right: 0;
@@ -21,10 +21,15 @@
     border-right: 0.3em solid transparent;
     border-bottom: 0;
     border-left: 0.3em solid transparent;
+    @include transition-slow();
   }
 
   &:hover {
     color: $blue;
+
+    &::after {
+      color: $gray-darken;
+    }
   }
 }
 
