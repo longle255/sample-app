@@ -146,6 +146,7 @@ class ProductsList extends React.Component {
         dataIndex: 'status',
         key: 'status',
         sorter: (a, b) => a.status.length - b.status.length,
+        render: record => <span className="font-size-12 badge badge-success">{record}</span>,
       },
       {
         title: 'Action',

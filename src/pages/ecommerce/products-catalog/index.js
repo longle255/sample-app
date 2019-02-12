@@ -14,7 +14,10 @@ class ProductsCatalog extends React.Component {
         <Helmet title="Products Catalog" />
         <div className="card">
           <div className="card-header">
-            <div className="row">
+            <div className="utils__title">
+              <strong>Products Catalog</strong>
+            </div>
+            <div className="row mb-5 mt-3">
               <div className="col-lg-2">
                 <InfoCard form="bordered" type="primary" icon={false} />
               </div>
@@ -38,40 +41,40 @@ class ProductsCatalog extends React.Component {
           <div className="card-body">
             <div className="productsCatalog">
               <div className="row">
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                   <ProductCard />
                 </div>
               </div>

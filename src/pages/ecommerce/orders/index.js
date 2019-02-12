@@ -136,7 +136,13 @@ class Orders extends React.Component {
         dataIndex: 'status',
         key: 'status',
         render: text => (
-          <span className={text === 'Processing' ? 'badge badge-primary' : 'badge badge-default'}>
+          <span
+            className={
+              text === 'Processing'
+                ? 'font-size-12 badge badge-primary'
+                : 'font-size-12 badge badge-default'
+            }
+          >
             {text}
           </span>
         ),

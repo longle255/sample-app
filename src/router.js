@@ -47,6 +47,11 @@ const routes = [
     component: loadable(() => import('pages/dashboard/gamma')),
     exact: true,
   },
+  {
+    path: '/dashboard/docs',
+    component: loadable(() => import('pages/dashboard/docs')),
+    exact: true,
+  },
 
   // Default Pages
   {

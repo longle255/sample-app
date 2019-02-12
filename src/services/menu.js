@@ -40,6 +40,12 @@ export async function getLeftMenuData() {
       icon: 'icmn icmn-home',
     },
     {
+      title: 'Dashboard Docs',
+      key: 'dashboardDocs',
+      url: '/dashboard/docs',
+      icon: 'icmn icmn-home',
+    },
+    {
       divider: true,
     },
     {
@@ -374,6 +380,11 @@ export async function getTopMenuData() {
           title: 'Dashboard Gamma',
           key: 'dashboardGamma',
           url: '/dashboard/gamma',
+        },
+        {
+          title: 'Dashboard Docs',
+          key: 'dashboardDocs',
+          url: '/dashboard/docs',
         },
       ],
     },
