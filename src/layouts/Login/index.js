@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import styles from './style.module.scss'
 
 @withRouter
-export default class LoginLayout extends React.PureComponent {
+class LoginLayout extends React.PureComponent {
   state = {
     backgroundNumber: 1,
     backgroundEnabled: false,
@@ -112,3 +112,5 @@ export default class LoginLayout extends React.PureComponent {
     )
   }
 }
+
+export default LoginLayout
