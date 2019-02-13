@@ -43,7 +43,7 @@
     position: fixed;
     height: 100%;
     width: 256px;
-    transition: width 0.3s;
+    transition: width 0.2s;
   }
 
   &:global(.ant-layout-sider-collapsed) {
@@ -69,6 +69,7 @@
 .logo {
   height: 64px;
   background: $menuBg-darken;
+  overflow: hidden;
 }
 
 .logoContainer {
