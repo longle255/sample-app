@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, Checkbox } from 'antd'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -64,11 +64,18 @@ class Login extends Component {
                         rules: [{ required: true, message: 'Please input your password' }],
                       })(<Input size="default" type="password" />)}
                     </Form.Item>
-                    <div className="mb-2">
-                      <Link to="/user/forgot" className="utils__link--blue utils__link--underlined">
-                        Forgot password
+                    <Form.Item>
+                      {form.getFieldDecorator('remember', {
+                        valuePropName: 'checked',
+                        initialValue: true,
+                      })(<Checkbox>Remember me</Checkbox>)}
+                      <Link
+                        to="/user/forgot"
+                        className="utils__link--blue utils__link--underlined pull-right"
+                      >
+                        Forgot password?
                       </Link>
-                    </div>
+                    </Form.Item>
                     <div className="form-actions">
                       <Button
                         type="primary"
@@ -78,6 +85,32 @@ class Login extends Component {
                       >
                         Login
                       </Button>
+                      <span className="ml-3 register-link">
+                        <a
+                          href="javascript: void(0);"
+                          className="text-primary utils__link--underlined"
+                        >
+                          Register
+                        </a>{' '}
+                        if you don&#39;t have account
+                      </span>
+                    </div>
+                    <div className="form-group">
+                      <p>Use another service to Log In</p>
+                      <div className="mt-2">
+                        <a href="javascript: void(0);" className="btn btn-icon mr-2">
+                          <i className="icmn-facebook" />
+                        </a>
+                        <a href="javascript: void(0);" className="btn btn-icon mr-2">
+                          <i className="icmn-google" />
+                        </a>
+                        <a href="javascript: void(0);" className="btn btn-icon mr-2">
+                          <i className="icmn-windows" />
+                        </a>
+                        <a href="javascript: void(0);" className="btn btn-icon mr-2">
+                          <i className="icmn-twitter" />
+                        </a>
+                      </div>
                     </div>
                   </Form>
                 </div>
