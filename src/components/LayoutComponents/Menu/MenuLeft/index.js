@@ -228,7 +228,7 @@ class MenuLeft extends React.Component {
                 width: '4px',
                 borderRadius: 'inherit',
                 backgroundColor: '#c5cdd2',
-                left: '2px',
+                left: '1px',
               }}
             />
           )}
