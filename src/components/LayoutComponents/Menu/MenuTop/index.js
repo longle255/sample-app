@@ -69,7 +69,7 @@ class MenuTop extends React.Component {
   generateMenuItems = () => {
     const { menuData = [] } = this.props
     const generateItem = item => {
-      const { key, title, url, icon, disabled } = item
+      const { key, title, url, icon, pro, disabled } = item
       if (item.divider) {
         return <Divider key={Math.random()} />
       }
@@ -80,11 +80,13 @@ class MenuTop extends React.Component {
               <a href={url} target={item.target} rel="noopener noreferrer">
                 {icon && <span className={`${icon} ${styles.icon}`} />}
                 <span className={styles.title}>{title}</span>
+                {pro && <span className="badge badge-primary ml-2">PRO</span>}
               </a>
             ) : (
               <Link to={url}>
                 {icon && <span className={`${icon} ${styles.icon}`} />}
                 <span className={styles.title}>{title}</span>
+                {pro && <span className="badge badge-primary ml-2">PRO</span>}
               </Link>
             )}
           </Menu.Item>
@@ -92,8 +94,9 @@ class MenuTop extends React.Component {
       }
       return (
         <Menu.Item key={key} disabled={disabled}>
-          <span className={styles.title}>{title}</span>
           {icon && <span className={`${icon} ${styles.icon}`} />}
+          <span className={styles.title}>{title}</span>
+          {pro && <span className="badge badge-primary ml-2">PRO</span>}
         </Menu.Item>
       )
     }
