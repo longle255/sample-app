@@ -29,9 +29,9 @@ class Login extends Component {
     return (
       <div>
         <Helmet title="Login" />
-        <div className={styles.title}>
+        <div className={`${styles.title} login-heading`}>
           <h1>
-            <strong>WELCOME TO CLEAN UI ADMIN TEMPLATE</strong>
+            <strong>WELCOME TO CLEAN UI REACT - REACT REDUX ADMIN TEMPLATE</strong>
           </h1>
           <p>
             Pluggable enterprise-level react application framework.
