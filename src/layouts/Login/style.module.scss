@@ -9,6 +9,12 @@
   background-size: cover;
   transition: background-image 0.4s linear;
 
+  @media (max-width: $sm-max-width) {
+    :global(.login-heading) {
+      display: none;
+    }
+  }
+
   &.light {
     .content {
       :global(.login-heading) {
@@ -55,6 +61,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     flex-shrink: 0;
+    margin-bottom: 0;
   }
 }
 
@@ -79,13 +86,17 @@
   }
 
   @media screen and (max-width: $sm-max-width) {
-    text-align: center;
+    display: none;
   }
 }
 
 .navigation {
   padding-top: rem(10);
   padding-bottom: rem(10);
+
+  @media screen and (max-width: $sm-max-width) {
+    display: none;
+  }
 }
 
 .navigationItems {
@@ -142,6 +153,10 @@
 
   @media (max-width: $md-max-width) {
     padding: rem(40) rem(20) rem(40);
+  }
+
+  @media (max-width: $sm-max-width) {
+    padding: rem(40) rem(20) rem(20);
   }
 
   ul {
