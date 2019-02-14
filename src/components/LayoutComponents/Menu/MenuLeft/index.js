@@ -129,15 +129,19 @@ class MenuLeft extends React.Component {
           <Menu.Item key={key} disabled={disabled}>
             {item.target ? (
               <a href={url} target={item.target} rel="noopener noreferrer">
-                {icon && <span className={`${icon} ${styles.icon}`} />}
+                {icon && <span className={`${icon} ${styles.icon} icon-collapsed-hidden`} />}
                 <span className={styles.title}>{title}</span>
-                {pro && <span className="badge badge-primary ml-2">PRO</span>}
+                {pro && (
+                  <span className="badge badge-primary badge-collapsed-hidden ml-2">PRO</span>
+                )}
               </a>
             ) : (
               <Link to={url}>
-                {icon && <span className={`${icon} ${styles.icon}`} />}
+                {icon && <span className={`${icon} ${styles.icon} icon-collapsed-hidden`} />}
                 <span className={styles.title}>{title}</span>
-                {pro && <span className="badge badge-primary ml-2">PRO</span>}
+                {pro && (
+                  <span className="badge badge-primary badge-collapsed-hidden ml-2">PRO</span>
+                )}
               </Link>
             )}
           </Menu.Item>
@@ -145,9 +149,9 @@ class MenuLeft extends React.Component {
       }
       return (
         <Menu.Item key={key} disabled={disabled}>
-          {icon && <span className={`${icon} ${styles.icon}`} />}
+          {icon && <span className={`${icon} ${styles.icon} icon-collapsed-hidden`} />}
           <span className={styles.title}>{title}</span>
-          {pro && <span className="badge badge-primary ml-2">PRO</span>}
+          {pro && <span className="badge badge-primary badge-collapsed-hidden ml-2">PRO</span>}
         </Menu.Item>
       )
     }

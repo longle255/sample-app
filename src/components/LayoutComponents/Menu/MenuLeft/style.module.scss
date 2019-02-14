@@ -248,8 +248,16 @@
   }
 }
 
-:global(.ant-menu-inline-collapsed-tooltip) [class*='style_icon'] {
-  display: none;
+:global(.ant-menu-inline-collapsed-tooltip) {
+  :global(.icon-collapsed-hidden) {
+    display: none;
+  }
+}
+
+:global(.ant-menu-inline-collapsed) {
+  :global(.badge-collapsed-hidden) {
+    display: none;
+  }
 }
 
 .buyPro {
