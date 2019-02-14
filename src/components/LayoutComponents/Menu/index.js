@@ -40,7 +40,7 @@ class AppMenu extends React.Component {
         return (
           <DrawerMenu
             getContainer={null}
-            level="all"
+            level={null}
             open={isMobileMenuOpen}
             onMaskClick={this.toggleOpen}
             onHandleClick={this.toggleOpen}

@@ -86,20 +86,8 @@ class MenuLeft extends React.Component {
   }
 
   handleClick = e => {
-    const { dispatch, isSettingsOpen, isMobileView, isMobileMenuOpen } = this.props
+    const { dispatch, isSettingsOpen } = this.props
     store.set('app.menu.selectedKeys', [e.key])
-    // close menu if mobile menu opened
-    if (isMobileView) {
-      setTimeout(() => {
-        dispatch({
-          type: 'settings/CHANGE_SETTING',
-          payload: {
-            setting: 'isMobileMenuOpen',
-            value: !isMobileMenuOpen,
-          },
-        })
-      }, 500)
-    }
     // custom action on settings menu item
     if (e.key === 'settings') {
       dispatch({
