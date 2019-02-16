@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import ChartistGraph from 'react-chartist'
-import Chartist from 'chartist'
 import ChartistTooltip from 'chartist-plugin-tooltips-updated'
 import { Table } from 'antd'
 import ProgressCard from 'components/CleanUIComponents/ProgressCard'
@@ -23,9 +22,6 @@ import {
 import styles from './style.module.scss'
 
 const boundChartistOptions = {
-  lineSmooth: Chartist.Interpolation.none({
-    fillHoles: false,
-  }),
   showPoint: true,
   showLine: true,
   showArea: true,

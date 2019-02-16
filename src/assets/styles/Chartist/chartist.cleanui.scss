@@ -1,10 +1,10 @@
 .chartist-tooltip {
   position: absolute;
-  display: inline-block;
+  display: none;
   opacity: 0;
   min-width: 5em;
   padding: 0.5em;
-  background: #113222;
+  background: #001529;
   color: #fff;
   font-weight: 700;
   text-align: center;
@@ -22,9 +22,10 @@
   height: 0;
   margin-left: -7px;
   border: 7px solid transparent;
-  border-top-color: #113222;
+  border-top-color: #001529;
 }
 .chartist-tooltip.tooltip-show {
+  display: inline-block;
   opacity: 1;
 }
 

@@ -13,8 +13,18 @@
         padding-right: 0;
       }
 
-      div[class^='style__inner'] {
+      div[class^='style-module__inner'] {
         margin-right: 0;
+      }
+
+      @media (max-width: 1445px) {
+        .utils__content {
+          padding-right: rem(30);
+        }
+
+        div[class^='style-module__inner'] {
+          margin-right: rem(30);
+        }
       }
     }
 
@@ -24,8 +34,19 @@
         padding-right: 0;
       }
 
-      div[class^='style__inner'] {
+      div[class^='style-module__inner'] {
         margin: 0;
+      }
+
+      @media (max-width: 1445px) {
+        .utils__content {
+          padding-left: rem(30);
+          padding-right: rem(30);
+        }
+
+        div[class^='style-module__inner'] {
+          margin: 0 rem(30);
+        }
       }
     }
   }

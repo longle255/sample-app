@@ -24,7 +24,7 @@
     margin: 0 auto;
 
     @media (max-width: $sm-max-width) {
-      padding: rem(30) rem(10);
+      padding: rem(30) rem(10) !important;
       overflow-x: hidden;
     }
   }
