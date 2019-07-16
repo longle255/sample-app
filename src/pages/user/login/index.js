@@ -24,7 +24,7 @@ class Login extends Component {
   render() {
     const {
       form,
-      user: { fetching },
+      user: { loading },
     } = this.props
     return (
       <div>
@@ -81,7 +81,7 @@ class Login extends Component {
                         type="primary"
                         className="width-150 mr-4"
                         htmlType="submit"
-                        loading={fetching}
+                        loading={loading}
                       >
                         Login
                       </Button>

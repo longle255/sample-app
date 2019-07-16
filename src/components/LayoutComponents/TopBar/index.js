@@ -24,7 +24,7 @@ class TopBar extends React.Component {
           <LiveSearch />
         </div>
         <a
-          href="https://themeforest.net/item/clean-ui-admin-template-react-redux-ant-design-fully-responsive-freebies/21938700"
+          href="https://themeforest.net/item/clean-ui-react-admin-template/21938700"
           target="_blank"
           rel="noopener noreferrer"
           className="mr-4 d-none d-sm-inline"

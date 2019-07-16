@@ -8,7 +8,7 @@ export async function getLeftMenuData() {
     {
       title: 'Documentation',
       key: 'documentation',
-      url: 'https://docs.cleanuitemplate.com/react/getting-started',
+      url: 'https://docs.cleanuitemplate.com',
       target: '_blank',
       icon: 'icmn icmn-books',
     },
@@ -384,7 +384,7 @@ export async function getTopMenuData() {
     {
       title: 'Docs',
       key: 'documentation',
-      url: 'https://docs.cleanuitemplate.com/react/getting-started',
+      url: 'https://docs.cleanuitemplate.com',
       target: '_blank',
       icon: 'icmn icmn-books',
     },

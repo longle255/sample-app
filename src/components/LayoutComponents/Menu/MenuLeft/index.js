@@ -250,7 +250,7 @@ class MenuLeft extends React.Component {
               rel="noopener noreferrer"
               className="btn btn-sm btn-danger"
             >
-              Buy Pro 24$
+              Buy Bundle 26$
             </a>
           </div>
         </Scrollbars>

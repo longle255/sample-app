@@ -17,7 +17,8 @@
 
   &.light {
     .content {
-      :global(.login-heading) {
+      :global(.login-heading),
+      :global(h1) {
         color: $white;
       }
     }
