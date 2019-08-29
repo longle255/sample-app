@@ -33,7 +33,7 @@ const Footer = () => (
               rel="noopener noreferrer"
               className="mr-4"
             >
-              <Button type="danger">Buy Bundle 24$</Button>
+              <Button type="danger">Buy Bundle</Button>
             </a>
           </div>
           <div className="col-sm-6">
