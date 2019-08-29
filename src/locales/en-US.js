@@ -5,7 +5,7 @@ const messages = {
   'topBar.issuesHistory': 'Issues History',
   'topBar.projectManagement': 'Project Management',
   'topBar.typeToSearch': 'Type to search...',
-  'topBar.buyNow': 'Buy Bundle $26',
+  'topBar.buyNow': 'Buy Bundle 24$',
   'topBar.bitcoin': 'Bitcoin',
   'topBar.profileMenu.hello': 'Hello',
   'topBar.profileMenu.billingPlan': 'Billing Plan',

@@ -4,7 +4,7 @@ const messages = {
   'topBar.issuesHistory': '发布历史',
   'topBar.projectManagement': '项目管理',
   'topBar.typeToSearch': '搜索...',
-  'topBar.buyNow': '立即购买 $26',
+  'topBar.buyNow': '立即购买 24$',
   'topBar.bitcoin': '比特币',
   'topBar.profileMenu.hello': '你好',
   'topBar.profileMenu.billingPlan': '结算计划',
