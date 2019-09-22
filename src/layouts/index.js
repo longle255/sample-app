@@ -20,9 +20,13 @@ class IndexLayout extends React.PureComponent {
   previousPath = ''
 
   componentDidUpdate(prevProps) {
-    const { location } = this.props
-    const { prevLocation } = prevProps
-    if (location !== prevLocation) {
+    const {
+      location: { pathname },
+    } = this.props
+    const {
+      location: { pathname: prevPathname },
+    } = prevProps
+    if (pathname !== prevPathname) {
       window.scrollTo(0, 0)
     }
   }
