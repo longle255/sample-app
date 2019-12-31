@@ -1,35 +1,34 @@
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
-import { prop, Ref } from 'typegoose';
+import { prop } from 'typegoose';
 
 import { BaseSchema, defaultOptions } from './BaseModel';
-import { IUser } from './User';
 
-export class IEmail extends BaseSchema {
-    @prop({ ref: IUser, required: false })
-    public user: Ref<IUser>;
+export class ICollection extends BaseSchema {
+    @prop({ required: true })
+    public name: string;
 
     @prop({ required: true })
-    public email: string;
+    public description: string;
 
     @prop({ required: true })
-    public template: string;
+    public thumbnail: string;
 
     @prop({ required: true })
-    public payload: object;
+    public photos: string[];
 }
 
 const options = Object.assign(
     {},
     {
-        collection: 'emails',
+        collection: 'collections',
         autoIndex: true,
         timestamps: true,
     },
     defaultOptions,
 );
 
-export const Email = new IEmail().getModelForClass(IEmail, {
+export const Collection = new ICollection().getModelForClass(ICollection, {
     existingMongoose: mongoose,
     schemaOptions: options,
 });

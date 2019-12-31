@@ -4,7 +4,6 @@ import { KoaMiddlewareInterface, Middleware } from 'routing-controllers';
 
 @Middleware({ type: 'before', priority: 80 })
 export class BodyParserMiddleware implements KoaMiddlewareInterface {
-
     public use(ctx: Context, next: (err?: any) => Promise<any>): Promise<any> {
         return bodyParser({
             enableTypes: ['json', 'form'],
@@ -13,6 +12,6 @@ export class BodyParserMiddleware implements KoaMiddlewareInterface {
             onerror: (err: Error, ctx1: Context): void => {
                 ctx1.throw('body parse error', 422);
             },
-          })(ctx, next);
+        })(ctx, next);
     }
 }

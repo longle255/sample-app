@@ -6,12 +6,13 @@ import { BaseSchema, defaultOptions } from './BaseModel';
 import { IUser } from './User';
 
 export enum TokenTypes {
-    'reset-password', 'refresh-token', 'email-confirmation',
+    'reset-password',
+    'refresh-token',
+    'email-confirmation',
 }
 
 export class IIdentityToken extends BaseSchema {
-
-    @prop({  required: true, index: true })
+    @prop({ required: true, index: true })
     public token: string;
 
     @prop({ ref: IUser, required: true })

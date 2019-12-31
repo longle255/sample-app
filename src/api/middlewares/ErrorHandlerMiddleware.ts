@@ -5,14 +5,11 @@ import { UNKNOWN_ENDPOINT } from '../../constants/error';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
 import { env } from '../../env';
 
-@Middleware({ type: 'before', priority: 80})
+@Middleware({ type: 'before', priority: 80 })
 export class ErrorHandlerMiddleware implements KoaMiddlewareInterface {
-
     public isProduction = env.isProduction;
 
-    constructor(
-        @Logger(__filename) private log: LoggerInterface
-    ) { }
+    constructor(@Logger(__filename) private log: LoggerInterface) {}
 
     public async use(ctx: Context, next: (err?: any) => Promise<any>): Promise<any> {
         try {

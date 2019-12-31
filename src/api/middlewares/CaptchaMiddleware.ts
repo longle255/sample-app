@@ -9,9 +9,10 @@ const recaptchaObj = new reCAPTCHA({
     secretKey: env.recaptcha.secretKey,
 });
 export class CaptchaMiddleware implements KoaMiddlewareInterface {
-
     public async use(ctx: Context, next: (err?: any) => Promise<any>): Promise<any> {
-        if (env.isDevelopment) { return next(); }
+        if (env.isDevelopment) {
+            return next();
+        }
 
         if (!ctx.request.body.captcha) {
             throw new InvalidCaptchaError('Please solve the captcha');

@@ -26,7 +26,6 @@ const LINK_EMAIL_CONFIRMATION = `${env.app.uri}/account/confirm-email?token=`;
 const LINK_RESET_PASSWORD = `${env.app.uri}/account/reset-password?token=`;
 @Service()
 export class EmailService extends BaseService<IEmail> {
-
     constructor(
         private mailer: Transporter = nodemailer.createTransport(mg(mailgunAuth)),
         private jobService: JobService = Container.get<JobService>(JobService),
@@ -175,7 +174,9 @@ export class EmailService extends BaseService<IEmail> {
         });
         await this.create(email);
 
-        if (!options.locals.email) { options.locals.email = options.to; }
+        if (!options.locals.email) {
+            options.locals.email = options.to;
+        }
         const content = await emailTemplate.renderAll(options.template, options.locals);
         const mailOption: SendMailOptions = {
             ...options,
@@ -213,8 +214,12 @@ export class EmailService extends BaseService<IEmail> {
                     html: mailOption.html,
                 };
             }
-            if (mailOption.text) { data.text = mailOption.text; }
-            if (recipientVars) { data['recipient-variables'] = recipientVars; }
+            if (mailOption.text) {
+                data.text = mailOption.text;
+            }
+            if (recipientVars) {
+                data['recipient-variables'] = recipientVars;
+            }
 
             try {
                 this.jobService.schedule('now', 'SendEmail', data);
@@ -236,5 +241,4 @@ export class EmailService extends BaseService<IEmail> {
             });
         });
     }
-
 }

@@ -1,6 +1,4 @@
-import {
-    Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req, State
-} from 'routing-controllers';
+import { Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req, State } from 'routing-controllers';
 
 import { UserNotFoundError } from '../errors/UserNotFoundError';
 import { IUser } from '../models/User';
@@ -10,10 +8,7 @@ import { InstanceType } from 'typegoose';
 @Authorized('admin')
 @JsonController('/users')
 export class UserController {
-
-    constructor(
-        private userService: UserService
-    ) { }
+    constructor(private userService: UserService) {}
 
     @Get()
     public find(): Promise<IUser[]> {
@@ -23,14 +18,14 @@ export class UserController {
     @Get('/profile')
     @Authorized('user')
     public async findMe(@Req() req: any, @State('user') user: InstanceType<IUser>): Promise<InstanceType<IUser>> {
-        const ret = await this.userService.findOne({_id: user._id});
+        const ret = await this.userService.findOne({ _id: user._id });
         return ret.toJSON();
     }
 
     @Get('/:id([0-9a-f]{24})')
     @OnUndefined(UserNotFoundError)
     public one(@Param('id') id: string): Promise<IUser | undefined> {
-        return this.userService.findOne({_id: id});
+        return this.userService.findOne({ _id: id });
     }
 
     @Post()
@@ -47,5 +42,4 @@ export class UserController {
     public delete(@Param('id') id: string): Promise<void> {
         return this.userService.delete(id);
     }
-
 }

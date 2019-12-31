@@ -18,7 +18,7 @@ export function getOsEnvOptional(key: string): string | undefined {
 }
 
 export function getPath(path: string): string {
-    return (process.env.NODE_ENV === 'production')
+    return process.env.NODE_ENV === 'production'
         ? join(process.cwd(), path.replace('src/', 'dist/').slice(0, -3) + '.js')
         : join(process.cwd(), path);
 }
@@ -36,7 +36,7 @@ export function getOsPaths(key: string): string[] {
 }
 
 export function getOsEnvArray(key: string, delimiter: string = ','): string[] {
-    return process.env[key] && process.env[key].split(delimiter) || [];
+    return (process.env[key] && process.env[key].split(delimiter)) || [];
 }
 
 export function toNumber(value: string): number {
@@ -49,10 +49,12 @@ export function toBool(value: string): boolean {
 
 export function normalizePort(port: string): number | string | boolean {
     const parsedPort = parseInt(port, 10);
-    if (isNaN(parsedPort)) { // named pipe
+    if (isNaN(parsedPort)) {
+        // named pipe
         return port;
     }
-    if (parsedPort >= 0) { // port number
+    if (parsedPort >= 0) {
+        // port number
         return parsedPort;
     }
     return false;

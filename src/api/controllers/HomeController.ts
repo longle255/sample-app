@@ -4,7 +4,6 @@ import { env } from '../../env';
 
 @JsonController('/')
 export class HomeController {
-
     @Get()
     public home(): Promise<object> {
         return new Promise((resolve, reject) => {

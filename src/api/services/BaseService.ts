@@ -68,7 +68,8 @@ export abstract class BaseService<ISchema extends BaseSchema> {
         this.log.debug(`Update an ${this.modelName}`);
         return new Promise<InstanceType<ISchema>>(async (resolve, reject) => {
             const updateData = _.omit(body, ['id']);
-            return this.model.findOneAndUpdate({ _id: id }, updateData, { new: true, select: {} })
+            return this.model
+                .findOneAndUpdate({ _id: id }, updateData, { new: true, select: {} })
                 .then((result: InstanceType<ISchema>) => {
                     resolve(result);
                 })
@@ -81,7 +82,8 @@ export abstract class BaseService<ISchema extends BaseSchema> {
     public async delete(id: any): Promise<void> {
         this.log.debug(`Delete an ${this.modelName}`);
         return new Promise<void>(async (resolve, reject) => {
-            return this.model.findByIdAndRemove({ _id: id })
+            return this.model
+                .findByIdAndRemove({ _id: id })
                 .then((result: ISchema) => {
                     resolve();
                 })

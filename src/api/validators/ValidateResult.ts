@@ -10,7 +10,7 @@ export class ValidateResult {
         if (!valid) {
             const error: any = {};
 
-            errors.forEach((err) => {
+            errors.forEach(err => {
                 error[err.property] = Object.keys(err.constraints).map(x => err.constraints[x]);
             });
 

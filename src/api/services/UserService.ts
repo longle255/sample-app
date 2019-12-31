@@ -7,7 +7,6 @@ import { BaseService } from './BaseService';
 
 @Service()
 export class UserService extends BaseService<IUser> {
-
     constructor() {
         super(new Logger(__filename), User, 'user');
     }
@@ -30,5 +29,4 @@ export class UserService extends BaseService<IUser> {
             },
         });
     }
-
 }

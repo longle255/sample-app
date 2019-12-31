@@ -7,10 +7,7 @@ import { Job } from 'agenda';
 
 @Service()
 export class JobService {
-
-    constructor(
-        @Logger(__filename) private log: LoggerInterface,
-    ) { }
+    constructor(@Logger(__filename) private log: LoggerInterface) {}
 
     public schedule(when: string, jobName: string, args: any): Promise<Job<any>> {
         this.log.debug(`Schedule job [${jobName}] at [${when}]`);

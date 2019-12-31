@@ -4,12 +4,10 @@ import { KoaMiddlewareInterface, Middleware } from 'routing-controllers';
 
 @Middleware({ type: 'before' })
 export class SecurityHstsMiddleware implements KoaMiddlewareInterface {
-
     public use(ctx: Context, next: (err?: any) => Promise<any>): Promise<any> {
         return helmet.hsts({
             maxAge: 31536000,
             includeSubdomains: true,
         })(ctx, next);
     }
-
 }

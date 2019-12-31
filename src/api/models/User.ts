@@ -11,7 +11,7 @@ export enum Roles {
     'coindev' = 2,
     'contributor' = 3,
     'app' = 4,
-  }
+}
 
 async function genUniqueReferralCode(): Promise<string> {
     let code = Math.random()
@@ -20,8 +20,8 @@ async function genUniqueReferralCode(): Promise<string> {
     let exist = await User.findOne({ referralCode: code }).exec();
     while (exist) {
         code = Math.random()
-        .toString(36)
-        .substring(2, 8);
+            .toString(36)
+            .substring(2, 8);
         exist = await User.findOne({ referralCode: code }).exec();
     }
     return code;
@@ -30,9 +30,11 @@ async function genUniqueReferralCode(): Promise<string> {
 @pre<IUser>('save', async function(next: (err?: Error) => void): Promise<void> {
     try {
         if (!this.referralCode || !this.referralCode.length) {
-        this.referralCode = await genUniqueReferralCode();
+            this.referralCode = await genUniqueReferralCode();
         }
-        if (!this.isModified('password')) { return next(); }
+        if (!this.isModified('password')) {
+            return next();
+        }
         const hash = await User.hashPassword(this.password);
         this.password = hash;
         return next();
@@ -40,9 +42,7 @@ async function genUniqueReferralCode(): Promise<string> {
         return next(error);
     }
 })
-
 export class IUser extends BaseSchema {
-
     @staticMethod
     public static hashPassword(password: string): Promise<string> {
         return bcrypt.hash(password, 10);
@@ -105,10 +105,10 @@ export class IUser extends BaseSchema {
     })
     public role: string;
 
-    @prop({default: []})
+    @prop({ default: [] })
     public referrals: string[];
 
-    @prop({ref: IUser})
+    @prop({ ref: IUser })
     public referrer: Ref<IUser>;
 
     @prop({

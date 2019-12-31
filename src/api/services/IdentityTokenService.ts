@@ -11,7 +11,6 @@ import { BaseService } from './BaseService';
 
 @Service()
 export class IdentityTokenService extends BaseService<IIdentityToken> {
-
     constructor() {
         super(new Logger(__filename), IdentityToken, 'identitytoken');
     }
@@ -38,24 +37,31 @@ export class IdentityTokenService extends BaseService<IIdentityToken> {
                 email,
                 expires,
                 type: tokenType,
-            }).then((result: IIdentityToken) => {
-                resolve(result);
-            }).catch((err: any) => {
-                reject(err);
-            });
+            })
+                .then((result: IIdentityToken) => {
+                    resolve(result);
+                })
+                .catch((err: any) => {
+                    reject(err);
+                });
         });
     }
 
     public invalidateToken(cond: any): Promise<void> {
         this.log.debug('invalidate all token with condition %s', cond);
         return new Promise<void>(async (resolve, reject) => {
-            return IdentityToken.update(cond, {
-                $set: {
-                    expires: new Date(),
+            return IdentityToken.update(
+                cond,
+                {
+                    $set: {
+                        expires: new Date(),
+                    },
                 },
-            }, {
+                {
                     multi: true,
-                }).then(() => {
+                },
+            )
+                .then(() => {
                     resolve();
                 })
                 .catch((err: any) => {
