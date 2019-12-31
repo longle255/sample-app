@@ -4,6 +4,7 @@ import { UserNotFoundError } from '../errors/UserNotFoundError';
 import { IUser } from '../models/User';
 import { UserService } from '../services/UserService';
 import { InstanceType } from 'typegoose';
+import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 
 @Authorized('admin')
 @JsonController('/users')
@@ -11,7 +12,7 @@ export class UserController {
     constructor(private userService: UserService) {}
 
     @Get()
-    public find(): Promise<IUser[]> {
+    public findAll(): Promise<IUser[]> {
         return this.userService.find();
     }
 
@@ -23,7 +24,7 @@ export class UserController {
     }
 
     @Get('/:id([0-9a-f]{24})')
-    @OnUndefined(UserNotFoundError)
+    @OnUndefined(RecordNotFoundError)
     public one(@Param('id') id: string): Promise<IUser | undefined> {
         return this.userService.findOne({ _id: id });
     }

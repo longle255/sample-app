@@ -1,29 +1,19 @@
-import { Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req, State } from 'routing-controllers';
-
-import { CollectionNotFoundError } from '../errors/CollectionNotFoundError';
+import { JsonController, Get, OnUndefined, Param, Body, Post, Put, Delete } from 'routing-controllers';
 import { ICollection } from '../models/Collection';
 import { CollectionService } from '../services/CollectionService';
-import { InstanceType } from 'typegoose';
+import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 
-@Authorized('admin')
 @JsonController('/collections')
 export class CollectionController {
     constructor(private collectionService: CollectionService) {}
 
     @Get()
-    public find(): Promise<ICollection[]> {
+    public findAll(): Promise<ICollection[]> {
         return this.collectionService.find();
     }
 
-    @Get('/profile')
-    @Authorized('collection')
-    public async findMe(@Req() req: any, @State('collection') collection: InstanceType<ICollection>): Promise<InstanceType<ICollection>> {
-        const ret = await this.collectionService.findOne({ _id: collection._id });
-        return ret.toJSON();
-    }
-
     @Get('/:id([0-9a-f]{24})')
-    @OnUndefined(CollectionNotFoundError)
+    @OnUndefined(RecordNotFoundError)
     public one(@Param('id') id: string): Promise<ICollection | undefined> {
         return this.collectionService.findOne({ _id: id });
     }
