@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"
+        data-inline-ignore>
+</head>
+
+<body style="margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;background-color: #f3f3f3;font-size: 12px;">
+    <div style="width: 100%; background: #eceff4; padding: 50px 20px; color: #514d6a;">
+        <div style="max-width: 700px; margin: 0px auto; font-size: 14px">
+            <table style="border-collapse: collapse; border: 0; width: 100%; margin-bottom: 20px">
+                <tr>
+                    <td style="vertical-align: top;">
+                        <img src="https://snode.co/img/email/logo.png" alt="InstantCredit Group" style="height: 40px" />
+                    </td>
+                    <td style="text-align: right; vertical-align: middle;">
+                        <span style="color: #a09bb9;">
+                            instantloan.ch
+                        </span>
+                    </td>
+                </tr>
+            </table>
+
+            <div style="padding: 40px 40px 20px 40px; background: #fff;">
+                <table style="border-collapse: collapse; border: 0; width: 100%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>Hi <%=name%>,</p>
+                                <p>
+                                    You have requested to reset your password.
+                                </p>
+                                <p>
+                                    Please click on following link and follow the instructions:
+                                </p>
+                                <div style="text-align: center">
+                                    <a href="<%=link%>"
+                                        style="display: inline-block;padding: 11px 30px 11px;margin: 20px 0px 30px;font-size: 15px;color: #fff;background: #01a8fe;border-radius: 5px;text-decoration: none;">
+                                        Reset my password
+                                    </a>
+                                </div>
+                                <p>Please copy and paste this link to your browser if the one above doesn't work:
+                                </p>
+                                <p
+                                    style="word-break:break-all;overflow-wrap: break-word;word-wrap: break-word;-ms-word-break: break-all;word-break: break-all;word-break: break-word;-ms-hyphens: auto;-moz-hyphens: auto;-webkit-hyphens: auto; hyphens: auto;">
+                                    <%=link%>
+                                </p>
+                                <p> - InstantLoan Team</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align: center; font-size: 12px; color: #a09bb9; margin-top: 20px">
+                <div style="display: inline-block; vertical-align: middle; margin-right: 30px;">
+                    <a style="display: inline-block; margin: 0 5px;" href="https://fb.me/snodeco">
+                        <img src="https://snode.co/img/email/ic_facebook.png" width="32px" />
+                    </a>
+                    <a style="display: inline-block; margin: 0 5px;" href="https://twitter.com/snode_co">
+                        <img src="https://snode.co/img/email/ic_twitter.png" width="32px" />
+                    </a>
+                    <a style="display: inline-block; margin: 0 5px;" href="https://discord.gg/u7uTYAA">
+                        <img src="https://snode.co/img/email/ic_discord.png" width="32px" />
+                    </a>
+                </div>
+                <p>
+                    Instant Loan Tech Inc., Ticino, Switzerland
+                    <br />
+                    This email was sent to <%=email%>. You are receiving this email because you signed up for an
+                    instantloan.ch
+                    account.
+                    <br />
+                    Don't like these emails?
+                    <a href="%unsubscribe_url%" style="color: #a09bb9; text-decoration: underline;">Unsubscribe</a>
+                    <br />
+                    Powered by Snode.co
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
