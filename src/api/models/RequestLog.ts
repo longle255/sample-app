@@ -5,13 +5,9 @@ import { prop, Ref, getModelForClass, modelOptions } from '@typegoose/typegoose'
 import { BaseSchema, defaultOptions } from './BaseModel';
 import { IUser } from './User';
 
-const schemaOptions = Object.assign(
-  {},
-  {
-    collection: 'request-logs',
-  },
-  defaultOptions,
-);
+const schemaOptions = Object.assign({}, defaultOptions, {
+  collection: 'request-logs',
+});
 
 @modelOptions({ existingMongoose: mongoose, schemaOptions })
 export class IRequestLog extends BaseSchema {

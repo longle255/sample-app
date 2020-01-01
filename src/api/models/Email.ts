@@ -5,13 +5,9 @@ import { prop, Ref, getModelForClass, modelOptions } from '@typegoose/typegoose'
 import { BaseSchema, defaultOptions } from './BaseModel';
 import { IUser } from './User';
 
-const schemaOptions = Object.assign(
-  {},
-  {
-    collection: 'emails',
-  },
-  defaultOptions,
-);
+const schemaOptions = Object.assign({}, defaultOptions, {
+  collection: 'emails',
+});
 
 @modelOptions({ existingMongoose: mongoose, schemaOptions })
 export class IEmail extends BaseSchema {

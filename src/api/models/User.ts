@@ -12,13 +12,9 @@ export enum Roles {
   APP = 'app',
 }
 
-const schemaOptions = Object.assign(
-  {},
-  {
-    collection: 'users',
-  },
-  defaultOptions,
-);
+const schemaOptions = Object.assign({}, defaultOptions, {
+  collection: 'users',
+});
 
 async function genUniqueReferralCode(): Promise<string> {
   let code = Math.random()

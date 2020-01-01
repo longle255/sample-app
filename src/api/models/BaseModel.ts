@@ -22,6 +22,10 @@ export const defaultOptions = {
     toJSON: {
         getters: true,
         virtuals: true,
+        transform: (doc, ret, options) => {
+          delete ret._id;
+          return ret;
+        },
     },
     toObject: {
         getters: true,

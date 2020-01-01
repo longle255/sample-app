@@ -10,13 +10,9 @@ export enum TokenTypes {
   REFRESH_TOKEN = 'refresh-token',
   EMAIL_CONFIRMATION = 'email-confirmation',
 }
-const schemaOptions = Object.assign(
-  {},
-  {
-    collection: 'emails',
-  },
-  defaultOptions,
-);
+const schemaOptions = Object.assign({}, defaultOptions, {
+  collection: 'emails',
+});
 
 @modelOptions({ existingMongoose: mongoose, schemaOptions })
 export class IIdentityToken extends BaseSchema {
