@@ -2,7 +2,7 @@ import { JsonController, Get, OnUndefined, Param, Body, Post, Put, Delete, Query
 import { ICollection } from '../models/Collection';
 import { CollectionService } from '../services/CollectionService';
 import { RecordNotFoundError } from '../errors/RecordNotFoundError';
-import { Pagination } from '../helpers/Pagination';
+import { Pagination } from '../services/Pagination';
 
 @JsonController('/collections')
 export class CollectionController {

@@ -49,7 +49,7 @@ module.exports = {
          * Creates the needed configuration files
          */
         config: {
-            script: series(runFast('./commands/tsconfig.ts')),
+            script: series(run('./commands/tsconfig.ts')),
             hiddenFromHelp: true,
         },
         /**
@@ -125,19 +125,19 @@ module.exports = {
          */
         db: {
             migrate: {
-                script: series('nps banner.migrate', 'nps config', runFast('./node_modules/typeorm/cli.js migration:run')),
+                script: series('nps banner.migrate', 'nps config', run('./node_modules/typeorm/cli.js migration:run')),
                 description: 'Migrates the database to newest version available',
             },
             revert: {
-                script: series('nps banner.revert', 'nps config', runFast('./node_modules/typeorm/cli.js migration:revert')),
+                script: series('nps banner.revert', 'nps config', run('./node_modules/typeorm/cli.js migration:revert')),
                 description: 'Downgrades the database',
             },
             seed: {
-                script: series('nps banner.seed', 'nps config', runFast('./commands/seed.ts')),
+                script: series('nps banner.seed', 'nps config', run('./commands/seed.ts')),
                 description: 'Seeds generated records into the database',
             },
             drop: {
-                script: runFast('./node_modules/typeorm/cli.js schema:drop'),
+                script: run('./node_modules/typeorm/cli.js schema:drop'),
                 description: 'Drops the schema of the database',
             },
             setup: {
@@ -241,7 +241,7 @@ function banner(name) {
         hiddenFromHelp: true,
         silent: true,
         description: `Shows ${name} banners to the console`,
-        script: runFast(`./commands/banner.ts ${name}`),
+        script: run(`./commands/banner.ts ${name}`),
     };
 }
 

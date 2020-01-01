@@ -8,7 +8,7 @@ import { AuthService, ITokenInfo } from '../../src/api/services/AuthService';
 import { BadRequestError } from 'routing-controllers';
 
 const account: RegisterRequestSchema = {
-    email: 'test@instantloan.ch',
+    email: 'test@sample.com',
     firstName: 'Test',
     lastName: 'INL',
     password: '123456',
@@ -48,7 +48,7 @@ describe('UserService', () => {
 
     test('should failed register duplicated email', async () => {
         const newAccount: RegisterRequestSchema = {
-            email: 'test@instantloan.ch',
+            email: 'test@sample.com',
             firstName: 'Test',
             lastName: 'INL',
             password: '123456',
@@ -61,7 +61,7 @@ describe('UserService', () => {
         const userService = Container.get<UserService>(UserService);
         let user = await userService.findOne({ email: account.email });
         const newAccount: RegisterRequestSchema = {
-            email: 'test2@instantloan.ch',
+            email: 'test2@sample.com',
             firstName: 'Test 2',
             lastName: 'INL',
             password: '123456',
@@ -78,7 +78,7 @@ describe('UserService', () => {
 
     test('should failed register new user with incorrect ref code', async () => {
         const newAccount: RegisterRequestSchema = {
-            email: 'test3@instantloan.ch',
+            email: 'test3@sample.com',
             firstName: 'Test 2',
             lastName: 'INL',
             password: '123456',
