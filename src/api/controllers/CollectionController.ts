@@ -6,35 +6,35 @@ import { Pagination } from '../services/Pagination';
 
 @JsonController('/collections')
 export class CollectionController {
-    constructor(private collectionService: CollectionService) {}
+  constructor(private collectionService: CollectionService) {}
 
-    @Get()
-    public findAll(@QueryParams() params: any): Promise<Pagination<ICollection>> {
-        return this.collectionService.paginate({
-            limit: params.limit ? parseInt(params.limit, 10) : 10,
-            page: params.page ? parseInt(params.page, 10) : 0,
-            cond: params.cond ? params.cond : {},
-        });
-    }
+  @Get()
+  public findAll(@QueryParams() params: any): Promise<Pagination<ICollection>> {
+    return this.collectionService.paginate({
+      limit: params.limit ? parseInt(params.limit, 10) : 10,
+      page: params.page ? parseInt(params.page, 10) : 0,
+      cond: params.cond ? params.cond : {},
+    });
+  }
 
-    @Get('/:id([0-9a-f]{24})')
-    @OnUndefined(RecordNotFoundError)
-    public one(@Param('id') id: string): Promise<ICollection | undefined> {
-        return this.collectionService.findOne({ _id: id });
-    }
+  @Get('/:id([0-9a-f]{24})')
+  @OnUndefined(RecordNotFoundError)
+  public one(@Param('id') id: string): Promise<ICollection | undefined> {
+    return this.collectionService.findOne({ _id: id });
+  }
 
-    @Post()
-    public async create(@Body() collection: ICollection): Promise<ICollection> {
-        return this.collectionService.create(collection);
-    }
+  @Post()
+  public async create(@Body() collection: ICollection): Promise<ICollection> {
+    return this.collectionService.create(collection);
+  }
 
-    @Put('/:id')
-    public async update(@Param('id') id: string, @Body() collection: ICollection): Promise<ICollection> {
-        return this.collectionService.update(id, collection);
-    }
+  @Put('/:id')
+  public async update(@Param('id') id: string, @Body() collection: ICollection): Promise<ICollection> {
+    return this.collectionService.update(id, collection);
+  }
 
-    @Delete('/:id')
-    public delete(@Param('id') id: string): Promise<void> {
-        return this.collectionService.delete(id);
-    }
+  @Delete('/:id')
+  public delete(@Param('id') id: string): Promise<void> {
+    return this.collectionService.delete(id);
+  }
 }

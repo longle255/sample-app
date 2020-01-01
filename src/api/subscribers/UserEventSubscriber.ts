@@ -8,8 +8,8 @@ const log = new Logger(__filename);
 
 @EventSubscriber()
 export class UserEventSubscriber {
-    @On(events[User.modelName].created)
-    public onUserCreate(user: IUser): void {
-        log.info('User ' + user.toString() + ' created!');
-    }
+  @On(events[User.modelName].created)
+  public onUserCreate(user: IUser): void {
+    log.info('User ' + user.toString() + ' created!');
+  }
 }

@@ -6,7 +6,7 @@ import { User } from '../models/User';
  * Define all your possible custom events here.
  */
 export const events = {
-    [User.modelName]: {
-        created: 'onUserCreate',
-    },
+  [User.modelName]: {
+    created: 'onUserCreate',
+  },
 };

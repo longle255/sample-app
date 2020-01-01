@@ -2,14 +2,14 @@ import { IsNotEmpty, Length, IsString, MaxLength, MinLength } from 'class-valida
 import { BaseRequestSchema } from './BaseRequestSchema';
 
 export class ResetPasswordRequestSchema extends BaseRequestSchema {
-    @IsNotEmpty()
-    @Length(105)
-    @IsString()
-    public token: string;
+  @IsNotEmpty()
+  @Length(105)
+  @IsString()
+  public token: string;
 
-    @IsNotEmpty()
-    @IsString()
-    @MaxLength(128)
-    @MinLength(6)
-    public password: string;
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(128)
+  @MinLength(6)
+  public password: string;
 }

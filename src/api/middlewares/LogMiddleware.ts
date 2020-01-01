@@ -7,13 +7,13 @@ import { Logger } from '../../lib/logger';
 
 @Middleware({ type: 'before' })
 export class LogMiddleware implements KoaMiddlewareInterface {
-    private log = new Logger(__filename);
+  private log = new Logger(__filename);
 
-    public use(ctx: Context, next: (err?: any) => Promise<any>): Promise<any> {
-        return morgan(env.log.output, {
-            stream: {
-                write: this.log.info.bind(this.log),
-            },
-        })(ctx, next);
-    }
+  public use(ctx: Context, next: (err?: any) => Promise<any>): Promise<any> {
+    return morgan(env.log.output, {
+      stream: {
+        write: this.log.info.bind(this.log),
+      },
+    })(ctx, next);
+  }
 }

@@ -26,14 +26,14 @@ Promise = require('bluebird');
 const log = new Logger(__filename);
 
 bootstrapMicroframework({
-    config: {
-        showBootstrapTime: true,
-    },
-    /**
-     * Loader is a place where you can configure all your modules during microframework
-     * bootstrap process. All loaders are executed one by one in a sequential order.
-     */
-    loaders: [winstonLoader, iocLoader, eventDispatchLoader, mongooseLoader, agendaLoader, koaLoader, swaggerLoader, publicLoader],
+  config: {
+    showBootstrapTime: true,
+  },
+  /**
+   * Loader is a place where you can configure all your modules during microframework
+   * bootstrap process. All loaders are executed one by one in a sequential order.
+   */
+  loaders: [winstonLoader, iocLoader, eventDispatchLoader, mongooseLoader, agendaLoader, koaLoader, swaggerLoader, publicLoader],
 })
-    .then(() => banner(log))
-    .catch(error => log.error('Application is crashed: ' + error));
+  .then(() => banner(log))
+  .catch(error => log.error('Application is crashed: ' + error));
