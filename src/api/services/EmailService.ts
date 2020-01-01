@@ -23,6 +23,11 @@ const mailgunAuth = {
 const NO_BCC = [];
 const LINK_EMAIL_CONFIRMATION = `${env.app.uri}/account/confirm-email?token=`;
 const LINK_RESET_PASSWORD = `${env.app.uri}/account/reset-password?token=`;
+
+const defaultValues = {
+    appName: env.app.name,
+    appUri: env.app.uri,
+};
 @Service()
 export class EmailService extends BaseService<IEmail> {
     constructor(
@@ -33,7 +38,7 @@ export class EmailService extends BaseService<IEmail> {
     }
 
     public async sendTestEmail(address: string, name: string): Promise<void> {
-        const subject = `[${env.app.name}] Test email from Instant Loan`;
+        const subject = `[${env.app.name}] Test email from ${env.app.name}`;
         const content = {
             subject,
             host: env.app.host,
@@ -71,7 +76,7 @@ export class EmailService extends BaseService<IEmail> {
     }
 
     public async sendRegistrationEmail(user: IUser, token: string): Promise<void> {
-        const subject = `Welcome to Instant Loan`;
+        const subject = `Welcome to ${env.app.name}`;
         const content = {
             subject,
             host: env.app.host,
@@ -99,6 +104,14 @@ export class EmailService extends BaseService<IEmail> {
                 },
             },
         });
+        if (env.isDevelopment && env.emailDebug) {
+            emailTemplate.preview = {
+                open: {
+                    app: 'firefox',
+                    wait: false,
+                },
+            };
+        }
         const email = new Email({
             user: options.user,
             email: options.to,
@@ -110,7 +123,8 @@ export class EmailService extends BaseService<IEmail> {
         if (!options.locals.email) {
             options.locals.email = options.to;
         }
-        const content = await emailTemplate.renderAll(options.template, options.locals);
+
+        const content = await emailTemplate.renderAll(options.template, Object.assign({}, options.locals, defaultValues));
         const mailOption: SendMailOptions = {
             ...options,
             html: content.html,

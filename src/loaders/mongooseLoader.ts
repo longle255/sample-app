@@ -5,22 +5,33 @@ import { env } from '../env';
 
 function createConnection(connectionOptions: any): Promise<mongoose.Connection> {
     return new Promise((resolve, reject) => {
-        mongoose.connect(connectionOptions.uri, {
-            keepAlive: true,
-            useNewUrlParser: true,
-        });
-        // Exit application on error
-        mongoose.connection.on('error', err => {
-            return reject(err);
-        });
+        // mongoose.set('useNewUrlParser', true);
+        // mongoose.set('useFindAndModify', false);
+        // mongoose.set('useCreateIndex', true);
+        // mongoose.set('useUnifiedTopology', true);
+        // mongoose.set('debug', true);
+        // mongoose.set('debug', connectionOptions.debug);
 
-        // when the connection is connected
-        mongoose.connection.on('connected', () => {
-            return resolve(mongoose.connection);
-        });
+        mongoose
+            .connect(connectionOptions.uri, {
+                useUnifiedTopology: true,
+                useNewUrlParser: true,
+                useCreateIndex: true,
+            })
+            .then(() => resolve(mongoose.connection))
+            .catch(err => {
+                console.log(`DB Connection Error: ${err.message}`);
+                return reject(err);
+            });
+        // // Exit application on error
+        // mongoose.connection.on('error', err => {
+        //     return reject(err);
+        // });
 
-        mongoose.set('useCreateIndex', true);
-        mongoose.set('debug', connectionOptions.debug);
+        // // when the connection is connected
+        // mongoose.connection.on('connected', () => {
+        //     return resolve(mongoose.connection);
+        // });
     });
 }
 

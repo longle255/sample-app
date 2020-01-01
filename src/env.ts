@@ -17,6 +17,7 @@ export const env = {
     isProduction: process.env.NODE_ENV === 'production',
     isTest: process.env.NODE_ENV === 'test',
     isDevelopment: process.env.NODE_ENV === 'development',
+    emailDebug: toBool(getOsEnv('EMAIL_DEBUG')),
     adminEmail: getOsEnv('APP_ADMIN_EMAIL'),
     app: {
         name: getOsEnv('APP_NAME'),

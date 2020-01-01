@@ -1,4 +1,4 @@
-import { ObjectId } from 'mongodb';
+import { Types } from 'mongoose';
 import { prop } from '@typegoose/typegoose';
 
 export abstract class BaseSchema {
@@ -6,10 +6,10 @@ export abstract class BaseSchema {
     public isActive?: boolean;
 
     @prop()
-    public createdBy: ObjectId;
+    public createdBy: Types.ObjectId;
 
     @prop()
-    public updatedBy: ObjectId;
+    public updatedBy: Types.ObjectId;
 }
 
 export const defaultOptions = {

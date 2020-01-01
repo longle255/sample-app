@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
-import { DocumentType, pre, prop, Ref, getModelForClass, modelOptions } from '@typegoose/typegoose';
+import { DocumentType, pre, prop, Ref, getModelForClass, modelOptions, arrayProp } from '@typegoose/typegoose';
 
 import { BaseSchema, defaultOptions } from './BaseModel';
 
@@ -111,7 +111,7 @@ export class IUser extends BaseSchema {
     })
     public role: string;
 
-    @prop({ default: [] })
+    @arrayProp({ items: String })
     public referrals: string[];
 
     @prop({ ref: IUser })

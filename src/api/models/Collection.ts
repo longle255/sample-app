@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
-import { prop, getModelForClass, modelOptions } from '@typegoose/typegoose';
+import { prop, getModelForClass, modelOptions, arrayProp } from '@typegoose/typegoose';
 
 import { BaseSchema, defaultOptions } from './BaseModel';
 
@@ -24,7 +24,7 @@ export class ICollection extends BaseSchema {
     public thumbnail: string;
     @prop({ required: true })
     public photos: string[];
-    @prop({ required: true })
+    @arrayProp({ required: true, items: String })
     public tags: string[];
 }
 
