@@ -8,11 +8,15 @@ export class ICollection extends BaseSchema {
     @prop({ required: true })
     public name: string;
     @prop({ required: true })
+    public nativeName: string;
+    @prop({ required: true })
     public description: string;
     @prop({ required: true })
     public thumbnail: string;
     @prop({ required: true })
     public photos: string[];
+    @prop({ required: true })
+    public tags: string[];
 }
 
 const options = Object.assign(

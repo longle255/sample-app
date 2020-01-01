@@ -7,7 +7,7 @@ import { Model as BaseModel } from 'mongoose';
 import { BaseSchema } from '../models/BaseModel';
 import { EventDispatcher } from 'event-dispatch';
 import { events } from '../subscribers/events';
-import { Pagination, PaginationOptionsInterface } from '../helpers/Pagination';
+import { Pagination, PaginationOptionsInterface } from './helpers/Pagination';
 
 @Service()
 export abstract class BaseService<E extends BaseSchema> {
