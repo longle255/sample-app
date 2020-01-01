@@ -12,7 +12,7 @@ import { BaseService } from './BaseService';
 @Service()
 export class IdentityTokenService extends BaseService<IIdentityToken> {
     constructor() {
-        super(new Logger(__filename), IdentityToken, 'identitytoken');
+        super(new Logger(__filename), IdentityToken);
     }
 
     public async generateToken(user: InstanceType<IUser>, tokenType: TokenTypes): Promise<IIdentityToken> {

@@ -385,3 +385,16 @@ DB_PORT=3306
 ## ❯ License
 
 [MIT](/LICENSE)
+
+
+### my note
+
+```
+error: [api:middlewares/ErrorHandlerMiddleware] TypeError: callback is not a function
+    at /Users/longle/Documents/Workspace/faptv/faptv-api/node_modules/mongoose/lib/statemachine.js:140:14
+    at Array.map (<anonymous>)
+    at ctor.map (/Users/longle/Documents/Workspace/faptv/faptv-api/node_modules/mongoose/lib/statemachine.js:137:29)
+    at _loop_1 (/Users/longle/Documents/Workspace/faptv/faptv-api/src/TransformOperationExecutor.ts:124:47)
+```
+
+This is because the result of api is in form of mongoose document. need to change to json before sending back by using .toJSON(). I put an interceptor to do that

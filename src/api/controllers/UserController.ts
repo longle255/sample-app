@@ -1,6 +1,4 @@
 import { Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req, State } from 'routing-controllers';
-
-import { UserNotFoundError } from '../errors/UserNotFoundError';
 import { IUser } from '../models/User';
 import { UserService } from '../services/UserService';
 import { InstanceType } from 'typegoose';
@@ -19,8 +17,7 @@ export class UserController {
     @Get('/profile')
     @Authorized('user')
     public async findMe(@Req() req: any, @State('user') user: InstanceType<IUser>): Promise<InstanceType<IUser>> {
-        const ret = await this.userService.findOne({ _id: user._id });
-        return ret.toJSON();
+        return this.userService.findOne({ _id: user._id });
     }
 
     @Get('/:id([0-9a-f]{24})')

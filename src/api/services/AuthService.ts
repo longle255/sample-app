@@ -290,6 +290,9 @@ export function authorizationChecker(): (action: Action, roles: any[]) => Promis
         }
 
         const parsedToken = await authService.parseFromAuthorizationHeader(token);
+        if (!parsedToken) {
+            return false;
+        }
         const user = await authService.verifyUser(parsedToken, roles);
 
         if (!user) {

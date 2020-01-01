@@ -1,5 +1,5 @@
 import { JsonController, Get, OnUndefined, Param, Body, Post, Put, Delete } from 'routing-controllers';
-import { ICollection } from '../models/Collection';
+import { ICollection, Collection } from '../models/Collection';
 import { CollectionService } from '../services/CollectionService';
 import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 
@@ -19,12 +19,12 @@ export class CollectionController {
     }
 
     @Post()
-    public create(@Body() collection: ICollection): Promise<ICollection> {
+    public async create(@Body() collection: ICollection): Promise<ICollection> {
         return this.collectionService.create(collection);
     }
 
     @Put('/:id')
-    public update(@Param('id') id: string, @Body() collection: ICollection): Promise<ICollection> {
+    public async update(@Param('id') id: string, @Body() collection: ICollection): Promise<ICollection> {
         return this.collectionService.update(id, collection);
     }
 

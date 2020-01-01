@@ -7,6 +7,6 @@ import { ICollection, Collection } from '../models/Collection';
 @Service()
 export class CollectionService extends BaseService<ICollection> {
     constructor() {
-        super(new Logger(__filename), Collection, 'user');
+        super(new Logger(__filename), Collection);
     }
 }

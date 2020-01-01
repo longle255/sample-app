@@ -8,7 +8,7 @@ import { BaseService } from './BaseService';
 @Service()
 export class UserService extends BaseService<IUser> {
     constructor() {
-        super(new Logger(__filename), User, 'user');
+        super(new Logger(__filename), User);
     }
 
     public confirmUser(id: any): Promise<InstanceType<IUser>> {

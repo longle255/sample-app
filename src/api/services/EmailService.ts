@@ -30,7 +30,7 @@ export class EmailService extends BaseService<IEmail> {
         private mailer: Transporter = nodemailer.createTransport(mg(mailgunAuth)),
         private jobService: JobService = Container.get<JobService>(JobService),
     ) {
-        super(new Logger(__filename), Email, 'email');
+        super(new Logger(__filename), Email);
     }
 
     public find(cond?: object): Promise<Array<InstanceType<IEmail>>> {
