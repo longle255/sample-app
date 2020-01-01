@@ -1,9 +1,18 @@
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
-import { prop } from 'typegoose';
+import { prop, getModelForClass, modelOptions } from '@typegoose/typegoose';
 
 import { BaseSchema, defaultOptions } from './BaseModel';
 
+const schemaOptions = Object.assign(
+    {},
+    {
+        collection: 'collections',
+    },
+    defaultOptions,
+);
+
+@modelOptions({ existingMongoose: mongoose, schemaOptions })
 export class ICollection extends BaseSchema {
     @prop({ required: true })
     public name: string;
@@ -19,17 +28,4 @@ export class ICollection extends BaseSchema {
     public tags: string[];
 }
 
-const options = Object.assign(
-    {},
-    {
-        collection: 'collections',
-        autoIndex: true,
-        timestamps: true,
-    },
-    defaultOptions,
-);
-
-export const Collection = new ICollection().getModelForClass(ICollection, {
-    existingMongoose: mongoose,
-    schemaOptions: options,
-});
+export const Collection = getModelForClass(ICollection);

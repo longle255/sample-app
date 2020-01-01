@@ -1,13 +1,13 @@
 import createHttpError from 'http-errors';
 import _ from 'lodash';
 import { Service } from 'typedi';
-import { InstanceType } from 'typegoose';
+import { DocumentType } from '@typegoose/typegoose';
 import { LoggerInterface } from '../../decorators/Logger';
 import { Model as BaseModel } from 'mongoose';
 import { BaseSchema } from '../models/BaseModel';
 import { EventDispatcher } from 'event-dispatch';
 import { events } from '../subscribers/events';
-import { Pagination, PaginationOptionsInterface } from './helpers/Pagination';
+import { Pagination, PaginationOptionsInterface } from './Pagination';
 
 @Service()
 export abstract class BaseService<E extends BaseSchema> {
@@ -58,9 +58,9 @@ export abstract class BaseService<E extends BaseSchema> {
         });
     }
 
-    public find(cond?: object): Promise<Array<InstanceType<E>>> {
+    public find(cond?: object): Promise<Array<DocumentType<E>>> {
         this.log.debug(`Find all ${this.model.modelName}`);
-        return new Promise<Array<InstanceType<E>>>(async (resolve, reject) => {
+        return new Promise<Array<DocumentType<E>>>(async (resolve, reject) => {
             try {
                 const result = await this.model.find(cond);
                 resolve(result);
@@ -70,9 +70,9 @@ export abstract class BaseService<E extends BaseSchema> {
         });
     }
 
-    public findOne(cond: object): Promise<InstanceType<E> | undefined> {
+    public findOne(cond: object): Promise<DocumentType<E> | undefined> {
         this.log.debug(`Find one ${this.model.modelName} with condition ${cond}`);
-        return new Promise<InstanceType<E>>(async (resolve, reject) => {
+        return new Promise<DocumentType<E>>(async (resolve, reject) => {
             try {
                 const result = await this.model.findOne(cond);
                 resolve(result);
@@ -82,9 +82,9 @@ export abstract class BaseService<E extends BaseSchema> {
         });
     }
 
-    public async create(instant: E): Promise<InstanceType<E>> {
+    public async create(instant: E): Promise<DocumentType<E>> {
         this.log.debug(`Create a new ${this.model.modelName} => `, JSON.stringify(instant));
-        return new Promise<InstanceType<E>>(async (resolve, reject) => {
+        return new Promise<DocumentType<E>>(async (resolve, reject) => {
             try {
                 const result = await this.model.create(instant);
                 if (events[this.model.modelName]) {
@@ -100,13 +100,13 @@ export abstract class BaseService<E extends BaseSchema> {
         });
     }
 
-    public update(id: any, body: any): Promise<InstanceType<E>> {
+    public update(id: any, body: any): Promise<DocumentType<E>> {
         this.log.debug(`Update an ${this.model.modelName}`);
-        return new Promise<InstanceType<E>>(async (resolve, reject) => {
+        return new Promise<DocumentType<E>>(async (resolve, reject) => {
             const updateData = _.omit(body, ['id']);
             return this.model
                 .findOneAndUpdate({ _id: id }, updateData, { new: true, select: {} })
-                .then((result: InstanceType<E>) => {
+                .then((result: DocumentType<E>) => {
                     resolve(result);
                 })
                 .catch((err: any) => {

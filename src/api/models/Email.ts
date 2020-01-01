@@ -1,10 +1,19 @@
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
-import { prop, Ref } from 'typegoose';
+import { prop, Ref, getModelForClass, modelOptions } from '@typegoose/typegoose';
 
 import { BaseSchema, defaultOptions } from './BaseModel';
 import { IUser } from './User';
 
+const schemaOptions = Object.assign(
+    {},
+    {
+        collection: 'emails',
+    },
+    defaultOptions,
+);
+
+@modelOptions({ existingMongoose: mongoose, schemaOptions })
 export class IEmail extends BaseSchema {
     @prop({ ref: IUser, required: false })
     public user: Ref<IUser>;
@@ -19,17 +28,4 @@ export class IEmail extends BaseSchema {
     public payload: object;
 }
 
-const options = Object.assign(
-    {},
-    {
-        collection: 'emails',
-        autoIndex: true,
-        timestamps: true,
-    },
-    defaultOptions,
-);
-
-export const Email = new IEmail().getModelForClass(IEmail, {
-    existingMongoose: mongoose,
-    schemaOptions: options,
-});
+export const Email = getModelForClass(IEmail);

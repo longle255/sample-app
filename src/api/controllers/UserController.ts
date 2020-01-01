@@ -1,9 +1,9 @@
 import { Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req, State, QueryParams } from 'routing-controllers';
 import { IUser } from '../models/User';
 import { UserService } from '../services/UserService';
-import { InstanceType } from 'typegoose';
+import { DocumentType } from '@typegoose/typegoose';
 import { RecordNotFoundError } from '../errors/RecordNotFoundError';
-import { Pagination } from '../helpers/Pagination';
+import { Pagination } from '../services/Pagination';
 
 @Authorized('admin')
 @JsonController('/users')
@@ -21,7 +21,7 @@ export class UserController {
 
     @Get('/profile')
     @Authorized('user')
-    public async findMe(@Req() req: any, @State('user') user: InstanceType<IUser>): Promise<InstanceType<IUser>> {
+    public async findMe(@Req() req: any, @State('user') user: DocumentType<IUser>): Promise<DocumentType<IUser>> {
         return this.userService.findOne({ _id: user._id });
     }
 

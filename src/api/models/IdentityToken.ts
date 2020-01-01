@@ -1,16 +1,24 @@
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
-import { prop, Ref } from 'typegoose';
+import { prop, Ref, getModelForClass, modelOptions } from '@typegoose/typegoose';
 
 import { BaseSchema, defaultOptions } from './BaseModel';
 import { IUser } from './User';
 
 export enum TokenTypes {
-    'reset-password',
-    'refresh-token',
-    'email-confirmation',
+    RESET_PASSWORD = 'reset-password',
+    REFRESH_TOKEN = 'refresh-token',
+    EMAIL_CONFIRMATION = 'email-confirmation',
 }
+const schemaOptions = Object.assign(
+    {},
+    {
+        collection: 'emails',
+    },
+    defaultOptions,
+);
 
+@modelOptions({ existingMongoose: mongoose, schemaOptions })
 export class IIdentityToken extends BaseSchema {
     @prop({ required: true, index: true })
     public token: string;
@@ -26,22 +34,9 @@ export class IIdentityToken extends BaseSchema {
 
     @prop({
         enum: TokenTypes,
-        default: TokenTypes['refresh-token'],
+        default: TokenTypes.REFRESH_TOKEN,
     })
     public type: string;
 }
 
-const options = Object.assign(
-    {},
-    {
-        collection: 'identity-tokens',
-        autoIndex: true,
-        timestamps: true,
-    },
-    defaultOptions,
-);
-
-export const IdentityToken = new IIdentityToken().getModelForClass(IIdentityToken, {
-    existingMongoose: mongoose,
-    schemaOptions: options,
-});
+export const IdentityToken = getModelForClass(IIdentityToken);

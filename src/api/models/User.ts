@@ -1,17 +1,24 @@
 import bcrypt from 'bcryptjs';
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
-import { instanceMethod, InstanceType, pre, prop, Ref, staticMethod } from 'typegoose';
+import { DocumentType, pre, prop, Ref, getModelForClass, modelOptions } from '@typegoose/typegoose';
 
 import { BaseSchema, defaultOptions } from './BaseModel';
 
 export enum Roles {
-    'admin' = 0,
-    'user' = 1,
-    'coindev' = 2,
-    'contributor' = 3,
-    'app' = 4,
+    ADMIN = 'admin',
+    CONTRIBUTOR = 'contributor',
+    USER = 'user',
+    APP = 'app',
 }
+
+const schemaOptions = Object.assign(
+    {},
+    {
+        collection: 'users',
+    },
+    defaultOptions,
+);
 
 async function genUniqueReferralCode(): Promise<string> {
     let code = Math.random()
@@ -42,8 +49,8 @@ async function genUniqueReferralCode(): Promise<string> {
         return next(error);
     }
 })
+@modelOptions({ existingMongoose: mongoose, schemaOptions })
 export class IUser extends BaseSchema {
-    @staticMethod
     public static hashPassword(password: string): Promise<string> {
         return bcrypt.hash(password, 10);
     }
@@ -80,7 +87,6 @@ export class IUser extends BaseSchema {
     })
     public lastName: string;
 
-    @prop()
     get fullName(): string {
         return _.map([this.firstName, this.lastName], _.trim).join(' ');
     }
@@ -101,7 +107,7 @@ export class IUser extends BaseSchema {
 
     @prop({
         enum: Roles,
-        default: 'user',
+        default: Roles.USER,
     })
     public role: string;
 
@@ -117,23 +123,9 @@ export class IUser extends BaseSchema {
     })
     public referralCode: string;
 
-    @instanceMethod
-    public async comparePassword(this: InstanceType<IUser>, password: string): Promise<boolean> {
+    public async comparePassword(this: DocumentType<IUser>, password: string): Promise<boolean> {
         return bcrypt.compare(password, this.password);
     }
 }
 
-const options = Object.assign(
-    {},
-    {
-        collection: 'users',
-        autoIndex: true,
-        timestamps: true,
-    },
-    defaultOptions,
-);
-
-export const User = new IUser().getModelForClass(IUser, {
-    existingMongoose: mongoose,
-    schemaOptions: options,
-});
+export const User = getModelForClass(IUser);

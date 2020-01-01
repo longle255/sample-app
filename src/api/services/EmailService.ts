@@ -9,7 +9,7 @@ import { JobService } from './JobService';
 import EmailTemplate from 'email-templates';
 import { IUser } from '../models/User';
 import { Email, IEmail } from '../models/Email';
-import { InstanceType } from 'typegoose';
+import { DocumentType } from '@typegoose/typegoose';
 import { BaseService } from './BaseService';
 
 const templatesDir = path.resolve(__dirname, '../../templates/emails');
@@ -50,7 +50,7 @@ export class EmailService extends BaseService<IEmail> {
         });
     }
 
-    public async sendResetPasswordEmail(user: InstanceType<IUser>, token: string): Promise<void> {
+    public async sendResetPasswordEmail(user: DocumentType<IUser>, token: string): Promise<void> {
         const subject = `Reset password`;
         const content = {
             subject,

@@ -1,10 +1,19 @@
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
-import { prop, Ref } from 'typegoose';
+import { prop, Ref, getModelForClass, modelOptions } from '@typegoose/typegoose';
 
 import { BaseSchema, defaultOptions } from './BaseModel';
 import { IUser } from './User';
 
+const schemaOptions = Object.assign(
+    {},
+    {
+        collection: 'request-logs',
+    },
+    defaultOptions,
+);
+
+@modelOptions({ existingMongoose: mongoose, schemaOptions })
 export class IRequestLog extends BaseSchema {
     @prop({ ref: IUser, required: false })
     public user: Ref<IUser>;
@@ -28,17 +37,4 @@ export class IRequestLog extends BaseSchema {
     public resTime: number;
 }
 
-const options = Object.assign(
-    {},
-    {
-        collection: 'request-logs',
-        autoIndex: true,
-        timestamps: true,
-    },
-    defaultOptions,
-);
-
-export const RequestLog = new IRequestLog().getModelForClass(IRequestLog, {
-    existingMongoose: mongoose,
-    schemaOptions: options,
-});
+export const RequestLog = getModelForClass(IRequestLog);

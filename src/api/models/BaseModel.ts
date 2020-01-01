@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
-import { prop, Typegoose } from 'typegoose';
+import { prop } from '@typegoose/typegoose';
 
-export abstract class BaseSchema extends Typegoose {
+export abstract class BaseSchema {
     @prop({ required: true, default: true })
     public isActive?: boolean;
 
@@ -28,4 +28,5 @@ export const defaultOptions = {
         virtuals: true,
     },
     usePushEach: true,
+    autoIndex: true,
 };

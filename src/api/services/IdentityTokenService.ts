@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import _ from 'lodash';
 import moment from 'moment';
 import { Service } from 'typedi';
-import { InstanceType } from 'typegoose';
+import { DocumentType } from '@typegoose/typegoose';
 import { Logger } from '../../lib/logger';
 import { env } from '../../env';
 import { IdentityToken, IIdentityToken, TokenTypes } from '../models/IdentityToken';
@@ -15,13 +15,13 @@ export class IdentityTokenService extends BaseService<IIdentityToken> {
         super(new Logger(__filename), IdentityToken);
     }
 
-    public async generateToken(user: InstanceType<IUser>, tokenType: TokenTypes): Promise<IIdentityToken> {
+    public async generateToken(user: DocumentType<IUser>, tokenType: TokenTypes): Promise<IIdentityToken> {
         this.log.info(`Create new [${tokenType}] token for user [${user.email}]`);
         return new Promise<IIdentityToken>((resolve, reject) => {
             const { email, _id: userId } = user;
             const token = `${userId}.${crypto.randomBytes(40).toString('hex')}`;
             let expires;
-            if (tokenType === TokenTypes['refresh-token']) {
+            if (tokenType === TokenTypes.REFRESH_TOKEN) {
                 expires = moment()
                     .add(30, 'days')
                     .toDate();

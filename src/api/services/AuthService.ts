@@ -4,7 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import { Action, BadRequestError } from 'routing-controllers';
 import { Container, Service } from 'typedi';
-import { InstanceType } from 'typegoose';
+import { DocumentType } from '@typegoose/typegoose';
 
 import { Logger, LoggerInterface } from '../../decorators/Logger';
 import { env } from '../../env';
@@ -88,7 +88,7 @@ export class AuthService {
         }
     }
 
-    public async verifyUser(parsedToken: any, roles: string[]): Promise<InstanceType<IUser>> {
+    public async verifyUser(parsedToken: any, roles: string[]): Promise<DocumentType<IUser>> {
         const user = await User.findOne({ _id: parsedToken.sub, isActive: true });
         if (!user) {
             return undefined;
@@ -106,14 +106,14 @@ export class AuthService {
             if (activeUsers.length) {
                 return reject(new BadRequestError('Email has been used'));
             }
-            let referrer: InstanceType<IUser>;
+            let referrer: DocumentType<IUser>;
             if (account.referCode) {
                 referrer = await this.userService.findOne({ referralCode: account.referCode });
                 if (!referrer) {
                     return reject(new BadRequestError('Referral code is not valid'));
                 }
             }
-            const user: InstanceType<IUser> = await this.userService.create(
+            const user: DocumentType<IUser> = await this.userService.create(
                 new User({
                     ...account,
                     referrer,
@@ -133,7 +133,7 @@ export class AuthService {
 
     public async login(credential: LoginRequestSchema): Promise<ITokenInfo> {
         return new Promise<ITokenInfo>(async (resolve, reject) => {
-            const user: InstanceType<IUser> = await this.userService.findOne({ email: credential.email });
+            const user: DocumentType<IUser> = await this.userService.findOne({ email: credential.email });
 
             if (!user) {
                 return reject(new BadRequestError('Email and password combination is not valid'));
@@ -162,7 +162,7 @@ export class AuthService {
         return new Promise<DefaultResponseSchema>(async (resolve, reject) => {
             const token: IIdentityToken = await this.identityTokenService.findOne({
                 token: data.token,
-                type: TokenTypes['email-confirmation'],
+                type: TokenTypes.EMAIL_CONFIRMATION,
                 expires: {
                     $gt: new Date(),
                 },
@@ -173,7 +173,7 @@ export class AuthService {
             await this.userService.confirmUser(token.user);
             await this.identityTokenService.invalidateToken({
                 email: token.email,
-                type: TokenTypes['email-confirmation'],
+                type: TokenTypes.EMAIL_CONFIRMATION,
             });
             resolve(new DefaultResponseSchema(true));
         });
@@ -181,7 +181,7 @@ export class AuthService {
 
     public async resendConfirmEmail(data: EmailRequestSchema): Promise<DefaultResponseSchema> {
         return new Promise<DefaultResponseSchema>(async (resolve, reject) => {
-            const user: InstanceType<IUser> = await this.userService.findOne({ email: data.email });
+            const user: DocumentType<IUser> = await this.userService.findOne({ email: data.email });
             if (!user) {
                 return resolve(
                     new DefaultResponseSchema(
@@ -202,7 +202,7 @@ export class AuthService {
 
     public async forgotPassword(data: EmailRequestSchema): Promise<DefaultResponseSchema> {
         return new Promise<DefaultResponseSchema>(async (resolve, reject) => {
-            const user: InstanceType<IUser> = await this.userService.findOne({ email: data.email });
+            const user: DocumentType<IUser> = await this.userService.findOne({ email: data.email });
             if (!user) {
                 return resolve(
                     new DefaultResponseSchema(
@@ -211,7 +211,7 @@ export class AuthService {
                     ),
                 );
             }
-            const token = await this.identityTokenService.generateToken(user, TokenTypes['reset-password']);
+            const token = await this.identityTokenService.generateToken(user, TokenTypes.RESET_PASSWORD);
             this.emailService.sendResetPasswordEmail(user, token.token);
             return resolve(
                 new DefaultResponseSchema(
@@ -225,7 +225,7 @@ export class AuthService {
         return new Promise<IUser>(async (resolve, reject) => {
             const token: IIdentityToken = await this.identityTokenService.findOne({
                 token: data.token,
-                type: TokenTypes['reset-password'],
+                type: TokenTypes.RESET_PASSWORD,
                 expires: {
                     $gt: new Date(),
                 },
@@ -233,24 +233,24 @@ export class AuthService {
             if (!token) {
                 return reject(new BadRequestError('Token is invalid'));
             }
-            const user: InstanceType<IUser> = await this.userService.changePassword(token.user, data.password);
+            const user: DocumentType<IUser> = await this.userService.changePassword(token.user, data.password);
             await this.identityTokenService.invalidateToken({
                 email: token.email,
-                type: TokenTypes['reset-password'],
+                type: TokenTypes.RESET_PASSWORD,
             });
             return resolve(user);
         });
     }
 
-    private async generateConfirmTokenAndEmail(user: InstanceType<IUser>): Promise<void> {
+    private async generateConfirmTokenAndEmail(user: DocumentType<IUser>): Promise<void> {
         return new Promise<void>(async (resolve, reject) => {
-            const token = await this.identityTokenService.generateToken(user, TokenTypes['email-confirmation']);
+            const token = await this.identityTokenService.generateToken(user, TokenTypes.EMAIL_CONFIRMATION);
             this.emailService.sendRegistrationEmail(user, token.token);
             resolve();
         });
     }
 
-    private async generateAuthToken(user: InstanceType<IUser>): Promise<ITokenInfo> {
+    private async generateAuthToken(user: DocumentType<IUser>): Promise<ITokenInfo> {
         return new Promise<ITokenInfo>(async (resolve, reject) => {
             const payload = {
                 exp: moment()
@@ -260,7 +260,7 @@ export class AuthService {
                 sub: user._id,
             };
             const access_token = jwt.sign(payload, env.jwt.secret, env.jwt.signOptions);
-            await this.identityTokenService.generateToken(user, TokenTypes['refresh-token']);
+            await this.identityTokenService.generateToken(user, TokenTypes.REFRESH_TOKEN);
             const tokenData: ITokenInfo = {
                 token_type: 'Bearer',
                 access_token,
