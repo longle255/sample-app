@@ -1,8 +1,9 @@
-import { Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req, State } from 'routing-controllers';
+import { Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req, State, QueryParams } from 'routing-controllers';
 import { IUser } from '../models/User';
 import { UserService } from '../services/UserService';
 import { InstanceType } from 'typegoose';
 import { RecordNotFoundError } from '../errors/RecordNotFoundError';
+import { Pagination } from '../helpers/Pagination';
 
 @Authorized('admin')
 @JsonController('/users')
@@ -10,8 +11,12 @@ export class UserController {
     constructor(private userService: UserService) {}
 
     @Get()
-    public findAll(): Promise<IUser[]> {
-        return this.userService.find();
+    public findAll(@QueryParams() params: any): Promise<Pagination<IUser>> {
+        return this.userService.paginate({
+            limit: params.limit ? parseInt(params.limit, 10) : 10,
+            page: params.page ? parseInt(params.page, 10) : 0,
+            cond: params.cond ? params.cond : {},
+        });
     }
 
     @Get('/profile')

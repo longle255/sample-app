@@ -1,15 +1,20 @@
-import { JsonController, Get, OnUndefined, Param, Body, Post, Put, Delete } from 'routing-controllers';
-import { ICollection, Collection } from '../models/Collection';
+import { JsonController, Get, OnUndefined, Param, Body, Post, Put, Delete, QueryParams } from 'routing-controllers';
+import { ICollection } from '../models/Collection';
 import { CollectionService } from '../services/CollectionService';
 import { RecordNotFoundError } from '../errors/RecordNotFoundError';
+import { Pagination } from '../helpers/Pagination';
 
 @JsonController('/collections')
 export class CollectionController {
     constructor(private collectionService: CollectionService) {}
 
     @Get()
-    public findAll(): Promise<ICollection[]> {
-        return this.collectionService.find();
+    public findAll(@QueryParams() params: any): Promise<Pagination<ICollection>> {
+        return this.collectionService.paginate({
+            limit: params.limit ? parseInt(params.limit, 10) : 10,
+            page: params.page ? parseInt(params.page, 10) : 0,
+            cond: params.cond ? params.cond : {},
+        });
     }
 
     @Get('/:id([0-9a-f]{24})')

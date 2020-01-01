@@ -7,6 +7,7 @@ import { Model as BaseModel } from 'mongoose';
 import { BaseSchema } from '../models/BaseModel';
 import { EventDispatcher } from 'event-dispatch';
 import { events } from '../subscribers/events';
+import { Pagination, PaginationOptionsInterface } from '../helpers/Pagination';
 
 @Service()
 export abstract class BaseService<E extends BaseSchema> {
@@ -18,6 +19,43 @@ export abstract class BaseService<E extends BaseSchema> {
         this.log = log;
         this.model = model;
         this.eventDispatcher = new EventDispatcher();
+    }
+
+    public async paginate(options: PaginationOptionsInterface): Promise<Pagination<E>> {
+        if (!options.limit) {
+            options.limit = 20;
+        }
+        if (!options.page) {
+            options.page = 0;
+        }
+        if (!options.sort) {
+            options.sort = { createdAt: -1 };
+        }
+
+        const ret: any = await this.model.aggregate([
+            { $match: options.cond },
+            { $sort: options.sort },
+            {
+                $facet: {
+                    paging: [{ $count: 'total' }, { $addFields: { page: options.page, limit: options.limit } }],
+                    results: [{ $skip: options.page * options.limit }, { $limit: options.limit }], // add projection here wish you re-shape the docs
+                },
+            },
+        ]);
+        if (!ret.length) {
+            return new Pagination<E>({
+                results: [],
+                items_count: 0,
+                pages_count: 0,
+                page: 0,
+            });
+        }
+        return new Pagination<E>({
+            items_count: ret[0].paging[0].total,
+            pages_count: Math.ceil((ret[0].paging[0].total * 1.0) / options.limit),
+            page: ret[0].paging[0].page,
+            results: ret[0].results,
+        });
     }
 
     public find(cond?: object): Promise<Array<InstanceType<E>>> {
