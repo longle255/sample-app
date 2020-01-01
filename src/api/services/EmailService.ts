@@ -1,4 +1,3 @@
-import createHttpError from 'http-errors';
 import _ from 'lodash';
 import Container, { Service } from 'typedi';
 import { Logger } from '../../lib/logger';
@@ -31,72 +30,6 @@ export class EmailService extends BaseService<IEmail> {
         private jobService: JobService = Container.get<JobService>(JobService),
     ) {
         super(new Logger(__filename), Email);
-    }
-
-    public find(cond?: object): Promise<Array<InstanceType<IEmail>>> {
-        this.log.debug('Find all emails');
-        return new Promise<Array<InstanceType<IEmail>>>(async (resolve, reject) => {
-            try {
-                const result = await Email.find(cond);
-                resolve(result);
-            } catch (err) {
-                reject(err);
-            }
-        });
-    }
-
-    public findOne(cond: object): Promise<InstanceType<IEmail> | undefined> {
-        this.log.debug('Find one email');
-        return new Promise<InstanceType<IEmail>>(async (resolve, reject) => {
-            try {
-                const result = await Email.findOne(cond);
-                resolve(result);
-            } catch (err) {
-                reject(err);
-            }
-        });
-    }
-
-    public async create(email: IEmail): Promise<InstanceType<IEmail>> {
-        this.log.debug('Create a new email => ', email.toString());
-        return new Promise<InstanceType<IEmail>>(async (resolve, reject) => {
-            try {
-                const result = await Email.create(email);
-                resolve(result);
-            } catch (err) {
-                if (err.name === 'MongoError' && err.code === 11000) {
-                    return reject(createHttpError(409, 'Duplicate key'));
-                }
-                reject(err);
-            }
-        });
-    }
-
-    public update(id: any, body: any): Promise<InstanceType<IEmail>> {
-        this.log.debug('Update a email');
-        return new Promise<InstanceType<IEmail>>(async (resolve, reject) => {
-            const updateData = _.omit(body, ['id']);
-            return Email.findOneAndUpdate({ _id: id }, updateData, { new: true, select: {} })
-                .then((result: InstanceType<IEmail>) => {
-                    resolve(result);
-                })
-                .catch((err: any) => {
-                    reject(err);
-                });
-        });
-    }
-
-    public async delete(id: any): Promise<void> {
-        this.log.debug('Delete a email');
-        return new Promise<void>(async (resolve, reject) => {
-            return Email.findByIdAndRemove({ _id: id })
-                .then((result: IEmail) => {
-                    resolve();
-                })
-                .catch((err: any) => {
-                    reject(err);
-                });
-        });
     }
 
     public async sendTestEmail(address: string, name: string): Promise<void> {
