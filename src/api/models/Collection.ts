@@ -10,13 +10,13 @@ const schemaOptions = Object.assign({}, defaultOptions, {
     virtuals: true,
     versionKey: false,
     transform: (doc, ret, options) => {
-      ret.photos = ret.photos.map(p => {
+      ret.photos = ret.photos.map((p: any) => {
+        p.uri = `${env.app.cdnUri}/${ret.uri}/${p.name}`;
         delete p.name;
-
-        p.uri = `${env.app.uri}/${ret.uri}/${p.uri}`;
         return p;
       });
       delete ret._id;
+      ret.thumbnail = ret.photos[0];
       return ret;
     },
   },
@@ -51,14 +51,6 @@ export class ICollection extends BaseSchema {
 
   @arrayProp({ required: true, _id: false, items: Object })
   public photos: object[];
-
-  get thumnailUrl(): string {
-    return `${env.app.uri}/${this.uri}/${this.thumbnail}`;
-  }
-
-  get photosUrl(): string[] {
-    return this.photos.map((photo: any) => `${env.app.uri}/${this.uri}/${photo.uri}`);
-  }
 }
 
 export const Collection = getModelForClass(ICollection);
