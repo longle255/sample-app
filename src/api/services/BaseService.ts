@@ -54,7 +54,7 @@ export abstract class BaseService<E extends BaseSchema> {
             items_count: ret[0].paging[0].total,
             pages_count: Math.ceil((ret[0].paging[0].total * 1.0) / options.limit),
             page: ret[0].paging[0].page,
-            results: ret[0].results,
+            results: ret[0].results.map(d => (new this.model(d)).toJSON()),
         });
     }
 
