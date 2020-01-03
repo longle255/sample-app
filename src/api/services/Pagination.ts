@@ -22,8 +22,15 @@ export interface PaginationResultInterface<PaginationEntity> {
 }
 
 export interface PaginationOptionsInterface {
-  cond: object;
+  cond?: object;
   sort?: object;
-  limit: number;
-  page: number;
+  limit?: number;
+  page?: number;
 }
+
+export const defaultOption: PaginationOptionsInterface = {
+  cond: {},
+  limit: 20,
+  page: 0,
+  sort: { createdAt: -1 },
+};

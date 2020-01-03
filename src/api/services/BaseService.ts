@@ -7,7 +7,7 @@ import { Model as BaseModel } from 'mongoose';
 import { BaseSchema } from '../models/BaseModel';
 import { EventDispatcher } from 'event-dispatch';
 import { events } from '../subscribers/events';
-import { Pagination, PaginationOptionsInterface } from './Pagination';
+import { Pagination, PaginationOptionsInterface, defaultOption } from './Pagination';
 
 @Service()
 export abstract class BaseService<E extends BaseSchema> {
@@ -22,15 +22,7 @@ export abstract class BaseService<E extends BaseSchema> {
   }
 
   public async paginate(options: PaginationOptionsInterface): Promise<Pagination<E>> {
-    if (!options.limit) {
-      options.limit = 20;
-    }
-    if (!options.page) {
-      options.page = 0;
-    }
-    if (!options.sort) {
-      options.sort = { createdAt: -1 };
-    }
+    options = Object.assign({}, defaultOption, options);
 
     const ret: any = await this.model.aggregate([
       { $match: options.cond },
