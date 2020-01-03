@@ -5,7 +5,7 @@ import { BaseService } from './BaseService';
 import { ICollection, Collection } from '../models/Collection';
 import { IUser } from '../models/User';
 import { DocumentType } from '@typegoose/typegoose';
-import { Like, ILike } from '../models/Like';
+import { Like } from '../models/Like';
 import { BadRequestError } from 'routing-controllers';
 import { PaginationOptionsInterface, Pagination, defaultOption } from './Pagination';
 
