@@ -10,7 +10,7 @@ const recaptchaObj = new reCAPTCHA({
 });
 export class CaptchaMiddleware implements KoaMiddlewareInterface {
   public async use(ctx: Context, next: (err?: any) => Promise<any>): Promise<any> {
-    if (env.isDevelopment) {
+    if (env.isDevelopment || !env.recaptcha.enabled) {
       return next();
     }
 

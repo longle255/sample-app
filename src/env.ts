@@ -80,5 +80,6 @@ export const env = {
   recaptcha: {
     siteKey: getOsEnv('RECAPTCHA_KEY'),
     secretKey: getOsEnv('RECAPTCHA_SECRET'),
+    enabled: toBool(getOsEnv('RECAPTCHA_ENABLED')),
   },
 };
