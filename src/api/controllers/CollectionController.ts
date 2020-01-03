@@ -25,6 +25,16 @@ export class CollectionController {
     return this.collectionService.findOneAndIncreaseView(id);
   }
 
+  @Get('/likes')
+  @Authorized()
+  public likes(@QueryParams() params: any, @State('user') user: DocumentType<IUser>): Promise<Pagination<ICollection>> {
+    return this.collectionService.getLikes(user, {
+      limit: params.limit ? parseInt(params.limit, 10) : 10,
+      page: params.page ? parseInt(params.page, 10) : 0,
+      cond: params.cond ? params.cond : {},
+    });
+  }
+
   @Post('/:id([0-9a-f]{24})/likes')
   @OnUndefined(RecordNotFoundError)
   @Authorized()

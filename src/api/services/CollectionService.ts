@@ -5,13 +5,32 @@ import { BaseService } from './BaseService';
 import { ICollection, Collection } from '../models/Collection';
 import { IUser } from '../models/User';
 import { DocumentType } from '@typegoose/typegoose';
-import { Like } from '../models/Like';
+import { Like, ILike } from '../models/Like';
 import { BadRequestError } from 'routing-controllers';
+import { PaginationOptionsInterface, Pagination, defaultOption } from './Pagination';
 
 @Service()
 export class CollectionService extends BaseService<ICollection> {
   constructor() {
     super(new Logger(__filename), Collection);
+  }
+
+  public async getLikes(user: DocumentType<IUser>, options: PaginationOptionsInterface): Promise<Pagination<ICollection>> {
+    options = Object.assign({}, defaultOption, options);
+    const total = await Like.count({ user });
+    const pageCount = Math.ceil(total / options.limit);
+    const page = options.page;
+    const likes = await Like.find({ user })
+      .skip(options.page * options.limit)
+      .limit(options.limit)
+      .populate('coll');
+    const results: any = likes.map((like: any) => like.coll).map(coll => coll.toJSON());
+    return new Pagination<ICollection>({
+      results,
+      items_count: total,
+      pages_count: pageCount,
+      page,
+    });
   }
 
   public findOneAndIncreaseView(colId: string): Promise<ICollection | undefined> {
