@@ -12,6 +12,8 @@ export enum Roles {
   APP = 'app',
 }
 
+export const ROLES_ALL = ['admin', 'contributor', 'user', 'app'];
+
 const schemaOptions = Object.assign({}, defaultOptions, {
   collection: 'users',
 });

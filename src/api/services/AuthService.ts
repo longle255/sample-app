@@ -16,7 +16,7 @@ import {
   ResetPasswordRequestSchema,
 } from '../controllers/request-schemas';
 import { TokenTypes, IIdentityToken } from '../models/IdentityToken';
-import { IUser, User } from '../models/User';
+import { IUser, User, ROLES_ALL } from '../models/User';
 import { IdentityTokenService } from './IdentityTokenService';
 import { UserService } from './UserService';
 import { EmailService } from './EmailService';
@@ -280,6 +280,9 @@ export function authorizationChecker(): (action: Action, roles: any[]) => Promis
     const parsedToken = await authService.parseFromAuthorizationHeader(token);
     if (!parsedToken) {
       return false;
+    }
+    if (!roles || !roles.length) {
+      roles = ROLES_ALL;
     }
     const user = await authService.verifyUser(parsedToken, roles);
 

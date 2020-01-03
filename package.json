@@ -9,7 +9,8 @@
     "build": "npm start build",
     "presetup": "yarn install",
     "setup": "npm start config && npm start setup.script",
-    "postinstall": "npm start patchNpm"
+    "postinstall": "npm start patchNpm",
+    "setupdb": "ts-node src/installer/installer.ts"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -49,6 +50,7 @@
     "figlet": "^1.2.0",
     "glob": "^7.1.2",
     "http-errors": "^1.7.2",
+    "javascript-natural-sort": "^0.7.1",
     "jsonfile": "5.0.0",
     "jsonwebtoken": "^8.5.0",
     "kcors": "^2.2.2",

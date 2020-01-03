@@ -38,11 +38,12 @@ export class ICollection extends BaseSchema {
 
   @prop({ required: true })
   public uri: string;
-  @prop({ required: true })
-  public viewed: number;
 
-  @prop({ required: true })
-  public liked: number;
+  @prop({ required: true, default: 0 })
+  public views: number;
+
+  @prop({ required: true, default: 0 })
+  public likes: number;
 
   @prop({ required: true })
   public tags: string[];

@@ -41,6 +41,6 @@ coverage/
 !test/preprocessor.js
 mydb.sql
 
+src/public/cdn
 
-test2.js
-test.js
+.DS_Store
