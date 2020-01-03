@@ -11,8 +11,9 @@ export class CollectionController {
   constructor(private collectionService: CollectionService) {}
 
   @Get()
-  public findAll(@QueryParams() params: any): Promise<Pagination<ICollection>> {
-    return this.collectionService.paginate({
+  @Authorized()
+  public findAll(@QueryParams() params: any, @State('user') user: DocumentType<IUser>): Promise<Pagination<ICollection>> {
+    return this.collectionService.getAll(user, {
       limit: params.limit ? parseInt(params.limit, 10) : 10,
       page: params.page ? parseInt(params.page, 10) : 0,
       cond: params.cond ? params.cond : {},
@@ -20,9 +21,10 @@ export class CollectionController {
   }
 
   @Get('/:id([0-9a-f]{24})')
+  @Authorized()
   @OnUndefined(RecordNotFoundError)
-  public one(@Param('id') id: string): Promise<ICollection | undefined> {
-    return this.collectionService.findOneAndIncreaseView(id);
+  public one(@Param('id') id: string, @State('user') user: DocumentType<IUser>): Promise<ICollection | undefined> {
+    return this.collectionService.findOneAndIncreaseView(user, id);
   }
 
   @Get('/likes')

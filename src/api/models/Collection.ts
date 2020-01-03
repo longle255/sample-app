@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
-import { prop, getModelForClass, modelOptions, arrayProp } from '@typegoose/typegoose';
+import { DocumentType, prop, getModelForClass, modelOptions, arrayProp } from '@typegoose/typegoose';
 import { BaseSchema, defaultOptions } from './BaseModel';
 import { env } from '../../env';
 
@@ -50,6 +50,14 @@ export class ICollection extends BaseSchema {
 
   @arrayProp({ required: true, _id: false, items: Object })
   public photos: object[];
+
+  public reduce(this: DocumentType<ICollection>, liked: boolean = false): any {
+    const obj = this.toJSON();
+    obj.photosCount = obj.photos.length;
+    obj.photos = _.take(obj.photos, 5);
+    obj.liked = liked;
+    return obj;
+  }
 }
 
 export const Collection = getModelForClass(ICollection);

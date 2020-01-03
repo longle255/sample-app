@@ -22,7 +22,7 @@ export abstract class BaseService<E extends BaseSchema> {
   }
 
   public async paginate(options: PaginationOptionsInterface): Promise<Pagination<E>> {
-    options = Object.assign({}, defaultOption, options);
+    options = _.defaultsDeep({}, options, defaultOption);
 
     const ret: any = await this.model.aggregate([
       { $match: options.cond },

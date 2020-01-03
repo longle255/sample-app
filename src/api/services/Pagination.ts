@@ -29,7 +29,9 @@ export interface PaginationOptionsInterface {
 }
 
 export const defaultOption: PaginationOptionsInterface = {
-  cond: {},
+  cond: {
+    isActive: true,
+  },
   limit: 20,
   page: 0,
   sort: { createdAt: -1 },
