@@ -121,6 +121,15 @@ export class IUser extends BaseSchema {
   })
   public referralCode: string;
 
+  @prop({
+    unique: true,
+    index: true,
+  })
+  public serviceUserId: string; // id for social service
+
+  @prop()
+  public service: string; // service
+
   public async comparePassword(this: DocumentType<IUser>, password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
   }

@@ -11,6 +11,7 @@ import {
 } from './request-schemas';
 import { IUser } from '../models/User';
 import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
+import { SocialAuthRequestSchema } from './request-schemas/SocialAuthRequestSchema';
 
 @JsonController('/auth')
 export class UserController {
@@ -20,6 +21,12 @@ export class UserController {
   @UseBefore(CaptchaMiddleware)
   public async login(@Body({ validate: true }) credential: LoginRequestSchema): Promise<ITokenInfo> {
     return this.authService.login(credential);
+  }
+
+  @Post('/social')
+  public async socialAuth(@Body() data: SocialAuthRequestSchema): Promise<ITokenInfo> {
+    console.log(data);
+    return this.authService.socialAuth(data);
   }
 
   @Post('/register')

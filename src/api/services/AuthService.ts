@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Koa from 'koa';
+import axios from 'axios';
 import _ from 'lodash';
 import moment from 'moment';
 import { Action, BadRequestError } from 'routing-controllers';
@@ -21,6 +22,8 @@ import { IdentityTokenService } from './IdentityTokenService';
 import { UserService } from './UserService';
 import { EmailService } from './EmailService';
 import { DefaultResponseSchema } from '../controllers/response-schemas/DefaultResponseSchema';
+import uuid from 'uuid';
+import { SocialAuthRequestSchema } from '../controllers/request-schemas/SocialAuthRequestSchema';
 
 export interface IAuthOption {
   secret: string;
@@ -158,6 +161,35 @@ export class AuthService {
     });
   }
 
+  public async socialAuth(credential: SocialAuthRequestSchema): Promise<ITokenInfo> {
+    return new Promise<ITokenInfo>(async (resolve, reject) => {
+      // first need to check if this user exist => log them in
+      let user: DocumentType<IUser> = await this.userService.findOne({ serviceUserId: credential.userId, service: credential.service });
+      const fbProfile = await this.fetchFacebookData(credential.accessToken);
+      if (!fbProfile) {
+        return reject(new BadRequestError(`Can't fetch social account of user ${credential.userId} on ${credential.service}`));
+      }
+      if (!user) {
+        // if no account => create one
+        // first need to fetch FB data
+        user = await this.userService.create(
+          new User({
+            ...fbProfile,
+            password: uuid.v4(),
+            isConfirmed: true, // don't need to verify email for this user
+          }),
+        );
+      }
+
+      if (!user.isActive) {
+        return reject(new BadRequestError('Your account is locked'));
+      }
+
+      const token = this.generateAuthToken(user);
+      return resolve(token);
+    });
+  }
+
   public async confirmEmail(data: ConfirmEmailRequestSchema): Promise<DefaultResponseSchema> {
     return new Promise<DefaultResponseSchema>(async (resolve, reject) => {
       const token: IIdentityToken = await this.identityTokenService.findOne({
@@ -265,6 +297,28 @@ export class AuthService {
       };
       resolve(tokenData);
     });
+  }
+
+  private async fetchFacebookData(access_token: string): Promise<any> {
+    const fields = 'id, name, email, picture';
+    const url = 'https://graph.facebook.com/me';
+    const params = { access_token, fields };
+    try {
+      const response = await axios.get(url, { params });
+      const { id, name, email, picture } = response.data;
+      const nameToken = name.split(' ');
+      return {
+        service: 'facebook',
+        avatarUrl: picture.data.url,
+        serviceUserId: id,
+        firstName: nameToken[0],
+        lastName: nameToken.length > 1 ? nameToken[1] : nameToken[0],
+        email,
+      };
+    } catch (err) {
+      this.log.error(`Failed to fetch Facebook profile of token ${access_token}. Error: `, err.stack);
+      return undefined;
+    }
   }
 }
 
