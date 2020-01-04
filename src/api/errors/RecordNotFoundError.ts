@@ -1,7 +1,7 @@
-import { HttpError } from 'routing-controllers';
+import { NotFoundError } from 'routing-controllers';
 
-export class RecordNotFoundError extends HttpError {
+export class RecordNotFoundError extends NotFoundError {
   constructor() {
-    super(404, 'Record not found!');
+    super('Record not found!');
   }
 }

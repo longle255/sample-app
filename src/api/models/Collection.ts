@@ -4,6 +4,23 @@ import { DocumentType, prop, getModelForClass, modelOptions, arrayProp } from '@
 import { BaseSchema, defaultOptions } from './BaseModel';
 import { env } from '../../env';
 
+export class Photo {
+  @prop()
+  public name: string;
+  @prop()
+  public width: number;
+  @prop()
+  public height: number;
+  @prop()
+  public direction: string;
+
+  constructor(name: string, width: number, height: number, direction: string) {
+    this.name = name;
+    this.width = width;
+    this.height = height;
+    this.direction = direction;
+  }
+}
 const schemaOptions = Object.assign({}, defaultOptions, {
   collection: 'collections',
   toJSON: {
@@ -22,6 +39,7 @@ const schemaOptions = Object.assign({}, defaultOptions, {
   },
 });
 
+// tslint:disable-next-line: max-classes-per-file
 @modelOptions({ existingMongoose: mongoose, schemaOptions })
 export class ICollection extends BaseSchema {
   @prop({ required: true })
@@ -48,8 +66,8 @@ export class ICollection extends BaseSchema {
   @prop({ required: true })
   public tags: string[];
 
-  @arrayProp({ required: true, _id: false, items: Object })
-  public photos: object[];
+  @arrayProp({ required: true, _id: false, items: Photo })
+  public photos: Photo[];
 
   public reduce(this: DocumentType<ICollection>, liked: boolean = false): any {
     const obj = this.toJSON();

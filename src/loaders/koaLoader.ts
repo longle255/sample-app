@@ -1,6 +1,6 @@
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
 import { createKoaServer } from 'routing-controllers';
-import { authorizationChecker, currentUserChecker } from '../api/services/AuthService';
+import { currentUserChecker, authorizationChecker } from '../api/services/AuthService';
 
 import { env } from '../env';
 

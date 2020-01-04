@@ -1,4 +1,18 @@
-import { Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req, State, QueryParams } from 'routing-controllers';
+import {
+  Authorized,
+  Body,
+  Delete,
+  Get,
+  JsonController,
+  OnUndefined,
+  Param,
+  Post,
+  Put,
+  Req,
+  QueryParams,
+  CurrentUser,
+  HttpCode,
+} from 'routing-controllers';
 import { IUser } from '../models/User';
 import { UserService } from '../services/UserService';
 import { DocumentType } from '@typegoose/typegoose';
@@ -21,7 +35,7 @@ export class UserController {
 
   @Get('/profile')
   @Authorized('user')
-  public async findMe(@Req() req: any, @State('user') user: DocumentType<IUser>): Promise<DocumentType<IUser>> {
+  public async findMe(@Req() req: any, @CurrentUser() user?: DocumentType<IUser>): Promise<DocumentType<IUser>> {
     return this.userService.findOne({ _id: user._id });
   }
 
@@ -32,6 +46,7 @@ export class UserController {
   }
 
   @Post()
+  @HttpCode(201)
   public create(@Body() user: IUser): Promise<IUser> {
     return this.userService.create(user);
   }
