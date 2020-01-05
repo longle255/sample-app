@@ -165,20 +165,26 @@ export class AuthService {
     return new Promise<ITokenInfo>(async (resolve, reject) => {
       // first need to check if this user exist => log them in
       let user: DocumentType<IUser> = await this.userService.findOne({ serviceUserId: credential.userId, service: credential.service });
+      // first need to fetch FB data
       const fbProfile = await this.fetchFacebookData(credential.accessToken);
       if (!fbProfile) {
         return reject(new BadRequestError(`Can't fetch social account of user ${credential.userId} on ${credential.service}`));
       }
       if (!user) {
-        // if no account => create one
-        // first need to fetch FB data
-        user = await this.userService.create(
-          new User({
-            ...fbProfile,
-            password: uuid.v4(),
-            isConfirmed: true, // don't need to verify email for this user
-          }),
-        );
+        // user could have removed the app and install again.
+        user = await this.userService.findOne({ email: fbProfile.email });
+        if (user) {
+          await user.update({ ...fbProfile });
+        } else {
+          // if no account => create one
+          user = await this.userService.create(
+            new User({
+              ...fbProfile,
+              password: uuid.v4(),
+              isConfirmed: true, // don't need to verify email for this user
+            }),
+          );
+        }
       }
 
       if (!user.isActive) {
