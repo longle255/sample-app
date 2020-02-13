@@ -24,15 +24,15 @@ class Orders extends React.Component {
       filtered: !!searchText,
       data: tableData
         .map(record => {
-          const match = record.name.match(reg)
+          const match = record.customer.match(reg)
           if (!match) {
             return null
           }
           return {
             ...record,
-            name: (
+            customer: (
               <span>
-                {record.name
+                {record.customer
                   .split(reg)
                   .map((text, i) =>
                     i > 0 ? [<span className="highlight">{match[0]}</span>, text] : text,
