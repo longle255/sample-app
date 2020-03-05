@@ -5,12 +5,12 @@ import 'firebase/database'
 import 'firebase/storage'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAE5G0RI2LwzwTBizhJbnRKIKbiXQIA1dY',
-  authDomain: 'cleanui-72a42.firebaseapp.com',
-  databaseURL: 'https://cleanui-72a42.firebaseio.com',
-  projectId: 'cleanui-72a42',
-  storageBucket: 'cleanui-72a42.appspot.com',
-  messagingSenderId: '583382839121',
+  apiKey: 'AIzaSyA2LHKgdr2GQb_QUBYfhMOaxgOuGjw1z5E',
+  authDomain: 'airui-a4b63.firebaseapp.com',
+  databaseURL: 'https://airui-a4b63.firebaseio.com',
+  projectId: 'airui-a4b63',
+  storageBucket: 'airui-a4b63.appspot.com',
+  messagingSenderId: '1039460737420',
 }
 
 const firebaseApp = firebase.initializeApp(firebaseConfig)

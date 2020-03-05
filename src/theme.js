@@ -2,19 +2,20 @@
 // you should restart dev server after variables changes
 // ref: https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
 module.exports = {
-  '@body-background': '#f2f4f8',
-  '@font-size-base': '13px',
-  '@font-size-lg': '15px',
+  '@body-background': '#fff',
+  '@font-size-base': '15px',
+  '@font-size-sm': '13px',
+  '@font-size-lg': '17px',
 
-  '@font-family': 'Nunito Sans, sans-serif',
-  '@code-family': 'Nunito Sans, sans-serif',
+  '@font-family': 'Source Sans Pro, sans-serif',
+  '@code-family': 'Source Sans Pro, sans-serif',
 
   '@border-color-base': '#e4e9f0',
 
   '@background-color-light': '#f2f4f8',
   '@background-color-base': '#f2f4f8',
 
-  '@primary-color': '#0190fe',
+  '@primary-color': '#1b55e3',
   '@info-color': '#0887c9',
   '@success-color': '#46be8a',
   '@error-color': '#fb434a',
@@ -22,6 +23,7 @@ module.exports = {
   '@warning-color': '#f39834',
   '@normal-color': '#e4e9f0',
 
+  '@input-color': '#161537',
   '@input-padding-horizontal': '13px',
   '@input-padding-vertical-base': '7px',
   '@input-padding-vertical-sm': '11px',
@@ -44,4 +46,8 @@ module.exports = {
   '@table-padding-horizontal': '8px',
 
   '@modal-mask-bg': 'rgba(15, 12, 41, 0.5)',
+
+  '@layout-body-background': '#fff',
+  '@layout-header-background': 'transparent',
+  '@layout-sider-background': 'transparent',
 }

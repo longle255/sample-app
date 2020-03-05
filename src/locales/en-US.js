@@ -1,12 +1,10 @@
-import antdData from 'antd/lib/locale-provider/en_US'
-import localeData from 'react-intl/locale-data/en'
+import localeAntd from 'antd/es/locale/en_US'
 
 const messages = {
   'topBar.issuesHistory': 'Issues History',
-  'topBar.projectManagement': 'Project Management',
-  'topBar.typeToSearch': 'Type to search...',
-  'topBar.buyNow': 'Buy Bundle',
-  'topBar.bitcoin': 'Bitcoin',
+  'topBar.typeToSearch': 'Start typing to search...',
+  'topBar.actions': 'Actions',
+  'topBar.status': 'Status',
   'topBar.profileMenu.hello': 'Hello',
   'topBar.profileMenu.billingPlan': 'Billing Plan',
   'topBar.profileMenu.role': 'Role',
@@ -18,7 +16,6 @@ const messages = {
 
 export default {
   locale: 'en-US',
-  antdData,
-  localeData,
+  localeAntd,
   messages,
 }

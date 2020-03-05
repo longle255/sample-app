@@ -12,21 +12,33 @@ const STORED_SETTINGS = storedSettings => {
 
 const initialState = {
   ...STORED_SETTINGS({
+    locale: 'en-US',
+    isSidebarOpen: false,
+    isSupportChatOpen: false,
     isMobileView: false,
     isMobileMenuOpen: false,
-    isLightTheme: true,
-    isSettingsOpen: false,
-    isMenuTop: false,
     isMenuCollapsed: false,
-    isBorderless: true,
+    isMenuShadow: false,
+    isMenuUnfixed: false,
+    menuLayoutType: 'left', // left, top, top-dark, nomenu
+    menuType: 'default', // default, flyout, compact
+    menuColor: 'dark', // dark, blue, gray, white
+    flyoutMenuColor: 'blue', // dark, blue, gray, white
+    systemLayoutColor: 'gray', // white, dark, blue, gray, image
+    isTopbarFixed: false,
+    isFooterDark: false,
+    isContentNoMaxWidth: false,
+    isAppMaxWidth: false,
+    isGrayBackground: false,
+    isGrayTopbar: false,
+    isCardShadow: false,
     isSquaredBorders: false,
-    isFixedWidth: false,
-    isMenuShadow: true,
-    locale: 'en-US',
+    isBorderless: false,
+    routerAnimation: 'slide-fadein-up', // none, slide-fadein-up, slide-fadein-right, fadein, zoom-fadein
   }),
 }
 
-export default function userReducer(state = initialState, action) {
+export default function settingsReducer(state = initialState, action) {
   switch (action.type) {
     case actions.SET_STATE:
       return { ...state, ...action.payload }

@@ -1,5 +1,6 @@
 import { all, takeEvery, put, call } from 'redux-saga/effects'
 import { notification } from 'antd'
+import { history } from 'index'
 import { login, currentAccount, logout } from 'services/user'
 import actions from './actions'
 
@@ -12,13 +13,14 @@ export function* LOGIN({ payload }) {
     },
   })
   const success = yield call(login, email, password)
+  yield put({
+    type: 'user/LOAD_CURRENT_ACCOUNT',
+  })
   if (success) {
+    yield history.push('/')
     notification.success({
       message: 'Logged In',
-      description: 'You have successfully logged in to Clean UI React Admin Template!',
-    })
-    yield put({
-      type: 'user/LOAD_CURRENT_ACCOUNT',
+      description: 'You have successfully logged in to Air UI React Admin Template!',
     })
   }
 }

@@ -1,12 +1,10 @@
-import antdData from 'antd/lib/locale-provider/ru_RU'
-import localeData from 'react-intl/locale-data/ru'
+import localeAntd from 'antd/es/locale/ru_RU'
 
 const messages = {
   'topBar.issuesHistory': 'История заданий',
-  'topBar.projectManagement': 'Управление проектом',
   'topBar.typeToSearch': 'Поиск...',
-  'topBar.buyNow': 'Купить',
-  'topBar.bitcoin': 'Биткоин',
+  'topBar.actions': 'Действия',
+  'topBar.status': 'Статус',
   'topBar.profileMenu.hello': 'Привет',
   'topBar.profileMenu.billingPlan': 'Тарифный план',
   'topBar.profileMenu.role': 'Роль',
@@ -18,7 +16,6 @@ const messages = {
 
 export default {
   locale: 'ru-RU',
-  antdData,
-  localeData,
+  localeAntd,
   messages,
 }

@@ -1,0 +1,19 @@
+// Import mixins
+@import 'components/kit-core/mixins.scss';
+
+body {
+  .ant-dropdown {
+    color: $gray-6;
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////
+  // DARK THEME STYLES
+  &.kit__dark {
+    .ant-select-dropdown {
+      &-menu-item-selected {
+        color: $text;
+        background: lighten($gray-6, 7%);
+      }
+    }
+  }
+}

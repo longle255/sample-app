@@ -19,11 +19,23 @@ export function* SETUP() {
   const changeSettings = search => {
     const query = qs.parse(search, { ignoreQueryPrefix: true })
     Object.keys(query).forEach(key => {
+      let value
+      switch (query[key]) {
+        case 'false':
+          value = false
+          break
+        case 'true':
+          value = true
+          break
+        default:
+          value = query[key]
+          break
+      }
       reduxStore.dispatch({
         type: 'settings/CHANGE_SETTING',
         payload: {
           setting: key,
-          value: query[key] === 'true',
+          value,
         },
       })
     })
@@ -48,9 +60,27 @@ export function* SETUP() {
       })
     }
   }
+
+  // detect viewport width on app load and window resize
+  const isMenuToggled = () => {
+    const shouldToggle = global.window.innerWidth < 1024
+    const prevState = store.get('app.settings.isMenuCollapsed')
+    if (shouldToggle || prevState) {
+      reduxStore.dispatch({
+        type: 'settings/CHANGE_SETTING',
+        payload: {
+          setting: 'isMenuCollapsed',
+          value: true,
+        },
+      })
+    }
+  }
+
   yield isMobileView(true)
+  yield isMenuToggled()
   yield window.addEventListener('resize', () => {
     isMobileView()
+    isMenuToggled()
   })
 }
 

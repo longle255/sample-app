@@ -1,14 +1,12 @@
 import { all, put, call } from 'redux-saga/effects'
-import { getLeftMenuData, getTopMenuData } from 'services/menu'
+import getMenuData from 'services/menu'
 
 export function* GET_DATA() {
-  const menuLeftData = yield call(getLeftMenuData)
-  const menuTopData = yield call(getTopMenuData)
+  const menuData = yield call(getMenuData)
   yield put({
     type: 'menu/SET_STATE',
     payload: {
-      menuLeftData,
-      menuTopData,
+      menuData,
     },
   })
 }
