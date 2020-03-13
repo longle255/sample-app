@@ -27,12 +27,8 @@ class SupportChat extends React.Component {
 
     return (
       <div className={style.chat}>
-        <button
-          onClick={this.toggleSupportChat}
-          type="button"
-          className={`${style.toggleButton} btn btn-rounded btn-light text-nowrap text-dark font-weight-bold font-size-18`}
-        >
-          <i className={`${style.icon} fe fe-message-square text-blue mr-md-2`} />
+        <button onClick={this.toggleSupportChat} type="button" className={style.toggleButton}>
+          <i className={`${style.icon} fe fe-message-square mr-md-2`} />
           <span className="d-none d-md-inline">Support Chat</span>
         </button>
         <div

@@ -80,7 +80,7 @@ class Layout extends React.PureComponent {
 
     return (
       <Fragment>
-        <Helmet titleTemplate="Clean UI React | %s" title="React Admin Template" />
+        <Helmet titleTemplate="Clean UI Pro React | %s" title="React Admin Template" />
         {BootstrappedLayout()}
       </Fragment>
     )

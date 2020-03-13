@@ -2,6 +2,7 @@ import localeAntd from 'antd/es/locale/fr_FR'
 
 const messages = {
   'topBar.issuesHistory': 'Histoire des problèmes',
+  'topBar.projectManagement': 'Gestion de projet',
   'topBar.typeToSearch': 'Chercher...',
   'topBar.actions': 'Actes',
   'topBar.status': 'Statut',

@@ -2,6 +2,7 @@ import localeAntd from 'antd/es/locale/zh_CN'
 
 const messages = {
   'topBar.issuesHistory': '发布历史',
+  'topBar.projectManagement': '项目管理',
   'topBar.typeToSearch': '搜索...',
   'topBar.actions': '动作',
   'topBar.status': '状态',

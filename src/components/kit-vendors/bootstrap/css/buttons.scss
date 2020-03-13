@@ -36,7 +36,6 @@ label.btn {
 
 .btn {
   outline: none !important;
-  box-shadow: none !important;
   transition: color 0.2s ease-in-out, background 0.2s ease-in-out, border 0.2s ease-in-out;
   &:hover,
   &:active {

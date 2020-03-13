@@ -4,9 +4,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
 import TopBar from 'components/layout/TopBar'
-import SubBar from 'components/layout/SubBar'
-import MenuLeft from 'components/layout/MenuLeft'
-import MenuTop from 'components/layout/MenuTop'
+import Breadcrumbs from 'components/layout/Breadcrumbs'
+import Menu from 'components/layout/Menu'
 import Footer from 'components/layout/Footer'
 import Sidebar from 'components/layout/Sidebar'
 import SupportChat from 'components/layout/SupportChat'
@@ -20,7 +19,6 @@ class MainLayout extends React.PureComponent {
     const {
       children,
       settings: {
-        menuLayoutType,
         isContentNoMaxWidth,
         isAppMaxWidth,
         isGrayBackground,
@@ -33,33 +31,32 @@ class MainLayout extends React.PureComponent {
     } = this.props
 
     return (
-      <div className={classNames({ air__layout__grayBackground: isGrayBackground })}>
+      <div className={classNames({ cui__layout__grayBackground: isGrayBackground })}>
         <Layout
           className={classNames({
-            air__layout__contentNoMaxWidth: isContentNoMaxWidth,
-            air__layout__appMaxWidth: isAppMaxWidth,
-            air__layout__grayBackground: isGrayBackground,
-            air__layout__squaredBorders: isSquaredBorders,
-            air__layout__cardsShadow: isCardShadow,
-            air__layout__borderless: isBorderless,
+            cui__layout__contentNoMaxWidth: isContentNoMaxWidth,
+            cui__layout__appMaxWidth: isAppMaxWidth,
+            cui__layout__grayBackground: isGrayBackground,
+            cui__layout__squaredBorders: isSquaredBorders,
+            cui__layout__cardsShadow: isCardShadow,
+            cui__layout__borderless: isBorderless,
           })}
         >
           <Sidebar />
           <SupportChat />
-          {menuLayoutType === 'left' && <MenuLeft />}
-          {menuLayoutType === 'top' && <MenuTop />}
+          <Menu />
           <Layout>
             <Layout.Header
-              className={classNames('air__layout__header', {
-                air__layout__fixedHeader: isTopbarFixed,
-                air__layout__headerGray: isGrayTopbar,
+              className={classNames('cui__layout__header', {
+                cui__layout__fixedHeader: isTopbarFixed,
+                cui__layout__headerGray: isGrayTopbar,
               })}
             >
               <TopBar />
-              <SubBar />
             </Layout.Header>
+            <Breadcrumbs />
             <Layout.Content style={{ height: '100%', position: 'relative' }}>
-              <div className="air__utils__content">{children}</div>
+              <div className="cui__utils__content">{children}</div>
             </Layout.Content>
             <Layout.Footer>
               <Footer />

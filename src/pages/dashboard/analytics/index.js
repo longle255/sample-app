@@ -13,9 +13,6 @@ class DashboardAnalytics extends React.Component {
     return (
       <div>
         <Helmet title="Dashboard: Analytics" />
-        <div className="cui__utils__heading">
-          <h5>Dashboard: Analytics</h5>
-        </div>
         <div className="row">
           <div className="col-xl-8 col-lg-6">
             <h5 className="text-dark mb-4">Google Analytics Home</h5>

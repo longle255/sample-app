@@ -2,6 +2,12 @@
 @import 'components/kit-core/mixins.scss';
 
 body {
+  .ant-alert {
+    &-info {
+      background: #e6f7ff;
+    }
+  }
+
   ////////////////////////////////////////////////////////////////////////////////////////////
   // DARK THEME STYLES
   &.kit__dark {

@@ -1,0 +1,26 @@
+@import 'components/kit-core/mixins.scss';
+
+.breadcrumbs {
+  padding: rem(20) rem(30) 0;
+}
+
+.path {
+  font-size: rem(17);
+  color: $black;
+}
+
+.arrow {
+  display: inline-block;
+  margin: 0 rem(10);
+  &:after {
+    display: inline-block;
+    content: '·';
+  }
+}
+
+// dark theme
+:global(body.kit__dark) {
+  .path {
+    color: $white;
+  }
+}

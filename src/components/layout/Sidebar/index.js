@@ -1,14 +1,79 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Scrollbars } from 'react-custom-scrollbars'
-import { Switch, Radio, Select } from 'antd'
+import { Switch, Radio, Select, Tooltip } from 'antd'
 import classNames from 'classnames'
 import style from './style.module.scss'
+
+import AntDesignDarkTheme from 'components/kit-vendors/antd/themes/themeDark'
+import AntDesignLightTheme from 'components/kit-vendors/antd/themes/themeLight'
 
 const mapStateToProps = ({ settings }) => ({ settings })
 
 @connect(mapStateToProps)
 class Sidebar extends React.Component {
+  state = {
+    primaryColor: '#4b7cf3',
+    reset: true,
+  }
+
+  componentDidMount() {
+    // init theme
+    const mode = window.localStorage.getItem('kit.theme')
+    if (mode === 'dark') {
+      document.querySelector('body').classList.add('kit__dark')
+      global.window.less.modifyVars(AntDesignDarkTheme)
+    } else {
+      global.window.less.modifyVars(AntDesignLightTheme)
+    }
+
+    // init primary color
+    const color = window.localStorage.getItem('kit.primary')
+    if (color) {
+      this.selectColor(color)
+    }
+  }
+
+  switchDarkTheme = () => {
+    if (document.querySelector('body').classList.contains('kit__dark')) {
+      document.querySelector('body').classList.remove('kit__dark')
+      window.localStorage.setItem('kit.theme', 'light')
+      window.less.modifyVars(AntDesignLightTheme)
+    } else {
+      document.querySelector('body').classList.add('kit__dark')
+      window.localStorage.setItem('kit.theme', 'dark')
+      window.less.modifyVars(AntDesignDarkTheme)
+    }
+  }
+
+  selectColor = color => {
+    const styleElement = document.querySelector('#primaryColor')
+    if (styleElement) {
+      styleElement.remove()
+    }
+    window.localStorage.setItem('kit.primary', color)
+    const body = document.querySelector('body')
+    const styleEl = document.createElement('style')
+    const css = document.createTextNode(`:root { --kit-color-primary: ${color};}`)
+    styleEl.setAttribute('id', 'primaryColor')
+    styleEl.appendChild(css)
+    body.appendChild(styleEl)
+    this.setState({
+      primaryColor: color,
+      reset: false,
+    })
+  }
+
+  resetColor = () => {
+    const defaultColor = '#4b7cf3'
+    this.selectColor(defaultColor)
+    window.localStorage.removeItem('kit.primary')
+    this.setState({
+      primaryColor: defaultColor,
+      reset: true,
+    })
+  }
+
   changeSetting = (setting, value) => {
     const { dispatch } = this.props
     dispatch({
@@ -99,9 +164,7 @@ class Sidebar extends React.Component {
         isMenuShadow,
         isMenuUnfixed,
         menuLayoutType,
-        menuType,
         menuColor,
-        flyoutMenuColor,
         systemLayoutColor,
         isTopbarFixed,
         isContentNoMaxWidth,
@@ -112,10 +175,12 @@ class Sidebar extends React.Component {
         isSquaredBorders,
         isBorderless,
         routerAnimation,
-        isFooterDark,
         locale,
+        theme,
       },
     } = this.props
+
+    const { reset, primaryColor } = this.state
 
     const ColorPicker = props => {
       return props.colors.map(item => {
@@ -169,10 +234,6 @@ class Sidebar extends React.Component {
               </h5>
               <div className="cui__utils__line" style={{ marginTop: 25, marginBottom: 30 }} />
               <div>
-                <p className="text-muted mb-5">
-                  This component gives possibility to construct custom blocks with any widgets,
-                  components and elements inside, like this theme settings
-                </p>
                 <div className={style.cui__sidebar__type}>
                   <div className={style.cui__sidebar__type__title}>
                     <span>Menu Layout</span>
@@ -185,45 +246,12 @@ class Sidebar extends React.Component {
                             <Radio value="left">Left Menu</Radio>
                           </div>
                           <div className="mb-2">
-                            <Radio value="top-dark">Top Dark</Radio>
+                            <Radio value="nomenu">No menu</Radio>
                           </div>
                         </div>
                         <div className="col-6">
                           <div className="mb-2">
                             <Radio value="top">Top Menu</Radio>
-                          </div>
-                          <div className="mb-2">
-                            <Radio value="nomenu">No menu</Radio>
-                          </div>
-                        </div>
-                      </div>
-                    </Radio.Group>
-                  </div>
-                </div>
-                <div className={style.cui__sidebar__type}>
-                  <div className={style.cui__sidebar__type__title}>
-                    <span>Left Menu Type</span>
-                  </div>
-                  <div className={style.cui__sidebar__type__items}>
-                    <Radio.Group onChange={this.selectMenuType} defaultValue={menuType}>
-                      <div className="row">
-                        <div className="col-6">
-                          <div className="mb-2">
-                            <Radio value="default" disabled={menuLayoutType !== 'left'}>
-                              Default
-                            </Radio>
-                          </div>
-                          <div className="mb-2">
-                            <Radio value="flyout" disabled={menuLayoutType !== 'left'}>
-                              Flyout
-                            </Radio>
-                          </div>
-                        </div>
-                        <div className="col-6">
-                          <div className="mb-2">
-                            <Radio value="compact" disabled={menuLayoutType !== 'left'}>
-                              Compact
-                            </Radio>
                           </div>
                         </div>
                       </div>
@@ -266,7 +294,7 @@ class Sidebar extends React.Component {
                   </div>
                 </div>
                 <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Toggled left menu</div>
+                  <div className={style.cui__sidebar__label}>Collapsed left menu</div>
                   <div className={style.cui__sidebar__container}>
                     <Switch
                       checked={isMenuCollapsed}
@@ -301,33 +329,12 @@ class Sidebar extends React.Component {
                   </div>
                 </div>
                 <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Dark Footer</div>
-                  <div className={style.cui__sidebar__container}>
-                    <Switch
-                      checked={isFooterDark}
-                      onChange={value => {
-                        this.changeSetting('isFooterDark', value)
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className={style.cui__sidebar__item}>
                   <div className={style.cui__sidebar__label}>Menu color</div>
                   <div className={style.cui__sidebar__container}>
                     <ColorPicker
                       setting="menuColor"
                       value={menuColor}
-                      colors={['white', 'gray', 'blue', 'dark']}
-                    />
-                  </div>
-                </div>
-                <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Flyout menu</div>
-                  <div className={style.cui__sidebar__container}>
-                    <ColorPicker
-                      setting="flyoutMenuColor"
-                      value={flyoutMenuColor}
-                      colors={['white', 'gray', 'blue', 'dark']}
+                      colors={['white', 'gray', 'dark']}
                     />
                   </div>
                 </div>
@@ -433,14 +440,63 @@ class Sidebar extends React.Component {
             </div>
           </Scrollbars>
         </div>
-        <a
-          href="#"
-          onClick={this.toggleSettings}
-          className={`${style.cui__sidebar__toggleButton} btn btn-rounded btn-light text-nowrap text-dark font-weight-bold font-size-18`}
-        >
-          <i className="fe fe-settings text-blue mr-md-2" />
-          <span className="d-none d-md-inline">Settings</span>
-        </a>
+        <Tooltip title="Settings" placement="left">
+          <a
+            onClick={this.toggleSettings}
+            style={{ bottom: 'calc(50% + 120px)' }}
+            className={style.cui__sidebar__toggleButton}
+          >
+            <i className="fe fe-settings" />
+          </a>
+        </Tooltip>
+        <Tooltip title="Switch Dark / Light Theme" placement="left">
+          <a
+            onClick={this.switchDarkTheme}
+            style={{ bottom: 'calc(50% + 60px)' }}
+            className={style.cui__sidebar__toggleButton}
+          >
+            {theme === 'light' && <i className="fe fe-moon" />}
+            {theme !== 'light' && <i className="fe fe-sun" />}
+          </a>
+        </Tooltip>
+        <Tooltip title="Set Primary Color" placement="left">
+          <a
+            style={{ bottom: 'calc(50%)' }}
+            className={`${style.cui__sidebar__toggleButton} ${style.color} ${
+              reset ? style.reset : ''
+            }`}
+          >
+            <button
+              type="button"
+              tabIndex="0"
+              onFocus={e => {
+                e.preventDefault()
+              }}
+              onKeyPress={this.resetColor}
+              onClick={this.resetColor}
+            >
+              <i className="fe fe-x-circle" />
+            </button>
+            <input
+              type="color"
+              id="colorPicker"
+              onChange={e => this.selectColor(e.target.value)}
+              value={primaryColor}
+            />
+            <i className="fe fe-package" />
+          </a>
+        </Tooltip>
+        <Tooltip title="Documentation" placement="left">
+          <a
+            href="https://docs.cleanuitemplate.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ bottom: 'calc(50% - 60px)' }}
+            className={style.cui__sidebar__toggleButton}
+          >
+            <i className="fe fe-book-open" />
+          </a>
+        </Tooltip>
       </div>
     )
   }

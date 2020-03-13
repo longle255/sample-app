@@ -92,4 +92,12 @@ module.exports = [
 
   '@label-required-color',
   '@label-color',
+
+  '@shadow-color',
+  '@box-shadow-base',
+  '@shadow-1-up',
+  '@shadow-1-down',
+  '@shadow-1-left',
+  '@shadow-1-right',
+  '@shadow-2',
 ]

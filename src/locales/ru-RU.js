@@ -2,6 +2,7 @@ import localeAntd from 'antd/es/locale/ru_RU'
 
 const messages = {
   'topBar.issuesHistory': 'История заданий',
+  'topBar.projectManagement': 'Управление проектом',
   'topBar.typeToSearch': 'Поиск...',
   'topBar.actions': 'Действия',
   'topBar.status': 'Статус',

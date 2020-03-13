@@ -1,5 +1,28 @@
 @import 'components/kit-core/mixins.scss';
 
+.toggleButton {
+  font-size: 18px;
+  height: rem(40);
+  padding: rem(10) rem(20);
+  background: $white;
+  border: none;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1) !important;
+  font-weight: bold;
+  border-radius: 30px;
+  color: $primary;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: $primary;
+    color: $white;
+  }
+
+  span {
+    font-size: 16px;
+    vertical-align: top;
+  }
+}
+
 .chat {
   position: fixed;
   z-index: 1998;
@@ -72,4 +95,11 @@
 .icon {
   position: relative;
   bottom: -1px;
+}
+
+// dark theme
+:global(body.kit__dark) {
+  .toggleButton {
+    background: $dark-gray-4;
+  }
 }

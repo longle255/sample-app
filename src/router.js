@@ -15,6 +15,23 @@ const routes = [
     Component: lazy(() => import('pages/dashboard/analytics')),
     exact: true,
   },
+  {
+    path: '/dashboard/beta',
+    Component: lazy(() => import('pages/dashboard/beta')),
+    exact: true,
+  },
+  // UI Kits
+  {
+    path: '/ui-kits/bootstrap',
+    Component: lazy(() => import('pages/ui-kits/bootstrap')),
+    exact: true,
+  },
+  {
+    path: '/ui-kits/antd',
+    Component: lazy(() => import('pages/ui-kits/antd')),
+    exact: true,
+  },
+
   // {
   //   path: '/dashboard/statistics',
   //   Component: loadable(() => import('pages/dashboard/statistics')),

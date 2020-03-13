@@ -12,29 +12,30 @@ const STORED_SETTINGS = storedSettings => {
 
 const initialState = {
   ...STORED_SETTINGS({
+    logo: 'Clean UI',
     locale: 'en-US',
     isSidebarOpen: false,
     isSupportChatOpen: false,
     isMobileView: false,
     isMobileMenuOpen: false,
     isMenuCollapsed: false,
+    menuLayoutType: 'left', // left, top, nomenu
+    routerAnimation: 'slide-fadein-up', // none, slide-fadein-up, slide-fadein-right, fadein, zoom-fadein
+    menuColor: 'white', // white, dark, gray
+    theme: 'light', // light, dark
+    leftMenuWidth: 256,
+
     isMenuShadow: false,
     isMenuUnfixed: false,
-    menuLayoutType: 'left', // left, top, top-dark, nomenu
-    menuType: 'default', // default, flyout, compact
-    menuColor: 'dark', // dark, blue, gray, white
-    flyoutMenuColor: 'blue', // dark, blue, gray, white
-    systemLayoutColor: 'gray', // white, dark, blue, gray, image
     isTopbarFixed: false,
-    isFooterDark: false,
     isContentNoMaxWidth: false,
     isAppMaxWidth: false,
-    isGrayBackground: false,
+    isWhiteBackground: false,
     isGrayTopbar: false,
     isCardShadow: false,
     isSquaredBorders: false,
     isBorderless: false,
-    routerAnimation: 'slide-fadein-up', // none, slide-fadein-up, slide-fadein-right, fadein, zoom-fadein
+    authPagesColor: 'gray', // white, dark, blue, gray, image
   }),
 }
 

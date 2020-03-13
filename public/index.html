@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Clean UI React | React Admin Template</title>
+  <title>Clean UI Pro React | React Admin Template</title>
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="theme-color" content="#ffffff" />
@@ -30,6 +30,16 @@
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
+  <!-- start:antd live theme switch resources -->
+  <link rel="stylesheet/less" type="text/css" href="color.less" />
+  <script>
+    window.less = {
+      async: false,
+      env: 'production'
+    };
+  </script>
+  <script type="text/javascript" src="resources/less.min.js"></script>
+  <!-- end:antd live theme switch resources -->
   <div id="root">
     <div class="kit__initial__loading"></div>
   </div>
