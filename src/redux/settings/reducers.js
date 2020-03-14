@@ -12,7 +12,7 @@ const STORED_SETTINGS = storedSettings => {
 
 const initialState = {
   ...STORED_SETTINGS({
-    logo: 'Clean UI',
+    logo: 'Clean UI Pro',
     locale: 'en-US',
     isSidebarOpen: false,
     isSupportChatOpen: false,

@@ -31,12 +31,25 @@
     &::after {
       color: $gray-6;
     }
+
+    .icon {
+      color: $primary;
+    }
   }
 }
 
 .icon {
-  margin-right: rem(3);
+  margin-right: rem(8);
   position: relative;
   bottom: -2px;
-  font-size: rem(16);
+  font-size: rem(17);
+  color: $gray-5;
+  @include transition-slow;
+}
+
+// dark theme
+:global(body.kit__dark) {
+  .icon {
+    color: $dark-gray-2;
+  }
 }

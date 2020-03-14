@@ -9,6 +9,7 @@ export default async function getMenuData() {
       key: 'dashboards',
       icon: 'fe fe-home',
       count: 6,
+      roles: ['admin'],
       children: [
         {
           title: 'Analytics',

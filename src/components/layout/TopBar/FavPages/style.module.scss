@@ -4,5 +4,13 @@
   margin-right: rem(8);
   position: relative;
   bottom: -2px;
-  font-size: rem(16);
+  font-size: rem(17);
+  color: $gray-5;
+}
+
+// dark theme
+:global(body.kit__dark) {
+  .icon {
+    color: $dark-gray-2;
+  }
 }

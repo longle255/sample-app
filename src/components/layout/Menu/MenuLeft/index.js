@@ -5,10 +5,10 @@ import { Menu, Layout } from 'antd'
 import classNames from 'classnames'
 import store from 'store'
 import { Scrollbars } from 'react-custom-scrollbars'
-import _ from 'lodash'
+import { find } from 'lodash'
 import style from './style.module.scss'
 
-const mapStateToProps = ({ menu, settings }) => ({
+const mapStateToProps = ({ menu, settings, user }) => ({
   menuData: menu.menuData,
   isMenuCollapsed: settings.isMenuCollapsed,
   isMobileView: settings.isMobileView,
@@ -16,6 +16,7 @@ const mapStateToProps = ({ menu, settings }) => ({
   leftMenuWidth: settings.leftMenuWidth,
   menuColor: settings.menuColor,
   logo: settings.logo,
+  role: user.role,
 })
 
 @withRouter
@@ -49,10 +50,7 @@ class MenuLeft extends React.Component {
         }
         return flattenedItems
       }, [])
-    const selectedItem = _.find(flattenItems(menuData, 'children'), [
-      'url',
-      props.location.pathname,
-    ])
+    const selectedItem = find(flattenItems(menuData, 'children'), ['url', props.location.pathname])
     this.setState({
       selectedKeys: selectedItem ? [selectedItem.key] : [],
     })
@@ -93,7 +91,7 @@ class MenuLeft extends React.Component {
   }
 
   generateMenuItems = () => {
-    const { menuData = [] } = this.props
+    const { menuData = [], role } = this.props
     const generateItem = item => {
       const { key, title, url, icon, disabled } = item
       if (item.category) {
@@ -143,6 +141,9 @@ class MenuLeft extends React.Component {
       })
 
     return menuData.map(menuItem => {
+      if (menuItem.roles && !menuItem.roles.includes(role)) {
+        return null
+      }
       if (menuItem.children) {
         const subMenuTitle = (
           <span key={menuItem.key}>
@@ -200,7 +201,7 @@ class MenuLeft extends React.Component {
             <div className={style.logo}>
               <img src="resources/images/logo.svg" className="mr-2" alt="Clean UI" />
               <div className={style.name}>{logo}</div>
-              {logo === 'Clean UI' && <div className={style.descr}>Pro React</div>}
+              {logo === 'Clean UI Pro' && <div className={style.descr}>React</div>}
             </div>
           </div>
           <Scrollbars

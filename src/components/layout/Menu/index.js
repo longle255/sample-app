@@ -14,6 +14,37 @@ const mapStateToProps = ({ settings }) => ({
 
 @connect(mapStateToProps)
 class Menu extends React.PureComponent {
+  touchStartPrev = 0
+  touchStartLocked = false
+
+  componentDidMount() {
+    // mobile menu touch slide opener
+    const unify = e => {
+      return e.changedTouches ? e.changedTouches[0] : e
+    }
+    document.addEventListener(
+      'touchstart',
+      e => {
+        const x = unify(e).clientX
+        this.touchStartPrev = x
+        this.touchStartLocked = x > 70 ? true : false
+      },
+      { passive: false },
+    )
+    document.addEventListener(
+      'touchmove',
+      e => {
+        const x = unify(e).clientX
+        const prev = this.touchStartPrev
+        if (x - prev > 50 && !this.touchStartLocked) {
+          this.toggleMobileMenu()
+          this.touchStartLocked = true
+        }
+      },
+      { passive: false },
+    )
+  }
+
   toggleMobileMenu = () => {
     const { dispatch, isMobileMenuOpen } = this.props
     dispatch({
@@ -39,7 +70,7 @@ class Menu extends React.PureComponent {
               closable={false}
               visible={isMobileMenuOpen}
               placement="left"
-              wrapClassName={style.mobileMenu}
+              className={style.mobileMenu}
               onClose={this.toggleMobileMenu}
               maskClosable={true}
               getContainer={null}

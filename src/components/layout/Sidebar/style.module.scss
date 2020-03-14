@@ -3,7 +3,7 @@
 .cui__sidebar {
   width: rem(330);
   position: fixed;
-  z-index: 1999;
+  z-index: 999;
   top: 0;
   right: 0;
   bottom: 0;
@@ -19,7 +19,7 @@
   // mobile toggle button
   &__toggleButton {
     position: fixed;
-    z-index: 1998;
+    z-index: 998;
     right: rem(40);
     box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1) !important;
     display: block;
@@ -246,6 +246,28 @@
 // dark theme
 :global(body.kit__dark) {
   .cui__sidebar {
+    background: $dark-gray-6;
+
+    &__type {
+      border-top: 1px solid $dark-gray-5;
+
+      &__title {
+        span {
+          background: $dark-gray-6;
+        }
+      }
+    }
+
+    &__select {
+      &__item {
+        &__black {
+          &:after {
+            background: $dark-gray-4;
+          }
+        }
+      }
+    }
+
     &__toggleButton {
       background: $dark-gray-4;
     }

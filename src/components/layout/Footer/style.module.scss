@@ -43,4 +43,10 @@
   .footerInner {
     border-top: 1px solid $dark-gray-4;
   }
+
+  .logo {
+    span {
+      background: $dark-gray-2;
+    }
+  }
 }

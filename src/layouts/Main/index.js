@@ -10,7 +10,16 @@ import Footer from 'components/layout/Footer'
 import Sidebar from 'components/layout/Sidebar'
 import SupportChat from 'components/layout/SupportChat'
 
-const mapStateToProps = ({ settings }) => ({ settings })
+const mapStateToProps = ({ settings }) => ({
+  isContentNoMaxWidth: settings.isContentNoMaxWidth,
+  isAppMaxWidth: settings.isAppMaxWidth,
+  isGrayBackground: settings.isGrayBackground,
+  isSquaredBorders: settings.isSquaredBorders,
+  isCardShadow: settings.isCardShadow,
+  isBorderless: settings.isBorderless,
+  isTopbarFixed: settings.isTopbarFixed,
+  isGrayTopbar: settings.isGrayTopbar,
+})
 
 @withRouter
 @connect(mapStateToProps)
@@ -18,16 +27,14 @@ class MainLayout extends React.PureComponent {
   render() {
     const {
       children,
-      settings: {
-        isContentNoMaxWidth,
-        isAppMaxWidth,
-        isGrayBackground,
-        isSquaredBorders,
-        isCardShadow,
-        isBorderless,
-        isTopbarFixed,
-        isGrayTopbar,
-      },
+      isContentNoMaxWidth,
+      isAppMaxWidth,
+      isGrayBackground,
+      isSquaredBorders,
+      isCardShadow,
+      isBorderless,
+      isTopbarFixed,
+      isGrayTopbar,
     } = this.props
 
     return (
