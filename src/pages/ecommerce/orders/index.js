@@ -171,7 +171,9 @@ class EcommerceOrders extends React.Component {
     return (
       <div>
         <Helmet title="Ecommerce: Orders" />
-        <div className="cui__utils__heading">Ecommerce: Orders</div>
+        <div className="cui__utils__heading">
+          <strong>Ecommerce: Orders</strong>
+        </div>
         <div className="card">
           <div className="card-header card-header-flex">
             <div className="d-flex flex-column justify-content-center mr-auto">

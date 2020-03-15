@@ -18,7 +18,9 @@ class EcommerceDashboard extends React.Component {
     return (
       <div>
         <Helmet title="Ecommerce: Dashboard" />
-        <div className="cui__utils__heading">Ecommerce: Dashboard</div>
+        <div className="cui__utils__heading">
+          <strong>Ecommerce: Dashboard</strong>
+        </div>
         <div className="row">
           <div className="col-xl-8 col-lg-12">
             <div className="card">

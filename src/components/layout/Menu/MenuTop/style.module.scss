@@ -115,7 +115,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 /* DARK THEME */
 .dark {
-  color: $dark-gray-2;
+  color: $dark-gray-1;
   background: $dark-gray-6 !important;
   border-bottom: 1px solid $dark-gray-4;
 
@@ -124,7 +124,7 @@
       color: $white;
     }
     .descr {
-      color: $dark-gray-2;
+      color: $dark-gray-1;
       border-left: 1px solid $dark-gray-4;
     }
   }
@@ -139,7 +139,7 @@
     }
 
     :global(.ant-menu-submenu-title) {
-      color: $dark-gray-2;
+      color: $dark-gray-1;
 
       &:hover {
         color: $primary;
@@ -148,7 +148,7 @@
 
     :global(.ant-menu-item) {
       > a {
-        color: $dark-gray-2;
+        color: $dark-gray-1;
 
         &:hover {
           color: $primary;

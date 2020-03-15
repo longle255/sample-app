@@ -36,7 +36,9 @@ class EcommerceProductDetails extends React.Component {
     return (
       <div>
         <Helmet title="Ecommerce: Product Details" />
-        <div className="cui__utils__heading">Ecommerce: Product Details</div>
+        <div className="cui__utils__heading">
+          <strong>Ecommerce: Product Details</strong>
+        </div>
         <div className="card overflow-hidden">
           <div className={style.new}>New</div>
           <div className="card-body">

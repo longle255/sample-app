@@ -37,7 +37,7 @@
 // dark theme
 :global(body.kit__dark) {
   .footer {
-    color: $dark-gray-2;
+    color: $dark-gray-1;
   }
 
   .footerInner {
@@ -46,7 +46,7 @@
 
   .logo {
     span {
-      background: $dark-gray-2;
+      background: $dark-gray-1;
     }
   }
 }

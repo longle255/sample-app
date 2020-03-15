@@ -56,7 +56,9 @@ class EcommerceCart extends React.Component {
     return (
       <div>
         <Helmet title="Ecommerce: Cart" />
-        <div className="cui__utils__heading">Ecommerce: Cart</div>
+        <div className="cui__utils__heading">
+          <strong>Ecommerce: Cart</strong>
+        </div>
         <div className="card">
           <div className="card-body">
             <h6 className="mb-4 text-uppercase">

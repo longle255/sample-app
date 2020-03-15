@@ -83,7 +83,7 @@ body {
 // dark theme
 body.kit__dark {
   background: $dark-gray-5;
-  color: $dark-gray-2;
+  color: $dark-gray-1;
 
   .badge-example {
     background: $dark-gray-4;
@@ -95,11 +95,11 @@ body.kit__dark {
   h4,
   h5,
   h6 {
-    color: $dark-gray-2;
+    color: $dark-gray-1;
   }
 
   a {
-    color: $dark-gray-2;
+    color: $dark-gray-1;
     &:hover,
     &:active,
     &:focus {

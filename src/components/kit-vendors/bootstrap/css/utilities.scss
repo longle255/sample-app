@@ -74,14 +74,14 @@
   }
 }
 
-// darl-theme
+// dark theme
 body.kit__dark {
   .text {
     &-light {
       color: $dark !important;
     }
     &-dark {
-      color: $dark-gray-2 !important;
+      color: $dark-gray-1 !important;
     }
     &-muted {
       color: $dark-gray-3 !important;

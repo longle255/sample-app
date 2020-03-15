@@ -15,13 +15,13 @@ import Chart8 from 'components/kit-widgets/Charts/8'
 import Chart9 from 'components/kit-widgets/Charts/9'
 import Chart10 from 'components/kit-widgets/Charts/10'
 import Chart11 from 'components/kit-widgets/Charts/11'
-import Chart11v1 from 'components/kit-widgets/Charts/11-1'
-import Chart11v2 from 'components/kit-widgets/Charts/11-2'
+import Chart11v1 from 'components/kit-widgets/Charts/11v1'
+import Chart11v2 from 'components/kit-widgets/Charts/11v2'
 import Chart12 from 'components/kit-widgets/Charts/12'
-import Chart12v1 from 'components/kit-widgets/Charts/12-1'
+import Chart12v1 from 'components/kit-widgets/Charts/12v1'
 import Chart13 from 'components/kit-widgets/Charts/13'
-import Chart13v1 from 'components/kit-widgets/Charts/13-1'
-import Chart13v2 from 'components/kit-widgets/Charts/13-2'
+import Chart13v1 from 'components/kit-widgets/Charts/13v1'
+import Chart13v2 from 'components/kit-widgets/Charts/13v2'
 
 class Widgets extends React.Component {
   render() {

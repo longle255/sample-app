@@ -22,19 +22,14 @@ export default async function getMenuData() {
           url: '/dashboard/beta',
         },
         {
-          title: 'Dashboard Crypto',
-          key: 'dashboardCrypto',
-          url: '/dashboard/crypto',
-        },
-        {
           title: 'Dashboard Gamma',
           key: 'dashboardGamma',
           url: '/dashboard/gamma',
         },
         {
-          title: 'Dashboard Docs',
-          key: 'dashboardDocs',
-          url: '/dashboard/docs',
+          title: 'Crypto Terminal',
+          key: 'dashboardCrypto',
+          url: '/dashboard/crypto',
         },
       ],
     },

@@ -51,6 +51,13 @@ export function* TOGGLE_THEME() {
     } else {
       document.querySelector('body').classList.add('kit__dark')
       window.less.modifyVars(AntDesignDarkTheme)
+      reduxStore.dispatch({
+        type: 'settings/CHANGE_SETTING',
+        payload: {
+          setting: 'menuColor',
+          value: 'dark',
+        },
+      })
     }
   }
 

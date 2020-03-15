@@ -2,16 +2,7 @@
 
 .breadcrumbs {
   padding: rem(20) rem(30) 0;
-  color: $gray-5;
   font-size: rem(17);
-
-  a {
-    color: $gray-5;
-
-    &:hover {
-      color: $primary;
-    }
-  }
 }
 
 .current {
@@ -31,7 +22,7 @@
 // dark theme
 :global(body.kit__dark) {
   .breadcrumbs {
-    color: $dark-gray-2;
+    color: $dark-gray-1;
   }
 
   .current {
@@ -40,7 +31,7 @@
 
   .arrow {
     &:after {
-      color: $dark-gray-2;
+      color: $dark-gray-1;
     }
   }
 }

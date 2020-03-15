@@ -8,7 +8,9 @@ class EcommerceProductCatalog extends React.Component {
     return (
       <div>
         <Helmet title="Ecommerce: Product Catalog" />
-        <div className="cui__utils__heading">Ecommerce: Product Catalog</div>
+        <div className="cui__utils__heading">
+          <strong>Ecommerce: Product Catalog</strong>
+        </div>
         <div className="row">
           {productsData.map(product => {
             const { isNew, isFavorite, image, name, price, oldPrice } = product

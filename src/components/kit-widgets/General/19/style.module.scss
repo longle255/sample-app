@@ -2,9 +2,10 @@
 
 .headerText {
   position: absolute;
-  top: rem(20);
-  left: rem(20);
-  font-size: rem(36);
+  top: rem(40);
+  left: rem(40);
+  font-size: rem(32);
+  line-height: rem(32);
 
   @media (max-width: $sm-max-width) {
     font-size: rem(30);

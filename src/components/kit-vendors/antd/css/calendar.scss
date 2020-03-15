@@ -8,6 +8,11 @@ body {
     }
   }
 
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-month,
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-selected-day .ant-fullcalendar-date {
+    background: $gray-1;
+  }
+
   ////////////////////////////////////////////////////////////////////////////////////////////
   // DARK THEME STYLES
   &.kit__dark {

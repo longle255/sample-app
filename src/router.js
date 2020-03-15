@@ -30,11 +30,6 @@ const routes = [
     Component: lazy(() => import('pages/dashboard/crypto')),
     exact: true,
   },
-  {
-    path: '/dashboard/docs',
-    Component: lazy(() => import('pages/dashboard/docs')),
-    exact: true,
-  },
 
   // Ecommerce
   {

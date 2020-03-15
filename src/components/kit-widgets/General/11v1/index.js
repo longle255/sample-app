@@ -27,7 +27,7 @@ class General11v1 extends React.Component {
   render() {
     return (
       <div>
-        <div className="bg-gray-2 height-200 d-flex flex-column">
+        <div className="bg-light height-200 d-flex flex-column">
           <div className="card-header card-header-flex border-bottom-0">
             <div className="d-flex flex-column justify-content-center">
               <h5 className="mb-0 text-color-6">Basic Card</h5>
