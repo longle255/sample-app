@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout } from 'antd'
 import { withRouter } from 'react-router-dom'
+import Sidebar from 'components/layout/Sidebar'
 
 @withRouter
 class AuthLayout extends React.PureComponent {
@@ -9,6 +10,7 @@ class AuthLayout extends React.PureComponent {
     return (
       <Layout>
         <Layout.Content>
+          <Sidebar />
           <div>{children}</div>
         </Layout.Content>
       </Layout>

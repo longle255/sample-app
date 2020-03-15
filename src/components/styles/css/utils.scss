@@ -11,8 +11,26 @@
       }
     }
 
+    &__heading {
+      color: $black;
+      font-size: rem(17);
+      text-transform: uppercase;
+      margin-bottom: rem(12);
+    }
+
     &__shadow {
       box-shadow: $shadow-ant;
+    }
+  }
+}
+
+// dark theme
+body.kit__dark {
+  .cui {
+    &__utils {
+      &__heading {
+        color: $dark-gray-2;
+      }
     }
   }
 }

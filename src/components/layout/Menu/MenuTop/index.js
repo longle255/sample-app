@@ -4,7 +4,7 @@ import { Menu } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
 import classNames from 'classnames'
 import store from 'store'
-import _ from 'lodash'
+import { find } from 'lodash'
 import style from './style.module.scss'
 
 const mapStateToProps = ({ menu, settings, user }) => ({
@@ -41,10 +41,7 @@ class MenuTop extends React.Component {
         }
         return flattenedItems
       }, [])
-    const selectedItem = _.find(flattenItems(menuData, 'children'), [
-      'url',
-      props.location.pathname,
-    ])
+    const selectedItem = find(flattenItems(menuData, 'children'), ['url', props.location.pathname])
     this.setState({
       selectedKeys: selectedItem ? [selectedItem.key] : [],
     })

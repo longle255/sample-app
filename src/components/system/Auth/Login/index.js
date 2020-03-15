@@ -111,7 +111,12 @@ class Login extends React.Component {
               </a>
             </li>
           </ul>
-          <div className="text-gray-4 text-center">© 2019 Mediatec. All rights reserved.</div>
+          <div className="text-center">
+            Copyright © 2017-2020 Mdtk Soft |{' '}
+            <a href="https://www.mediatec.org/privacy" target="_blank" rel="noopener noreferrer">
+              Privacy Policy
+            </a>
+          </div>
         </div>
       </div>
     )

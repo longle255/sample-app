@@ -2,75 +2,68 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Switch, Radio, Select, Tooltip } from 'antd'
+import { throttle } from 'lodash'
 import classNames from 'classnames'
 import style from './style.module.scss'
 
-import AntDesignDarkTheme from 'components/kit-vendors/antd/themes/themeDark'
-import AntDesignLightTheme from 'components/kit-vendors/antd/themes/themeLight'
-
-const mapStateToProps = ({ settings }) => ({ settings })
+const mapStateToProps = ({ settings }) => ({
+  isSidebarOpen: settings.isSidebarOpen,
+  isMenuCollapsed: settings.isMenuCollapsed,
+  isMenuShadow: settings.isMenuShadow,
+  isMenuUnfixed: settings.isMenuUnfixed,
+  menuLayoutType: settings.menuLayoutType,
+  menuColor: settings.menuColor,
+  systemLayoutColor: settings.systemLayoutColor,
+  isTopbarFixed: settings.isTopbarFixed,
+  isContentNoMaxWidth: settings.isContentNoMaxWidth,
+  isAppMaxWidth: settings.isAppMaxWidth,
+  isGrayBackground: settings.isGrayBackground,
+  isGrayTopbar: settings.isGrayTopbar,
+  isCardShadow: settings.isCardShadow,
+  isSquaredBorders: settings.isSquaredBorders,
+  isBorderless: settings.isBorderless,
+  routerAnimation: settings.routerAnimation,
+  locale: settings.locale,
+  theme: settings.theme,
+  primaryColor: settings.primaryColor,
+})
 
 @connect(mapStateToProps)
 class Sidebar extends React.Component {
   state = {
-    primaryColor: '#4b7cf3',
-    reset: true,
-  }
-
-  componentDidMount() {
-    // init theme
-    const mode = window.localStorage.getItem('kit.theme')
-    if (mode === 'dark') {
-      document.querySelector('body').classList.add('kit__dark')
-      global.window.less.modifyVars(AntDesignDarkTheme)
-    } else {
-      global.window.less.modifyVars(AntDesignLightTheme)
-    }
-
-    // init primary color
-    const color = window.localStorage.getItem('kit.primary')
-    if (color) {
-      this.selectColor(color)
-    }
+    primaryColor: this.props.primaryColor,
+    defaultColor: '#4b7cf3',
   }
 
   switchDarkTheme = () => {
-    if (document.querySelector('body').classList.contains('kit__dark')) {
-      document.querySelector('body').classList.remove('kit__dark')
-      window.localStorage.setItem('kit.theme', 'light')
-      window.less.modifyVars(AntDesignLightTheme)
-    } else {
-      document.querySelector('body').classList.add('kit__dark')
-      window.localStorage.setItem('kit.theme', 'dark')
-      window.less.modifyVars(AntDesignDarkTheme)
-    }
+    const { dispatch } = this.props
+    dispatch({ type: 'settings/TOGGLE_THEME' })
   }
 
-  selectColor = color => {
-    const styleElement = document.querySelector('#primaryColor')
-    if (styleElement) {
-      styleElement.remove()
-    }
-    window.localStorage.setItem('kit.primary', color)
-    const body = document.querySelector('body')
-    const styleEl = document.createElement('style')
-    const css = document.createTextNode(`:root { --kit-color-primary: ${color};}`)
-    styleEl.setAttribute('id', 'primaryColor')
-    styleEl.appendChild(css)
-    body.appendChild(styleEl)
+  selectColor = throttle(color => {
+    const { dispatch } = this.props
     this.setState({
       primaryColor: color,
-      reset: false,
     })
-  }
+    dispatch({
+      type: 'settings/SET_PRIMARY_COLOR',
+      payload: {
+        color,
+      },
+    })
+  }, 200)
 
   resetColor = () => {
-    const defaultColor = '#4b7cf3'
-    this.selectColor(defaultColor)
-    window.localStorage.removeItem('kit.primary')
+    const { defaultColor } = this.state
+    const { dispatch } = this.props
     this.setState({
       primaryColor: defaultColor,
-      reset: true,
+    })
+    dispatch({
+      type: 'settings/SET_PRIMARY_COLOR',
+      payload: {
+        color: defaultColor,
+      },
     })
   }
 
@@ -87,8 +80,7 @@ class Sidebar extends React.Component {
 
   toggleSettings = e => {
     e.preventDefault()
-    const { dispatch, settings } = this.props
-    const { isSidebarOpen } = settings
+    const { dispatch, isSidebarOpen } = this.props
     dispatch({
       type: 'settings/CHANGE_SETTING',
       payload: {
@@ -158,29 +150,27 @@ class Sidebar extends React.Component {
 
   render() {
     const {
-      settings: {
-        isSidebarOpen,
-        isMenuCollapsed,
-        isMenuShadow,
-        isMenuUnfixed,
-        menuLayoutType,
-        menuColor,
-        systemLayoutColor,
-        isTopbarFixed,
-        isContentNoMaxWidth,
-        isAppMaxWidth,
-        isGrayBackground,
-        isGrayTopbar,
-        isCardShadow,
-        isSquaredBorders,
-        isBorderless,
-        routerAnimation,
-        locale,
-        theme,
-      },
+      isSidebarOpen,
+      isMenuCollapsed,
+      isMenuShadow,
+      isMenuUnfixed,
+      menuLayoutType,
+      menuColor,
+      systemLayoutColor,
+      isTopbarFixed,
+      isContentNoMaxWidth,
+      isAppMaxWidth,
+      isGrayBackground,
+      isGrayTopbar,
+      isCardShadow,
+      isSquaredBorders,
+      isBorderless,
+      routerAnimation,
+      locale,
+      theme,
     } = this.props
 
-    const { reset, primaryColor } = this.state
+    const { defaultColor, primaryColor } = this.state
 
     const ColorPicker = props => {
       return props.colors.map(item => {
@@ -463,7 +453,7 @@ class Sidebar extends React.Component {
           <a
             style={{ bottom: 'calc(50%)' }}
             className={`${style.cui__sidebar__toggleButton} ${style.color} ${
-              reset ? style.reset : ''
+              primaryColor === defaultColor ? style.reset : ''
             }`}
           >
             <button

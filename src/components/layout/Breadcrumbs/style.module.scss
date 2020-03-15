@@ -2,10 +2,19 @@
 
 .breadcrumbs {
   padding: rem(20) rem(30) 0;
+  color: $gray-5;
+  font-size: rem(17);
+
+  a {
+    color: $gray-5;
+
+    &:hover {
+      color: $primary;
+    }
+  }
 }
 
-.path {
-  font-size: rem(17);
+.current {
   color: $black;
 }
 
@@ -15,12 +24,23 @@
   &:after {
     display: inline-block;
     content: '·';
+    color: $gray-5;
   }
 }
 
 // dark theme
 :global(body.kit__dark) {
-  .path {
+  .breadcrumbs {
+    color: $dark-gray-2;
+  }
+
+  .current {
     color: $white;
+  }
+
+  .arrow {
+    &:after {
+      color: $dark-gray-2;
+    }
   }
 }

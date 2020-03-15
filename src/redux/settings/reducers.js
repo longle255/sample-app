@@ -23,6 +23,7 @@ const initialState = {
     routerAnimation: 'slide-fadein-up', // none, slide-fadein-up, slide-fadein-right, fadein, zoom-fadein
     menuColor: 'white', // white, dark, gray
     theme: 'light', // light, dark
+    primaryColor: '#4b7cf3',
     leftMenuWidth: 256,
 
     isMenuShadow: false,

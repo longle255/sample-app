@@ -212,7 +212,7 @@ class MenuLeft extends React.Component {
                 style={{
                   width: '4px',
                   borderRadius: 'inherit',
-                  backgroundColor: '#c5cdd2',
+                  backgroundColor: menuColor === 'dark' ? '#232135' : '#c5cdd2',
                   left: '1px',
                 }}
               />
