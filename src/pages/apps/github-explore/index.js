@@ -45,9 +45,6 @@ class ExtraAppsGithubExplore extends React.Component {
     return (
       <div>
         <Helmet title="Github Explore" />
-        <div className="kit__utils__heading">
-          <h5>Github Explore</h5>
-        </div>
         <div className="d-flex flex-wrap">
           <div className="mr-auto pr-3 my-2">
             <i className="fe fe-book font-size-21 mr-2" />
@@ -79,7 +76,7 @@ class ExtraAppsGithubExplore extends React.Component {
             </div>
           </div>
         </div>
-        <Tabs className="air-tabs-bordered mb-2" defaultActiveKey="1">
+        <Tabs className="kit-tabs-bordered mb-2" defaultActiveKey="1">
           <TabPane tab="Code" key="1" />
           <TabPane
             tab={

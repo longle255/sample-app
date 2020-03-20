@@ -15,9 +15,6 @@ class ExtraAppsWordpressPost extends React.Component {
     return (
       <div>
         <Helmet title="Wordpress Post" />
-        <div className="kit__utils__heading">
-          <h5>Wordpress Post</h5>
-        </div>
         <div className="row">
           <div className="col-xl-9 col-lg-12">
             <div className="card">

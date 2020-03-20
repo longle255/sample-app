@@ -4,25 +4,10 @@
   height: 100%;
   width: 120px;
   position: absolute;
-  right: 0;
   bottom: 0;
+  right: 0;
 }
 
 .chart {
   height: 100%;
-
-  .ct-line {
-    stroke-width: 1px;
-  }
-
-  .ct-series-a {
-    .ct-area {
-      fill: rgba(199, 228, 255, 0.5) !important;
-      fill-opacity: 1 !important;
-    }
-
-    .ct-line {
-      stroke: rgb(0, 69, 133) !important;
-    }
-  }
 }

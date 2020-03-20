@@ -66,7 +66,7 @@ class EcommerceCart extends React.Component {
             </h6>
             <div className="text-nowrap mb-4">
               <Table
-                scroll={{ x: '100%' }}
+                scroll={{ x: true }}
                 columns={columns}
                 dataSource={ordersTableData}
                 pagination={false}

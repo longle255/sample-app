@@ -15,9 +15,6 @@ class ExtraAppsWordpressAdd extends React.Component {
     return (
       <div>
         <Helmet title="Wordpress Add" />
-        <div className="kit__utils__heading">
-          <h5>Wordpress Add</h5>
-        </div>
         <Form className="mt-3">
           <div className="row">
             <div className="col-md-6">

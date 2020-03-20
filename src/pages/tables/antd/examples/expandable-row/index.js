@@ -22,7 +22,7 @@ class TablesAntdExpandableRow extends React.Component {
           columns={columns}
           dataSource={data}
           expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}
-          scroll={{ x: '100%' }}
+          scroll={{ x: true }}
         />
       </div>
     )

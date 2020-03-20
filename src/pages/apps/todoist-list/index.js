@@ -62,9 +62,6 @@ class ExtraAppsTodoistList extends React.Component {
     return (
       <div>
         <Helmet title="Todoist List" />
-        <div className="kit__utils__heading">
-          <h5>Todoist List</h5>
-        </div>
         <div className="row">
           <div className="col-12 col-md-3">
             <div className="mb-4">

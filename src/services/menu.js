@@ -38,83 +38,14 @@ export default async function getMenuData() {
       title: 'Apps & Pages',
     },
     {
-      title: 'System Pages',
-      key: 'system',
-      icon: 'fe fe-user',
-      children: [
-        {
-          title: 'Login',
-          key: 'systemLogin',
-          url: '/system/login',
-        },
-        {
-          title: 'Forgot Password',
-          key: 'systemForgotPassword',
-          url: '/system/forgot-password',
-        },
-        {
-          title: 'Register',
-          key: 'systemRegister',
-          url: '/system/register',
-        },
-        {
-          title: 'Lockscreen',
-          key: 'systemLockscreen',
-          url: '/system/lockscreen',
-        },
-        {
-          title: 'Page 404',
-          key: 'system404',
-          url: '/system/404',
-        },
-        {
-          title: 'Page 500',
-          key: 'system500',
-          url: '/system/500',
-        },
-      ],
-    },
-    {
-      title: 'Ecommerce',
-      key: 'ecommerce',
-      icon: 'fe fe-shopping-cart',
-      children: [
-        {
-          title: 'Dashboard',
-          key: 'ecommerceDashboard',
-          url: '/ecommerce/dashboard',
-        },
-        {
-          title: 'Orders',
-          key: 'ecommerceOrders',
-          url: '/ecommerce/orders',
-        },
-        {
-          title: 'Propduct Catalog',
-          key: 'ecommerceProductCatalog',
-          url: '/ecommerce/product-catalog',
-        },
-        {
-          title: 'Product Details',
-          key: 'ecommerceProductDetails',
-          url: '/ecommerce/product-details',
-        },
-        {
-          title: 'Cart',
-          key: 'ecommerceCart',
-          url: '/ecommerce/cart',
-        },
-      ],
-    },
-    {
       title: 'Apps',
       key: 'apps',
       icon: 'fe fe-database',
       children: [
         {
-          title: 'Messaging',
-          key: 'appsCart',
-          url: '/apps/messaging',
+          title: 'Profile',
+          key: 'appsProfile',
+          url: '/apps/profile',
         },
         {
           title: 'Calendar',
@@ -122,19 +53,19 @@ export default async function getMenuData() {
           url: '/apps/calendar',
         },
         {
-          title: 'Mail',
-          key: 'appsMail',
-          url: '/apps/mail',
-        },
-        {
-          title: 'Profile',
-          key: 'appsProfile',
-          url: '/apps/profile',
-        },
-        {
           title: 'Gallery',
           key: 'appsGallery',
           url: '/apps/gallery',
+        },
+        {
+          title: 'Messaging',
+          key: 'appsCart',
+          url: '/apps/messaging',
+        },
+        {
+          title: 'Mail',
+          key: 'appsMail',
+          url: '/apps/mail',
         },
       ],
     },
@@ -206,6 +137,75 @@ export default async function getMenuData() {
       ],
     },
     {
+      title: 'Ecommerce',
+      key: 'ecommerce',
+      icon: 'fe fe-shopping-cart',
+      children: [
+        {
+          title: 'Dashboard',
+          key: 'ecommerceDashboard',
+          url: '/ecommerce/dashboard',
+        },
+        {
+          title: 'Orders',
+          key: 'ecommerceOrders',
+          url: '/ecommerce/orders',
+        },
+        {
+          title: 'Propduct Catalog',
+          key: 'ecommerceProductCatalog',
+          url: '/ecommerce/product-catalog',
+        },
+        {
+          title: 'Product Details',
+          key: 'ecommerceProductDetails',
+          url: '/ecommerce/product-details',
+        },
+        {
+          title: 'Cart',
+          key: 'ecommerceCart',
+          url: '/ecommerce/cart',
+        },
+      ],
+    },
+    {
+      title: 'System Pages',
+      key: 'system',
+      icon: 'fe fe-user',
+      children: [
+        {
+          title: 'Login',
+          key: 'systemLogin',
+          url: '/system/login',
+        },
+        {
+          title: 'Forgot Password',
+          key: 'systemForgotPassword',
+          url: '/system/forgot-password',
+        },
+        {
+          title: 'Register',
+          key: 'systemRegister',
+          url: '/system/register',
+        },
+        {
+          title: 'Lockscreen',
+          key: 'systemLockscreen',
+          url: '/system/lockscreen',
+        },
+        {
+          title: 'Page 404',
+          key: 'system404',
+          url: '/system/404',
+        },
+        {
+          title: 'Page 500',
+          key: 'system500',
+          url: '/system/500',
+        },
+      ],
+    },
+    {
       category: true,
       title: 'UI Kits',
     },
@@ -273,24 +273,24 @@ export default async function getMenuData() {
     {
       title: 'Tables',
       key: 'tables',
-      icon: 'fe fe-pie-chart',
+      icon: 'fe fe-grid',
       children: [
-        {
-          title: 'Bootstrap',
-          key: 'tablesBootstrap',
-          url: '/tables/bootstrap',
-        },
         {
           title: 'Ant Design',
           key: 'tablesAntd',
           url: '/tables/antd',
+        },
+        {
+          title: 'Bootstrap',
+          key: 'tablesBootstrap',
+          url: '/tables/bootstrap',
         },
       ],
     },
     {
       title: 'Charts',
       key: 'charts',
-      icon: 'fe fe-home',
+      icon: 'fe fe-pie-chart',
       children: [
         {
           title: 'Chartist.js',

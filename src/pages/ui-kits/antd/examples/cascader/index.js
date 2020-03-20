@@ -47,7 +47,7 @@ class AntdCascaderExample extends React.Component {
         <h5 className="mb-3">
           <strong>Basic</strong>
         </h5>
-        <div class="mb-5">
+        <div className="mb-5">
           <Cascader options={options} onChange={onChange} placeholder="Please select" />
         </div>
       </div>

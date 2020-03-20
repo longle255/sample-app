@@ -70,9 +70,6 @@ class AppsCalendar extends React.Component {
     return (
       <div>
         <Helmet title="Calendar" />
-        <div className="kit__utils__heading">
-          <h5>Calendar</h5>
-        </div>
         <div className="card">
           <div className="card-body">
             <div className="d-flex flex-wrap mb-3">

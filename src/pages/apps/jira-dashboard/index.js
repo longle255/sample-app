@@ -38,9 +38,6 @@ class ExtraAppsJiraDashboard extends React.Component {
     return (
       <div>
         <Helmet title="Jira Dashboard" />
-        <div className="kit__utils__heading">
-          <h5>Jira Dashboard</h5>
-        </div>
         <div className="row">
           <div className="col-lg-6">
             <div className="card kit__utils__cardMarked kit__utils__cardMarked--primary">

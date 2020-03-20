@@ -1,5 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { Pagination } from 'antd'
 import General16 from 'components/kit-widgets/General/16'
 import productsData from './data.json'
 
@@ -10,6 +11,9 @@ class EcommerceProductCatalog extends React.Component {
         <Helmet title="Ecommerce: Product Catalog" />
         <div className="cui__utils__heading">
           <strong>Ecommerce: Product Catalog</strong>
+        </div>
+        <div className="mb-4">
+          <Pagination defaultCurrent={6} total={500} showSizeChanger />
         </div>
         <div className="row">
           {productsData.map(product => {
@@ -28,6 +32,7 @@ class EcommerceProductCatalog extends React.Component {
             )
           })}
         </div>
+        <Pagination defaultCurrent={6} total={500} showSizeChanger />
       </div>
     )
   }

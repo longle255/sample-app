@@ -100,7 +100,7 @@ class Table3 extends React.Component {
         </Tabs>
         <div className="pb-4 px-4">
           <div className={style.table}>
-            <Table columns={columns} dataSource={data} pagination={false} scroll={{ x: '100%' }} />
+            <Table columns={columns} dataSource={data} pagination={false} scroll={{ x: true }} />
           </div>
         </div>
       </div>

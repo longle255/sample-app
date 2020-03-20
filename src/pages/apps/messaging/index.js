@@ -23,11 +23,8 @@ class AppsMessaging extends React.Component {
     return (
       <div>
         <Helmet title="Messaging" />
-        <div className="kit__utils__heading">
-          <h5>Messaging</h5>
-        </div>
         <div className="row">
-          <div className="col-12 col-md-4">
+          <div className="col-12 col-md-3">
             <div className="mb-4">
               <Input
                 prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -80,7 +77,7 @@ class AppsMessaging extends React.Component {
               </Scrollbars>
             </div>
           </div>
-          <div className="col-12 col-md-8">
+          <div className="col-12 col-md-9">
             <div className="card">
               <div className="card-header card-header-flex align-items-center">
                 <div className="d-flex flex-column justify-content-center mr-auto">

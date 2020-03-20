@@ -10,9 +10,6 @@ class ExtraAppsGithubDiscuss extends React.Component {
     return (
       <div>
         <Helmet title="Github Discuss" />
-        <div className="kit__utils__heading">
-          <h5>Github Discuss</h5>
-        </div>
         <div className="d-flex flex-wrap">
           <div className="mr-auto pr-3 my-2">
             <i className="fe fe-book font-size-21 mr-2" />
@@ -44,7 +41,7 @@ class ExtraAppsGithubDiscuss extends React.Component {
             </div>
           </div>
         </div>
-        <Tabs className="air-tabs-bordered mb-2" defaultActiveKey="1">
+        <Tabs className="kit-tabs-bordered mb-2" defaultActiveKey="1">
           <TabPane tab="Code" key="1" />
           <TabPane
             tab={
@@ -183,7 +180,7 @@ class ExtraAppsGithubDiscuss extends React.Component {
                 <img src="resources/images/avatars/4.jpg" alt="Mary Stanform" />
               </a>
               <div className="card flex-grow-1">
-                <Tabs className="air-tabs-bordered pt-2 px-3" defaultActiveKey="1">
+                <Tabs className="kit-tabs-bordered pt-2 px-3" defaultActiveKey="1">
                   <TabPane tab="Write" key="1" />
                   <TabPane tab="Preview" key="2" />
                 </Tabs>

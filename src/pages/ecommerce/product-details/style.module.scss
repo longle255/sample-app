@@ -34,6 +34,7 @@
   align-items: center;
   border-radius: 5px;
   overflow: hidden;
+  background: $white;
 
   img {
     margin: auto;
@@ -45,6 +46,7 @@
 .image {
   display: flex;
   align-items: center;
+  background: $white;
 
   img {
     margin: auto;

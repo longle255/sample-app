@@ -426,21 +426,21 @@ class UIKitAntd extends React.Component {
             <h5>
               <strong className="mr-3">{example.name}</strong>
               <a
-                href="https://ant.design/docs/react/introduce"
-                rel="noopener noreferrer"
-                target="_blank"
-                className="btn btn-sm btn-light mr-3"
-              >
-                Official Documentation
-                <i className="fe fe-corner-right-up" />
-              </a>
-              <a
                 href={example.link}
                 rel="noopener noreferrer"
                 target="_blank"
                 className="btn btn-sm btn-light mr-3"
               >
-                More Examples
+                Component Docs & Examples
+                <i className="fe fe-corner-right-up" />
+              </a>
+              <a
+                href="https://ant.design/docs/react/introduce"
+                rel="noopener noreferrer"
+                target="_blank"
+                className="btn btn-sm btn-light mr-3"
+              >
+                Ant Design Docs
                 <i className="fe fe-corner-right-up" />
               </a>
             </h5>

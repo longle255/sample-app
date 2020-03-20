@@ -36,7 +36,7 @@ class TablesAntdRowSelection extends React.Component {
           rowSelection={rowSelection}
           columns={columns}
           dataSource={data}
-          scroll={{ x: '100%' }}
+          scroll={{ x: true }}
         />
       </div>
     )

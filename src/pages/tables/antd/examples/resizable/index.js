@@ -107,7 +107,7 @@ class TablesAntdBasic extends React.Component {
           components={this.components}
           columns={columns}
           dataSource={this.data}
-          scroll={{ x: '100%' }}
+          scroll={{ x: true }}
         />
       </div>
     )

@@ -13,9 +13,6 @@ class ExtraAppsGoogleAnalytics extends React.Component {
     return (
       <div>
         <Helmet title="Google Analytics" />
-        <div className="kit__utils__heading">
-          <h5>Google Analytics</h5>
-        </div>
         <div className="row">
           <div className="col-xl-8 col-lg-12">
             <h5 className="text-dark mb-4">Google Analytics Home</h5>

@@ -73,9 +73,6 @@ class ExtraAppsHelpdeskDashboard extends React.Component {
     return (
       <div>
         <Helmet title="Helpdesk Dashboard" />
-        <div className="kit__utils__heading">
-          <h5>Helpdesk Dashboard</h5>
-        </div>
         <div className="row">
           <div className="col-lg-4">
             <div className="card">
@@ -165,7 +162,7 @@ class ExtraAppsHelpdeskDashboard extends React.Component {
                     columns={columns}
                     dataSource={data}
                     pagination={false}
-                    scroll={{ x: '100%' }}
+                    scroll={{ x: true }}
                   />
                 </div>
               </div>

@@ -3,7 +3,8 @@ import localeAntd from 'antd/es/locale/en_US'
 const messages = {
   'topBar.issuesHistory': 'Issues History',
   'topBar.projectManagement': 'Project Management',
-  'topBar.typeToSearch': 'Start typing to search...',
+  'topBar.typeToSearch': 'Search...',
+  'topBar.findPages': 'Find pages...',
   'topBar.actions': 'Actions',
   'topBar.status': 'Status',
   'topBar.profileMenu.hello': 'Hello',

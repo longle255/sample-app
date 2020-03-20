@@ -4,6 +4,7 @@ const messages = {
   'topBar.issuesHistory': 'Histoire des problèmes',
   'topBar.projectManagement': 'Gestion de projet',
   'topBar.typeToSearch': 'Chercher...',
+  'topBar.findPages': 'Trouver des pages...',
   'topBar.actions': 'Actes',
   'topBar.status': 'Statut',
   'topBar.profileMenu.hello': 'Bonjour',

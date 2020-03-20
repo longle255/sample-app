@@ -3,7 +3,7 @@ import React from 'react'
 class General21v2 extends React.Component {
   render() {
     return (
-      <div className="card border-0 bg-gray-2">
+      <div className="card border-0 bg-light">
         <div className="card-body">
           <div className="d-flex flex-wrap align-items-center">
             <i className="fe fe-server font-size-50 mr-3 text-gray-5" />

@@ -93,7 +93,7 @@ class TablesAntdFilterSorter extends React.Component {
           <Table
             columns={columns}
             dataSource={data}
-            scroll={{ x: '100%' }}
+            scroll={{ x: true }}
             onChange={this.handleChange}
           />
         </div>

@@ -9,40 +9,40 @@ class AppsGallery extends React.Component {
     return (
       <div>
         <Helmet title="Gallery" />
-        <div className="kit__utils__heading">
-          <h5>Gallery</h5>
-        </div>
-        <div className="text-uppercase font-weight-bold text-dark mb-3">Galleries</div>
-        <div className="d-flex flex-wrap mb-4">
-          <Checkbox>Models</Checkbox>
-          <Checkbox>Fashion</Checkbox>
-          <Checkbox>Cars</Checkbox>
-          <Checkbox checked>Wallpapers</Checkbox>
-        </div>
-        <div className={style.items}>
-          {data.map(item => (
-            <div key={Math.random()} className={style.item}>
-              <div className={style.itemContent}>
-                <div className={style.itemControl}>
-                  <div className={style.itemControlContainer}>
-                    <Button.Group size="default">
-                      <Button>
-                        <Icon type="edit" />
-                      </Button>
-                      <Button>
-                        <Icon type="delete" />
-                      </Button>
-                    </Button.Group>
+        <div className="card">
+          <div className="card-body">
+            <div className="d-flex flex-wrap mb-4">
+              <Checkbox>Models</Checkbox>
+              <Checkbox>Fashion</Checkbox>
+              <Checkbox>Cars</Checkbox>
+              <Checkbox checked>Wallpapers</Checkbox>
+            </div>
+            <div className={style.items}>
+              {data.map(item => (
+                <div key={Math.random()} className={style.item}>
+                  <div className={style.itemContent}>
+                    <div className={style.itemControl}>
+                      <div className={style.itemControlContainer}>
+                        <Button.Group size="default">
+                          <Button>
+                            <Icon type="edit" />
+                          </Button>
+                          <Button>
+                            <Icon type="delete" />
+                          </Button>
+                        </Button.Group>
+                      </div>
+                    </div>
+                    <img src={item.path} alt="Gallery" />
+                  </div>
+                  <div className="text-gray-6">
+                    <div>{item.name}</div>
+                    <div>{item.size}</div>
                   </div>
                 </div>
-                <img src={item.path} alt="Gallery" />
-              </div>
-              <div className="text-gray-6">
-                <div>{item.name}</div>
-                <div>{item.size}</div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     )

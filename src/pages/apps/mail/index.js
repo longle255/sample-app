@@ -66,9 +66,6 @@ class AppsMail extends React.Component {
     return (
       <div>
         <Helmet title="Mail" />
-        <div className="kit__utils__heading">
-          <h5>Mail</h5>
-        </div>
         <div className="row">
           <div className="col-12 col-md-3">
             <div className="mb-4">
@@ -137,7 +134,7 @@ class AppsMail extends React.Component {
           <div className="col-12 col-md-9">
             <div className="card">
               <div className="card-header card-header-flex">
-                <Tabs defaultActiveKey="1" className="mr-auto air-tabs-bold">
+                <Tabs defaultActiveKey="1" className="mr-auto kit-tabs-bold">
                   <TabPane tab="Notifications" key="1" />
                   <TabPane
                     tab={
@@ -189,7 +186,7 @@ class AppsMail extends React.Component {
               <div className="card-body">
                 <div className="kit__utils__scrollTable">
                   <Table
-                    scroll={{ x: '100%' }}
+                    scroll={{ x: true }}
                     columns={columns}
                     rowSelection={rowSelection}
                     dataSource={mails}

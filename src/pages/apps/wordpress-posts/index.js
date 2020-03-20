@@ -8,9 +8,6 @@ class ExtraAppsWordpressPosts extends React.Component {
     return (
       <div>
         <Helmet title="Wordpress Posts" />
-        <div className="kit__utils__heading">
-          <h5>Wordpress Posts</h5>
-        </div>
         <div className="row">
           <div className="col-xl-9 col-lg-12">
             <div className="card">

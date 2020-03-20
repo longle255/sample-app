@@ -89,7 +89,7 @@ class Chart8 extends React.Component {
             columns={columns}
             dataSource={data.table}
             pagination={false}
-            scroll={{ x: '100%' }}
+            scroll={{ x: true }}
             rowSelection={rowSelection}
           />
         </div>

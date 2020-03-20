@@ -2,6 +2,14 @@
 @import 'components/kit-core/mixins.scss';
 
 body {
+  .ant-input {
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $primary;
+    }
+  }
+
   ////////////////////////////////////////////////////////////////////////////////////////////
   // DARK THEME STYLES
   &.kit__dark {

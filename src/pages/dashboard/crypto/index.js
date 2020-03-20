@@ -410,7 +410,7 @@ class DashboardCrypto extends React.Component {
                   <div className={styles.orderLeft}>
                     <div className={`${styles.table} text-nowrap`}>
                       <Table
-                        scroll={{ x: '100%' }}
+                        scroll={{ x: true }}
                         columns={ordersSellColumns}
                         dataSource={orderBook.sell}
                         pagination={{ position: 'bottom' }}
@@ -542,7 +542,7 @@ class DashboardCrypto extends React.Component {
                         dataSource={orderBook.buy}
                         pagination={{ position: 'bottom' }}
                         size="small"
-                        scroll={{ x: '100%' }}
+                        scroll={{ x: true }}
                       />
                     </div>
                   </div>
@@ -557,7 +557,7 @@ class DashboardCrypto extends React.Component {
                 <div className={`${styles.table} text-nowrap`}>
                   <Table
                     className="utils__scrollTable"
-                    scroll={{ x: '100%' }}
+                    scroll={{ x: true }}
                     columns={marketHistoryColumns}
                     dataSource={marketHistory.data}
                     pagination={{ position: 'bottom' }}
@@ -587,7 +587,7 @@ class DashboardCrypto extends React.Component {
                     <div className={`${styles.table} text-nowrap`}>
                       <Table
                         className="utils__scrollTable"
-                        scroll={{ x: '100%' }}
+                        scroll={{ x: true }}
                         columns={myOrderColumns}
                         dataSource={myOpenOrders.data}
                         pagination={{ position: 'bottom' }}
@@ -619,7 +619,7 @@ class DashboardCrypto extends React.Component {
                     <div className={`${styles.table} text-nowrap`}>
                       <Table
                         className="utils__scrollTable"
-                        scroll={{ x: '100%' }}
+                        scroll={{ x: true }}
                         columns={myOrderColumns}
                         dataSource={myOpenOrders.data}
                         pagination={{ position: 'bottom' }}

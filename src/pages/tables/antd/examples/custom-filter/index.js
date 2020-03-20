@@ -97,7 +97,7 @@ class TablesAntdCustomFilter extends React.Component {
 
     return (
       <div className="mb-4 kit__utils__scrollTable">
-        <Table columns={columns} dataSource={data} scroll={{ x: '100%' }} />
+        <Table columns={columns} dataSource={data} scroll={{ x: true }} />
       </div>
     )
   }

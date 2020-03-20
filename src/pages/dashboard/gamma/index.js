@@ -4,14 +4,17 @@ import ChartistGraph from 'react-chartist'
 import ChartistTooltip from 'chartist-plugin-tooltips-updated'
 import { Table } from 'antd'
 import General4 from 'components/kit-widgets/General/4'
+import General5v1 from 'components/kit-widgets/General/5v1'
+import General2 from 'components/kit-widgets/General/2'
+import General2v1 from 'components/kit-widgets/General/2v1'
+import General2v2 from 'components/kit-widgets/General/2v2'
+import General13v1 from 'components/kit-widgets/General/13v1'
 import List10 from 'components/kit-widgets/Lists/10'
-import List16 from 'components/kit-widgets/Lists/16'
 import List11 from 'components/kit-widgets/Lists/11'
 
 import {
   inboundBandwidthData,
   outboundBandwidthData,
-  topPhotosGraphData,
   supportCasesTableData,
   supportCasesPieData,
 } from './data.json'
@@ -83,29 +86,43 @@ class DashboardGamma extends React.Component {
       <div>
         <Helmet title="Dashboard Gamma" />
         <div className="row">
-          <div className="col-xl-12">
-            <div className="cui__utils__heading">
-              <strong>Progress Information</strong>
+          <div className="col-xl-4">
+            <div className="card">
+              <General13v1 />
             </div>
-            <div className="row">
-              <div className="col-lg-6">
-                <div class="card">
-                  <div class="card-body">
-                    <General4 />
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <div class="card">
-                  <div class="card-body">
-                    <General4 />
-                  </div>
-                </div>
+            <div className="card">
+              <div className="card-body">
+                <General5v1 />
               </div>
             </div>
           </div>
-        </div>
-        <div className="row">
+          <div className="col-xl-4">
+            <div className="card">
+              <div className="card-header border-0 pb-0">
+                <div className="cui__utils__heading mb-0">
+                  <strong>RECENT INVITES</strong>
+                </div>
+              </div>
+              <div className="card-body">
+                <List10 />
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-body">
+                <General2 />
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-body">
+                <General2v1 />
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-body">
+                <General2v2 />
+              </div>
+            </div>
+          </div>
           <div className="col-xl-4">
             <div className="row">
               <div className="col-xl-12">
@@ -122,7 +139,7 @@ class DashboardGamma extends React.Component {
                     data={inboundBandwidthData}
                     options={boundChartistOptions}
                     type="Line"
-                    className="height-200"
+                    className="height-250"
                   />
                 </div>
               </div>
@@ -141,47 +158,37 @@ class DashboardGamma extends React.Component {
                       data={outboundBandwidthData}
                       options={boundChartistOptions}
                       type="Line"
-                      className="height-200"
+                      className="height-250"
                     />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-xl-4">
-            <div className="card graphCard card--fullHeight">
-              <div className="card-header border-0 pb-0">
-                <div className="cui__utils__heading mb-0">
-                  <strong>RECENT INVITES</strong>
+        </div>
+        <div className="row">
+          <div className="col-xl-12">
+            <div className="row">
+              <div className="col-lg-6">
+                <div className="card">
+                  <div className="card-body">
+                    <General4 />
+                  </div>
                 </div>
               </div>
-              <div className="card-body">
-                <List10 />
-              </div>
-              <ChartistGraph
-                data={topPhotosGraphData}
-                options={boundChartistOptions}
-                type="Line"
-                className="height-300"
-              />
-            </div>
-          </div>
-          <div className="col-xl-4">
-            <div className="card card--fullHeight">
-              <div className="card-header border-0 pb-0">
-                <div className="cui__utils__heading mb-0">
-                  <strong className="text-uppercase font-size-16">New Users</strong>
+              <div className="col-lg-6">
+                <div className="card">
+                  <div className="card-body">
+                    <General4 />
+                  </div>
                 </div>
-              </div>
-              <div className="card-body">
-                <List16 />
               </div>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-lg-6">
-            <div className="card card--fullHeight">
+            <div className="card">
               <div className="card-header border-0 pb-0">
                 <div className="cui__utils__heading mb-0">
                   <strong className="text-uppercase font-size-16">Support cases</strong>
@@ -193,7 +200,7 @@ class DashboardGamma extends React.Component {
                     <div className="mb-3">
                       <Table
                         className="utils__scrollTable"
-                        scroll={{ x: '100%' }}
+                        scroll={{ x: true }}
                         dataSource={supportCasesTableData}
                         columns={supportCasesTableColumns}
                         pagination={false}
@@ -204,12 +211,14 @@ class DashboardGamma extends React.Component {
                     <div
                       className={`h-100 d-flex flex-column justify-content-center align-items-center ${styles.chartPieExample}`}
                     >
-                      <ChartistGraph
-                        data={supportCasesPieData}
-                        type="Pie"
-                        options={supportCasesPieOptions}
-                      />
-                      <div className="text-center">
+                      <div className="mb-4">
+                        <ChartistGraph
+                          data={supportCasesPieData}
+                          type="Pie"
+                          options={supportCasesPieOptions}
+                        />
+                      </div>
+                      <div className="text-center mb-4">
                         <span className="mr-2">
                           <span className="kit__utils__donut kit__utils__donut--success"></span>
                           Ready
@@ -230,7 +239,7 @@ class DashboardGamma extends React.Component {
             </div>
           </div>
           <div className="col-lg-6">
-            <div className="card card--fullHeight">
+            <div className="card">
               <div className="card-header border-0 pb-0">
                 <div className="cui__utils__heading mb-0">
                   <strong className="text-uppercase font-size-16">Finance Stats</strong>

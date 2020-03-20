@@ -30,9 +30,6 @@ class AppsProfile extends React.Component {
     return (
       <div>
         <Helmet title="Profile" />
-        <div className="kit__utils__heading">
-          <h5>Profile</h5>
-        </div>
         <div className="row">
           <div className="col-xl-4 col-lg-12">
             <div className="card">
@@ -73,7 +70,7 @@ class AppsProfile extends React.Component {
                 </div>
                 <Tabs
                   activeKey={tabKey}
-                  className="mr-auto air-tabs-bold"
+                  className="mr-auto kit-tabs-bold"
                   onChange={this.changeTab}
                 >
                   <TabPane tab="Agent Wall" key="1" />
@@ -82,7 +79,12 @@ class AppsProfile extends React.Component {
                 </Tabs>
               </div>
               <div className="card-body">
-                {tabKey === '1' && <General15 />}
+                {tabKey === '1' && (
+                  <div>
+                    <General15 />
+                    <General15 />
+                  </div>
+                )}
                 {tabKey === '2' && <General14 />}
                 {tabKey === '3' && (
                   <Form className="login-form">

@@ -277,21 +277,21 @@ class UIKitBootstrap extends React.Component {
             <h5>
               <strong className="mr-3">{example.name}</strong>
               <a
-                href="https://reactstrap.github.io/"
-                rel="noopener noreferrer"
-                target="_blank"
-                className="btn btn-sm btn-light mr-3"
-              >
-                Official Documentation
-                <i className="fe fe-corner-right-up" />
-              </a>
-              <a
                 href={example.link}
                 rel="noopener noreferrer"
                 target="_blank"
                 className="btn btn-sm btn-light mr-3"
               >
-                More Examples
+                Component Docs & Examples
+                <i className="fe fe-corner-right-up" />
+              </a>
+              <a
+                href="https://reactstrap.github.io/"
+                rel="noopener noreferrer"
+                target="_blank"
+                className="btn btn-sm btn-light mr-3"
+              >
+                Bootstrap Docs
                 <i className="fe fe-corner-right-up" />
               </a>
             </h5>

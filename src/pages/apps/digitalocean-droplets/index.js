@@ -40,9 +40,6 @@ class ExtraAppsDigitaloceanDroplets extends React.Component {
     return (
       <div>
         <Helmet title="DigitalOcean Droplets" />
-        <div className="kit__utils__heading">
-          <h5>DigitalOcean Droplets</h5>
-        </div>
         <div className="d-flex flex-wrap align-items-center">
           <div className="kit__utils__avatar kit__utils__avatar--size64 flex-shrink-0 mr-5 mb-3">
             <img src="resources/images/avatars/2.jpg" alt="Mary Stanform" />
@@ -66,7 +63,7 @@ class ExtraAppsDigitaloceanDroplets extends React.Component {
             Move Resources →
           </a>
         </div>
-        <Tabs className="air-tabs-bordered mb-3" defaultActiveKey="1">
+        <Tabs className="kit-tabs-bordered mb-3" defaultActiveKey="1">
           <TabPane tab="Resources" key="1" />
           <TabPane tab="Activity" key="2" />
           <TabPane tab="Settings" key="3" />

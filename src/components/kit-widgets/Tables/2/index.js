@@ -41,7 +41,7 @@ class Table2 extends React.Component {
     return (
       <div>
         <div className={style.table}>
-          <Table columns={columns} dataSource={data} pagination={false} scroll={{ x: '100%' }} />
+          <Table columns={columns} dataSource={data} pagination={false} scroll={{ x: true }} />
         </div>
         <div className="mt-4 d-flex align-items-center flex-wrap">
           <button type="button" className="btn btn-primary mr-2 mb-2">

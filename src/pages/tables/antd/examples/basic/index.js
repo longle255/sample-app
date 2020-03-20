@@ -26,7 +26,7 @@ const columns = [
     render: tags => (
       <span>
         {tags.map(tag => {
-          let color = tag.length > 5 ? 'blue' : 'green'
+          let color = tag.length > 5 ? 'red' : 'green'
           if (tag === 'loser') {
             color = 'volcano'
           }
@@ -56,7 +56,7 @@ class TablesAntdBasic extends React.Component {
   render() {
     return (
       <div className="mb-4 kit__utils__scrollTable">
-        <Table columns={columns} dataSource={data} scroll={{ x: '100%' }} />
+        <Table columns={columns} dataSource={data} scroll={{ x: true }} />
       </div>
     )
   }

@@ -107,9 +107,6 @@ class ExtraAppsJiraAgileBoard extends React.Component {
     return (
       <div>
         <Helmet title="Jira Agile Board" />
-        <div className="kit__utils__heading">
-          <h5>Jira Agile Board</h5>
-        </div>
         <div className="d-flex align-items-center mb-4">
           <div className="kit__utils__avatarGroup mr-4 flex-shrink-0">
             <div className="kit__utils__avatar kit__utils__avatar--size46 kit__utils__avatar--rounded">

@@ -164,12 +164,12 @@ class DashboardBeta extends React.Component {
       {
         title: 'Name',
         dataIndex: 'name',
-        render: text => <a href="javascript: void(0);">{text}</a>,
+        render: text => <a href="">{text}</a>,
       },
       {
         title: 'Username',
         dataIndex: 'username',
-        render: text => <a href="javascript: void(0);">{text}</a>,
+        render: text => <a href="">{text}</a>,
       },
       {
         title: 'Actions',
@@ -343,7 +343,7 @@ class DashboardBeta extends React.Component {
                 <div className="row">
                   <div className="col-lg-12">
                     <Table
-                      scroll={{ x: '100%' }}
+                      scroll={{ x: true }}
                       columns={taskTableColumns}
                       dataSource={taskTableData}
                       rowSelection={taskTableRowSelection}
@@ -506,7 +506,7 @@ class DashboardBeta extends React.Component {
                   <General22 />
                 </div>
                 <Table
-                  scroll={{ x: '100%' }}
+                  scroll={{ x: true }}
                   columns={tableColumns}
                   dataSource={data}
                   onChange={this.handleChange}
