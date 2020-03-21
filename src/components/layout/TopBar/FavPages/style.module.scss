@@ -59,11 +59,19 @@
 
 // dark theme
 :global(body.kit__dark) {
-  .link {
-    background: $dark-gray-5;
+  .icon {
+    color: $dark-gray-2;
 
     &:hover {
-      background: $dark-gray-4;
+      color: $primary;
+    }
+  }
+
+  .link {
+    background: $dark-gray-6;
+
+    &:hover {
+      background: $dark-gray-5;
     }
   }
 }
