@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet'
 import ChartistGraph from 'react-chartist'
 import ChartistTooltip from 'chartist-plugin-tooltips-updated'
 import { Table } from 'antd'
-import General4 from 'components/kit-widgets/General/4'
+import Chart12 from 'components/kit-widgets/Charts/12'
+import Chart12v1 from 'components/kit-widgets/Charts/12v1'
 import General5v1 from 'components/kit-widgets/General/5v1'
 import General2 from 'components/kit-widgets/General/2'
 import General2v1 from 'components/kit-widgets/General/2v1'
@@ -86,6 +87,26 @@ class DashboardGamma extends React.Component {
       <div>
         <Helmet title="Dashboard Gamma" />
         <div className="row">
+          <div className="col-xl-12">
+            <div className="row">
+              <div className="col-lg-6">
+                <div className="card">
+                  <div className="card-body">
+                    <Chart12 />
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-6">
+                <div className="card">
+                  <div className="card-body">
+                    <Chart12v1 />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
           <div className="col-xl-4">
             <div className="card">
               <General13v1 />
@@ -160,26 +181,6 @@ class DashboardGamma extends React.Component {
                       type="Line"
                       className="height-250"
                     />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-xl-12">
-            <div className="row">
-              <div className="col-lg-6">
-                <div className="card">
-                  <div className="card-body">
-                    <General4 />
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <div className="card">
-                  <div className="card-body">
-                    <General4 />
                   </div>
                 </div>
               </div>

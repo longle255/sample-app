@@ -254,6 +254,125 @@
     }
   }
 
+  // marked card
+  &__cardMarked {
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background-color: $gray-2;
+      overflow: hidden;
+      border-top-left-radius: calc(7px - 1px);
+      border-top-right-radius: calc(7px - 1px);
+    }
+
+    &--default {
+      &::before {
+        background-color: $default !important;
+      }
+    }
+    &--primary {
+      &::before {
+        background-color: $primary !important;
+      }
+    }
+    &--secondary {
+      &::before {
+        background-color: $primary !important;
+      }
+    }
+    &--success {
+      &::before {
+        background-color: $success !important;
+      }
+    }
+    &--danger {
+      &::before {
+        background-color: $danger !important;
+      }
+    }
+    &--warning {
+      &::before {
+        background-color: $warning !important;
+      }
+    }
+    &--info {
+      &::before {
+        background-color: $info !important;
+      }
+    }
+    &--light {
+      &::before {
+        background-color: $light !important;
+      }
+    }
+    &--dark {
+      &::before {
+        background-color: $dark !important;
+      }
+    }
+    &--white {
+      &::before {
+        background-color: $white !important;
+      }
+    }
+    &--blue {
+      &::before {
+        background-color: $blue !important;
+      }
+    }
+    &--red {
+      &::before {
+        background-color: $red !important;
+      }
+    }
+    &--yellow {
+      &::before {
+        background-color: $yellow !important;
+      }
+    }
+    &--orange {
+      &::before {
+        background-color: $orange !important;
+      }
+    }
+    &--gray-1 {
+      &::before {
+        background-color: $gray-1 !important;
+      }
+    }
+    &--gray-2 {
+      &::before {
+        background-color: $gray-2 !important;
+      }
+    }
+    &--gray-3 {
+      &::before {
+        background-color: $gray-3 !important;
+      }
+    }
+    &--gray-4 {
+      &::before {
+        background-color: $gray-4 !important;
+      }
+    }
+    &--gray-5 {
+      &::before {
+        background-color: $gray-5 !important;
+      }
+    }
+    &--gray-6 {
+      &::before {
+        background-color: $gray-6 !important;
+      }
+    }
+  }
+
   // donut badge
   &__donut {
     display: inline-block;

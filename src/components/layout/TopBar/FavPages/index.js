@@ -59,6 +59,7 @@ class FavPages extends React.Component {
     const isActive = favs.some(child => child.url === item.url)
     if (isActive) {
       const filtered = favs.filter(child => child.url !== item.url)
+      store.set('app.topbar.favs', filtered)
       this.setState({
         favs: filtered,
       })
@@ -153,7 +154,7 @@ class FavPages extends React.Component {
             </Tooltip>
           )
         })}
-        <Tooltip placement="bottom" title="Page List">
+        <Tooltip placement="bottom" title="Bookmarks">
           <Dropdown overlay={menu} trigger={['click']} placement="bottomLeft">
             <span className={style.item}>
               <i className={`${style.icon} fe fe-star`} />

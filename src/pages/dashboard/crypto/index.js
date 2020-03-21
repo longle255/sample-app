@@ -35,7 +35,8 @@ class DashboardCrypto extends React.Component {
     })
   }
 
-  handleMyOpenOrders = () => {
+  handleMyOpenOrders = e => {
+    e.preventDefault()
     const { myOpenOrders } = this.state
     this.setState({
       myOpenOrders: {
@@ -54,7 +55,8 @@ class DashboardCrypto extends React.Component {
     }, 1500)
   }
 
-  handleMyOrderHistory = () => {
+  handleMyOrderHistory = e => {
+    e.preventDefault()
     const { myOrderHistory } = this.state
 
     this.setState({

@@ -11,7 +11,7 @@ import Sidebar from 'components/layout/Sidebar'
 import SupportChat from 'components/layout/SupportChat'
 
 const mapStateToProps = ({ settings }) => ({
-  isContentNoMaxWidth: settings.isContentNoMaxWidth,
+  isContentMaxWidth: settings.isContentMaxWidth,
   isAppMaxWidth: settings.isAppMaxWidth,
   isGrayBackground: settings.isGrayBackground,
   isSquaredBorders: settings.isSquaredBorders,
@@ -27,7 +27,7 @@ class MainLayout extends React.PureComponent {
   render() {
     const {
       children,
-      isContentNoMaxWidth,
+      isContentMaxWidth,
       isAppMaxWidth,
       isGrayBackground,
       isSquaredBorders,
@@ -41,7 +41,7 @@ class MainLayout extends React.PureComponent {
       <div className={classNames({ cui__layout__grayBackground: isGrayBackground })}>
         <Layout
           className={classNames({
-            cui__layout__contentNoMaxWidth: isContentNoMaxWidth,
+            cui__layout__contentMaxWidth: isContentMaxWidth,
             cui__layout__appMaxWidth: isAppMaxWidth,
             cui__layout__grayBackground: isGrayBackground,
             cui__layout__squaredBorders: isSquaredBorders,

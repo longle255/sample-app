@@ -23,20 +23,19 @@ const initialState = {
     routerAnimation: 'slide-fadein-up', // none, slide-fadein-up, slide-fadein-right, fadein, zoom-fadein
     menuColor: 'white', // white, dark, gray
     theme: 'light', // light, dark
+    authPagesColor: 'gray', // white, dark, blue, gray, image
     primaryColor: '#4b7cf3',
     leftMenuWidth: 256,
-
-    isMenuShadow: false,
     isMenuUnfixed: false,
+    isMenuShadow: false,
     isTopbarFixed: false,
-    isContentNoMaxWidth: false,
-    isAppMaxWidth: false,
-    isWhiteBackground: false,
     isGrayTopbar: false,
+    isContentMaxWidth: false,
+    isAppMaxWidth: false,
+    isGrayBackground: false,
     isCardShadow: false,
     isSquaredBorders: false,
     isBorderless: false,
-    authPagesColor: 'gray', // white, dark, blue, gray, image
   }),
 }
 

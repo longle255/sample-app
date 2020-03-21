@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Scrollbars } from 'react-custom-scrollbars'
-import { Switch, Radio, Select, Tooltip } from 'antd'
+import { Switch, Radio, Select, Tooltip, Slider, Input } from 'antd'
 import { throttle } from 'lodash'
 import classNames from 'classnames'
 import style from './style.module.scss'
@@ -13,9 +13,9 @@ const mapStateToProps = ({ settings }) => ({
   isMenuUnfixed: settings.isMenuUnfixed,
   menuLayoutType: settings.menuLayoutType,
   menuColor: settings.menuColor,
-  systemLayoutColor: settings.systemLayoutColor,
+  authPagesColor: settings.authPagesColor,
   isTopbarFixed: settings.isTopbarFixed,
-  isContentNoMaxWidth: settings.isContentNoMaxWidth,
+  isContentMaxWidth: settings.isContentMaxWidth,
   isAppMaxWidth: settings.isAppMaxWidth,
   isGrayBackground: settings.isGrayBackground,
   isGrayTopbar: settings.isGrayTopbar,
@@ -26,6 +26,8 @@ const mapStateToProps = ({ settings }) => ({
   locale: settings.locale,
   theme: settings.theme,
   primaryColor: settings.primaryColor,
+  leftMenuWidth: settings.leftMenuWidth,
+  logo: settings.logo,
 })
 
 @connect(mapStateToProps)
@@ -156,9 +158,9 @@ class Sidebar extends React.Component {
       isMenuUnfixed,
       menuLayoutType,
       menuColor,
-      systemLayoutColor,
+      authPagesColor,
       isTopbarFixed,
-      isContentNoMaxWidth,
+      isContentMaxWidth,
       isAppMaxWidth,
       isGrayBackground,
       isGrayTopbar,
@@ -168,6 +170,8 @@ class Sidebar extends React.Component {
       routerAnimation,
       locale,
       theme,
+      leftMenuWidth,
+      logo,
     } = this.props
 
     const { defaultColor, primaryColor } = this.state
@@ -224,6 +228,20 @@ class Sidebar extends React.Component {
               </h5>
               <div className="cui__utils__line" style={{ marginTop: 25, marginBottom: 30 }} />
               <div>
+                <div className={`${style.cui__sidebar__type} mb-4`}>
+                  <div className={style.cui__sidebar__type__title}>
+                    <span>Logo String</span>
+                  </div>
+                  <div className={style.cui__sidebar__type__items}>
+                    <Input
+                      value={logo}
+                      onChange={e => {
+                        const { value } = e.target
+                        this.changeSetting('logo', value)
+                      }}
+                    />
+                  </div>
+                </div>
                 <div className={style.cui__sidebar__type}>
                   <div className={style.cui__sidebar__type__title}>
                     <span>Menu Layout</span>
@@ -236,12 +254,12 @@ class Sidebar extends React.Component {
                             <Radio value="left">Left Menu</Radio>
                           </div>
                           <div className="mb-2">
-                            <Radio value="nomenu">No menu</Radio>
+                            <Radio value="top">Top Menu</Radio>
                           </div>
                         </div>
                         <div className="col-6">
                           <div className="mb-2">
-                            <Radio value="top">Top Menu</Radio>
+                            <Radio value="nomenu">No menu</Radio>
                           </div>
                         </div>
                       </div>
@@ -271,11 +289,7 @@ class Sidebar extends React.Component {
                     <span>Internationalization</span>
                   </div>
                   <div className={style.cui__sidebar__type__items}>
-                    <Select
-                      defaultValue={locale}
-                      style={{ width: '100%' }}
-                      onChange={this.selectLocale}
-                    >
+                    <Select value={locale} style={{ width: '100%' }} onChange={this.selectLocale}>
                       <Select.Option value="en-US">English (en-US)</Select.Option>
                       <Select.Option value="fr-FR">French (fr-FR)</Select.Option>
                       <Select.Option value="ru-RU">Русский (ru-RU)</Select.Option>
@@ -283,8 +297,23 @@ class Sidebar extends React.Component {
                     </Select>
                   </div>
                 </div>
+                <div className={`${style.cui__sidebar__type} mb-2`}>
+                  <div className={style.cui__sidebar__type__title}>
+                    <span>Left Menu Width</span>
+                  </div>
+                  <div className={style.cui__sidebar__type__items}>
+                    <Slider
+                      value={leftMenuWidth}
+                      min={256}
+                      max={330}
+                      onChange={value => {
+                        this.changeSetting('leftMenuWidth', value)
+                      }}
+                    />
+                  </div>
+                </div>
                 <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Collapsed left menu</div>
+                  <div className={style.cui__sidebar__label}>Left Menu: Collapsed</div>
                   <div className={style.cui__sidebar__container}>
                     <Switch
                       checked={isMenuCollapsed}
@@ -296,7 +325,7 @@ class Sidebar extends React.Component {
                   </div>
                 </div>
                 <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Unfixed left menu</div>
+                  <div className={style.cui__sidebar__label}>Left Menu: Unfixed</div>
                   <div className={style.cui__sidebar__container}>
                     <Switch
                       checked={isMenuUnfixed}
@@ -308,7 +337,38 @@ class Sidebar extends React.Component {
                   </div>
                 </div>
                 <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Fixed topbar</div>
+                  <div className={style.cui__sidebar__label}>Left Menu: Shadow</div>
+                  <div className={style.cui__sidebar__container}>
+                    <Switch
+                      checked={isMenuShadow}
+                      onChange={value => {
+                        this.changeSetting('isMenuShadow', value)
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className={style.cui__sidebar__item}>
+                  <div className={style.cui__sidebar__label}>Menu: Color</div>
+                  <div className={style.cui__sidebar__container}>
+                    <ColorPicker
+                      setting="menuColor"
+                      value={menuColor}
+                      colors={['white', 'gray', 'dark']}
+                    />
+                  </div>
+                </div>
+                <div className={style.cui__sidebar__item}>
+                  <div className={style.cui__sidebar__label}>Auth: Bg Color</div>
+                  <div className={style.cui__sidebar__container}>
+                    <ColorPicker
+                      setting="authPagesColor"
+                      value={authPagesColor}
+                      colors={['white', 'gray', 'blue', 'dark', 'image']}
+                    />
+                  </div>
+                </div>
+                <div className={style.cui__sidebar__item}>
+                  <div className={style.cui__sidebar__label}>Topbar: Fixed</div>
                   <div className={style.cui__sidebar__container}>
                     <Switch
                       checked={isTopbarFixed}
@@ -319,60 +379,7 @@ class Sidebar extends React.Component {
                   </div>
                 </div>
                 <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Menu color</div>
-                  <div className={style.cui__sidebar__container}>
-                    <ColorPicker
-                      setting="menuColor"
-                      value={menuColor}
-                      colors={['white', 'gray', 'dark']}
-                    />
-                  </div>
-                </div>
-                <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Login color</div>
-                  <div className={style.cui__sidebar__container}>
-                    <ColorPicker
-                      setting="systemLayoutColor"
-                      value={systemLayoutColor}
-                      colors={['white', 'gray', 'blue', 'dark', 'image']}
-                    />
-                  </div>
-                </div>
-                <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Content no max-width</div>
-                  <div className={style.cui__sidebar__container}>
-                    <Switch
-                      checked={isContentNoMaxWidth}
-                      onChange={value => {
-                        this.changeSetting('isContentNoMaxWidth', value)
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>App max-width</div>
-                  <div className={style.cui__sidebar__container}>
-                    <Switch
-                      checked={isAppMaxWidth}
-                      onChange={value => {
-                        this.changeSetting('isAppMaxWidth', value)
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Gray background</div>
-                  <div className={style.cui__sidebar__container}>
-                    <Switch
-                      checked={isGrayBackground}
-                      onChange={value => {
-                        this.changeSetting('isGrayBackground', value)
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Gray topbar</div>
+                  <div className={style.cui__sidebar__label}>Topbar: Gray Background</div>
                   <div className={style.cui__sidebar__container}>
                     <Switch
                       checked={isGrayTopbar}
@@ -383,7 +390,40 @@ class Sidebar extends React.Component {
                   </div>
                 </div>
                 <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Squared card borders</div>
+                  <div className={style.cui__sidebar__label}>App: Content Max-Width</div>
+                  <div className={style.cui__sidebar__container}>
+                    <Switch
+                      checked={isContentMaxWidth}
+                      onChange={value => {
+                        this.changeSetting('isContentMaxWidth', value)
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className={style.cui__sidebar__item}>
+                  <div className={style.cui__sidebar__label}>App: Max-Width</div>
+                  <div className={style.cui__sidebar__container}>
+                    <Switch
+                      checked={isAppMaxWidth}
+                      onChange={value => {
+                        this.changeSetting('isAppMaxWidth', value)
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className={style.cui__sidebar__item}>
+                  <div className={style.cui__sidebar__label}>App: Gray Background</div>
+                  <div className={style.cui__sidebar__container}>
+                    <Switch
+                      checked={isGrayBackground}
+                      onChange={value => {
+                        this.changeSetting('isGrayBackground', value)
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className={style.cui__sidebar__item}>
+                  <div className={style.cui__sidebar__label}>Cards: Squared Borders</div>
                   <div className={style.cui__sidebar__container}>
                     <Switch
                       checked={isSquaredBorders}
@@ -394,7 +434,7 @@ class Sidebar extends React.Component {
                   </div>
                 </div>
                 <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Card shadow</div>
+                  <div className={style.cui__sidebar__label}>Cards: Shadow</div>
                   <div className={style.cui__sidebar__container}>
                     <Switch
                       checked={isCardShadow}
@@ -405,23 +445,12 @@ class Sidebar extends React.Component {
                   </div>
                 </div>
                 <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Borderless cards</div>
+                  <div className={style.cui__sidebar__label}>Cards: Borderless</div>
                   <div className={style.cui__sidebar__container}>
                     <Switch
                       checked={isBorderless}
                       onChange={value => {
                         this.changeSetting('isBorderless', value)
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Menu shadow</div>
-                  <div className={style.cui__sidebar__container}>
-                    <Switch
-                      checked={isMenuShadow}
-                      onChange={value => {
-                        this.changeSetting('isMenuShadow', value)
                       }}
                     />
                   </div>

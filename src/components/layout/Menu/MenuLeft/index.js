@@ -13,6 +13,8 @@ const mapStateToProps = ({ menu, settings, user }) => ({
   isMenuCollapsed: settings.isMenuCollapsed,
   isMobileView: settings.isMobileView,
   isMobileMenuOpen: settings.isMobileMenuOpen,
+  isMenuUnfixed: settings.isMenuUnfixed,
+  isMenuShadow: settings.isMenuShadow,
   leftMenuWidth: settings.leftMenuWidth,
   menuColor: settings.menuColor,
   logo: settings.logo,
@@ -163,7 +165,15 @@ class MenuLeft extends React.Component {
 
   render() {
     const { selectedKeys, openedKeys } = this.state
-    const { isMobileView, isMenuCollapsed, menuColor, leftMenuWidth, logo } = this.props
+    const {
+      isMobileView,
+      isMenuCollapsed,
+      menuColor,
+      leftMenuWidth,
+      logo,
+      isMenuUnfixed,
+      isMenuShadow,
+    } = this.props
     const menuSettings = isMobileView
       ? {
           width: leftMenuWidth,
@@ -188,13 +198,15 @@ class MenuLeft extends React.Component {
           [style.white]: menuColor === 'white',
           [style.gray]: menuColor === 'gray',
           [style.dark]: menuColor === 'dark',
+          [style.unfixed]: isMenuUnfixed,
+          [style.shadow]: isMenuShadow,
         })}
       >
         <div
           className={style.menuOuter}
           style={{
             width: isMenuCollapsed && !isMobileView ? 80 : leftMenuWidth,
-            height: isMobileView ? 'calc(100% - 64px)' : 'calc(100% - 110px)',
+            height: isMobileView || isMenuUnfixed ? 'calc(100% - 64px)' : 'calc(100% - 110px)',
           }}
         >
           <div className={style.logoContainer}>
