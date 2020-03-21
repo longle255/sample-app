@@ -5,7 +5,6 @@
   position: relative;
   cursor: pointer;
   @include transition-slow;
-  color: $gray-5;
 
   &::after {
     opacity: 0.5;
