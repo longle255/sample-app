@@ -9,7 +9,7 @@ class ACL extends React.PureComponent {
     const {
       user: { role },
       redirect = false,
-      defaultRedirect = '/system/404',
+      defaultRedirect = '/auth/404',
       roles = [],
     } = this.props
     const authorized = roles.includes(role)

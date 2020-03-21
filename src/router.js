@@ -5,8 +5,6 @@ import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 
 import Layout from 'layouts'
-// import Loader from 'components/layout/Loader'
-// import NotFoundPage from 'pages/system/404'
 
 const routes = [
   // Dashboards
@@ -277,35 +275,35 @@ const routes = [
     Component: lazy(() => import('pages/advanced/colors')),
     exact: true,
   },
-  // System Pages
+  // Auth Pages
   {
-    path: '/system/login',
-    Component: lazy(() => import('pages/system/login')),
+    path: '/auth/login',
+    Component: lazy(() => import('pages/auth/login')),
     exact: true,
   },
   {
-    path: '/system/forgot-password',
-    Component: lazy(() => import('pages/system/forgot-password')),
+    path: '/auth/forgot-password',
+    Component: lazy(() => import('pages/auth/forgot-password')),
     exact: true,
   },
   {
-    path: '/system/register',
-    Component: lazy(() => import('pages/system/register')),
+    path: '/auth/register',
+    Component: lazy(() => import('pages/auth/register')),
     exact: true,
   },
   {
-    path: '/system/lockscreen',
-    Component: lazy(() => import('pages/system/lockscreen')),
+    path: '/auth/lockscreen',
+    Component: lazy(() => import('pages/auth/lockscreen')),
     exact: true,
   },
   {
-    path: '/system/404',
-    Component: lazy(() => import('pages/system/404')),
+    path: '/auth/404',
+    Component: lazy(() => import('pages/auth/404')),
     exact: true,
   },
   {
-    path: '/system/500',
-    Component: lazy(() => import('pages/system/500')),
+    path: '/auth/500',
+    Component: lazy(() => import('pages/auth/500')),
     exact: true,
   },
 ]
@@ -350,7 +348,7 @@ class Router extends React.Component {
                           }}
                         />
                       ))}
-                      <Redirect to="/system/404" />
+                      <Redirect to="/auth/404" />
                     </Switch>
                   </CSSTransition>
                 </SwitchTransition>

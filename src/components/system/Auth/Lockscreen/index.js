@@ -19,72 +19,35 @@ class Lockscreen extends React.Component {
     const { form } = this.props
 
     return (
-      <div className={style.auth}>
-        <div className="pt-5 pb-5 d-flex align-items-end mt-auto">
-          <img src="resources/images/air-logo.png" alt="AIR UI Logo" />
-          <div className="air__utils__logo__text">
-            <div className="air__utils__logo__name text-uppercase text-dark font-size-21">
-              AIR UI
+      <div>
+        <div className={`card ${style.container}`}>
+          <div className="text-dark text-center font-size-24 mb-4">
+            <strong>Account Locked</strong>
+          </div>
+          <div className="text-center">
+            <div className="kit__utils__avatar kit__utils__avatar--size64 d-inline-block mb-2">
+              <img src="resources/images/avatars/2.jpg" alt="Mary Stanform" />
             </div>
-            <div className="air__utils__logo__descr text-uppercase font-size-12 text-gray-6">
-              Admin template
+            <div className="font-size-18 text-dark mb-4">
+              <strong>Mary Stanform</strong>
             </div>
           </div>
-        </div>
-        <div className={`${style.container} pl-5 pr-5 pt-5 pb-5 bg-white text-center`}>
-          <div className="text-dark font-size-30 mb-4">Account Locked</div>
-          <div className="air__utils__avatar air__utils__avatar--size64 d-inline-block mb-2">
-            <img src="resources/images/avatars/2.jpg" alt="Mary Stanform" />
-          </div>
-          <div className="font-weight-bold font-size-18 text-dark mb-4">Mary Stanform</div>
           <Form layout="vertical" hideRequiredMark onSubmit={this.onSubmit} className="mb-4">
             <Form.Item>
               {form.getFieldDecorator('password', {
                 rules: [{ required: true, message: 'Please input your password' }],
               })(<Input size="large" placeholder="Password" />)}
             </Form.Item>
-            <Button
-              type="button"
-              htmlType="submit"
-              size="large"
-              className="text-center btn btn-success w-100 font-weight-bold font-size-18"
-            >
-              Log In
+            <Button type="primary" htmlType="submit" size="large" className="text-center w-100">
+              <strong>Unlock Account</strong>
             </Button>
           </Form>
         </div>
-        <div className="text-center font-size-18 pt-4 mb-auto">
-          <span className="mr-2">Don&apos;t have an account?</span>
-          <Link to="/system/register" className="font-weight-bold text-blue text-underlined">
-            <u>Sign Up</u>
+        <div className="text-center pt-2 mb-auto">
+          <span className="mr-2">Don't have an account?</span>
+          <Link to="/auth/register" className="kit__utils__link font-size-16">
+            Sign up
           </Link>
-        </div>
-        <div className="mt-auto pb-5 pt-5">
-          <ul
-            className={`${style.footerNav} list-unstyled d-flex mb-2 flex-wrap justify-content-center`}
-          >
-            <li>
-              <a href="#" onClick={e => e.preventDefault()}>
-                Terms of Use
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={e => e.preventDefault()}>
-                Compliance
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={e => e.preventDefault()}>
-                Support
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={e => e.preventDefault()}>
-                Contacts
-              </a>
-            </li>
-          </ul>
-          <div className="text-gray-4 text-center">© 2019 Mediatec. All rights reserved.</div>
         </div>
       </div>
     )

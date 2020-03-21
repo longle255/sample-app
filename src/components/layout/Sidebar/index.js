@@ -358,12 +358,12 @@ class Sidebar extends React.Component {
                   </div>
                 </div>
                 <div className={style.cui__sidebar__item}>
-                  <div className={style.cui__sidebar__label}>Auth: Bg Color</div>
+                  <div className={style.cui__sidebar__label}>Auth: Background</div>
                   <div className={style.cui__sidebar__container}>
                     <ColorPicker
                       setting="authPagesColor"
                       value={authPagesColor}
-                      colors={['white', 'gray', 'blue', 'dark', 'image']}
+                      colors={['white', 'gray', 'image']}
                     />
                   </div>
                 </div>

@@ -54,7 +54,7 @@ class Layout extends React.PureComponent {
       if (pathname === '/') {
         return 'public'
       }
-      if (/^\/system(?=\/|$)/i.test(pathname)) {
+      if (/^\/auth(?=\/|$)/i.test(pathname)) {
         return 'auth'
       }
       return 'main'
@@ -72,7 +72,7 @@ class Layout extends React.PureComponent {
       }
       // redirect to login page if current is not login page and user not authorized
       if (!isAuthLayout && !isUserAuthorized) {
-        return <Redirect to="/system/login" />
+        return <Redirect to="/auth/login" />
       }
       // in other case render previously set layout
       return <Container>{children}</Container>

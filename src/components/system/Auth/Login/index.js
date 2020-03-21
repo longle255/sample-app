@@ -27,22 +27,13 @@ class Login extends React.Component {
     } = this.props
 
     return (
-      <div className={style.auth}>
-        <div className="pt-5 pb-5 d-flex align-items-end mt-auto">
-          <img src="resources/images/air-logo.png" alt="AIR UI Logo" />
-          <div className="air__utils__logo__text">
-            <div className="air__utils__logo__name text-uppercase text-dark font-size-21">
-              AIR UI
-            </div>
-            <div className="air__utils__logo__descr text-uppercase font-size-12 text-gray-6">
-              Admin template
-            </div>
+      <div>
+        <div className={`card ${style.container}`}>
+          <div className="text-dark font-size-24 mb-2">
+            <strong>Sign in to your account</strong>
           </div>
-        </div>
-        <div className={`${style.container} pl-5 pr-5 pt-5 pb-5 bg-white`}>
-          <div className="text-dark font-size-30 mb-2 text-center">Log In</div>
-          <div className="text-muted text-center mb-4">
-            Login and password - admin@mediatec.org / mediatec
+          <div className="mb-4">
+            <p>Login and password - admin@mediatec.org / mediatec</p>
           </div>
           <Form layout="vertical" hideRequiredMark onSubmit={this.onSubmit} className="mb-4">
             <Form.Item>
@@ -60,63 +51,22 @@ class Login extends React.Component {
             <Button
               type="primary"
               size="large"
-              className="text-center btn btn-success w-100 font-weight-bold font-size-18"
+              className="text-center w-100"
               htmlType="submit"
               loading={loading}
             >
-              Log In
+              <strong>Sign in</strong>
             </Button>
           </Form>
-          <Link
-            to="/system/register"
-            className={`${style.googleSign} font-weight-bold font-size-18 text-dark btn btn-outline-light w-100 mb-3`}
-            style={{ backgroundImage: 'url(resources/images/icons/google-logo.svg)' }}
-          >
-            Log in with Google
-          </Link>
-          <div className="text-center">
-            <Link to="/system/forgot-password" className="text-blue font-weight-bold font-size-18">
-              Forgot password?
-            </Link>
-          </div>
-        </div>
-        <div className="text-center font-size-18 pt-4 mb-auto">
-          <span className="mr-2">Don&apos;t have an account?</span>
-          <Link to="/system/register" className="font-weight-bold text-blue text-underlined">
-            <u>Sign Up</u>
+          <Link to="/auth/forgot-password" className="kit__utils__link font-size-16">
+            Forgot Password?
           </Link>
         </div>
-        <div className="mt-auto pb-5 pt-5">
-          <ul
-            className={`${style.footerNav} list-unstyled d-flex mb-2 flex-wrap justify-content-center`}
-          >
-            <li>
-              <a href="#" onClick={e => e.preventDefault()}>
-                Terms of Use
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={e => e.preventDefault()}>
-                Compliance
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={e => e.preventDefault()}>
-                Support
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={e => e.preventDefault()}>
-                Contacts
-              </a>
-            </li>
-          </ul>
-          <div className="text-center">
-            Copyright © 2017-2020 Mdtk Soft |{' '}
-            <a href="https://www.mediatec.org/privacy" target="_blank" rel="noopener noreferrer">
-              Privacy Policy
-            </a>
-          </div>
+        <div className="text-center pt-2 mb-auto">
+          <span className="mr-2">Don't have an account?</span>
+          <Link to="/auth/register" className="kit__utils__link font-size-16">
+            Sign up
+          </Link>
         </div>
       </div>
     )
