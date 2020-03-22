@@ -29,6 +29,10 @@ class FavPages extends React.Component {
           if (item.category) {
             return flattenedItems
           }
+          if (item.key === 'nestedItem1' || item.disabled) {
+            // skip unwanted items
+            return flattenedItems
+          }
           if (Array.isArray(item[key])) {
             const items = item[key].map(child => {
               child.icon = item.icon

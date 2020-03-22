@@ -8,8 +8,8 @@ export default async function getMenuData() {
       title: 'Dashboards',
       key: 'dashboards',
       icon: 'fe fe-home',
-      count: 6,
       roles: ['admin'],
+      count: 4,
       children: [
         {
           title: 'Dashboard Alpha',
@@ -387,6 +387,39 @@ export default async function getMenuData() {
       key: 'colors',
       icon: 'fe fe-feather',
       url: '/advanced/colors',
+    },
+    {
+      title: 'Nested Items',
+      key: 'nestedItem1',
+      icon: 'fe fe-layers',
+      disabled: true,
+      children: [
+        {
+          title: 'Nested Item 1-1',
+          key: 'nestedItem1-1',
+          children: [
+            {
+              title: 'Nested Item 1-1-1',
+              key: 'nestedItem1-1-1',
+            },
+            {
+              title: 'Nested Items 1-1-2',
+              key: 'nestedItem1-1-2',
+              disabled: true,
+            },
+          ],
+        },
+        {
+          title: 'Nested Items 1-2',
+          key: 'nestedItem1-2',
+        },
+      ],
+    },
+    {
+      title: 'Disabled Item',
+      key: 'disabledItem',
+      icon: 'fe fe-slash',
+      disabled: true,
     },
   ]
 }

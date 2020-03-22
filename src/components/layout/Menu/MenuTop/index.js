@@ -68,7 +68,7 @@ class MenuTop extends React.Component {
   generateMenuItems = () => {
     const { menuData = [], role } = this.props
     const generateItem = item => {
-      const { key, title, url, icon, disabled } = item
+      const { key, title, url, icon, disabled, count } = item
       if (item.category) {
         return null
       }
@@ -79,11 +79,13 @@ class MenuTop extends React.Component {
               <a href={url} target={item.target} rel="noopener noreferrer">
                 {icon && <span className={`${icon} ${style.icon}`} />}
                 <span className={style.title}>{title}</span>
+                {count && <span className="badge badge-success ml-2">{count}</span>}
               </a>
             ) : (
               <Link to={url}>
                 {icon && <span className={`${icon} ${style.icon}`} />}
                 <span className={style.title}>{title}</span>
+                {count && <span className="badge badge-success ml-2">{count}</span>}
               </Link>
             )}
           </Menu.Item>
@@ -93,6 +95,7 @@ class MenuTop extends React.Component {
         <Menu.Item key={key} disabled={disabled}>
           {icon && <span className={`${icon} ${style.icon}`} />}
           <span className={style.title}>{title}</span>
+          {count && <span className="badge badge-success ml-2">{count}</span>}
         </Menu.Item>
       )
     }
@@ -103,6 +106,7 @@ class MenuTop extends React.Component {
             <span key={menuItem.key}>
               {menuItem.icon && <span className={`${menuItem.icon} ${style.icon}`} />}
               <span className={style.title}>{menuItem.title}</span>
+              {menuItem.count && <span className="badge badge-success ml-2">{menuItem.count}</span>}
             </span>
           )
           return (
@@ -122,6 +126,7 @@ class MenuTop extends React.Component {
           <span key={menuItem.key}>
             {menuItem.icon && <span className={`${menuItem.icon} ${style.icon}`} />}
             <span className={style.title}>{menuItem.title}</span>
+            {menuItem.count && <span className="badge badge-success ml-2">{menuItem.count}</span>}
           </span>
         )
         return (

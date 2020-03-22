@@ -80,6 +80,7 @@
     transition: none !important;
     background: transparent;
     border-right: none;
+    color: $text;
 
     :global(.ant-menu-submenu > .ant-menu) {
       background: transparent;
@@ -124,6 +125,10 @@
       margin-bottom: 4px !important;
       border-radius: 5px;
       transition: background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
+      > span {
+        color: $text;
+      }
+
       > a {
         color: $text;
 
@@ -169,6 +174,18 @@
 
       &:after {
         display: none;
+      }
+    }
+
+    :global(.ant-menu-item-active) {
+      > span {
+        color: $primary;
+      }
+    }
+
+    :global(.ant-menu-item-disabled) {
+      > span {
+        color: $gray-4;
       }
     }
   }
@@ -300,6 +317,9 @@
     }
 
     :global(.ant-menu-item) {
+      > span {
+        color: $dark-gray-2;
+      }
       > a {
         color: $dark-gray-2;
 
@@ -320,8 +340,17 @@
     }
 
     :global(.ant-menu-item-active) {
+      > span {
+        color: $primary;
+      }
       &:global(.ant-menu-item-selected) {
         background: $primary !important;
+      }
+    }
+
+    :global(.ant-menu-item-disabled) {
+      > span {
+        color: $dark-gray-3;
       }
     }
   }

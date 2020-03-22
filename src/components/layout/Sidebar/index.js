@@ -230,7 +230,7 @@ class Sidebar extends React.Component {
               <div>
                 <div className={`${style.cui__sidebar__type} mb-4`}>
                   <div className={style.cui__sidebar__type__title}>
-                    <span>Logo String</span>
+                    <span>Application Name</span>
                   </div>
                   <div className={style.cui__sidebar__type__items}>
                     <Input

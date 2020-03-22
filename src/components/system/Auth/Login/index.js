@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, Radio, Tooltip } from 'antd'
 import { Link } from 'react-router-dom'
 import style from '../style.module.scss'
 
 @Form.create()
-@connect(({ user }) => ({ user }))
+@connect(({ user, settings }) => ({ user, authProvider: settings.authProvider }))
 class Login extends React.Component {
   onSubmit = event => {
     event.preventDefault()
@@ -20,20 +20,43 @@ class Login extends React.Component {
     })
   }
 
+  changeAuthProvider = value => {
+    const { dispatch } = this.props
+    dispatch({
+      type: 'settings/CHANGE_SETTING',
+      payload: {
+        setting: 'authProvider',
+        value,
+      },
+    })
+  }
+
   render() {
     const {
       form,
       user: { loading },
+      authProvider,
     } = this.props
 
     return (
       <div>
         <div className={`card ${style.container}`}>
-          <div className="text-dark font-size-24 mb-2">
+          <div className="text-dark font-size-24 mb-3">
             <strong>Sign in to your account</strong>
           </div>
           <div className="mb-4">
-            <p>Login and password - admin@mediatec.org / mediatec</p>
+            <Radio.Group
+              onChange={e => this.changeAuthProvider(e.target.value)}
+              value={authProvider}
+            >
+              <Radio value="firebase">Firebase</Radio>
+              <Radio value="jwt">JWT</Radio>
+              <Tooltip placement="right" title="Soon">
+                <Radio value="auth0" disabled>
+                  Auth0
+                </Radio>
+              </Tooltip>
+            </Radio.Group>
           </div>
           <Form layout="vertical" hideRequiredMark onSubmit={this.onSubmit} className="mb-4">
             <Form.Item>
@@ -44,7 +67,7 @@ class Login extends React.Component {
             </Form.Item>
             <Form.Item>
               {form.getFieldDecorator('password', {
-                initialValue: 'mediatec',
+                initialValue: 'cleanui',
                 rules: [{ required: true, message: 'Please input your password' }],
               })(<Input size="large" type="password" placeholder="Password" />)}
             </Form.Item>

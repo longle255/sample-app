@@ -95,7 +95,7 @@ class MenuLeft extends React.Component {
   generateMenuItems = () => {
     const { menuData = [], role } = this.props
     const generateItem = item => {
-      const { key, title, url, icon, disabled } = item
+      const { key, title, url, icon, disabled, count } = item
       if (item.category) {
         return <Menu.ItemGroup key={Math.random()} title={item.title}></Menu.ItemGroup>
       }
@@ -105,11 +105,13 @@ class MenuLeft extends React.Component {
             {item.target ? (
               <a href={url} target={item.target} rel="noopener noreferrer">
                 <span className={style.title}>{title}</span>
+                {count && <span className="badge badge-success ml-2">{count}</span>}
                 {icon && <span className={`${icon} ${style.icon} icon-collapsed-hidden`} />}
               </a>
             ) : (
               <Link to={url}>
                 <span className={style.title}>{title}</span>
+                {count && <span className="badge badge-success ml-2">{count}</span>}
                 {icon && <span className={`${icon} ${style.icon} icon-collapsed-hidden`} />}
               </Link>
             )}
@@ -119,6 +121,7 @@ class MenuLeft extends React.Component {
       return (
         <Menu.Item key={key} disabled={disabled}>
           <span className={style.title}>{title}</span>
+          {count && <span className="badge badge-success ml-2">{count}</span>}
           {icon && <span className={`${icon} ${style.icon} icon-collapsed-hidden`} />}
         </Menu.Item>
       )
@@ -130,6 +133,7 @@ class MenuLeft extends React.Component {
           const subMenuTitle = (
             <span key={menuItem.key}>
               <span className={style.title}>{menuItem.title}</span>
+              {menuItem.count && <span className="badge badge-success ml-2">{menuItem.count}</span>}
               {menuItem.icon && <span className={`${menuItem.icon} ${style.icon}`} />}
             </span>
           )
@@ -150,6 +154,7 @@ class MenuLeft extends React.Component {
         const subMenuTitle = (
           <span key={menuItem.key}>
             <span className={style.title}>{menuItem.title}</span>
+            {menuItem.count && <span className="badge badge-success ml-2">{menuItem.count}</span>}
             {menuItem.icon && <span className={`${menuItem.icon} ${style.icon}`} />}
           </span>
         )

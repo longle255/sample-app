@@ -5,19 +5,19 @@ import 'firebase/database'
 import 'firebase/storage'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyA2LHKgdr2GQb_QUBYfhMOaxgOuGjw1z5E',
-  authDomain: 'airui-a4b63.firebaseapp.com',
-  databaseURL: 'https://airui-a4b63.firebaseio.com',
-  projectId: 'airui-a4b63',
-  storageBucket: 'airui-a4b63.appspot.com',
-  messagingSenderId: '1039460737420',
+  apiKey: 'AIzaSyAE5G0RI2LwzwTBizhJbnRKIKbiXQIA1dY',
+  authDomain: 'cleanui-72a42.firebaseapp.com',
+  databaseURL: 'https://cleanui-72a42.firebaseio.com',
+  projectId: 'cleanui-72a42',
+  storageBucket: 'cleanui-72a42.appspot.com',
+  messagingSenderId: '583382839121',
 }
 
 const firebaseApp = firebase.initializeApp(firebaseConfig)
 const firebaseAuth = firebase.auth
 export default firebaseApp
 
-export async function login(email, password) {
+export async function FB_login(email, password) {
   return firebaseAuth()
     .signInWithEmailAndPassword(email, password)
     .then(() => true)
@@ -29,7 +29,7 @@ export async function login(email, password) {
     })
 }
 
-export async function currentAccount() {
+export async function FB_currentAccount() {
   let userLoaded = false
   function getCurrentUser(auth) {
     return new Promise((resolve, reject) => {
@@ -46,7 +46,7 @@ export async function currentAccount() {
   return getCurrentUser(firebaseAuth())
 }
 
-export async function logout() {
+export async function FB_logout() {
   return firebaseAuth()
     .signOut()
     .then(() => true)
