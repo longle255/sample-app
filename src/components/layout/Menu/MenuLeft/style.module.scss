@@ -199,6 +199,13 @@
       }
     }
 
+    :global(.badge) {
+      position: absolute;
+      z-index: 1;
+      top: 3px;
+      right: 3px;
+    }
+
     .title,
     .name,
     .line,
