@@ -1,152 +1,171 @@
 import React from 'react'
-import { Tabs, Input, Menu, Dropdown, Button, Icon } from 'antd'
 import { Helmet } from 'react-helmet'
-import Avatar from 'components/CleanUIComponents/Avatar'
-import styles from './style.module.scss'
-import data from './data.json'
+import { Input, Icon, Tooltip } from 'antd'
+import { Scrollbars } from 'react-custom-scrollbars'
+import dialogs from './data.json'
+import style from './style.module.scss'
 
-const { TabPane } = Tabs
-const { Search } = Input
-
-const actionsMenu = (
-  <Menu>
-    <Menu.Item key="1">
-      <Icon style={{ marginRight: 3 }} type="sound" />
-      Mute
-    </Menu.Item>
-    <Menu.Item key="2">
-      <Icon style={{ marginRight: 3 }} type="delete" />
-      Delete chat
-    </Menu.Item>
-    <Menu.Item key="3">
-      <Icon style={{ marginRight: 3 }} type="setting" />
-      Settings
-    </Menu.Item>
-  </Menu>
-)
-
-const chatTab = chat => {
-  const { chatMessages } = chat
-  const tabName = chat.companionName
-  const lastMessage = chatMessages[chatMessages.length - 1].content.replace(/<\/*\w*>/g, '')
-  const tabImg = chat.companionImg
-  return (
-    <div className={styles.tab}>
-      <div className={styles.tabAvatar}>
-        <Avatar src={tabImg} size="50" border="true" borderColor="#fff" />
-      </div>
-      <div className={styles.tabContent}>
-        <small className={styles.tabTime}>8:34PM</small>
-        <div className={styles.tabName}>{tabName}</div>
-        <div className={styles.tabText} dangerouslySetInnerHTML={{ __html: lastMessage }} />
-      </div>
-    </div>
-  )
-}
-
-const Message = message => {
-  const { content } = message.message
-  const { chatOwner } = message
-  const messageOwner = message.message.username
-  const messageImg = message.message.img
-
-  return (
-    <div
-      className={`clearfix ${styles.item} ${
-        chatOwner === messageOwner ? styles.itemLeft : styles.itemRight
-      }`}
-    >
-      <div className={styles.itemAvatar}>
-        <Avatar src={messageImg} size="50" border="false" />
-      </div>
-      <div className={styles.itemContent}>
-        <strong>{messageOwner}</strong>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      </div>
-    </div>
-  )
-}
-
-class MessagingChat extends React.Component {
+class AppsMessaging extends React.Component {
   state = {
-    chatOwner: '',
-    chatsData: [],
-    activeChatKey: data.chats[0].companionName,
+    activeIndex: 0,
   }
 
-  componentWillMount() {
+  changeDialog = (e, index) => {
+    e.preventDefault()
     this.setState({
-      chatOwner: data.chatsOwner,
-      chatsData: data.chats,
-    })
-  }
-
-  changeChat = chatKey => {
-    this.setState({
-      activeChatKey: chatKey,
+      activeIndex: index,
     })
   }
 
   render() {
-    const { chatOwner, chatsData, activeChatKey } = this.state
-    const selectedChatData = chatsData.find(item =>
-      item.companionName === activeChatKey ? item : [],
-    )
-    const messagesData = selectedChatData.chatMessages
+    const { activeIndex } = this.state
+    const { name, position, dialog, avatar } = dialogs[activeIndex]
     return (
       <div>
-        <Helmet title="Messaging App" />
-        <div className={`card ${styles.messaging}`}>
-          <div className={styles.sidebar}>
-            <div className={styles.sidebarHeader}>
-              <Search placeholder="input search text" style={{ width: '100%' }} />
+        <Helmet title="Messaging" />
+        <div className="row">
+          <div className="col-12 col-md-3">
+            <div className="mb-4">
+              <Input
+                prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Search users..."
+              />
             </div>
-            <div className={styles.tabs}>
-              <Tabs
-                defaultActiveKey={chatsData[0].companionName}
-                tabPosition="left"
-                onChange={this.changeChat}
+            <div className={style.dialogs}>
+              <Scrollbars
+                autoHide
+                renderThumbVertical={({ ...props }) => (
+                  <div
+                    {...props}
+                    style={{
+                      width: '5px',
+                      borderRadius: 'inherit',
+                      backgroundColor: 'rgba(195, 190, 220, 0.4)',
+                      left: '1px',
+                    }}
+                  />
+                )}
               >
-                {chatsData.map(chat => (
-                  <TabPane tab={chatTab(chat)} key={chat.companionName} />
+                {dialogs.map((item, index) => (
+                  <a
+                    href="#"
+                    onClick={e => this.changeDialog(e, index)}
+                    key={item.name}
+                    className={`${style.item} ${
+                      index === activeIndex ? style.current : ''
+                    } d-flex flex-nowrap align-items-center`}
+                  >
+                    <div className="kit__utils__avatar kit__utils__avatar--size46 mr-3 flex-shrink-0">
+                      <img src={item.avatar} alt={item.name} />
+                    </div>
+                    <div className={`${style.info} flex-grow-1`}>
+                      <div className="text-uppercase font-size-12 text-truncate text-gray-6">
+                        {item.position}
+                      </div>
+                      <div className="text-dark font-size-18 font-weight-bold text-truncate">
+                        {item.name}
+                      </div>
+                    </div>
+                    <div
+                      hidden={!item.unread}
+                      className={`${style.unread} flex-shrink-0 align-self-start`}
+                    >
+                      <div className="badge badge-success">{item.unread}</div>
+                    </div>
+                  </a>
                 ))}
-              </Tabs>
+              </Scrollbars>
             </div>
           </div>
-          <div className={styles.content}>
-            <div className="card-header clearfix">
-              <h4 className="mt-1 mb-1 text-black d-inline-block">
-                <strong>{selectedChatData.companionName}</strong>
-              </h4>
-              <div className="pull-right">
-                <Dropdown overlay={actionsMenu}>
-                  <Button style={{ marginLeft: 4 }}>
-                    Actions <Icon type="setting" />
-                  </Button>
-                </Dropdown>
-              </div>
-            </div>
-            <div className={styles.contentWrapper}>
-              <div className={`${styles.chat} height-700`}>
-                {messagesData.map(message => (
-                  <Message message={message} key={Math.random()} chatOwner={chatOwner} />
-                ))}
-              </div>
-              <form className="form-group mt-4 mb-3">
-                <textarea
-                  className="form-control adjustable-textarea"
-                  placeholder="Type message..."
-                />
-                <div className="mt-3">
-                  <button type="submit" className="btn btn-primary width-200">
-                    <i className="fa fa-send mr-2" />
-                    Send
-                  </button>
-                  <button className="btn btn-link" type="button">
-                    Attach File
-                  </button>
+          <div className="col-12 col-md-9">
+            <div className="card">
+              <div className="card-header card-header-flex align-items-center">
+                <div className="d-flex flex-column justify-content-center mr-auto">
+                  <h5 className="mb-0 mr-2 font-size-18">
+                    {name} <span className="font-size-14 text-gray-6">({position})</span>
+                  </h5>
                 </div>
-              </form>
+                <div>
+                  <Tooltip placement="top" title="Unlock Account">
+                    <a
+                      href="#"
+                      onClick={e => e.preventDefault()}
+                      className="btn btn-sm btn-light mr-2"
+                    >
+                      <i className="fe fe-unlock" />
+                    </a>
+                  </Tooltip>
+                  <Tooltip placement="top" title="Mark as important">
+                    <a
+                      href="#"
+                      onClick={e => e.preventDefault()}
+                      className="btn btn-sm btn-light mr-2"
+                    >
+                      <i className="fe fe-star" />
+                    </a>
+                  </Tooltip>
+                  <Tooltip placement="top" title="Delete user">
+                    <a href="#" onClick={e => e.preventDefault()} className="btn btn-sm btn-light">
+                      <i className="fe fe-trash" />
+                    </a>
+                  </Tooltip>
+                </div>
+              </div>
+              <div className="card-body">
+                <div className="height-700">
+                  <Scrollbars
+                    autoHide
+                    renderThumbVertical={({ ...props }) => (
+                      <div
+                        {...props}
+                        style={{
+                          width: '5px',
+                          borderRadius: 'inherit',
+                          backgroundColor: 'rgba(195, 190, 220, 0.4)',
+                          left: '1px',
+                        }}
+                      />
+                    )}
+                  >
+                    <div className="d-flex flex-column justify-content-end height-100p">
+                      {dialog.map(message => (
+                        <div
+                          key={Math.random()}
+                          className={`${style.message} ${
+                            message.owner !== 'you' ? style.answer : ''
+                          }`}
+                        >
+                          <div className={style.messageContent}>
+                            <div className="text-gray-4 font-size-12 text-uppercase">
+                              {message.owner}, {message.time}
+                            </div>
+                            <div>{message.content}</div>
+                          </div>
+                          <div className={`${style.messageAvatar} kit__utils__avatar`}>
+                            <img
+                              src={`${
+                                message.owner !== 'you'
+                                  ? avatar
+                                  : 'resources/images/avatars/avatar-2.png'
+                              }`}
+                              alt={name}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </Scrollbars>
+                </div>
+                <div className="pt-2 pb-2">{name} is typing...</div>
+                <div className="input-group mb-3">
+                  <input type="text" className="form-control" placeholder="Send message..." />
+                  <div className="input-group-append">
+                    <button className="btn btn-primary" type="button">
+                      <i className="fe fe-send align-middle" />
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -155,4 +174,4 @@ class MessagingChat extends React.Component {
   }
 }
 
-export default MessagingChat
+export default AppsMessaging

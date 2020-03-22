@@ -1,8 +1,7 @@
 import actions from './actions'
 
 const initialState = {
-  menuLeftData: [],
-  menuTopData: [],
+  menuData: [],
 }
 
 export default function userReducer(state = initialState, action) {

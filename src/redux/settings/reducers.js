@@ -12,21 +12,35 @@ const STORED_SETTINGS = storedSettings => {
 
 const initialState = {
   ...STORED_SETTINGS({
+    authProvider: 'firebase', // firebase, jwt
+    logo: 'Clean UI Pro',
+    locale: 'en-US',
+    isSidebarOpen: false,
+    isSupportChatOpen: false,
     isMobileView: false,
     isMobileMenuOpen: false,
-    isLightTheme: true,
-    isSettingsOpen: false,
-    isMenuTop: false,
     isMenuCollapsed: false,
-    isBorderless: true,
+    menuLayoutType: 'left', // left, top, nomenu
+    routerAnimation: 'slide-fadein-up', // none, slide-fadein-up, slide-fadein-right, fadein, zoom-fadein
+    menuColor: 'white', // white, dark, gray
+    theme: 'light', // light, dark
+    authPagesColor: 'white', // white, gray, image
+    primaryColor: '#4b7cf3',
+    leftMenuWidth: 256,
+    isMenuUnfixed: false,
+    isMenuShadow: false,
+    isTopbarFixed: false,
+    isGrayTopbar: false,
+    isContentMaxWidth: false,
+    isAppMaxWidth: false,
+    isGrayBackground: false,
+    isCardShadow: true,
     isSquaredBorders: false,
-    isFixedWidth: false,
-    isMenuShadow: true,
-    locale: 'en-US',
+    isBorderless: false,
   }),
 }
 
-export default function userReducer(state = initialState, action) {
+export default function settingsReducer(state = initialState, action) {
   switch (action.type) {
     case actions.SET_STATE:
       return { ...state, ...action.payload }

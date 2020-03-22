@@ -1,350 +1,164 @@
 import React from 'react'
-import { Button, Progress, Calendar, Tabs, Upload, Icon, Input, Menu, Dropdown } from 'antd'
 import { Helmet } from 'react-helmet'
-import Avatar from 'components/CleanUIComponents/Avatar'
-import Donut from 'components/CleanUIComponents/Donut'
-import Chat from 'components/CleanUIComponents/Chat'
-import SettingsForm from './SettingsForm'
-import data from './data.json'
-import style from './style.module.scss'
+import { Tabs, Form, Input, Button, Upload } from 'antd'
+import General1 from 'components/kit-widgets/General/1'
+import General10v1 from 'components/kit-widgets/General/10v1'
+import General12v1 from 'components/kit-widgets/General/12v1'
+import General14 from 'components/kit-widgets/General/14'
+import General15 from 'components/kit-widgets/General/15'
+import List19 from 'components/kit-widgets/Lists/19'
 
 const { TabPane } = Tabs
-const { TextArea } = Input
+const FormItem = Form.Item
 
-const actions = (
-  <Menu>
-    <Menu.Item>
-      <Icon type="edit" /> Edit Post
-    </Menu.Item>
-    <Menu.Item>
-      <Icon type="delete" /> Delete Post
-    </Menu.Item>
-    <Menu.Item>
-      <Icon type="frown-o" /> Mark as a Spam
-    </Menu.Item>
-  </Menu>
-)
-
-class ProfileApp extends React.Component {
+@Form.create()
+class AppsProfile extends React.Component {
   state = {
-    name: '',
-    nickname: '',
-    photo: '',
-    background: '',
-    post: '',
-    postsCount: '',
-    followersCount: '',
-    lastActivity: '',
-    status: '',
+    tabKey: '1',
   }
 
-  componentWillMount() {
+  changeTab = tabKey => {
     this.setState({
-      name: data.name,
-      nickname: data.nickname,
-      photo: data.photo,
-      background: data.background,
-      post: data.post,
-      postsCount: data.postsCount,
-      followersCount: data.followersCount,
-      lastActivity: data.lastActivity,
-      status: data.status,
-      skills: data.skills,
-      coursesEnd: data.coursesEnd,
-      adress: data.adress,
-      profSkills: data.profSkills,
-      lastCompanies: data.lastCompanies,
-      personal: data.personal,
-      posts: data.posts,
+      tabKey,
     })
   }
 
   render() {
-    const {
-      name,
-      nickname,
-      photo,
-      background,
-      post,
-      postsCount,
-      followersCount,
-      lastActivity,
-      status,
-      skills,
-      coursesEnd,
-      adress,
-      profSkills,
-      lastCompanies,
-      personal,
-      posts,
-    } = this.state
+    const { tabKey } = this.state
+    const { form } = this.props
 
     return (
       <div>
         <Helmet title="Profile" />
-        <div className={style.profile}>
-          <div className="row">
-            <div className="col-xl-4">
-              <div
-                className={`card ${style.header}`}
-                style={{ backgroundImage: `url(${background})` }}
-              >
-                <div>
-                  <div className="card-body text-center">
-                    <Avatar src={photo} size="110" border="true" borderColor="white" />
-                    <br />
-                    <br />
-                    <Button.Group size="default">
-                      <Button style={{ width: 150 }}>Follow</Button>
-                      <Button style={{ width: 150 }}>Add to Friend</Button>
-                    </Button.Group>
-                    <br />
-                    <p className="text-white mt-2">{`Last activity: ${lastActivity}`}</p>
-                    <p className="text-white mt-2">
-                      {status === 'Online' && <Donut type="success" name={status} />}
-                      {status === 'Offline' && <Donut type="danger" name={status} />}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="mb-3 text-black">
-                    <strong>Actions</strong>
-                  </h5>
-                  <div className={style.actions}>
-                    <Button style={{ display: 'block', width: '100%' }}>Send Message</Button>
-                    <Button style={{ display: 'block', width: '100%' }}>Send File</Button>
-                    <Button style={{ display: 'block', width: '100%' }}>Access History</Button>
-                    <Button style={{ display: 'block', width: '100%' }}>Rename User</Button>
-                    <Button style={{ display: 'block', width: '100%' }}>Ban User</Button>
-                  </div>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="mb-3 text-black">
-                    <strong>Skills</strong>
-                  </h5>
-                  {skills.map(skill => (
-                    <div key={skill.name}>
-                      <div className="mb-1">{skill.name}</div>
-                      <Progress percent={skill.value} showInfo={false} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="mb-3 text-black">
-                    <strong>Information</strong>
-                  </h5>
-                  <dl className="row">
-                    <dt className="col-xl-3">Courses End:</dt>
-                    <dd className="col-xl-9">{coursesEnd}</dd>
-                    <dt className="col-xl-3">Address:</dt>
-                    <dd className="col-xl-9">{adress}</dd>
-                    <dt className="col-xl-3">Skills:</dt>
-                    <dd className="col-xl-9">
-                      {profSkills.map(skill => (
-                        <span className="badge badge-default mr-1" key={skill}>
-                          {skill}
-                        </span>
-                      ))}
-                    </dd>
-                    <dt className="col-xl-3">Last companies:</dt>
-                    <dd className="col-xl-9">{lastCompanies}</dd>
-                    <dt className="col-xl-3">Personal Information:</dt>
-                    <dd className="col-xl-9">{personal}</dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="mb-3 text-black">
-                    <strong>Calendar</strong>
-                  </h5>
-                  <Calendar fullscreen={false} />
-                </div>
+        <div className="row">
+          <div className="col-xl-4 col-lg-12">
+            <div className="card">
+              <div className="card-body">
+                <General10v1 />
               </div>
             </div>
-            <div className="col-xl-8">
-              <div className={`card card-body mb-4 ${style.socialInfo}`}>
-                <div>
-                  <h2>
-                    <span className="text-black mr-2">
-                      <strong>{name}</strong>
-                    </span>
-                    <small className="text-muted">{nickname}</small>
-                  </h2>
-                  <p className="mb-1">{post}</p>
-                </div>
-                <div className={style.socialCounts}>
-                  <div className="text-center mr-3">
-                    <h2>{followersCount}</h2>
-                    <p className="mb-0">Followers</p>
-                  </div>
-                  <div className="text-center">
-                    <h2>{postsCount}</h2>
-                    <p className="mb-0">Posts</p>
-                  </div>
-                </div>
+            <div className="card text-white bg-primary">
+              <General12v1 />
+            </div>
+            <div className="card">
+              <div className="card-body">
+                <General1 />
               </div>
-              <div className="card">
-                <div className="card-body">
-                  <Tabs defaultActiveKey="1">
-                    <TabPane
-                      tab={
-                        <span>
-                          <i className="icmn-menu" /> Wall
-                        </span>
-                      }
-                      key="1"
-                    >
-                      <div className="py-3">
-                        <TextArea rows={3} />
-                        <div className="mt-3">
-                          <Button className="mr-2" type="primary" style={{ width: 200 }}>
-                            <i className="fa fa-send mr-2" />
-                            Create Post
-                          </Button>
-                          <Upload>
-                            <Button>
-                              <Icon type="upload" /> Attach File
-                            </Button>
-                          </Upload>
-                        </div>
-                      </div>
-                      <hr />
-                      {posts.map(item => (
-                        <div key={item.name}>
-                          <div className={`${style.wallItem} clearfix`}>
-                            <div className={style.wallAvatar}>
-                              <Avatar size="50" src={item.avatar} border={false} />
-                            </div>
-                            <div className={style.wallContent}>
-                              <div className="mb-3">
-                                <div className="pull-right">
-                                  <Dropdown overlay={actions}>
-                                    <a className="ant-dropdown-link" href="javascript: void(0);">
-                                      Actions <Icon type="down" />
-                                    </a>
-                                  </Dropdown>
-                                </div>
-                                <strong>{item.name}</strong> posted:
-                                <br />
-                                <small className="text-muted">{item.date}</small>
-                              </div>
-                              <div
-                                dangerouslySetInnerHTML={{ __html: item.content }}
-                                className="mb-3"
-                              />
-                              <div className="mr-3">
-                                <a href="javascript: void(0);" className="mr-3">
-                                  <i className="icmn-heart mr-2" />
-                                  {item.likesCount > 0 && <span>{`${item.likesCount} Likes`}</span>}
-                                  {item.likesCount === 0 && (
-                                    <span>{`${item.likesCount} Like`}</span>
-                                  )}
-                                </a>
-                                <a href="javascript: void(0);">
-                                  <i className="icmn-bubble mr-2" />
-                                  {item.commentsCount > 0 && (
-                                    <span>{`${item.commentsCount} Comments`}</span>
-                                  )}
-                                  {item.commentsCount === 0 && (
-                                    <span>{`${item.commentsCount} Comment`}</span>
-                                  )}
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                          <div className={`${style.wallContent} ${style.wallInnerContent}`}>
-                            {item.comments.length > 0 && (
-                              <div className={style.wallComments}>
-                                {item.comments.map(postComment => (
-                                  <div
-                                    className={`${style.wallItem} clearfix`}
-                                    key={postComment.name}
-                                  >
-                                    <div className={style.wallAvatar}>
-                                      <Avatar size="50" src={postComment.avatar} border={false} />
-                                    </div>
-                                    <div className={style.wallContent}>
-                                      <div className="mb-3">
-                                        <div className="pull-right">
-                                          <Dropdown overlay={actions}>
-                                            <a
-                                              className="ant-dropdown-link"
-                                              href="javascript: void(0);"
-                                            >
-                                              Actions <Icon type="down" />
-                                            </a>
-                                          </Dropdown>
-                                        </div>
-                                        <strong>{postComment.name}</strong> posted:
-                                        <br />
-                                        <small className="text-muted">{postComment.date}</small>
-                                      </div>
-                                      <div
-                                        dangerouslySetInnerHTML={{ __html: postComment.content }}
-                                      />
-                                      <div>
-                                        <a href="javascript: void(0);" className="mr-2">
-                                          <i className="icmn-heart mr-2" />
-                                          {postComment.likesCount > 0 && (
-                                            <span>{`${postComment.likesCount} Likes`}</span>
-                                          )}
-                                          {postComment.likesCount === 0 && (
-                                            <span>{`${postComment.likesCount} Like`}</span>
-                                          )}
-                                        </a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                          <div className="form-group mt-4 mb-0">
-                            <TextArea rows={3} />
-                            <div className="mt-3">
-                              <Button className="mr-2" type="primary" style={{ width: 200 }}>
-                                <i className="fa fa-send mr-2" />
-                                Comment
-                              </Button>
-                              <Upload>
-                                <Button>
-                                  <Icon type="upload" /> Attach File
-                                </Button>
-                              </Upload>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </TabPane>
-                    <TabPane
-                      tab={
-                        <span>
-                          <i className="icmn-bubbles" /> Messages
-                        </span>
-                      }
-                      key="2"
-                    >
-                      <Chat />
-                    </TabPane>
-                    <TabPane
-                      tab={
-                        <span>
-                          <i className="icmn-cog" /> Settings
-                        </span>
-                      }
-                      key="3"
-                    >
-                      <SettingsForm />
-                    </TabPane>
-                  </Tabs>
+            </div>
+            <div className="card">
+              <div className="card-body">
+                <List19 />
+              </div>
+            </div>
+          </div>
+          <div className="col-xl-8 col-lg-12">
+            <div className="card">
+              <div className="card-header card-header-flex flex-column">
+                <div className="d-flex flex-wrap border-bottom pt-3 pb-4 mb-3">
+                  <div className="mr-5">
+                    <div className="text-dark font-size-18 font-weight-bold">David Beckham</div>
+                    <div className="text-gray-6">@david100</div>
+                  </div>
+                  <div className="mr-5 text-center">
+                    <div className="text-dark font-size-18 font-weight-bold">100</div>
+                    <div className="text-gray-6">Posts</div>
+                  </div>
+                  <div className="mr-5 text-center">
+                    <div className="text-dark font-size-18 font-weight-bold">17,256</div>
+                    <div className="text-gray-6">Followers</div>
+                  </div>
                 </div>
+                <Tabs
+                  activeKey={tabKey}
+                  className="mr-auto kit-tabs-bold"
+                  onChange={this.changeTab}
+                >
+                  <TabPane tab="Agent Wall" key="1" />
+                  <TabPane tab="Messages" key="2" />
+                  <TabPane tab="Settings" key="3" />
+                </Tabs>
+              </div>
+              <div className="card-body">
+                {tabKey === '1' && (
+                  <div>
+                    <General15 />
+                    <General15 />
+                  </div>
+                )}
+                {tabKey === '2' && <General14 />}
+                {tabKey === '3' && (
+                  <Form className="login-form">
+                    <h5 className="text-black mt-4">
+                      <strong>Personal Information</strong>
+                    </h5>
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <FormItem label="Username">
+                          {form.getFieldDecorator('userName', {
+                            rules: [{ required: false }],
+                          })(<Input placeholder="Username" />)}
+                        </FormItem>
+                      </div>
+                      <div className="col-lg-6">
+                        <FormItem label="Email">
+                          {form.getFieldDecorator('email', {
+                            rules: [{ required: false }],
+                          })(<Input placeholder="Email" />)}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <h5 className="text-black mt-4">
+                      <strong>New Password</strong>
+                    </h5>
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <FormItem label="Password">
+                          {form.getFieldDecorator('password')(<Input placeholder="New password" />)}
+                        </FormItem>
+                      </div>
+                      <div className="col-lg-6">
+                        <FormItem label="Confirm Password">
+                          {form.getFieldDecorator('confirmpassword')(
+                            <Input placeholder="Confirm password" />,
+                          )}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <h5 className="text-black mt-4 mb-3">
+                          <strong>Profile Avatar</strong>
+                        </h5>
+                        <Upload>
+                          <Button>
+                            <i className="fe fe-upload mr-2" /> Click to Upload
+                          </Button>
+                        </Upload>
+                      </div>
+                      <div className="col-lg-6">
+                        <h5 className="text-black mt-4 mb-3">
+                          <strong>Profile Background</strong>
+                        </h5>
+                        <Upload>
+                          <Button>
+                            <i className="fe fe-upload mr-2" /> Click to Upload
+                          </Button>
+                        </Upload>
+                      </div>
+                    </div>
+                    <div className="form-actions">
+                      <Button
+                        style={{ width: 200 }}
+                        type="primary"
+                        htmlType="submit"
+                        className="mr-3"
+                      >
+                        Submit
+                      </Button>
+                      <Button htmlType="submit">Cancel</Button>
+                    </div>
+                  </Form>
+                )}
               </div>
             </div>
           </div>
@@ -354,4 +168,4 @@ class ProfileApp extends React.Component {
   }
 }
 
-export default ProfileApp
+export default AppsProfile

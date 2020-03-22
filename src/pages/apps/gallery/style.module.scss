@@ -1,62 +1,68 @@
-@import 'assets/styles/mixins.scss';
+@import 'components/kit-core/mixins.scss';
 
-.gallery {
+.control {
+  margin-right: rem(20);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.items {
+  margin-right: rem(-35);
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
 }
 
 .item {
-  width: rem(200);
-  height: rem(160);
+  margin-bottom: rem(30);
+  margin-right: rem(35);
+}
+
+.itemContent {
+  border-radius: 5px;
   overflow: hidden;
   position: relative;
-  z-index: 1;
-  background-position: center;
-  background-size: cover;
-  @media (max-width: $sm-max-width) {
-    width: 100%;
-    height: rem(270);
-  }
-  @include transition-fast();
-  &:hover {
-    transform: scale(1.1);
-    z-index: 2;
+  background-color: transparent;
+  width: rem(184);
+  height: rem(184);
+  margin-bottom: rem(15);
 
-    .itemControls {
-      display: block;
+  &:hover {
+    .itemControl {
+      z-index: 10;
+      opacity: 1;
     }
   }
-}
 
-.withControls {
-  &:before {
+  img {
     position: absolute;
-    top: rem(-15);
-    right: rem(-15);
-    width: 0;
-    height: 0;
-    content: '';
-    z-index: 3;
-    border: rem(15) solid transparent;
-    border-bottom-color: $primary;
-    transform: rotate(45deg);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: rem(184);
   }
 }
 
-.itemControls {
-  display: none;
+.itemControl {
   position: absolute;
   top: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  padding: rem(57) rem(20) 0;
-  text-align: center;
-  background: rgba($black, 0.8);
+  right: 0;
+  z-index: -1;
+  opacity: 0;
+  background-color: rgba($gray-6, 0.5);
+  @include transition-slow;
+}
 
-  @media (max-width: $md-max-width) {
-    text-align: left;
-    padding-top: rem(20);
-  }
+.itemControlContainer {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 10;
+  text-align: center;
 }

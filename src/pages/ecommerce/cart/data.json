@@ -27,10 +27,5 @@
     "quantity": "231",
     "unitcost": "$12.00",
     "total": "$866.00"
-  }],
-  "invoicePrices": {
-    "invoiceAmount": "$5,700.00",
-    "invoiceVAT": "$57.00",
-    "invoiceTotal": "$5,757.00"
-  }
+  }]
 }

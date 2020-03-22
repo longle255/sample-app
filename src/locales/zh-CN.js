@@ -1,11 +1,12 @@
-import localeData from 'react-intl/locale-data/zh'
+import localeAntd from 'antd/es/locale/zh_CN'
 
 const messages = {
   'topBar.issuesHistory': '发布历史',
   'topBar.projectManagement': '项目管理',
   'topBar.typeToSearch': '搜索...',
-  'topBar.buyNow': '立即购买',
-  'topBar.bitcoin': '比特币',
+  'topBar.findPages': '查找页面...',
+  'topBar.actions': '动作',
+  'topBar.status': '状态',
   'topBar.profileMenu.hello': '你好',
   'topBar.profileMenu.billingPlan': '结算计划',
   'topBar.profileMenu.role': '角色',
@@ -16,8 +17,7 @@ const messages = {
 }
 
 export default {
-  locale: 'zh-CH',
-  antdData: null,
-  localeData,
+  locale: 'zh-CN',
+  localeAntd,
   messages,
 }

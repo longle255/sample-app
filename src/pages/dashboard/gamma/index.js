@@ -3,18 +3,19 @@ import { Helmet } from 'react-helmet'
 import ChartistGraph from 'react-chartist'
 import ChartistTooltip from 'chartist-plugin-tooltips-updated'
 import { Table } from 'antd'
-import ProgressCard from 'components/CleanUIComponents/ProgressCard'
-import ShortItemInfo from 'components/CleanUIComponents/ShortItemInfo'
-import Donut from 'components/CleanUIComponents/Donut'
+import Chart12 from 'components/kit-widgets/Charts/12'
+import Chart12v1 from 'components/kit-widgets/Charts/12v1'
+import General5v1 from 'components/kit-widgets/General/5v1'
+import General2 from 'components/kit-widgets/General/2'
+import General2v1 from 'components/kit-widgets/General/2v1'
+import General2v2 from 'components/kit-widgets/General/2v2'
+import General13v1 from 'components/kit-widgets/General/13v1'
+import List10 from 'components/kit-widgets/Lists/10'
+import List11 from 'components/kit-widgets/Lists/11'
 
 import {
-  progressCardsData,
-  newUsersData,
   inboundBandwidthData,
   outboundBandwidthData,
-  topPhotosData,
-  topPhotosGraphData,
-  financeStatsData,
   supportCasesTableData,
   supportCasesPieData,
 } from './data.json'
@@ -87,133 +88,110 @@ class DashboardGamma extends React.Component {
         <Helmet title="Dashboard Gamma" />
         <div className="row">
           <div className="col-xl-12">
-            <div className="utils__title utils__title--flat mb-3">
-              <strong className="text-uppercase font-size-16">Progress Information</strong>
-            </div>
             <div className="row">
-              {progressCardsData.map(item => (
-                <div className="col-lg-6" key={item.title}>
-                  <ProgressCard
-                    title={item.title}
-                    note={item.note}
-                    currentValue={item.currentValue}
-                    percent={item.percent}
-                    dataColor={item.dataColor}
-                  />
+              <div className="col-lg-6">
+                <div className="card">
+                  <div className="card-body">
+                    <Chart12 />
+                  </div>
                 </div>
-              ))}
+              </div>
+              <div className="col-lg-6">
+                <div className="card">
+                  <div className="card-body">
+                    <Chart12v1 />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-xl-4">
+            <div className="card">
+              <General13v1 />
+            </div>
+            <div className="card">
+              <div className="card-body">
+                <General5v1 />
+              </div>
+            </div>
+          </div>
+          <div className="col-xl-4">
+            <div className="card">
+              <div className="card-header border-0 pb-0">
+                <div className="cui__utils__heading mb-0">
+                  <strong>RECENT INVITES</strong>
+                </div>
+              </div>
+              <div className="card-body">
+                <List10 />
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-body">
+                <General2 />
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-body">
+                <General2v1 />
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-body">
+                <General2v2 />
+              </div>
+            </div>
+          </div>
+          <div className="col-xl-4">
             <div className="row">
               <div className="col-xl-12">
                 <div className="card">
-                  <div className="card-header">
-                    <div className="utils__title utils__title--flat">
-                      <strong className="text-uppercase font-size-16">Inbound Bandwidth</strong>
+                  <div className="card-header border-0 pb-0">
+                    <div className="cui__utils__heading mb-0">
+                      <strong>Inbound Bandwidth</strong>
                     </div>
                   </div>
                   <div className="card-body">
-                    <span className="font-size-36 font-weight-bold text-primary">246</span>
+                    <strong className="font-size-36 text-dark">246Gb</strong>
                   </div>
                   <ChartistGraph
                     data={inboundBandwidthData}
                     options={boundChartistOptions}
                     type="Line"
-                    className="height-200"
+                    className="height-250"
                   />
                 </div>
               </div>
               <div className="col-xl-12">
                 <div className="graphCard card">
-                  <div className="card-header">
-                    <div className="utils__title utils__title--flat">
-                      <strong className="text-uppercase font-size-16">Outbound Bandwidth</strong>
+                  <div className="card-header border-0 pb-0">
+                    <div className="cui__utils__heading mb-0">
+                      <strong>Outbound Bandwidth</strong>
                     </div>
                   </div>
                   <div className="card-body">
-                    <span className="font-size-36 font-weight-bold text-success">52</span>
+                    <strong className="font-size-36 text-dark">52Gb</strong>
                   </div>
                   <div className="utils__chartist utils__chartist--success">
                     <ChartistGraph
                       data={outboundBandwidthData}
                       options={boundChartistOptions}
                       type="Line"
-                      className="height-200"
+                      className="height-250"
                     />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-xl-4">
-            <div className="card graphCard card--fullHeight">
-              <div className="card-header">
-                <div className="utils__title utils__title--flat">
-                  <strong className="text-uppercase font-size-16">Top photos</strong>
-                </div>
-              </div>
-              <div className="card-body">
-                {topPhotosData.map(item => {
-                  const actionData = (
-                    <span style={{ color: item.actionDataColor }}>{item.actionData}</span>
-                  )
-                  return (
-                    <ShortItemInfo
-                      key={item.name}
-                      img={item.img}
-                      name={item.name}
-                      note={item.note}
-                      actionData={actionData}
-                    />
-                  )
-                })}
-              </div>
-              <div className="utils__chartist utils__chartist--danger">
-                <ChartistGraph
-                  data={topPhotosGraphData}
-                  options={boundChartistOptions}
-                  type="Line"
-                  className="height-300"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-4">
-            <div className="card card--fullHeight">
-              <div className="card-header">
-                <div className="utils__title utils__title--flat">
-                  <strong className="text-uppercase font-size-16">New Users</strong>
-                </div>
-              </div>
-              <div className="card-body">
-                {newUsersData.map(item => {
-                  const actionData = (
-                    <a href="javascript: void(0);" className="btn btn-sm btn-outline-default">
-                      Follow
-                    </a>
-                  )
-                  return (
-                    <ShortItemInfo
-                      key={item.name}
-                      img={item.img}
-                      name={item.name}
-                      note={item.note}
-                      actionData={actionData}
-                    />
-                  )
-                })}
-              </div>
-            </div>
-          </div>
         </div>
         <div className="row">
           <div className="col-lg-6">
-            <div className="card card--fullHeight">
-              <div className="card-header">
-                <div className="utils__title utils__title--flat">
+            <div className="card">
+              <div className="card-header border-0 pb-0">
+                <div className="cui__utils__heading mb-0">
                   <strong className="text-uppercase font-size-16">Support cases</strong>
                 </div>
               </div>
@@ -223,7 +201,7 @@ class DashboardGamma extends React.Component {
                     <div className="mb-3">
                       <Table
                         className="utils__scrollTable"
-                        scroll={{ x: '100%' }}
+                        scroll={{ x: true }}
                         dataSource={supportCasesTableData}
                         columns={supportCasesTableColumns}
                         pagination={false}
@@ -234,20 +212,25 @@ class DashboardGamma extends React.Component {
                     <div
                       className={`h-100 d-flex flex-column justify-content-center align-items-center ${styles.chartPieExample}`}
                     >
-                      <ChartistGraph
-                        data={supportCasesPieData}
-                        type="Pie"
-                        options={supportCasesPieOptions}
-                      />
-                      <div className="text-center">
+                      <div className="mb-4">
+                        <ChartistGraph
+                          data={supportCasesPieData}
+                          type="Pie"
+                          options={supportCasesPieOptions}
+                        />
+                      </div>
+                      <div className="text-center mb-4">
                         <span className="mr-2">
-                          <Donut type="success" name="Ready" />
+                          <span className="kit__utils__donut kit__utils__donut--success"></span>
+                          Ready
                         </span>
                         <span className="mr-2">
-                          <Donut type="primary" name="In progress" />
+                          <span className="kit__utils__donut kit__utils__donut--primary"></span>
+                          In Progress
                         </span>
                         <span className="mr-2">
-                          <Donut type="danger" name="Defected" />
+                          <span className="kit__utils__donut kit__utils__donut--danger"></span>
+                          Defected
                         </span>
                       </div>
                     </div>
@@ -257,28 +240,14 @@ class DashboardGamma extends React.Component {
             </div>
           </div>
           <div className="col-lg-6">
-            <div className="card card--fullHeight">
-              <div className="card-header">
-                <div className="utils__title utils__title--flat">
+            <div className="card">
+              <div className="card-header border-0 pb-0">
+                <div className="cui__utils__heading mb-0">
                   <strong className="text-uppercase font-size-16">Finance Stats</strong>
                 </div>
               </div>
               <div className="card-body">
-                {financeStatsData.map(item => {
-                  const actionData = (
-                    <span style={{ color: item.actionDataColor }}>{item.actionData}</span>
-                  )
-                  return (
-                    <ShortItemInfo
-                      key={item.name}
-                      img={item.img}
-                      name={item.name}
-                      note={item.note}
-                      actionData={actionData}
-                      size="large"
-                    />
-                  )
-                })}
+                <List11 />
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { Table, Icon, Input, Button } from 'antd'
 import { Helmet } from 'react-helmet'
 import table from './data.json'
 
-class Orders extends React.Component {
+class EcommerceOrders extends React.Component {
   state = {
     tableData: table.data,
     data: table.data,
@@ -30,7 +30,7 @@ class Orders extends React.Component {
           }
           return {
             ...record,
-            customer: (
+            name: (
               <span>
                 {record.customer
                   .split(reg)
@@ -58,8 +58,8 @@ class Orders extends React.Component {
         dataIndex: 'id',
         key: 'id',
         render: text => (
-          <a className="utils__link--underlined" href="javascript: void(0);">
-            {`#${text}`}
+          <a className="btn btn-sm btn-light" href="#" onClick={e => e.preventDefault()}>
+            {text}
           </a>
         ),
         sorter: (a, b) => a.id - b.id,
@@ -75,7 +75,7 @@ class Orders extends React.Component {
         key: 'customer',
         sorter: (a, b) => a.name.length - b.name.length,
         render: text => (
-          <a className="utils__link--underlined" href="javascript: void(0);">
+          <a className="btn btn-sm btn-light" href="#" onClick={e => e.preventDefault()}>
             {text}
           </a>
         ),
@@ -146,18 +146,23 @@ class Orders extends React.Component {
             {text}
           </span>
         ),
+        sorter: (a, b) => a.status.length - b.status.length,
       },
       {
         title: 'Action',
         key: 'action',
         render: () => (
           <span>
-            <Button icon="edit" className="mr-1" size="small">
+            <a href="#" onClick={e => e.preventDefault()} className="btn btn-sm btn-light mr-2">
+              <i className="fe fe-edit mr-2" />
               View
-            </Button>
-            <Button icon="cross" size="small">
+            </a>
+            <a href="#" onClick={e => e.preventDefault()} className="btn btn-sm btn-light">
+              <small>
+                <i className="fe fe-trash mr-2" />
+              </small>
               Remove
-            </Button>
+            </a>
           </span>
         ),
       },
@@ -165,21 +170,30 @@ class Orders extends React.Component {
 
     return (
       <div>
-        <Helmet title="Orders" />
+        <Helmet title="Ecommerce: Orders" />
+        <div className="cui__utils__heading">
+          <strong>Ecommerce: Orders</strong>
+        </div>
         <div className="card">
-          <div className="card-header">
-            <div className="utils__title">
-              <strong>Orders</strong>
+          <div className="card-header card-header-flex">
+            <div className="d-flex flex-column justify-content-center mr-auto">
+              <h5 className="mb-0">Latest Orders</h5>
+            </div>
+            <div className="d-flex flex-column justify-content-center">
+              <a className="btn btn-primary" href="#" onClick={e => e.preventDefault()}>
+                New Order
+              </a>
             </div>
           </div>
           <div className="card-body">
-            <Table
-              className="utils__scrollTable"
-              scroll={{ x: '100%' }}
-              columns={columns}
-              dataSource={data}
-              onChange={this.handleTableChange}
-            />
+            <div className="text-nowrap">
+              <Table
+                scroll={{ x: true }}
+                columns={columns}
+                dataSource={data}
+                onChange={this.handleTableChange}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -187,4 +201,4 @@ class Orders extends React.Component {
   }
 }
 
-export default Orders
+export default EcommerceOrders

@@ -1,14 +1,20 @@
 import React from 'react'
-import { Slider, Calendar, Badge, Table, Input, Dropdown, Button, Icon, Menu } from 'antd'
-import { Helmet } from 'react-helmet'
+import { Slider, Calendar, Badge, Table, Input, Dropdown, Button, Icon, Menu, Progress } from 'antd'
 import ChartistGraph from 'react-chartist'
-import Donut from 'components/CleanUIComponents/Donut'
-import UserCard from 'components/CleanUIComponents/UserCard'
-import ProfileHeadCard from 'components/CleanUIComponents/ProfileHeadCard'
-import ProgressGroup from 'components/CleanUIComponents/ProgressGroup'
-import SliderCard from 'components/CleanUIComponents/SliderCard'
-import InfoCard from 'components/CleanUIComponents/InfoCard'
-import Chat from 'components/CleanUIComponents/Chat'
+import { Helmet } from 'react-helmet'
+import General19 from 'components/kit-widgets/General/19'
+import General23 from 'components/kit-widgets/General/23'
+import General23v1 from 'components/kit-widgets/General/23v1'
+import General24 from 'components/kit-widgets/General/24'
+import General24v1 from 'components/kit-widgets/General/24v1'
+import General14 from 'components/kit-widgets/General/14'
+import General20 from 'components/kit-widgets/General/20'
+import General20v1 from 'components/kit-widgets/General/20v1'
+import General21 from 'components/kit-widgets/General/21'
+import General21v1 from 'components/kit-widgets/General/21v1'
+import General21v2 from 'components/kit-widgets/General/21v2'
+import General21v3 from 'components/kit-widgets/General/21v3'
+import General22 from 'components/kit-widgets/General/22'
 import {
   rangeSlider,
   calendarData,
@@ -16,6 +22,7 @@ import {
   monthCartistData,
   taskTableData,
   tableData,
+  progressGroup,
 } from './data.json'
 
 // Slider Range Settings //
@@ -157,12 +164,12 @@ class DashboardBeta extends React.Component {
       {
         title: 'Name',
         dataIndex: 'name',
-        render: text => <a href="javascript: void(0);">{text}</a>,
+        render: text => <a href="">{text}</a>,
       },
       {
         title: 'Username',
         dataIndex: 'username',
-        render: text => <a href="javascript: void(0);">{text}</a>,
+        render: text => <a href="">{text}</a>,
       },
       {
         title: 'Actions',
@@ -240,78 +247,103 @@ class DashboardBeta extends React.Component {
 
     return (
       <div>
-        <Helmet title="Dashboard Beta" />
+        <Helmet title="Dashboard: Beta" />
         <div className="row">
           <div className="col-lg-12 col-xl-6">
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Account Information</strong>
                 </div>
-                <div className="utils__titleDescription">
-                  Block with important Account information
-                </div>
+                <div className="text-muted">Block with important Account information</div>
               </div>
               <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-12">
-                    <ProfileHeadCard />
-                  </div>
-                </div>
+                <General19 />
               </div>
             </div>
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Work Progress</strong>
                 </div>
-                <div className="utils__titleDescription">
-                  Block with important Work Progress information
-                </div>
+                <div className="text-muted">Block with important Work Progress information</div>
               </div>
               <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-12">
-                    <ProgressGroup />
+                <div>
+                  <strong>{progressGroup.first.name}</strong>
+                  <p className="text-muted mb-1">{progressGroup.first.description}</p>
+                  <div className="mb-3">
+                    <Progress
+                      percent={progressGroup.first.progress}
+                      status={progressGroup.first.status}
+                    />
+                  </div>
+                  <strong>{progressGroup.second.name}</strong>
+                  <p className="text-muted mb-1">{progressGroup.second.description}</p>
+                  <div className="mb-3">
+                    <Progress
+                      percent={progressGroup.second.progress}
+                      status={progressGroup.second.status}
+                    />
+                  </div>
+                  <strong>{progressGroup.third.name}</strong>
+                  <p className="text-muted mb-1">{progressGroup.third.description}</p>
+                  <div className="mb-3">
+                    <Progress
+                      percent={progressGroup.third.progress}
+                      status={progressGroup.third.status}
+                    />
+                  </div>
+                  <strong>{progressGroup.fourth.name}</strong>
+                  <p className="text-muted mb-1">{progressGroup.fourth.description}</p>
+                  <div className="mb-3">
+                    <Progress
+                      percent={progressGroup.fourth.progress}
+                      status={progressGroup.fourth.status}
+                    />
+                  </div>
+                  <strong>{progressGroup.fives.name}</strong>
+                  <p className="text-muted mb-1">{progressGroup.fives.description}</p>
+                  <div className="mb-3">
+                    <Progress percent={progressGroup.fives.progress} />
                   </div>
                 </div>
               </div>
             </div>
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Employees</strong>
                 </div>
-                <div className="utils__titleDescription">
-                  Block with Employees important information
-                </div>
+                <div className="text-muted">Block with Employees important information</div>
               </div>
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-6">
-                    <UserCard type="primary" />
+                    <div className="card bg-light border-0 mb-0">
+                      <General23 />
+                    </div>
                   </div>
                   <div className="col-md-6">
-                    <UserCard />
+                    <div className="card border-0 mb-0">
+                      <General23v1 />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Task Table</strong>
                 </div>
-                <div className="utils__titleDescription">
-                  Block with important Task Table information
-                </div>
+                <div className="text-muted">Block with important Task Table information</div>
               </div>
               <div className="card-body">
                 <div className="row">
                   <div className="col-lg-12">
                     <Table
-                      className="utils__scrollTable"
-                      scroll={{ x: '100%' }}
+                      scroll={{ x: true }}
                       columns={taskTableColumns}
                       dataSource={taskTableData}
                       rowSelection={taskTableRowSelection}
@@ -323,20 +355,20 @@ class DashboardBeta extends React.Component {
             </div>
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Information Cards</strong>
                 </div>
-                <div className="utils__titleDescription">
-                  Block with important Information Cards information
-                </div>
+                <div className="text-muted">Block with important Information Cards information</div>
               </div>
               <div className="card-body">
-                <div className="row">
-                  <div className="col-md-6">
-                    <InfoCard form="interactive" icon="database" type="danger" />
+                <div className="card bg-primary border-0 mb-4">
+                  <div className="card-body">
+                    <General24 />
                   </div>
-                  <div className="col-md-6">
-                    <InfoCard form="interactive" icon="database" btnType="success" type="success" />
+                </div>
+                <div className="card bg-light border-0 mb-0">
+                  <div className="card-body">
+                    <General24v1 />
                   </div>
                 </div>
               </div>
@@ -345,52 +377,52 @@ class DashboardBeta extends React.Component {
           <div className="col-lg-12 col-xl-6">
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Server Info</strong>
                 </div>
-                <div className="utils__titleDescription">
-                  Block with important Server Info information
-                </div>
+                <div className="text-muted">Block with important Server Info information</div>
               </div>
               <div className="card-body">
                 <div className="row">
                   <div className="col-lg-6">
-                    <SliderCard />
+                    <div className="overflow-hidden rounded card border-0 mb-0">
+                      <General20 />
+                    </div>
                   </div>
                   <div className="col-lg-6">
-                    <SliderCard inverse />
+                    <div className="overflow-hidden rounded card border-0 mb-0">
+                      <General20v1 />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Server Statistics</strong>
                 </div>
-                <div className="utils__titleDescription">
-                  Block with important Server Statistics information
-                </div>
+                <div className="text-muted">Block with important Server Statistics information</div>
               </div>
               <div className="card-body">
                 <div className="row">
                   <div className="col-lg-6">
-                    <InfoCard form="stats" icon="database" type="primary" />
-                    <InfoCard form="stats" icon="users" type="empty" />
+                    <General21 />
+                    <General21v1 />
                   </div>
                   <div className="col-lg-6">
-                    <InfoCard form="stats" icon="bullhorn" type="success" />
-                    <InfoCard form="stats" icon="price-tags" type="empty" />
+                    <General21v2 />
+                    <General21v3 />
                   </div>
                 </div>
               </div>
             </div>
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Server Configuration</strong>
                 </div>
-                <div className="utils__titleDescription">
+                <div className="text-muted">
                   Block with important Server Configuration information
                 </div>
               </div>
@@ -405,12 +437,21 @@ class DashboardBeta extends React.Component {
             </div>
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Week Revenue Statistics, Billions</strong>
                 </div>
-                <Donut type="primary" name="Nuts" />
-                <Donut type="success" name="Apples" />
-                <Donut color="yellow" name="Peaches" />
+                <span className="mr-2">
+                  <span className="kit__utils__donut kit__utils__donut--primary"></span>
+                  Nuts
+                </span>
+                <span className="mr-2">
+                  <span className="kit__utils__donut kit__utils__donut--success"></span>
+                  Apples
+                </span>
+                <span className="mr-2">
+                  <span className="kit__utils__donut kit__utils__donut--yellow"></span>
+                  Peaches
+                </span>
               </div>
               <div className="card-body">
                 <ChartistGraph
@@ -423,11 +464,17 @@ class DashboardBeta extends React.Component {
             </div>
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Month Site Visits Growth, %</strong>
                 </div>
-                <Donut type="primary" name="Income" />
-                <Donut type="success" name="Outcome" />
+                <span className="mr-2">
+                  <span className="kit__utils__donut kit__utils__donut--primary"></span>
+                  Income
+                </span>
+                <span className="mr-2">
+                  <span className="kit__utils__donut kit__utils__donut--success"></span>
+                  Outcome
+                </span>
               </div>
               <div className="card-body">
                 <ChartistGraph
@@ -440,13 +487,13 @@ class DashboardBeta extends React.Component {
             </div>
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Chat</strong>
                 </div>
-                <div className="utils__titleDescription">Block with important Chat information</div>
+                <div className="text-muted">Block with important Chat information</div>
               </div>
               <div className="card-body">
-                <Chat />
+                <General14 />
               </div>
             </div>
           </div>
@@ -454,26 +501,12 @@ class DashboardBeta extends React.Component {
         <div className="row">
           <div className="col-lg-12">
             <div className="card">
-              <div className="card-header">
-                <div className="row">
-                  <div className="col-lg-3">
-                    <InfoCard form="bordered" icon="home" type="danger" />
-                  </div>
-                  <div className="col-lg-3">
-                    <InfoCard form="bordered" icon="key" type="primary" />
-                  </div>
-                  <div className="col-lg-3">
-                    <InfoCard form="bordered" icon="play2" type="warning" />
-                  </div>
-                  <div className="col-lg-3">
-                    <InfoCard form="bordered" icon="database" type="sucess" />
-                  </div>
-                </div>
-              </div>
               <div className="card-body">
+                <div className="mb-4">
+                  <General22 />
+                </div>
                 <Table
-                  className="utils__scrollTable"
-                  scroll={{ x: '100%' }}
+                  scroll={{ x: true }}
                   columns={tableColumns}
                   dataSource={data}
                   onChange={this.handleChange}
@@ -482,12 +515,10 @@ class DashboardBeta extends React.Component {
             </div>
             <div className="card">
               <div className="card-header">
-                <div className="utils__title">
+                <div className="cui__utils__heading mb-0">
                   <strong>Calendar</strong>
                 </div>
-                <div className="utils__titleDescription">
-                  Block with important Calendar information
-                </div>
+                <div className="text-muted">Block with important Calendar information</div>
               </div>
               <div className="card-body">
                 <Calendar dateCellRender={dateCellRender} />

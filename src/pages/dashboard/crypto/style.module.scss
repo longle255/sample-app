@@ -1,4 +1,4 @@
-@import 'assets/styles/mixins.scss';
+@import 'components/kit-core/mixins.scss';
 
 .crypto {
   display: flex;
@@ -11,9 +11,6 @@
 }
 
 .table {
-  :global(.ant-table) {
-    color: $black;
-  }
   :global(.ant-pagination) {
     margin-bottom: 0;
   }
@@ -43,12 +40,18 @@
 
 .listItem {
   display: block;
-  background: $white;
+  background: $gray-1;
   padding: rem(10) rem(20);
   margin-bottom: rem(10);
   border-radius: 5px;
   color: $black;
   transition: all 0.1s ease-in-out;
+
+  @at-root {
+    :global(.cui__layout__grayBackground) & {
+      background: $white;
+    }
+  }
 
   &:hover {
     background: $primary;
@@ -157,4 +160,16 @@
   font-weight: bold;
   text-transform: uppercase;
   font-size: rem(12);
+}
+
+// dark theme
+:global(body.kit__dark) {
+  .listItem {
+    background: $dark-gray-4;
+
+    &:hover {
+      background: $primary;
+      color: $white;
+    }
+  }
 }

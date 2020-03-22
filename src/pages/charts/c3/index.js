@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import C3Chart from 'react-c3js'
 
-class C3Items extends React.Component {
+class ChartsC3 extends React.Component {
   render() {
     const colors = {
       primary: '#01a8fe',
@@ -511,7 +511,10 @@ class C3Items extends React.Component {
     }
     const pie = {
       data: {
-        columns: [['Primary', 30], ['Success', 120]],
+        columns: [
+          ['Primary', 30],
+          ['Success', 120],
+        ],
         type: 'pie',
       },
       color: {
@@ -520,7 +523,10 @@ class C3Items extends React.Component {
     }
     const donut = {
       data: {
-        columns: [['Danger', 30], ['Success', 120]],
+        columns: [
+          ['Danger', 30],
+          ['Success', 120],
+        ],
         type: 'donut',
       },
       color: {
@@ -532,7 +538,10 @@ class C3Items extends React.Component {
     }
     const step = {
       data: {
-        columns: [['Primary', 300, 350, 300, 0, 0, 100], ['Success', 130, 100, 140, 200, 150, 50]],
+        columns: [
+          ['Primary', 300, 350, 300, 0, 0, 100],
+          ['Success', 130, 100, 140, 200, 150, 50],
+        ],
         types: {
           Primary: 'step',
           Success: 'area-step',
@@ -544,7 +553,10 @@ class C3Items extends React.Component {
     }
     const area = {
       data: {
-        columns: [['Primary', 300, 350, 300, 0, 0, 0], ['Success', 130, 100, 140, 200, 150, 50]],
+        columns: [
+          ['Primary', 300, 350, 300, 0, 0, 0],
+          ['Success', 130, 100, 140, 200, 150, 50],
+        ],
         types: {
           Primary: 'area',
           Success: 'area-spline',
@@ -557,53 +569,36 @@ class C3Items extends React.Component {
 
     return (
       <div>
-        <Helmet title="C3.js" />
-        <section className="card">
-          <div className="card-header">
-            <div className="utils__title">
-              <strong>C3</strong>
-              <a
-                href="http://c3js.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-sm btn-primary ml-4"
-              >
-                Official Documentation <i className="icmn-link ml-1" />
-              </a>
-            </div>
-          </div>
+        <Helmet title="Charts / C3" />
+        <div className="kit__utils__heading">
+          <h5>
+            <span className="mr-3">C3</span>
+            <a
+              href="http://c3js.org/"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="btn btn-sm btn-light"
+            >
+              Official Documentation
+              <i className="fe fe-corner-right-up" />
+            </a>
+          </h5>
+        </div>
+        <div className="card">
           <div className="card-body">
             <div className="row">
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Simple Line</strong>
                 </h5>
-                <p className="text-muted">
-                  Element: read{' '}
-                  <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
-                    official documentation
-                    <small>
-                      <i className="icmn-link ml-1" />
-                    </small>
-                  </a>
-                </p>
                 <div className="mb-5">
                   <C3Chart data={line.data} color={line.color} axis={line.axis} grid={line.grid} />
                 </div>
               </div>
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Spline</strong>
                 </h5>
-                <p className="text-muted">
-                  Element: read{' '}
-                  <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
-                    official documentation
-                    <small>
-                      <i className="icmn-link ml-1" />
-                    </small>
-                  </a>
-                </p>
                 <div className="mb-5">
                   <C3Chart
                     data={spline.data}
@@ -615,55 +610,28 @@ class C3Items extends React.Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Step</strong>
                 </h5>
-                <p className="text-muted">
-                  Element: read{' '}
-                  <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
-                    official documentation
-                    <small>
-                      <i className="icmn-link ml-1" />
-                    </small>
-                  </a>
-                </p>
                 <div className="mb-5">
                   <C3Chart data={step.data} color={step.color} />
                 </div>
               </div>
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Area</strong>
                 </h5>
-                <p className="text-muted">
-                  Element: read{' '}
-                  <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
-                    official documentation
-                    <small>
-                      <i className="icmn-link ml-1" />
-                    </small>
-                  </a>
-                </p>
                 <div className="mb-5">
                   <C3Chart data={area.data} color={area.color} />
                 </div>
               </div>
             </div>
             <div className="row">
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Scatter</strong>
                 </h5>
-                <p className="text-muted">
-                  Element: read{' '}
-                  <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
-                    official documentation
-                    <small>
-                      <i className="icmn-link ml-1" />
-                    </small>
-                  </a>
-                </p>
                 <div className="mb-5">
                   <C3Chart
                     data={scatter.data}
@@ -673,38 +641,20 @@ class C3Items extends React.Component {
                   />
                 </div>
               </div>
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Bar</strong>
                 </h5>
-                <p className="text-muted">
-                  Element: read{' '}
-                  <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
-                    official documentation
-                    <small>
-                      <i className="icmn-link ml-1" />
-                    </small>
-                  </a>
-                </p>
                 <div className="mb-5">
                   <C3Chart data={bar.data} color={bar.color} grid={bar.grid} bar={bar.bar} />
                 </div>
               </div>
             </div>
             <div className="row">
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Stacked Bar</strong>
                 </h5>
-                <p className="text-muted">
-                  Element: read{' '}
-                  <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
-                    official documentation
-                    <small>
-                      <i className="icmn-link ml-1" />
-                    </small>
-                  </a>
-                </p>
                 <div className="mb-5">
                   <C3Chart
                     data={stackedBar.data}
@@ -714,19 +664,10 @@ class C3Items extends React.Component {
                   />
                 </div>
               </div>
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Combination</strong>
                 </h5>
-                <p className="text-muted">
-                  Element: read{' '}
-                  <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
-                    official documentation
-                    <small>
-                      <i className="icmn-link ml-1" />
-                    </small>
-                  </a>
-                </p>
                 <div className="mb-5">
                   <C3Chart
                     data={combination.data}
@@ -737,8 +678,8 @@ class C3Items extends React.Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Sub Chart</strong>
                 </h5>
                 <p className="text-muted">
@@ -746,7 +687,7 @@ class C3Items extends React.Component {
                   <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
                     official documentation
                     <small>
-                      <i className="icmn-link ml-1" />
+                      <i className="fe fe-link ml-1" />
                     </small>
                   </a>
                 </p>
@@ -758,65 +699,38 @@ class C3Items extends React.Component {
                   />
                 </div>
               </div>
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Zoom</strong>
                 </h5>
-                <p className="text-muted">
-                  Element: read{' '}
-                  <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
-                    official documentation
-                    <small>
-                      <i className="icmn-link ml-1" />
-                    </small>
-                  </a>
-                </p>
                 <div className="mb-5">
                   <C3Chart data={zoom.data} color={zoom.color} zoom={zoom.zoom} />
                 </div>
               </div>
             </div>
             <div className="row">
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Pie Chart</strong>
                 </h5>
-                <p className="text-muted">
-                  Element: read{' '}
-                  <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
-                    official documentation
-                    <small>
-                      <i className="icmn-link ml-1" />
-                    </small>
-                  </a>
-                </p>
                 <div className="mb-5">
                   <C3Chart data={pie.data} color={pie.color} />
                 </div>
               </div>
-              <div className="col-lg-6">
-                <h5 className="text-black">
+              <div className="col-xl-6 col-lg-12">
+                <h5 className="mb-4">
                   <strong>Donut Chart</strong>
                 </h5>
-                <p className="text-muted">
-                  Element: read{' '}
-                  <a href="http://c3js.org/" target="_blank" rel="noopener noreferrer">
-                    official documentation
-                    <small>
-                      <i className="icmn-link ml-1" />
-                    </small>
-                  </a>
-                </p>
                 <div className="mb-5">
                   <C3Chart data={donut.data} color={donut.color} donut={donut.donut} />
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     )
   }
 }
 
-export default C3Items
+export default ChartsC3

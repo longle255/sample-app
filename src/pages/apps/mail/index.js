@@ -1,55 +1,20 @@
 import React from 'react'
-import { Tabs, Input, Icon, Table, Button } from 'antd'
+import { Input, Icon, Tabs, Table } from 'antd'
+import { Scrollbars } from 'react-custom-scrollbars'
 import { Helmet } from 'react-helmet'
-import styles from './style.module.scss'
-import data from './data.json'
+import mails from './data.json'
+import style from './style.module.scss'
 
 const { TabPane } = Tabs
-const { Search } = Input
 
-const mailTab = category => (
-  <div className={styles.tab}>
-    <div className={styles.tabContent}>
-      <div className="mb-1">
-        <strong>
-          {category.mailCount > 0 ? `${category.title} (${category.mailCount})` : category.title}
-        </strong>
-      </div>
-      {category.mailCount > 0 && (
-        <div>
-          <small className={styles.tabTime}>8:34PM</small>
-          <div className={styles.tabName}>Barak Obama</div>
-          <div className={styles.tabText}>
-            Hello! Where you are now? I want to talk. Hello! Where you are now? I want to talk
-          </div>
-        </div>
-      )}
-    </div>
-  </div>
-)
+const rowSelection = {
+  onChange: (selectedRowKeys, selectedRows) => {
+    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
+  },
+}
 
-class MailList extends React.Component {
-  state = {
-    mailData: data.mailData,
-    mailCategories: data.mailData.mailCategories,
-    activeCategory: 'inbox',
-    mails: data.mailData.inbox,
-  }
-
-  changeCategory = key => {
-    const { mailData } = this.state
-    const activeCategory = key
-    const mails = mailData[activeCategory]
-
-    this.setState({
-      activeCategory,
-      mails,
-    })
-  }
-
+class AppsMail extends React.Component {
   render() {
-    const { mailCategories, mails, activeCategory } = this.state
-
     const columns = [
       {
         title: '',
@@ -67,7 +32,11 @@ class MailList extends React.Component {
         title: 'From',
         dataIndex: 'from',
         key: 'from',
-        render: text => <a href="javascript: void(0);">{text}</a>,
+        render: text => (
+          <a href="#" onClick={e => e.preventDefault()}>
+            {text}
+          </a>
+        ),
         sorter: (a, b) => a.from.length - b.from.length,
       },
       {
@@ -96,68 +65,134 @@ class MailList extends React.Component {
 
     return (
       <div>
-        <Helmet title="Mail App" />
-        <div className={`card ${styles.mail}`}>
-          <div className={styles.sidebar}>
-            <div className={styles.sidebarHeader}>
-              <Search placeholder="input search text" style={{ width: '100%' }} />
+        <Helmet title="Mail" />
+        <div className="row">
+          <div className="col-12 col-md-3">
+            <div className="mb-4">
+              <Input
+                prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Search mail..."
+              />
             </div>
-            <div className={styles.tabs}>
-              <Tabs
-                defaultActiveKey={activeCategory}
-                tabPosition="left"
-                onChange={this.changeCategory}
+            <div className={style.categories}>
+              <Scrollbars
+                autoHide
+                renderThumbVertical={({ ...props }) => (
+                  <div
+                    {...props}
+                    style={{
+                      width: '5px',
+                      borderRadius: 'inherit',
+                      backgroundColor: 'rgba(195, 190, 220, 0.4)',
+                      left: '1px',
+                    }}
+                  />
+                )}
               >
-                {mailCategories.map(category => (
-                  <TabPane tab={mailTab(category)} key={category.key} />
-                ))}
-              </Tabs>
+                <div className="d-flex flex-column">
+                  <a
+                    href="#"
+                    onClick={e => e.preventDefault()}
+                    className={`${style.category} ${style.current} text-dark font-size-18 font-weight-bold`}
+                  >
+                    <span className="text-truncate">Inbox</span>
+                    <span>(2)</span>
+                  </a>
+                  <a
+                    href="#"
+                    onClick={e => e.preventDefault()}
+                    className={`${style.category} text-dark font-size-18`}
+                  >
+                    <span className="text-truncate">Snoozed</span>
+                  </a>
+                  <a
+                    href="#"
+                    onClick={e => e.preventDefault()}
+                    className={`${style.category} text-dark font-size-18`}
+                  >
+                    <span className="text-truncate">Sent</span>
+                  </a>
+                  <a
+                    href="#"
+                    onClick={e => e.preventDefault()}
+                    className={`${style.category} text-dark font-size-18 font-weight-bold`}
+                  >
+                    <span className="text-truncate">Drafts</span>
+                    <span>(1)</span>
+                  </a>
+                  <a
+                    href="#"
+                    onClick={e => e.preventDefault()}
+                    className={`${style.category} text-dark font-size-18`}
+                  >
+                    <span className="text-truncate">Spam</span>
+                  </a>
+                </div>
+              </Scrollbars>
             </div>
           </div>
-          <div className={styles.content}>
-            <div className={styles.contentHeader}>
-              <div className="card-header clearfix">
-                <div className="pull-right">
-                  <Button type="primary">Compose mail</Button>
-                </div>
-                <Tabs defaultActiveKey="1" tabPosition="top">
+          <div className="col-12 col-md-9">
+            <div className="card">
+              <div className="card-header card-header-flex">
+                <Tabs defaultActiveKey="1" className="mr-auto kit-tabs-bold">
+                  <TabPane tab="Notifications" key="1" />
                   <TabPane
                     tab={
                       <span>
-                        <Icon type="home" />
-                        Primary
-                      </span>
-                    }
-                    key="1"
-                  />
-                  <TabPane
-                    tab={
-                      <span>
-                        <Icon type="message" />
                         Social
+                        <span className=" ml-2 badge badge-primary text-uppercase">4 new</span>
                       </span>
                     }
                     key="2"
                   />
-                  <TabPane
-                    tab={
-                      <span>
-                        <Icon type="tags" />
-                        Promotion
-                      </span>
-                    }
-                    key="3"
-                  />
+                  <TabPane tab="Primary" key="3" />
                 </Tabs>
+                <div className="d-inline-flex align-items-center">
+                  <a
+                    href="#"
+                    onClick={e => e.preventDefault()}
+                    className="btn btn-sm btn-light mr-2"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title=""
+                    data-original-title="Unlock Account"
+                  >
+                    <i className="fe fe-unlock" />
+                  </a>
+                  <a
+                    href="#"
+                    onClick={e => e.preventDefault()}
+                    className="btn btn-sm btn-light mr-2"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title=""
+                    data-original-title="Mark as important"
+                  >
+                    <i className="fe fe-star" />
+                  </a>
+                  <a
+                    href="#"
+                    onClick={e => e.preventDefault()}
+                    className="btn btn-sm btn-light"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title=""
+                    data-original-title="Delete user"
+                  >
+                    <i className="fe fe-trash" />
+                  </a>
+                </div>
               </div>
-            </div>
-            <div className={styles.contentWrapper}>
-              <Table
-                className="utils__scrollTable"
-                scroll={{ x: '100%' }}
-                columns={columns}
-                dataSource={mails}
-              />
+              <div className="card-body">
+                <div className="kit__utils__scrollTable">
+                  <Table
+                    scroll={{ x: true }}
+                    columns={columns}
+                    rowSelection={rowSelection}
+                    dataSource={mails}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -166,4 +201,4 @@ class MailList extends React.Component {
   }
 }
 
-export default MailList
+export default AppsMail

@@ -1,39 +1,28 @@
 import React from 'react'
 import { Tooltip } from 'antd'
 import { Helmet } from 'react-helmet'
+import { iconsData } from './data.json'
 
-import data from './data.json'
-
-class FontAwesomeIcons extends React.Component {
-  state = {
-    iconsData: [],
-  }
-
-  componentWillMount() {
-    this.setState({
-      iconsData: data.iconsData,
-    })
-  }
-
+class IconsFontawesome extends React.Component {
   render() {
-    const { iconsData } = this.state
     return (
       <div>
-        <Helmet title="FontAwesome Icons" />
-        <section className="card">
-          <div className="card-header">
-            <div className="utils__title">
-              <strong>FontAwesome</strong>
-              <a
-                href="http://fontawesome.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-sm btn-primary ml-4"
-              >
-                Official Documentation <i className="icmn-link ml-1" />
-              </a>
-            </div>
-          </div>
+        <Helmet title="Icons / Fontawesome" />
+        <div className="kit__utils__heading">
+          <h5>
+            <span className="mr-3">Fontawesome</span>
+            <a
+              href="http://fontawesome.io/"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="btn btn-sm btn-light"
+            >
+              Official Documentation
+              <i className="fe fe-corner-right-up" />
+            </a>
+          </h5>
+        </div>
+        <div className="card">
           <div className="card-body">
             <div className="row">
               <div className="col-lg-12">
@@ -55,7 +44,7 @@ class FontAwesomeIcons extends React.Component {
                     <h3 className="text-block mt-5 mb-4">
                       <strong>{iconsSet.setName}</strong>
                     </h3>
-                    <ul className="utils__iconsBlock list-unstyled">
+                    <ul className="kit__utils__iconPresent list-unstyled">
                       {iconsSet.icons.map(icon => (
                         <Tooltip title={`fa ${icon}`} key={icon}>
                           <li>
@@ -69,10 +58,10 @@ class FontAwesomeIcons extends React.Component {
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     )
   }
 }
 
-export default FontAwesomeIcons
+export default IconsFontawesome

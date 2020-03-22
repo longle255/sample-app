@@ -35,7 +35,8 @@ class DashboardCrypto extends React.Component {
     })
   }
 
-  handleMyOpenOrders = () => {
+  handleMyOpenOrders = e => {
+    e.preventDefault()
     const { myOpenOrders } = this.state
     this.setState({
       myOpenOrders: {
@@ -54,7 +55,8 @@ class DashboardCrypto extends React.Component {
     }, 1500)
   }
 
-  handleMyOrderHistory = () => {
+  handleMyOrderHistory = e => {
+    e.preventDefault()
     const { myOrderHistory } = this.state
 
     this.setState({
@@ -201,7 +203,7 @@ class DashboardCrypto extends React.Component {
         width: 60,
         align: 'right',
         render: () => (
-          <a href="javascript: void(0);" className="utils__link--blue mr-2">
+          <a href="#" className="utils__link--blue mr-2">
             <strong>SELL</strong>
           </a>
         ),
@@ -215,7 +217,7 @@ class DashboardCrypto extends React.Component {
         key: 'sell',
         width: 60,
         render: () => (
-          <a href="javascript: void(0);" className="utils__link--blue ml-2">
+          <a href="#" className="utils__link--blue ml-2">
             <strong>BUY</strong>
           </a>
         ),
@@ -249,7 +251,7 @@ class DashboardCrypto extends React.Component {
         <Helmet title="Dashboard Crypto" />
         <div className={styles.crypto}>
           <div className={styles.listMobile}>
-            <div className="utils__title utils__title--flat mb-3">
+            <div className="cui__utils__heading">
               <strong>Markets</strong>
             </div>
             <Select showSearch size="large" defaultValue="btc" style={{ width: '100%' }}>
@@ -305,10 +307,10 @@ class DashboardCrypto extends React.Component {
           </div>
           <div className={styles.list}>
             <Affix offsetTop={20}>
-              <div className="utils__title utils__title--flat mb-3">
+              <div className="cui__utils__heading">
                 <strong>Markets</strong>
               </div>
-              <a href="javascript: void(0);" className={styles.listItem}>
+              <a href="#" className={styles.listItem}>
                 <span className={styles.listPercents}>
                   <span>11.7%</span>
                   0.00016985
@@ -318,10 +320,7 @@ class DashboardCrypto extends React.Component {
                   97.20
                 </span>
               </a>
-              <a
-                href="javascript: void(0);"
-                className={`${styles.listItem} ${styles.listItemNegative}`}
-              >
+              <a href="#" className={`${styles.listItem} ${styles.listItemNegative}`}>
                 <span className={styles.listPercents}>
                   <span>67.5%</span>
                   0.00016985
@@ -331,10 +330,7 @@ class DashboardCrypto extends React.Component {
                   8.26
                 </span>
               </a>
-              <a
-                href="javascript: void(0);"
-                className={`${styles.listItem} ${styles.listItemNegative}`}
-              >
+              <a href="#" className={`${styles.listItem} ${styles.listItemNegative}`}>
                 <span className={styles.listPercents}>
                   <span>-22.9%</span>
                   0.00016985
@@ -344,7 +340,7 @@ class DashboardCrypto extends React.Component {
                   5.20
                 </span>
               </a>
-              <a href="javascript: void(0);" className={styles.listItem}>
+              <a href="#" className={styles.listItem}>
                 <span className={styles.listPercents}>
                   <span>-12.3%</span>
                   0.00016985
@@ -354,7 +350,7 @@ class DashboardCrypto extends React.Component {
                   3.20
                 </span>
               </a>
-              <a href="javascript: void(0);" className={styles.listItem}>
+              <a href="#" className={styles.listItem}>
                 <span className={styles.listPercents}>
                   <span>+4.3%</span>
                   0.00036234
@@ -364,10 +360,7 @@ class DashboardCrypto extends React.Component {
                   5.64
                 </span>
               </a>
-              <a
-                href="javascript: void(0);"
-                className={`${styles.listItem} ${styles.listItemNegative}`}
-              >
+              <a href="#" className={`${styles.listItem} ${styles.listItemNegative}`}>
                 <span className={styles.listPercents}>
                   <span>-4.2%</span>
                   0.00035685
@@ -377,7 +370,7 @@ class DashboardCrypto extends React.Component {
                   6.36
                 </span>
               </a>
-              <a href="javascript: void(0);" className={styles.listItem}>
+              <a href="#" className={styles.listItem}>
                 <span className={styles.listPercents}>
                   <span>-1.7%</span>
                   0.00000985
@@ -387,7 +380,7 @@ class DashboardCrypto extends React.Component {
                   6.35
                 </span>
               </a>
-              <a href="javascript: void(0);" className={styles.listItem}>
+              <a href="#" className={styles.listItem}>
                 <span className={styles.listPercents}>
                   <span>-2.8%</span>
                   0.00000152
@@ -400,17 +393,17 @@ class DashboardCrypto extends React.Component {
             </Affix>
           </div>
           <div className={styles.content}>
-            <div className="utils__title utils__title--flat mb-3">
+            <div className="cui__utils__heading">
               <strong>Bittrex Live Market</strong>
             </div>
-            <div className="card">
+            <div className="card bg-white">
               <div className="card-body">
                 <div style={{ height: 400 }}>
                   {graphData !== null && <TradeChart type="hybrid" data={graphData} />}
                 </div>
               </div>
             </div>
-            <div className="utils__title utils__title--flat mb-3">
+            <div className="cui__utils__heading">
               <strong>Order Book</strong>
             </div>
             <div className="card">
@@ -419,8 +412,7 @@ class DashboardCrypto extends React.Component {
                   <div className={styles.orderLeft}>
                     <div className={`${styles.table} text-nowrap`}>
                       <Table
-                        className="utils__scrollTable"
-                        scroll={{ x: '100%' }}
+                        scroll={{ x: true }}
                         columns={ordersSellColumns}
                         dataSource={orderBook.sell}
                         pagination={{ position: 'bottom' }}
@@ -488,10 +480,7 @@ class DashboardCrypto extends React.Component {
                               <div>12.92520000 BTC</div>
                               <div>1450.00 USD</div>
                               <div>
-                                <a
-                                  href="javascript: void(0);"
-                                  className="utils__link--blue utils__link--underlined"
-                                >
+                                <a href="#" className="utils__link--blue utils__link--underlined">
                                   <strong>Max Buy</strong>
                                 </a>
                               </div>
@@ -538,10 +527,7 @@ class DashboardCrypto extends React.Component {
                               <div>12.92520000 BTC</div>
                               <div>1450.00 USD</div>
                               <div>
-                                <a
-                                  href="javascript: void(0);"
-                                  className="utils__link--blue utils__link--underlined"
-                                >
+                                <a href="#" className="utils__link--blue utils__link--underlined">
                                   <strong>Max SELL</strong>
                                 </a>
                               </div>
@@ -565,7 +551,7 @@ class DashboardCrypto extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="utils__title utils__title--flat mb-3">
+            <div className="cui__utils__heading">
               <strong>Market History</strong>
             </div>
             <div className="card">
@@ -573,7 +559,7 @@ class DashboardCrypto extends React.Component {
                 <div className={`${styles.table} text-nowrap`}>
                   <Table
                     className="utils__scrollTable"
-                    scroll={{ x: '100%' }}
+                    scroll={{ x: true }}
                     columns={marketHistoryColumns}
                     dataSource={marketHistory.data}
                     pagination={{ position: 'bottom' }}
@@ -582,14 +568,14 @@ class DashboardCrypto extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="utils__title utils__title--flat mb-3">
+            <div className="cui__utils__heading">
               <strong>My Open Orders</strong>
             </div>
             <div className="card">
               <div className="card-body">
                 <div>
                   {!myOpenOrders.loaded && (
-                    <a href="javascript: void(0);" onClick={this.handleMyOpenOrders}>
+                    <a href="#" onClick={this.handleMyOpenOrders}>
                       <Spin spinning={myOpenOrders.loading}>
                         <Alert
                           className={styles.warning}
@@ -603,7 +589,7 @@ class DashboardCrypto extends React.Component {
                     <div className={`${styles.table} text-nowrap`}>
                       <Table
                         className="utils__scrollTable"
-                        scroll={{ x: '100%' }}
+                        scroll={{ x: true }}
                         columns={myOrderColumns}
                         dataSource={myOpenOrders.data}
                         pagination={{ position: 'bottom' }}
@@ -614,14 +600,14 @@ class DashboardCrypto extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="utils__title utils__title--flat mb-3">
+            <div className="cui__utils__heading">
               <strong>My Order History</strong>
             </div>
             <div className="card">
               <div className="card-body">
                 <div>
                   {!myOrderHistory.loaded && (
-                    <a href="javascript: void(0);" onClick={this.handleMyOrderHistory}>
+                    <a href="#" onClick={this.handleMyOrderHistory}>
                       <Spin spinning={myOrderHistory.loading}>
                         <Alert
                           className={styles.warning}
@@ -635,7 +621,7 @@ class DashboardCrypto extends React.Component {
                     <div className={`${styles.table} text-nowrap`}>
                       <Table
                         className="utils__scrollTable"
-                        scroll={{ x: '100%' }}
+                        scroll={{ x: true }}
                         columns={myOrderColumns}
                         dataSource={myOpenOrders.data}
                         pagination={{ position: 'bottom' }}

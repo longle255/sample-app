@@ -1,7 +1,19 @@
 {
-  "extends": ["react-app", "airbnb", "prettier"],
+  "extends": [
+    "react-app",
+    // "airbnb",
+    // "prettier"
+  ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js",".jsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
     "no-useless-escape": "off",
     "no-script-url": "off",
     "jsx-a11y/anchor-has-content": "off",
@@ -18,7 +30,8 @@
     "no-use-before-define": 0,
     "no-param-reassign": 0,
     "import/no-unresolved": 0,
-    "no-console": 0
+    "no-console": 0,
+    "react/no-multi-comp": 0,
   },
   "parserOptions": {
     "ecmaFeatures": {

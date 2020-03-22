@@ -1,225 +1,150 @@
 import React from 'react'
-import { Carousel, Breadcrumb, Rate, Select, Tooltip, Button, Icon, Tabs } from 'antd'
 import { Helmet } from 'react-helmet'
-import styles from './style.module.scss'
+import { Select, Tabs } from 'antd'
+import General16 from 'components/kit-widgets/General/16'
+import style from './style.module.scss'
 import data from './data.json'
 
-const { TabPane } = Tabs
 const { Option } = Select
+const { TabPane } = Tabs
 
-class ProductDetails extends React.Component {
+class EcommerceProductDetails extends React.Component {
   state = {
-    imgActiveStatus: [],
-    images: data.images,
-    sku: data.sku,
-    name: data.name,
-    rate: data.rate,
-    price: data.price,
-    oldPrice: data.oldPrice,
-    shortDescr: data.shortDescr,
-    description: data.description,
-    properties: data.properties,
+    favorite: false,
+    images: data.descr.images,
+    activeImgIndex: 0,
   }
 
-  componentWillMount() {
-    this.generateImgStatus()
-  }
-
-  generateImgStatus = () => {
-    const { imgActiveStatus, images } = this.state
-    images.forEach((img, index) => {
-      imgActiveStatus[index] = 'not-active'
-      if (index === 0) {
-        imgActiveStatus[0] = 'active'
-      }
-    })
-  }
-
-  setActiveImg = imgNumber => {
-    const { imgActiveStatus } = this.state
-    imgActiveStatus.forEach((imgStatus, index) => {
-      imgActiveStatus[index] = 'not-active'
-      if (imgNumber === index) {
-        imgActiveStatus[index] = 'active'
-      }
-    })
-    this.setState({
-      imgActiveStatus,
-    })
-  }
-
-  refSlider = node => {
-    this.slider = node
-  }
-
-  changeSlide = (e, index) => {
+  setFavorite = e => {
     e.preventDefault()
-    this.slider.slick.innerSlider.slickGoTo(index)
-    this.setActiveImg(index)
+    const { favorite } = this.state
+    this.setState({
+      favorite: !favorite,
+    })
+  }
+
+  setActiveImg = (e, index) => {
+    e.preventDefault()
+    this.setState({
+      activeImgIndex: index,
+    })
   }
 
   render() {
-    const {
-      imgActiveStatus,
-      images,
-      sku,
-      name,
-      rate,
-      price,
-      oldPrice,
-      shortDescr,
-      description,
-      properties,
-    } = this.state
+    const { favorite, images, activeImgIndex } = this.state
 
     return (
       <div>
-        <Helmet title="Products Details" />
-        <section className="card">
-          <div className="card-header">
-            <div className="utils__title">
-              <strong>Product Details</strong>
-            </div>
-          </div>
+        <Helmet title="Ecommerce: Product Details" />
+        <div className="cui__utils__heading">
+          <strong>Ecommerce: Product Details</strong>
+        </div>
+        <div className="card overflow-hidden">
+          <div className={style.new}>New</div>
           <div className="card-body">
             <div className="row">
               <div className="col-lg-4">
-                <div className={styles.item}>
-                  <div className={styles.img}>
-                    <div className={styles.status}>
-                      <span className={styles.statusTitle}>New</span>
-                    </div>
-                    <div className={`${styles.like} ${styles.selectedLike}`}>
-                      <i className="icmn-heart" />
-                    </div>
-                    <Carousel ref={this.refSlider} autoplay={false} dots={false} effect="fade">
-                      {images.map(image => (
-                        <div key={image}>
-                          <img className={styles.img} src={image} alt="" />
-                        </div>
-                      ))}
-                    </Carousel>
-                  </div>
+                <a
+                  className={`${style.favorite} ${favorite ? 'text-dark' : 'text-gray-3'}`}
+                  href="#"
+                  onClick={this.setFavorite}
+                >
+                  <i className="fe fe-heart font-size-21" />
+                </a>
+                <div className={`${style.image} height-250 mb-3`}>
+                  <img className="img-fluid" src={images[activeImgIndex]} alt="Product" />
                 </div>
-                <div className={`${styles.photos} clearfix`}>
+                <div className="d-flex flex-wrap mb-3">
                   {images.map((image, index) => (
                     <a
-                      href="javascript: void(0)"
-                      key={image}
+                      href="#"
+                      className={`${index === activeImgIndex ? 'border-primary' : ''} ${
+                        style.thumb
+                      } width-100 height-100 border m-2`}
                       onClick={e => {
-                        this.changeSlide(e, index)
+                        this.setActiveImg(e, index)
                       }}
-                      className={`${styles.photosItem} ${
-                        imgActiveStatus[index] === 'active' ? styles.photosItemActive : ''
-                      }`}
+                      key={image}
                     >
-                      <img src={image} alt="" />
+                      <img className="img-fluid" src={image} alt="Product" />
                     </a>
                   ))}
                 </div>
               </div>
               <div className="col-lg-8">
-                <div className={styles.breadcrumbs}>
-                  <Breadcrumb separator="">
-                    <Breadcrumb.Item>
-                      <span className={styles.breadcrumbItem}>
-                        <a href="javascript: void(0);">Catalog</a>
-                      </span>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item>
-                      <span className={styles.breadcrumbItem}>
-                        <a href="javascript: void(0);">Chairs</a>
-                      </span>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item>
-                      <span className={styles.breadcrumbItem}>
-                        <a href="javascript: void(0);">White</a>
-                      </span>
-                    </Breadcrumb.Item>
-                  </Breadcrumb>
+                <div className="font-size-24 font-weight-bold text-dark mb-2">
+                  $199.28 <del className="align-text-top font-size-14">$299.28</del>
                 </div>
-                <div className={styles.sku}>
-                  {`SKU: #${sku}`}
-                  <br />
-                  <div className={styles.raiting}>
-                    <Rate value={rate} disabled allowHalf />
-                  </div>
-                </div>
-                <h4 className={styles.mainTitle}>
-                  <strong>{name}</strong>
-                </h4>
-                <div className={styles.price}>
-                  {`$${price}`}
-                  {oldPrice && <div className={styles.priceBefore}>{`$${oldPrice}`}</div>}
-                </div>
-                <hr />
-                <div className={`mb-1 ${styles.descr}`}>
-                  <p>{shortDescr}</p>
-                </div>
-                <div className="row">
-                  <div className="col-lg-6">
-                    <div className={styles.optionTitle}>Color</div>
-                    <div className={styles.option}>
-                      <Select defaultValue="Red" size="small" style={{ width: 120 }}>
-                        <Option value="red">Red</Option>
-                        <Option value="black">Black</Option>
-                        <Option value="cyan">Cyan</Option>
-                        <Option value="blue">Blue</Option>
-                      </Select>
-                    </div>
-                    <div className={styles.optionTitle}>Available Size</div>
-                    <div className={styles.option}>
-                      <div className={styles.sizes}>
-                        <Tooltip placement="top" title="Size S">
-                          <span>S</span>
-                        </Tooltip>
-                        <Tooltip placement="top" title="Size M">
-                          <span title="Size M">M</span>
-                        </Tooltip>
-                        <Tooltip placement="top" title="Size XL">
-                          <span>XL</span>
-                        </Tooltip>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-                <div className={styles.controls}>
-                  <Button type="primary" size="large">
-                    <Icon type="shopping-cart" />
-                    Buy now
-                  </Button>
-                  <a href="javascript: void(0);" className="btn btn-link">
-                    <i className="icmn-heart mr-1" />
-                    Add to Wishlist
-                  </a>
-                  <a href="javascript: void(0);" className="btn btn-link">
-                    <i className="icmn-stats-bars mr-1" />
-                    Add to Compare
+                <div className="pb-3 mb-4 border-bottom">
+                  <a href="" className="text-blue font-size-18">
+                    TP-Link AC1750 Smart WiFi Router - Dual
+                    <br />
+                    Band Gigabit Wireless Internet Routers for
+                    <br />
+                    Home
                   </a>
                 </div>
-                <div className={styles.info}>
-                  <Tabs defaultActiveKey="1">
-                    <TabPane tab="Information" key="1">
-                      {properties.map(property => (
-                        <div className="mb-1" key={property.name}>
-                          <strong className="mr-1">{`${property.name}: `}</strong>
-                          {property.value}
-                        </div>
-                      ))}
-                    </TabPane>
-                    <TabPane tab="Description" key="2">
-                      <p>{description}</p>
-                    </TabPane>
-                  </Tabs>
+                <div className="mb-4 width-300">
+                  <Select defaultValue="Red" style={{ width: 300 }}>
+                    <Option value="red">Red</Option>
+                    <Option value="black">Black</Option>
+                    <Option value="cyan">Cyan</Option>
+                    <Option value="blue">Blue</Option>
+                  </Select>
+                </div>
+                <a
+                  href="#"
+                  onClick={e => e.preventDefault()}
+                  className="width-200 btn btn-success btn-with-addon mr-auto mb-3 text-nowrap d-none d-md-block"
+                >
+                  <span className="btn-addon">
+                    <i className="btn-addon-icon fe fe-plus-circle" />
+                  </span>
+                  Add To Card
+                </a>
+                <Tabs defaultActiveKey="1" className="kit-tabs-bordered">
+                  <TabPane tab="Information" key="1" />
+                  <TabPane tab="Description" key="2" />
+                </Tabs>
+                <div className="card-body px-0">
+                  <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                    Ipsum has been the industry&apos;s standard dummy text ever since the 1500s,
+                    when an unknown printer took a galley of type and scrambled it to make a type
+                    specimen book. It has survived not only five centuries, but also the leap into
+                    electronic typesetting, remaining essentially unchanged.
+                  </p>
+                  <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                    Ipsum has been the industry&apos;s standard dummy text ever since the 1500s,
+                    when an unknown printer took a galley of type.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+        <div className="cui__utils__heading">Related Products</div>
+        <div className="row">
+          {data.products.map(product => {
+            const { isNew, isFavorite, image, name, price, oldPrice } = product
+            return (
+              <div className="col-lg-4" key={Math.random()}>
+                <General16
+                  isNew={isNew}
+                  isFavorite={isFavorite}
+                  image={image}
+                  name={name}
+                  price={price}
+                  oldPrice={oldPrice}
+                />
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
   }
 }
 
-export default ProductDetails
+export default EcommerceProductDetails
