@@ -14,6 +14,7 @@ class IssuesHistory extends React.Component {
         <Menu.Item>
           <Link to="/">Search for issues</Link>
         </Menu.Item>
+        <Menu.Divider />
         <Menu.ItemGroup title="Opened">
           <Menu.Item>
             <Link to="/">

@@ -99,6 +99,13 @@
 
 // dark theme
 :global(body.kit__dark) {
+  .container {
+    background: $dark-gray-4;
+
+    &::before {
+      border-top: 7px solid $dark-gray-4;
+    }
+  }
   .toggleButton {
     background: $dark-gray-4;
   }

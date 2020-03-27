@@ -28,7 +28,7 @@ class ForgotPassword extends React.Component {
             <Form.Item>
               {form.getFieldDecorator('email', {
                 rules: [{ required: true, message: 'Please input your e-mail address' }],
-              })(<Input size="large" placeholder="Email" />)}
+              })(<Input size="large" placeholder="Email Address" />)}
             </Form.Item>
             <Button type="primary" htmlType="submit" size="large" className="text-center w-100">
               <strong>Reset my password</strong>

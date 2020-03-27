@@ -11,8 +11,8 @@ class Chart11 extends React.Component {
         {
           values: [2, 11, 8, 14, 18, 20, 26],
           colors: {
-            area: 'rgba(199, 228, 255, 0.5)',
-            line: '#004585',
+            area: 'rgba(75,124,243, 0.1)',
+            line: '#4b7cf3',
           },
         },
       ],

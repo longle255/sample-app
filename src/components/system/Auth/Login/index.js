@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import style from '../style.module.scss'
 
 @Form.create()
-@connect(({ user, settings }) => ({ user, authProvider: settings.authProvider }))
+@connect(({ user, settings }) => ({ user, authProvider: settings.authProvider, logo: settings.logo }))
 class Login extends React.Component {
   onSubmit = event => {
     event.preventDefault()
@@ -36,10 +36,24 @@ class Login extends React.Component {
       form,
       user: { loading },
       authProvider,
+      logo,
     } = this.props
 
     return (
       <div>
+        <div className="text-center mb-5">
+          <h1 className="mb-5">
+            <strong>Welcome to {logo}</strong>
+          </h1>
+          <p>
+            Pluggable enterprise-level application framework.
+            <br />
+            An excellent front-end solution for web applications built upon Ant Design.
+            <br />
+            Credentials for testing purposes - <strong>admin@mediatec.org</strong> /{' '}
+            <strong>cleanui</strong>
+          </p>
+        </div>
         <div className={`card ${style.container}`}>
           <div className="text-dark font-size-24 mb-3">
             <strong>Sign in to your account</strong>

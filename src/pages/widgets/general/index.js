@@ -99,7 +99,7 @@ class Widgets extends React.Component {
             <div>
               <h2 className="badge-example">General / 12-3</h2>
               <div className="card">
-                <div className="card-body bg-gray-2">
+                <div className="card-body bg-light">
                   <General12v3 />
                 </div>
               </div>
@@ -405,7 +405,7 @@ class Widgets extends React.Component {
           <div className="col-lg-3">
             <div>
               <h2 className="badge-example">General / 23</h2>
-              <div className="card bg-gray-2">
+              <div className="card bg-light">
                 <div className="card-body">
                   <General23 />
                 </div>
@@ -437,7 +437,7 @@ class Widgets extends React.Component {
               <div className="col-lg-12">
                 <div>
                   <h2 className="badge-example">General / 24-1</h2>
-                  <div className="card bg-gray-2">
+                  <div className="card bg-light">
                     <div className="card-body">
                       <General24v1 />
                     </div>

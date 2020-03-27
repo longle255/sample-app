@@ -102,6 +102,21 @@
 
 // dark theme
 :global(body.kit__dark) {
+  .messageContent {
+    background-color: $dark-gray-5;
+    &:before {
+      border-left-color: $dark-gray-5;
+    }
+  }
+  .message {
+    &.answer {
+      .messageContent {
+        &:before {
+          border-right-color: $dark-gray-5;
+        }
+      }
+    }
+  }
   .item {
     &:hover,
     &.current {

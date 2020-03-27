@@ -10,6 +10,14 @@ body {
     }
   }
 
+  .ant-input-affix-wrapper {
+    &:hover, &:focus, &:active {
+      .ant-input:not(.ant-input-disabled) {
+        border-color: $primary;
+      }
+    }
+  }
+
   ////////////////////////////////////////////////////////////////////////////////////////////
   // DARK THEME STYLES
   &.kit__dark {

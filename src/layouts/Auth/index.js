@@ -67,19 +67,6 @@ class AuthLayout extends React.PureComponent {
                 </Link>
               </div>
             </div>
-            <div className="text-center mb-5">
-              <h1 className="mb-5 text-uppercase">
-                <strong>WELCOME TO {logo}</strong>
-              </h1>
-              <p>
-                Pluggable enterprise-level application framework.
-                <br />
-                An excellent front-end solution for web applications built upon Ant Design.
-                <br />
-                Credentials for testing purposes - <strong>admin@mediatec.org</strong> /{' '}
-                <strong>cleanui</strong>
-              </p>
-            </div>
             <div className={style.containerInner}>{children}</div>
             <div className="mt-auto pb-5 pt-5">
               <ul

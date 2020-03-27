@@ -109,12 +109,12 @@ class MenuLeft extends React.Component {
                 {icon && <span className={`${icon} ${style.icon} icon-collapsed-hidden`} />}
               </a>
             ) : (
-              <Link to={url}>
-                <span className={style.title}>{title}</span>
-                {count && <span className="badge badge-success ml-2">{count}</span>}
-                {icon && <span className={`${icon} ${style.icon} icon-collapsed-hidden`} />}
-              </Link>
-            )}
+                <Link to={url}>
+                  <span className={style.title}>{title}</span>
+                  {count && <span className="badge badge-success ml-2">{count}</span>}
+                  {icon && <span className={`${icon} ${style.icon} icon-collapsed-hidden`} />}
+                </Link>
+              )}
           </Menu.Item>
         )
       }
@@ -181,18 +181,18 @@ class MenuLeft extends React.Component {
     } = this.props
     const menuSettings = isMobileView
       ? {
-          width: leftMenuWidth,
-          collapsible: false,
-          collapsed: false,
-          onCollapse: this.onCollapse,
-        }
+        width: leftMenuWidth,
+        collapsible: false,
+        collapsed: false,
+        onCollapse: this.onCollapse,
+      }
       : {
-          width: leftMenuWidth,
-          collapsible: true,
-          collapsed: isMenuCollapsed,
-          onCollapse: this.onCollapse,
-          breakpoint: 'lg',
-        }
+        width: leftMenuWidth,
+        collapsible: true,
+        collapsed: isMenuCollapsed,
+        onCollapse: this.onCollapse,
+        breakpoint: 'lg',
+      }
 
     const menu = this.generateMenuItems()
 
@@ -222,7 +222,6 @@ class MenuLeft extends React.Component {
             </div>
           </div>
           <Scrollbars
-            className={isMobileView ? style.scrollbarMobile : style.scrollbarDesktop}
             renderThumbVertical={({ ...props }) => (
               <div
                 {...props}

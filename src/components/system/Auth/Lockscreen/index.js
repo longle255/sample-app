@@ -44,9 +44,9 @@ class Lockscreen extends React.Component {
           </Form>
         </div>
         <div className="text-center pt-2 mb-auto">
-          <span className="mr-2">Don't have an account?</span>
-          <Link to="/auth/register" className="kit__utils__link font-size-16">
-            Sign up
+          <span className="mr-2">Already have an account?</span>
+          <Link to="/auth/login" className="kit__utils__link font-size-16">
+            Sign in
           </Link>
         </div>
       </div>
