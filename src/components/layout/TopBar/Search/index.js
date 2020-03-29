@@ -85,7 +85,7 @@ class Search extends React.Component {
                 value={searchText}
                 onChange={this.changeSearchText}
                 id="livesearchInput"
-                placeholder="Type to search..."
+                placeholder={formatMessage({ id: 'topBar.typeToSearch' })}
                 ref={this.handleNode}
               />
               <ul className={style.options}>
