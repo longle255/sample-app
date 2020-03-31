@@ -1,19 +1,21 @@
 import { all, takeEvery, put, call } from 'redux-saga/effects'
 import { notification } from 'antd'
 import { history, store as reduxStore } from 'index'
-import { auth } from 'services/auth'
+import { FB_login, FB_currentAccount, FB_logout } from 'services/firebase.auth'
+import { JWT_login, JWT_currentAccount, JWT_logout } from 'services/jwt.auth'
 import actions from './actions'
 
 export function* LOGIN({ payload }) {
   const { email, password } = payload
   const provider = reduxStore.getState().settings.authProvider
+  const login = provider === 'firebase' ? FB_login : JWT_login
   yield put({
     type: 'user/SET_STATE',
     payload: {
       loading: true,
     },
   })
-  const success = yield call(auth(provider).login, email, password)
+  const success = yield call(login, email, password)
   yield put({
     type: 'user/LOAD_CURRENT_ACCOUNT',
   })
@@ -28,13 +30,14 @@ export function* LOGIN({ payload }) {
 
 export function* LOAD_CURRENT_ACCOUNT() {
   const provider = reduxStore.getState().settings.authProvider
+  const currentAccount = provider === 'firebase' ? FB_currentAccount : JWT_currentAccount
   yield put({
     type: 'user/SET_STATE',
     payload: {
       loading: true,
     },
   })
-  const response = yield call(auth(provider).currentAccount)
+  const response = yield call(currentAccount)
   if (response) {
     const { uid: id, email, photoURL: avatar } = response
     yield put({
@@ -59,7 +62,8 @@ export function* LOAD_CURRENT_ACCOUNT() {
 
 export function* LOGOUT() {
   const provider = reduxStore.getState().settings.authProvider
-  yield call(auth(provider).logout)
+  const logout = provider === 'firebase' ? FB_logout : JWT_logout
+  yield call(logout)
   yield put({
     type: 'user/SET_STATE',
     payload: {

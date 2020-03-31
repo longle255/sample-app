@@ -44,8 +44,8 @@ export async function JWT_login(email, password) {
     password,
   }
   return (
+    // replace this with real fetch() method
     fake_fetch('api/login', {
-      // replace this with real fetch() method
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -68,8 +68,8 @@ export async function JWT_login(email, password) {
 export async function JWT_currentAccount() {
   const jwt = store.get('jwt.token')
   return (
+    // replace this with real fetch() method
     fake_fetch('api/currentUser', {
-      // replace this with real fetch() method
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -91,8 +91,8 @@ export async function JWT_currentAccount() {
 export async function JWT_logout() {
   const jwt = store.get('jwt.token')
   return (
+    // replace this with real fetch() method
     fake_fetch('api/logout', {
-      // replace this with real fetch() method
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
