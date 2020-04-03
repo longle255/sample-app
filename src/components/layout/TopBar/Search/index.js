@@ -76,9 +76,6 @@ class Search extends React.Component {
           </button>
           <div className="container-fluid">
             <div className={style.wrapper}>
-              <div className={style.logoContainer}>
-                <img className={style.logo} src="resources/images/logo.png" alt="" />
-              </div>
               <input
                 type="search"
                 className={style.searchInput}
