@@ -139,7 +139,7 @@
   width: rem(250);
   padding: 0 rem(30);
 
-  @media (max-width: $xl-max-width) {
+  @media (max-width: $xxl-max-width) {
     width: auto;
     max-width: 350px;
     margin: rem(20) auto rem(40);

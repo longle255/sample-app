@@ -6,8 +6,9 @@ import style from './style.module.scss'
 
 const columns = [
   {
-    title: 'User Name',
+    title: 'USERNAME',
     dataIndex: 'userName',
+    className: 'text-gray-6',
     key: 'userName',
     render: text => {
       return (
@@ -19,25 +20,26 @@ const columns = [
     },
   },
   {
-    title: 'Location',
+    title: 'LOCATION',
     dataIndex: 'location',
+    className: 'text-gray-6',
     key: 'location',
     render: text => {
       return <a className="text-blue">{text}</a>
     },
   },
   {
-    title: 'Value',
+    title: 'VALUE',
     dataIndex: 'value',
     key: 'value',
     className: 'text-right text-gray-6',
     render: text => <span className="font-weight-bold">{text}</span>,
   },
   {
-    title: 'Last week profit',
+    title: 'LAST WEEK PROFIT',
     dataIndex: 'chart',
     key: 'chart',
-    className: 'text-right',
+    className: 'text-right text-gray-6',
     render: chart => {
       return <ChartistGraph data={chart} options={options} type="Line" />
     },
@@ -89,7 +91,6 @@ class Chart8 extends React.Component {
             columns={columns}
             dataSource={data.table}
             pagination={false}
-            scroll={{ x: true }}
             rowSelection={rowSelection}
           />
         </div>

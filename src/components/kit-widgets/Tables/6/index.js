@@ -71,7 +71,6 @@ class Table6 extends React.Component {
             dataSource={data}
             pagination={false}
             rowSelection={rowSelection}
-            scroll={{ x: true }}
           />
         </div>
       </div>

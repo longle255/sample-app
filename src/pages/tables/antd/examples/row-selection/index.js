@@ -31,13 +31,8 @@ const rowSelection = {
 class TablesAntdRowSelection extends React.Component {
   render() {
     return (
-      <div className="mb-4 kit__utils__scrollTable">
-        <Table
-          rowSelection={rowSelection}
-          columns={columns}
-          dataSource={data}
-          scroll={{ x: true }}
-        />
+      <div className="mb-4 kit__utils__table">
+        <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
       </div>
     )
   }

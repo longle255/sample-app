@@ -55,8 +55,8 @@ const columns = [
 class TablesAntdBasic extends React.Component {
   render() {
     return (
-      <div className="mb-4 kit__utils__scrollTable">
-        <Table columns={columns} dataSource={data} scroll={{ x: true }} />
+      <div className="mb-4 kit__utils__table">
+        <Table columns={columns} dataSource={data} />
       </div>
     )
   }

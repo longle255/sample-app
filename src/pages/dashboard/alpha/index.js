@@ -122,12 +122,9 @@ class DashboardAlpha extends React.Component {
                 </div>
               </div>
               <div className="card-body">
-                <Table
-                  scroll={{ x: true }}
-                  columns={tableColumns}
-                  dataSource={tableData}
-                  pagination={false}
-                />
+                <div className="kit__utils__table">
+                  <Table columns={tableColumns} dataSource={tableData} pagination={false} />
+                </div>
               </div>
             </div>
           </div>

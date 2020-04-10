@@ -32,6 +32,12 @@
     }
   }
 
+  // responsive table
+  &__table {
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+
   // avatar
   &__avatar {
     width: rem(40);

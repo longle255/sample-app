@@ -89,13 +89,8 @@ class TablesAntdFilterSorter extends React.Component {
             Clear filters and sorters
           </Button>
         </div>
-        <div className="mb-4 kit__utils__scrollTable">
-          <Table
-            columns={columns}
-            dataSource={data}
-            scroll={{ x: true }}
-            onChange={this.handleChange}
-          />
+        <div className="mb-4 kit__utils__table">
+          <Table columns={columns} dataSource={data} onChange={this.handleChange} />
         </div>
       </div>
     )

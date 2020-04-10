@@ -32,3 +32,13 @@
     padding-right: rem(24);
   }
 }
+
+// dark theme
+:global(body.kit__dark) {
+  .textDivider {
+    &::before,
+    &::after {
+      background-color: $dark-gray-4;
+    }
+  }
+}

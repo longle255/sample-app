@@ -65,12 +65,7 @@ class EcommerceCart extends React.Component {
               <strong>Order items</strong>
             </h6>
             <div className="text-nowrap mb-4">
-              <Table
-                scroll={{ x: true }}
-                columns={columns}
-                dataSource={ordersTableData}
-                pagination={false}
-              />
+              <Table columns={columns} dataSource={ordersTableData} pagination={false} />
             </div>
             <h6 className="mb-4 text-uppercase">
               <strong>Shipment details</strong>

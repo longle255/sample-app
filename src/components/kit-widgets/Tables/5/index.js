@@ -65,7 +65,7 @@ class Table5 extends React.Component {
           $29,931 <sup className="text-uppercase text-gray-6 font-size-30">paid</sup>
         </div>
         <div className={style.table}>
-          <Table columns={columns} dataSource={data} pagination={false} scroll={{ x: true }} />
+          <Table columns={columns} dataSource={data} pagination={false} />
         </div>
       </div>
     )

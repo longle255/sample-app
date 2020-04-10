@@ -59,7 +59,7 @@ class Table4 extends React.Component {
           </div>
         </div>
         <div className={style.table}>
-          <Table columns={columns} dataSource={data} pagination={false} scroll={{ x: true }} />
+          <Table columns={columns} dataSource={data} pagination={false} />
         </div>
       </div>
     )

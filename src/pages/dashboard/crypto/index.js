@@ -410,9 +410,8 @@ class DashboardCrypto extends React.Component {
               <div className="card-body">
                 <div className={styles.order}>
                   <div className={styles.orderLeft}>
-                    <div className={`${styles.table} text-nowrap`}>
+                    <div className={`${styles.table} kit__utils__table`}>
                       <Table
-                        scroll={{ x: true }}
                         columns={ordersSellColumns}
                         dataSource={orderBook.sell}
                         pagination={{ position: 'bottom' }}
@@ -538,13 +537,12 @@ class DashboardCrypto extends React.Component {
                     </div>
                   </div>
                   <div className={styles.orderRight}>
-                    <div className={`${styles.table} text-nowrap`}>
+                    <div className={`${styles.table} kit__utils__table`}>
                       <Table
                         columns={ordersBuyColumns}
                         dataSource={orderBook.buy}
                         pagination={{ position: 'bottom' }}
                         size="small"
-                        scroll={{ x: true }}
                       />
                     </div>
                   </div>
@@ -556,10 +554,8 @@ class DashboardCrypto extends React.Component {
             </div>
             <div className="card">
               <div className="card-body">
-                <div className={`${styles.table} text-nowrap`}>
+                <div className={`${styles.table} kit__utils__table`}>
                   <Table
-                    className="utils__scrollTable"
-                    scroll={{ x: true }}
                     columns={marketHistoryColumns}
                     dataSource={marketHistory.data}
                     pagination={{ position: 'bottom' }}
@@ -586,10 +582,8 @@ class DashboardCrypto extends React.Component {
                     </a>
                   )}
                   {myOpenOrders.loaded && (
-                    <div className={`${styles.table} text-nowrap`}>
+                    <div className={`${styles.table} kit__utils__table`}>
                       <Table
-                        className="utils__scrollTable"
-                        scroll={{ x: true }}
                         columns={myOrderColumns}
                         dataSource={myOpenOrders.data}
                         pagination={{ position: 'bottom' }}
@@ -618,10 +612,8 @@ class DashboardCrypto extends React.Component {
                     </a>
                   )}
                   {myOrderHistory.loaded && (
-                    <div className={`${styles.table} text-nowrap`}>
+                    <div className={`${styles.table} kit__utils__table`}>
                       <Table
-                        className="utils__scrollTable"
-                        scroll={{ x: true }}
                         columns={myOrderColumns}
                         dataSource={myOpenOrders.data}
                         pagination={{ position: 'bottom' }}

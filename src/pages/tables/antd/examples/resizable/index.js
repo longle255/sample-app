@@ -101,14 +101,8 @@ class TablesAntdBasic extends React.Component {
     }))
 
     return (
-      <div className={`${style.example} mb-4 kit__utils__scrollTable`}>
-        <Table
-          bordered
-          components={this.components}
-          columns={columns}
-          dataSource={this.data}
-          scroll={{ x: true }}
-        />
+      <div className={`${style.example} mb-4 kit__utils__table`}>
+        <Table bordered components={this.components} columns={columns} dataSource={this.data} />
       </div>
     )
   }

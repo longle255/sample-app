@@ -343,7 +343,6 @@ class DashboardBeta extends React.Component {
                 <div className="row">
                   <div className="col-lg-12">
                     <Table
-                      scroll={{ x: true }}
                       columns={taskTableColumns}
                       dataSource={taskTableData}
                       rowSelection={taskTableRowSelection}
@@ -505,12 +504,7 @@ class DashboardBeta extends React.Component {
                 <div className="mb-4">
                   <General22 />
                 </div>
-                <Table
-                  scroll={{ x: true }}
-                  columns={tableColumns}
-                  dataSource={data}
-                  onChange={this.handleChange}
-                />
+                <Table columns={tableColumns} dataSource={data} onChange={this.handleChange} />
               </div>
             </div>
             <div className="card">

@@ -17,12 +17,11 @@ const columns = [
 class TablesAntdExpandableRow extends React.Component {
   render() {
     return (
-      <div className="mb-4 kit__utils__scrollTable">
+      <div className="mb-4 kit__utils__table">
         <Table
           columns={columns}
           dataSource={data}
           expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}
-          scroll={{ x: true }}
         />
       </div>
     )

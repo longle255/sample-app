@@ -146,13 +146,8 @@ class ExtraAppsHelpdeskDashboard extends React.Component {
                 <h6 className="text-uppercase text-dark font-weight-bold mb-3">
                   Recent help requests
                 </h6>
-                <div className="kit__utils__scrollTable">
-                  <Table
-                    columns={columns}
-                    dataSource={data}
-                    pagination={false}
-                    scroll={{ x: true }}
-                  />
+                <div className="kit__utils__table">
+                  <Table columns={columns} dataSource={data} pagination={false} />
                 </div>
               </div>
             </div>

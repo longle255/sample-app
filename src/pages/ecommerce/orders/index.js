@@ -187,12 +187,7 @@ class EcommerceOrders extends React.Component {
           </div>
           <div className="card-body">
             <div className="text-nowrap">
-              <Table
-                scroll={{ x: true }}
-                columns={columns}
-                dataSource={data}
-                onChange={this.handleTableChange}
-              />
+              <Table columns={columns} dataSource={data} onChange={this.handleTableChange} />
             </div>
           </div>
         </div>

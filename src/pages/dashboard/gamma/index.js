@@ -200,8 +200,6 @@ class DashboardGamma extends React.Component {
                   <div className="col-xl-6">
                     <div className="mb-3">
                       <Table
-                        className="utils__scrollTable"
-                        scroll={{ x: true }}
                         dataSource={supportCasesTableData}
                         columns={supportCasesTableColumns}
                         pagination={false}

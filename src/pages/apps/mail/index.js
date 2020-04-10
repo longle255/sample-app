@@ -171,13 +171,8 @@ class AppsMail extends React.Component {
                 </div>
               </div>
               <div className="card-body">
-                <div className="kit__utils__scrollTable">
-                  <Table
-                    scroll={{ x: true }}
-                    columns={columns}
-                    rowSelection={rowSelection}
-                    dataSource={mails}
-                  />
+                <div className="kit__utils__table">
+                  <Table columns={columns} rowSelection={rowSelection} dataSource={mails} />
                 </div>
               </div>
             </div>
