@@ -37,9 +37,27 @@ class Sidebar extends React.Component {
     defaultColor: '#4b7cf3',
   }
 
-  switchDarkTheme = () => {
+  componentDidUpdate(prevProps) {
+    const { dispatch, theme } = this.props
+    if (prevProps.theme !== theme) {
+      dispatch({
+        type: 'settings/SET_THEME',
+        payload: {
+          theme,
+        },
+      })
+    }
+  }
+
+  setTheme = nextTheme => {
     const { dispatch } = this.props
-    dispatch({ type: 'settings/TOGGLE_THEME' })
+    dispatch({
+      type: 'settings/CHANGE_SETTING',
+      payload: {
+        setting: 'theme',
+        value: nextTheme,
+      },
+    })
   }
 
   selectColor = throttle(color => {
@@ -457,7 +475,7 @@ class Sidebar extends React.Component {
         </Tooltip>
         <Tooltip title="Switch Dark / Light Theme" placement="left">
           <a
-            onClick={this.switchDarkTheme}
+            onClick={() => this.setTheme(theme === 'light' ? 'dark' : 'light')}
             style={{ bottom: 'calc(50% + 60px)' }}
             className={style.cui__sidebar__toggleButton}
           >

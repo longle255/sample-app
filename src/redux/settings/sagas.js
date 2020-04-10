@@ -41,14 +41,20 @@ export function* SET_PRIMARY_COLOR({ payload: { color } }) {
   })
 }
 
-export function* TOGGLE_THEME() {
-  const currentTheme = reduxStore.getState().settings.theme
-  const nextTheme = currentTheme === 'light' ? 'dark' : 'light'
+export function* SET_THEME({ payload: { theme } }) {
   const toggleTheme = () => {
-    if (nextTheme === 'light') {
+    if (theme === 'light') {
       document.querySelector('body').classList.remove('kit__dark')
       window.less.modifyVars(AntDesignLightTheme)
-    } else {
+      reduxStore.dispatch({
+        type: 'settings/CHANGE_SETTING',
+        payload: {
+          setting: 'menuColor',
+          value: 'light',
+        },
+      })
+    }
+    if (theme === 'dark') {
       document.querySelector('body').classList.add('kit__dark')
       window.less.modifyVars(AntDesignDarkTheme)
       reduxStore.dispatch({
@@ -60,13 +66,12 @@ export function* TOGGLE_THEME() {
       })
     }
   }
-
   yield toggleTheme()
   yield reduxStore.dispatch({
     type: 'settings/CHANGE_SETTING',
     payload: {
       setting: 'theme',
-      value: nextTheme,
+      value: theme,
     },
   })
 }
@@ -117,14 +122,24 @@ export function* SETUP() {
   }
   yield primaryColor()
 
-  // set primary color on app load
+  // init theme on app load
   const initTheme = () => {
     const theme = store.get('app.settings.theme')
+    if (theme === 'light') {
+      reduxStore.dispatch({
+        type: 'settings/SET_THEME',
+        payload: {
+          theme: 'light',
+        },
+      })
+    }
     if (theme === 'dark') {
-      document.querySelector('body').classList.add('kit__dark')
-      global.window.less.modifyVars(AntDesignDarkTheme)
-    } else {
-      global.window.less.modifyVars(AntDesignLightTheme)
+      reduxStore.dispatch({
+        type: 'settings/SET_THEME',
+        payload: {
+          theme: 'dark',
+        },
+      })
     }
   }
   yield initTheme()
@@ -171,7 +186,7 @@ export default function* rootSaga() {
   yield all([
     takeEvery(actions.CHANGE_SETTING, CHANGE_SETTING),
     takeEvery(actions.SET_PRIMARY_COLOR, SET_PRIMARY_COLOR),
-    takeEvery(actions.TOGGLE_THEME, TOGGLE_THEME),
+    takeEvery(actions.SET_THEME, SET_THEME),
     SETUP(), // run once on app load to init listeners
   ])
 }
