@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Scrollbars } from 'react-custom-scrollbars'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import { Switch, Radio, Select, Tooltip, Slider, Input } from 'antd'
 import { throttle } from 'lodash'
 import classNames from 'classnames'
@@ -203,20 +203,7 @@ class Sidebar extends React.Component {
             [style.cui__sidebar__toggled]: isSidebarOpen,
           })}
         >
-          <Scrollbars
-            autoHide
-            renderThumbVertical={({ ...props }) => (
-              <div
-                {...props}
-                style={{
-                  width: '5px',
-                  borderRadius: 'inherit',
-                  backgroundColor: 'rgba(195, 190, 220, 0.4)',
-                  left: '1px',
-                }}
-              />
-            )}
-          >
+          <PerfectScrollbar>
             <div className={style.cui__sidebar__inner}>
               <a
                 href="#"
@@ -457,7 +444,7 @@ class Sidebar extends React.Component {
                 </div>
               </div>
             </div>
-          </Scrollbars>
+          </PerfectScrollbar>
         </div>
         <Tooltip title="Settings" placement="left">
           <a

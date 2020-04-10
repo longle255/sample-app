@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { injectIntl } from 'react-intl'
 import { Dropdown, Input, Tooltip, message } from 'antd'
-import { Scrollbars } from 'react-custom-scrollbars'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import store from 'store'
 import style from './style.module.scss'
 
@@ -45,8 +45,10 @@ class FavPages extends React.Component {
         }, [])
       return flattenItems(_menuData, 'children')
     }
-    this.setState({
-      pagesList: pagesList(),
+    setTimeout(() => {
+      this.setState({
+        pagesList: pagesList(),
+      })
     })
   }
 
@@ -126,22 +128,9 @@ class FavPages extends React.Component {
               />
             </div>
             <div className="height-200">
-              <Scrollbars
-                autoHide
-                renderThumbVertical={({ ...props }) => (
-                  <div
-                    {...props}
-                    style={{
-                      width: '4px',
-                      borderRadius: 'inherit',
-                      backgroundColor: '#c5cdd2',
-                      left: '1px',
-                    }}
-                  />
-                )}
-              >
+              <PerfectScrollbar>
                 <div className="px-2 pb-2">{list}</div>
-              </Scrollbars>
+              </PerfectScrollbar>
             </div>
           </div>
         </div>

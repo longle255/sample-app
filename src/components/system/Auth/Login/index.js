@@ -5,7 +5,11 @@ import { Link } from 'react-router-dom'
 import style from '../style.module.scss'
 
 @Form.create()
-@connect(({ user, settings }) => ({ user, authProvider: settings.authProvider, logo: settings.logo }))
+@connect(({ user, settings }) => ({
+  user,
+  authProvider: settings.authProvider,
+  logo: settings.logo,
+}))
 class Login extends React.Component {
   onSubmit = event => {
     event.preventDefault()
@@ -42,7 +46,7 @@ class Login extends React.Component {
     return (
       <div>
         <div className="text-center mb-5">
-          <h1 className="mb-5">
+          <h1 className="mb-5 px-3">
             <strong>Welcome to {logo}</strong>
           </h1>
           <p>

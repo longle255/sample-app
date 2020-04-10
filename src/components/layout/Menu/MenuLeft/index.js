@@ -4,7 +4,8 @@ import { Link, withRouter } from 'react-router-dom'
 import { Menu, Layout } from 'antd'
 import classNames from 'classnames'
 import store from 'store'
-import { Scrollbars } from 'react-custom-scrollbars'
+// import PerfectScrollbar from 'react-perfect-scrollbar'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import { find } from 'lodash'
 import style from './style.module.scss'
 
@@ -109,12 +110,12 @@ class MenuLeft extends React.Component {
                 {icon && <span className={`${icon} ${style.icon} icon-collapsed-hidden`} />}
               </a>
             ) : (
-                <Link to={url}>
-                  <span className={style.title}>{title}</span>
-                  {count && <span className="badge badge-success ml-2">{count}</span>}
-                  {icon && <span className={`${icon} ${style.icon} icon-collapsed-hidden`} />}
-                </Link>
-              )}
+              <Link to={url}>
+                <span className={style.title}>{title}</span>
+                {count && <span className="badge badge-success ml-2">{count}</span>}
+                {icon && <span className={`${icon} ${style.icon} icon-collapsed-hidden`} />}
+              </Link>
+            )}
           </Menu.Item>
         )
       }
@@ -181,18 +182,18 @@ class MenuLeft extends React.Component {
     } = this.props
     const menuSettings = isMobileView
       ? {
-        width: leftMenuWidth,
-        collapsible: false,
-        collapsed: false,
-        onCollapse: this.onCollapse,
-      }
+          width: leftMenuWidth,
+          collapsible: false,
+          collapsed: false,
+          onCollapse: this.onCollapse,
+        }
       : {
-        width: leftMenuWidth,
-        collapsible: true,
-        collapsed: isMenuCollapsed,
-        onCollapse: this.onCollapse,
-        breakpoint: 'lg',
-      }
+          width: leftMenuWidth,
+          collapsible: true,
+          collapsed: isMenuCollapsed,
+          onCollapse: this.onCollapse,
+          breakpoint: 'lg',
+        }
 
     const menu = this.generateMenuItems()
 
@@ -221,20 +222,7 @@ class MenuLeft extends React.Component {
               {logo === 'Clean UI Pro' && <div className={style.descr}>React</div>}
             </div>
           </div>
-          <Scrollbars
-            renderThumbVertical={({ ...props }) => (
-              <div
-                {...props}
-                style={{
-                  width: '4px',
-                  borderRadius: 'inherit',
-                  backgroundColor: menuColor === 'dark' ? '#32304b' : '#c5cdd2',
-                  left: '1px',
-                }}
-              />
-            )}
-            autoHide
-          >
+          <PerfectScrollbar>
             <Menu
               onClick={this.handleClick}
               selectedKeys={selectedKeys}
@@ -257,7 +245,7 @@ class MenuLeft extends React.Component {
                 Buy Bundle
               </a>
             </div>
-          </Scrollbars>
+          </PerfectScrollbar>
         </div>
       </Layout.Sider>
     )

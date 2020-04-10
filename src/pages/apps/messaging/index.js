@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Input, Icon, Tooltip } from 'antd'
-import { Scrollbars } from 'react-custom-scrollbars'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import dialogs from './data.json'
 import style from './style.module.scss'
 
@@ -32,20 +32,7 @@ class AppsMessaging extends React.Component {
               />
             </div>
             <div className={style.dialogs}>
-              <Scrollbars
-                autoHide
-                renderThumbVertical={({ ...props }) => (
-                  <div
-                    {...props}
-                    style={{
-                      width: '5px',
-                      borderRadius: 'inherit',
-                      backgroundColor: 'rgba(195, 190, 220, 0.4)',
-                      left: '1px',
-                    }}
-                  />
-                )}
-              >
+              <PerfectScrollbar>
                 {dialogs.map((item, index) => (
                   <a
                     href="#"
@@ -74,7 +61,7 @@ class AppsMessaging extends React.Component {
                     </div>
                   </a>
                 ))}
-              </Scrollbars>
+              </PerfectScrollbar>
             </div>
           </div>
           <div className="col-12 col-md-9">
@@ -113,20 +100,7 @@ class AppsMessaging extends React.Component {
               </div>
               <div className="card-body">
                 <div className="height-700">
-                  <Scrollbars
-                    autoHide
-                    renderThumbVertical={({ ...props }) => (
-                      <div
-                        {...props}
-                        style={{
-                          width: '5px',
-                          borderRadius: 'inherit',
-                          backgroundColor: 'rgba(195, 190, 220, 0.4)',
-                          left: '1px',
-                        }}
-                      />
-                    )}
-                  >
+                  <PerfectScrollbar>
                     <div className="d-flex flex-column justify-content-end height-100p">
                       {dialog.map(message => (
                         <div
@@ -154,7 +128,7 @@ class AppsMessaging extends React.Component {
                         </div>
                       ))}
                     </div>
-                  </Scrollbars>
+                  </PerfectScrollbar>
                 </div>
                 <div className="pt-2 pb-2">{name} is typing...</div>
                 <div className="input-group mb-3">

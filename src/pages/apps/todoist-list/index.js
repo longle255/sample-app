@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Scrollbars } from 'react-custom-scrollbars'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import SortableTree, { changeNodeAtPath } from 'react-sortable-tree'
 import { Input, Icon, Tooltip, Checkbox } from 'antd'
 import Table6 from 'components/kit-widgets/Tables/6'
@@ -170,48 +170,37 @@ class ExtraAppsTodoistList extends React.Component {
                   Welocme to Todoist! Let&apos;s get you started with a few tips
                 </p>
                 <div className="height-400">
-                  <Scrollbars
-                    autoHide
-                    renderThumbVertical={({ ...props }) => (
-                      <div
-                        {...props}
-                        style={{
-                          width: '5px',
-                          borderRadius: 'inherit',
-                          backgroundColor: 'rgba(195, 190, 220, 0.4)',
-                          left: '1px',
-                        }}
-                      />
-                    )}
-                  >
-                    <SortableTree
-                      treeData={treeData}
-                      onChange={tree => this.setState({ treeData: tree })}
-                      generateNodeProps={({ node, path }) => ({
-                        title: !node.children ? (
-                          <Checkbox
-                            checked={node.checked}
-                            onChange={event => {
-                              const { checked } = event.target
+                  <PerfectScrollbar>
+                    <div className="height-400">
+                      <SortableTree
+                        treeData={treeData}
+                        onChange={tree => this.setState({ treeData: tree })}
+                        generateNodeProps={({ node, path }) => ({
+                          title: !node.children ? (
+                            <Checkbox
+                              checked={node.checked}
+                              onChange={event => {
+                                const { checked } = event.target
 
-                              this.setState(state => ({
-                                treeData: changeNodeAtPath({
-                                  treeData: state.treeData,
-                                  path,
-                                  getNodeKey,
-                                  newNode: { ...node, checked },
-                                }),
-                              }))
-                            }}
-                          >
-                            {node.name}
-                          </Checkbox>
-                        ) : (
-                          <span>{node.name}:</span>
-                        ),
-                      })}
-                    />
-                  </Scrollbars>
+                                this.setState(state => ({
+                                  treeData: changeNodeAtPath({
+                                    treeData: state.treeData,
+                                    path,
+                                    getNodeKey,
+                                    newNode: { ...node, checked },
+                                  }),
+                                }))
+                              }}
+                            >
+                              {node.name}
+                            </Checkbox>
+                          ) : (
+                            <span>{node.name}:</span>
+                          ),
+                        })}
+                      />
+                    </div>
+                  </PerfectScrollbar>
                 </div>
                 <button
                   type="button"
@@ -238,32 +227,21 @@ class ExtraAppsTodoistList extends React.Component {
                   Welocme to Todoist! Let&apos;s get you started with a few tips
                 </p>
                 <div className="height-200">
-                  <Scrollbars
-                    autoHide
-                    renderThumbVertical={({ ...props }) => (
-                      <div
-                        {...props}
-                        style={{
-                          width: '5px',
-                          borderRadius: 'inherit',
-                          backgroundColor: 'rgba(195, 190, 220, 0.4)',
-                          left: '1px',
-                        }}
+                  <PerfectScrollbar>
+                    <div className="height-200">
+                      <SortableTree
+                        treeData={completed}
+                        onChange={tree => this.setState({ completed: tree })}
+                        generateNodeProps={({ node }) => ({
+                          title: !node.children ? (
+                            <Checkbox checked={node.checked}>{node.name}</Checkbox>
+                          ) : (
+                            <span>{node.name}:</span>
+                          ),
+                        })}
                       />
-                    )}
-                  >
-                    <SortableTree
-                      treeData={completed}
-                      onChange={tree => this.setState({ completed: tree })}
-                      generateNodeProps={({ node }) => ({
-                        title: !node.children ? (
-                          <Checkbox checked={node.checked}>{node.name}</Checkbox>
-                        ) : (
-                          <span>{node.name}:</span>
-                        ),
-                      })}
-                    />
-                  </Scrollbars>
+                    </div>
+                  </PerfectScrollbar>
                 </div>
               </div>
             </div>

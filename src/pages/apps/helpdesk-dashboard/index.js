@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Table, Checkbox } from 'antd'
-import { Scrollbars } from 'react-custom-scrollbars'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import SortableTree, { changeNodeAtPath } from 'react-sortable-tree'
 import General2 from 'components/kit-widgets/General/2'
 import General2v1 from 'components/kit-widgets/General/2v1'
@@ -105,48 +105,37 @@ class ExtraAppsHelpdeskDashboard extends React.Component {
                   Welcome to Todoist! Let&apos;s get you started with a few tips
                 </p>
                 <div className="height-300">
-                  <Scrollbars
-                    autoHide
-                    renderThumbVertical={({ ...props }) => (
-                      <div
-                        {...props}
-                        style={{
-                          width: '5px',
-                          borderRadius: 'inherit',
-                          backgroundColor: 'rgba(195, 190, 220, 0.4)',
-                          left: '1px',
-                        }}
-                      />
-                    )}
-                  >
-                    <SortableTree
-                      treeData={treeData}
-                      onChange={tree => this.setState({ treeData: tree })}
-                      generateNodeProps={({ node, path }) => ({
-                        title: !node.children ? (
-                          <Checkbox
-                            checked={node.checked}
-                            onChange={event => {
-                              const { checked } = event.target
+                  <PerfectScrollbar>
+                    <div className="height-300">
+                      <SortableTree
+                        treeData={treeData}
+                        onChange={tree => this.setState({ treeData: tree })}
+                        generateNodeProps={({ node, path }) => ({
+                          title: !node.children ? (
+                            <Checkbox
+                              checked={node.checked}
+                              onChange={event => {
+                                const { checked } = event.target
 
-                              this.setState(state => ({
-                                treeData: changeNodeAtPath({
-                                  treeData: state.treeData,
-                                  path,
-                                  getNodeKey,
-                                  newNode: { ...node, checked },
-                                }),
-                              }))
-                            }}
-                          >
-                            {node.name}
-                          </Checkbox>
-                        ) : (
-                          <span>{node.name}:</span>
-                        ),
-                      })}
-                    />
-                  </Scrollbars>
+                                this.setState(state => ({
+                                  treeData: changeNodeAtPath({
+                                    treeData: state.treeData,
+                                    path,
+                                    getNodeKey,
+                                    newNode: { ...node, checked },
+                                  }),
+                                }))
+                              }}
+                            >
+                              {node.name}
+                            </Checkbox>
+                          ) : (
+                            <span>{node.name}:</span>
+                          ),
+                        })}
+                      />
+                    </div>
+                  </PerfectScrollbar>
                 </div>
               </div>
             </div>

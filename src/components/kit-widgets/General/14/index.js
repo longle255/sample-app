@@ -1,5 +1,5 @@
 import React from 'react'
-import { Scrollbars } from 'react-custom-scrollbars'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import style from './style.module.scss'
 
 class General14 extends React.Component {
@@ -7,21 +7,7 @@ class General14 extends React.Component {
     return (
       <div>
         <div className="height-300 d-flex flex-column justify-content-end">
-          <Scrollbars
-            renderThumbVertical={({ styles, ...props }) => (
-              <div
-                {...props}
-                style={{
-                  ...styles,
-                  width: '4px',
-                  borderRadius: 'inherit',
-                  backgroundColor: '#c5cdd2',
-                  left: '1px',
-                }}
-              />
-            )}
-            autoHide
-          >
+          <PerfectScrollbar>
             <div className={style.contentWrapper}>
               <div className={style.message}>
                 <div className={style.messageContent}>
@@ -42,7 +28,7 @@ class General14 extends React.Component {
                 </div>
               </div>
             </div>
-          </Scrollbars>
+          </PerfectScrollbar>
         </div>
         <div className="pt-2 pb-2">Mary is typing...</div>
         <form>

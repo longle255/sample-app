@@ -1,7 +1,7 @@
 import React from 'react'
 import { Menu, Dropdown, Tooltip } from 'antd'
 import { Helmet } from 'react-helmet'
-import { Scrollbars } from 'react-custom-scrollbars'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 const dropdownMenu = (
   <Menu>
@@ -245,20 +245,7 @@ class CardsBasicCards extends React.Component {
                 </div>
               </div>
               <div className="card-body height-200">
-                <Scrollbars
-                  autoHide
-                  renderThumbVertical={({ ...props }) => (
-                    <div
-                      {...props}
-                      style={{
-                        width: '5px',
-                        borderRadius: 'inherit',
-                        backgroundColor: 'rgba(195, 190, 220, 0.4)',
-                        left: '1px',
-                      }}
-                    />
-                  )}
-                >
+                <PerfectScrollbar>
                   <p>
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                     Ipsum has been the industry&apos;s standard dummy text ever since the 1500s,
@@ -273,7 +260,7 @@ class CardsBasicCards extends React.Component {
                     specimen book. It has survived not only five centuries, but also the leap into
                     electronic typesetting, remaining essentially unchanged.
                   </p>
-                </Scrollbars>
+                </PerfectScrollbar>
               </div>
               <div className="card-footer">
                 <a className="btn btn-primary mr-2">Save</a>

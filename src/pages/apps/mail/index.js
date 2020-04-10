@@ -1,6 +1,6 @@
 import React from 'react'
 import { Input, Icon, Tabs, Table } from 'antd'
-import { Scrollbars } from 'react-custom-scrollbars'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import { Helmet } from 'react-helmet'
 import mails from './data.json'
 import style from './style.module.scss'
@@ -75,20 +75,7 @@ class AppsMail extends React.Component {
               />
             </div>
             <div className={style.categories}>
-              <Scrollbars
-                autoHide
-                renderThumbVertical={({ ...props }) => (
-                  <div
-                    {...props}
-                    style={{
-                      width: '5px',
-                      borderRadius: 'inherit',
-                      backgroundColor: 'rgba(195, 190, 220, 0.4)',
-                      left: '1px',
-                    }}
-                  />
-                )}
-              >
+              <PerfectScrollbar>
                 <div className="d-flex flex-column">
                   <a
                     href="#"
@@ -128,7 +115,7 @@ class AppsMail extends React.Component {
                     <span className="text-truncate">Spam</span>
                   </a>
                 </div>
-              </Scrollbars>
+              </PerfectScrollbar>
             </div>
           </div>
           <div className="col-12 col-md-9">
