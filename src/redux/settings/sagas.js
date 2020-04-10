@@ -124,7 +124,9 @@ export function* SETUP() {
 
   // init theme on app load
   const initTheme = () => {
-    const theme = store.get('app.settings.theme') || 'light'
+    const { search } = history.location
+    const query = qs.parse(search, { ignoreQueryPrefix: true })
+    const theme = query.theme || store.get('app.settings.theme') || 'light'
     reduxStore.dispatch({
       type: 'settings/SET_THEME',
       payload: {
