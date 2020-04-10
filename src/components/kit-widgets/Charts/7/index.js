@@ -15,7 +15,7 @@ const columns = [
     title: 'Location',
     dataIndex: 'location',
     key: 'location',
-    className: 'bg-transparent',
+    className: 'bg-transparent text-gray-6',
     render: text => {
       return <a className="text-blue">{text}</a>
     },
@@ -79,12 +79,7 @@ class Chart7 extends React.Component {
           />
         </div>
         <div className={style.table}>
-          <Table
-            columns={columns}
-            dataSource={data.table}
-            pagination={false}
-            scroll={{ x: true }}
-          />
+          <Table columns={columns} dataSource={data.table} pagination={false} />
         </div>
       </div>
     )
