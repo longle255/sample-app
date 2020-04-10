@@ -125,7 +125,7 @@ export function* SETUP() {
   // init theme on app load
   const initTheme = () => {
     const theme = store.get('app.settings.theme')
-    if (theme === 'light') {
+    if (theme === 'light' || theme === undefined) {
       reduxStore.dispatch({
         type: 'settings/SET_THEME',
         payload: {
