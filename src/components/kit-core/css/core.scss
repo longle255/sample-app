@@ -22,6 +22,8 @@ body {
   color: $text;
   overflow-x: hidden;
   position: relative;
+  font-variant: normal;
+  font-feature-settings: normal;
 
   a {
     text-decoration: none;
