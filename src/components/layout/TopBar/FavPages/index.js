@@ -141,7 +141,7 @@ class FavPages extends React.Component {
         {favs.map(item => {
           return (
             <Tooltip key={item.key} placement="bottom" title={item.title}>
-              <Link to={item.url} className={`${style.item} mr-2`}>
+              <Link to={item.url} className={`${style.item} mr-3`}>
                 <i className={`${style.icon} fe ${item.icon}`} />
               </Link>
             </Tooltip>

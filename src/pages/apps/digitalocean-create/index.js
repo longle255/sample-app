@@ -40,45 +40,47 @@ class ExtraAppsDigitaloceanCreate extends React.Component {
         <h6 className="mb-4 text-uppercase">
           <strong>Choose an image</strong>
         </h6>
-        <div className="d-flex flex-wrap mb-5">
-          <div className="card width-200 text-center mr-5">
-            <div className="card-header pt-3 pb-3">
-              <div className="text-uppercase text-dark font-weight-bold">Ubuntu</div>
-            </div>
-            <div className="card-body pt-3 pb-3">
-              <div className="text-center text-gray-5">18.04 x86</div>
-            </div>
-          </div>
-          <div className="card width-200 text-center mr-5 bg-light border-blue">
-            <div className="card-header pt-3 pb-3">
-              <div className="text-uppercase text-dark font-weight-bold">Freebsd</div>
-            </div>
-            <div className="card-body pt-3 pb-3">
-              <div className="text-center text-gray-5">18.04 x86</div>
+        <div className="row mb-5">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div className="card text-center">
+              <div className="card-header pt-3 pb-3">
+                <div className="text-uppercase text-dark font-weight-bold">Ubuntu</div>
+              </div>
+              <div className="card-body pt-3 pb-3">
+                <div className="text-center text-gray-5">18.04 x86</div>
+              </div>
             </div>
           </div>
-          <div className="card width-200 text-center mr-5">
-            <div className="card-header pt-3 pb-3">
-              <div className="text-uppercase text-dark font-weight-bold">Fedora</div>
-            </div>
-            <div className="card-body pt-3 pb-3">
-              <div className="text-center text-gray-5">18.04 x86</div>
-            </div>
-          </div>
-          <div className="card width-200 text-center mr-5">
-            <div className="card-header pt-3 pb-3">
-              <div className="text-uppercase text-dark font-weight-bold">Debian</div>
-            </div>
-            <div className="card-body pt-3 pb-3">
-              <div className="text-center text-gray-5">18.04 x86</div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div className="card text-center bg-light border-blue">
+              <div className="card-header pt-3 pb-3">
+                <div className="text-uppercase text-dark font-weight-bold">Freebsd</div>
+              </div>
+              <div className="card-body pt-3 pb-3">
+                <div className="text-center text-gray-5">18.04 x86</div>
+              </div>
             </div>
           </div>
-          <div className="card width-200 text-center">
-            <div className="card-header pt-3 pb-3">
-              <div className="text-uppercase text-dark font-weight-bold">Centos</div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div className="card text-center">
+              <div className="card-header pt-3 pb-3">
+                <div className="text-uppercase text-dark font-weight-bold">Fedora</div>
+              </div>
+              <div className="card-body pt-3 pb-3">
+                <div className="text-center text-gray-5">18.04 x86</div>
+              </div>
             </div>
-            <div className="card-body pt-3 pb-3">
-              <div className="text-center text-gray-5">18.04 x86</div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div className="card text-center">
+              <div className="card-header pt-3 pb-3">
+                <div className="text-uppercase text-dark font-weight-bold">Debian</div>
+              </div>
+              <div className="card-body pt-3 pb-3">
+                <div className="text-center text-gray-5">18.04 x86</div>
+              </div>
             </div>
           </div>
         </div>

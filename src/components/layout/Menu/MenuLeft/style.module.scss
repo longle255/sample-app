@@ -6,6 +6,7 @@
   background: $white !important;
   color: $text;
   transition: none;
+  font-size: rem(15);
 
   .menuOuter {
     position: fixed;
@@ -81,6 +82,10 @@
     background: transparent;
     border-right: none;
     color: $text;
+
+    .title {
+      font-size: rem(15);
+    }
 
     :global(.ant-menu-submenu > .ant-menu) {
       background: transparent;
