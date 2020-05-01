@@ -13,7 +13,7 @@ class Footer extends React.Component {
             className={style.logo}
           >
             SELLPIXELS
-            <span></span>
+            <span />
           </a>
           <br />
           <p className="mb-0">

@@ -45,7 +45,7 @@ const columns = [
 ]
 
 const data = []
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i <= 10; i += 1) {
   data.push({
     key: i,
     name: 'John Brown',
@@ -128,7 +128,7 @@ class AntdTableExample extends React.Component {
   }
 
   render() {
-    const { xScroll, yScroll, ...state } = this.state
+    const { xScroll, yScroll, top, bottom, ...state } = this.state
 
     const scroll = {}
     if (yScroll) {
@@ -203,7 +203,7 @@ class AntdTableExample extends React.Component {
           </Form.Item>
           <Form.Item label="Pagination Top">
             <Radio.Group
-              value={this.state.top}
+              value={top}
               onChange={e => {
                 this.setState({ top: e.target.value })
               }}
@@ -216,7 +216,7 @@ class AntdTableExample extends React.Component {
           </Form.Item>
           <Form.Item label="Pagination Bottom">
             <Radio.Group
-              value={this.state.bottom}
+              value={bottom}
               onChange={e => {
                 this.setState({ bottom: e.target.value })
               }}
@@ -230,7 +230,7 @@ class AntdTableExample extends React.Component {
         </Form>
         <Table
           {...this.state}
-          pagination={{ position: [this.state.top, this.state.bottom] }}
+          pagination={{ position: [top, bottom] }}
           columns={tableColumns}
           dataSource={state.hasData ? data : null}
           scroll={scroll}

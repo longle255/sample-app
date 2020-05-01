@@ -41,7 +41,7 @@ class ExtraAppsDigitaloceanCreate extends React.Component {
           <strong>Choose an image</strong>
         </h6>
         <div className="row mb-5">
-          <div class="col-md-3 col-sm-6 col-xs-12">
+          <div className="col-md-3 col-sm-6 col-xs-12">
             <div className="card text-center">
               <div className="card-header pt-3 pb-3">
                 <div className="text-uppercase text-dark font-weight-bold">Ubuntu</div>
@@ -51,7 +51,7 @@ class ExtraAppsDigitaloceanCreate extends React.Component {
               </div>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
+          <div className="col-md-3 col-sm-6 col-xs-12">
             <div className="card text-center bg-light border-blue">
               <div className="card-header pt-3 pb-3">
                 <div className="text-uppercase text-dark font-weight-bold">Freebsd</div>
@@ -62,7 +62,7 @@ class ExtraAppsDigitaloceanCreate extends React.Component {
             </div>
           </div>
 
-          <div class="col-md-3 col-sm-6 col-xs-12">
+          <div className="col-md-3 col-sm-6 col-xs-12">
             <div className="card text-center">
               <div className="card-header pt-3 pb-3">
                 <div className="text-uppercase text-dark font-weight-bold">Fedora</div>
@@ -73,7 +73,7 @@ class ExtraAppsDigitaloceanCreate extends React.Component {
             </div>
           </div>
 
-          <div class="col-md-3 col-sm-6 col-xs-12">
+          <div className="col-md-3 col-sm-6 col-xs-12">
             <div className="card text-center">
               <div className="card-header pt-3 pb-3">
                 <div className="text-uppercase text-dark font-weight-bold">Debian</div>

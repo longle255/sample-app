@@ -15,6 +15,7 @@ const mapStateToProps = ({ settings }) => ({
 @connect(mapStateToProps)
 class Menu extends React.PureComponent {
   touchStartPrev = 0
+
   touchStartLocked = false
 
   componentDidMount() {
@@ -27,7 +28,7 @@ class Menu extends React.PureComponent {
       e => {
         const x = unify(e).clientX
         this.touchStartPrev = x
-        this.touchStartLocked = x > 70 ? true : false
+        this.touchStartLocked = x > 70
       },
       { passive: false },
     )
@@ -59,12 +60,21 @@ class Menu extends React.PureComponent {
   render() {
     const { isMobileMenuOpen, isMobileView, menuLayoutType, leftMenuWidth } = this.props
 
-    const Menu = () => {
+    const GetMenu = () => {
       if (isMobileView) {
         return (
           <div>
-            <div className={style.handler} onClick={this.toggleMobileMenu}>
-              <div className={style.handlerIcon}></div>
+            <div
+              className={style.handler}
+              onClick={this.toggleMobileMenu}
+              onFocus={e => {
+                e.preventDefault()
+              }}
+              onKeyPress={this.toggleMobileMenu}
+              role="button"
+              tabIndex="0"
+            >
+              <div className={style.handlerIcon} />
             </div>
             <Drawer
               closable={false}
@@ -72,7 +82,7 @@ class Menu extends React.PureComponent {
               placement="left"
               className={style.mobileMenu}
               onClose={this.toggleMobileMenu}
-              maskClosable={true}
+              maskClosable
               getContainer={null}
               width={leftMenuWidth}
             >
@@ -90,7 +100,7 @@ class Menu extends React.PureComponent {
       return <MenuLeft />
     }
 
-    return Menu()
+    return GetMenu()
   }
 }
 

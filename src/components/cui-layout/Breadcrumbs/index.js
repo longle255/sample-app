@@ -19,7 +19,7 @@ class Breadcrumbs extends React.Component {
     this.setBreadcrumbs(this.props)
   }
 
-  UNSAFE_componentWillReceiveProps(newProps) {
+  componentWillReceiveProps(newProps) {
     this.setBreadcrumbs(newProps)
   }
 

@@ -30,11 +30,11 @@ class MenuLeft extends React.Component {
     openedKeys: store.get('app.menu.openedKeys') || [],
   }
 
-  UNSAFE_componentWillMount() {
+  componentWillMount() {
     this.setSelectedKeys(this.props)
   }
 
-  UNSAFE_componentWillReceiveProps(newProps) {
+  componentWillReceiveProps(newProps) {
     if (newProps.isMenuCollapsed && !newProps.isMobileView) {
       this.setState({
         openedKeys: [],
@@ -98,18 +98,19 @@ class MenuLeft extends React.Component {
     const generateItem = item => {
       const { key, title, url, icon, disabled, count } = item
       if (item.category) {
-        return <Menu.ItemGroup key={Math.random()} title={item.title}></Menu.ItemGroup>
+        return <Menu.ItemGroup key={Math.random()} title={item.title} />
       }
       if (item.url) {
         return (
           <Menu.Item key={key} disabled={disabled}>
-            {item.target ? (
+            {item.target && (
               <a href={url} target={item.target} rel="noopener noreferrer">
                 <span className={style.title}>{title}</span>
                 {count && <span className="badge badge-success ml-2">{count}</span>}
                 {icon && <span className={`${icon} ${style.icon} icon-collapsed-hidden`} />}
               </a>
-            ) : (
+            )}
+            {!item.target && (
               <Link to={url}>
                 <span className={style.title}>{title}</span>
                 {count && <span className="badge badge-success ml-2">{count}</span>}

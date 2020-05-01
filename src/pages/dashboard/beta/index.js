@@ -441,15 +441,15 @@ class DashboardBeta extends React.Component {
                   <strong>Week Revenue Statistics, Billions</strong>
                 </div>
                 <span className="mr-2">
-                  <span className="kit__utils__donut kit__utils__donut--primary"></span>
+                  <span className="kit__utils__donut kit__utils__donut--primary" />
                   Nuts
                 </span>
                 <span className="mr-2">
-                  <span className="kit__utils__donut kit__utils__donut--success"></span>
+                  <span className="kit__utils__donut kit__utils__donut--success" />
                   Apples
                 </span>
                 <span className="mr-2">
-                  <span className="kit__utils__donut kit__utils__donut--yellow"></span>
+                  <span className="kit__utils__donut kit__utils__donut--yellow" />
                   Peaches
                 </span>
               </div>
@@ -468,11 +468,11 @@ class DashboardBeta extends React.Component {
                   <strong>Month Site Visits Growth, %</strong>
                 </div>
                 <span className="mr-2">
-                  <span className="kit__utils__donut kit__utils__donut--primary"></span>
+                  <span className="kit__utils__donut kit__utils__donut--primary" />
                   Income
                 </span>
                 <span className="mr-2">
-                  <span className="kit__utils__donut kit__utils__donut--success"></span>
+                  <span className="kit__utils__donut kit__utils__donut--success" />
                   Outcome
                 </span>
               </div>

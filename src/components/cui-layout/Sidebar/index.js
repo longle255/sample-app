@@ -33,8 +33,28 @@ const mapStateToProps = ({ settings }) => ({
 @connect(mapStateToProps)
 class Sidebar extends React.Component {
   state = {
-    primaryColor: this.props.primaryColor,
+    primaryColor: '',
     defaultColor: '#4b7cf3',
+  }
+
+  selectColor = throttle(color => {
+    const { dispatch } = this.props
+    this.setState({
+      primaryColor: color,
+    })
+    dispatch({
+      type: 'settings/SET_PRIMARY_COLOR',
+      payload: {
+        color,
+      },
+    })
+  }, 200)
+
+  componentDidMount() {
+    const { primaryColor } = this.props
+    this.setState({
+      primaryColor,
+    })
   }
 
   componentDidUpdate(prevProps) {
@@ -59,19 +79,6 @@ class Sidebar extends React.Component {
       },
     })
   }
-
-  selectColor = throttle(color => {
-    const { dispatch } = this.props
-    this.setState({
-      primaryColor: color,
-    })
-    dispatch({
-      type: 'settings/SET_PRIMARY_COLOR',
-      payload: {
-        color,
-      },
-    })
-  }, 200)
 
   resetColor = () => {
     const { defaultColor } = this.state
@@ -466,6 +473,12 @@ class Sidebar extends React.Component {
         </div>
         <Tooltip title="Settings" placement="left">
           <a
+            role="button"
+            tabIndex="0"
+            onFocus={e => {
+              e.preventDefault()
+            }}
+            onKeyPress={this.toggleSettings}
             onClick={this.toggleSettings}
             style={{ bottom: 'calc(50% + 120px)' }}
             className={style.cui__sidebar__toggleButton}
@@ -475,6 +488,12 @@ class Sidebar extends React.Component {
         </Tooltip>
         <Tooltip title="Switch Dark / Light Theme" placement="left">
           <a
+            role="button"
+            tabIndex="0"
+            onFocus={e => {
+              e.preventDefault()
+            }}
+            onKeyPress={() => this.setTheme(theme === 'default' ? 'dark' : 'default')}
             onClick={() => this.setTheme(theme === 'default' ? 'dark' : 'default')}
             style={{ bottom: 'calc(50% + 60px)' }}
             className={style.cui__sidebar__toggleButton}

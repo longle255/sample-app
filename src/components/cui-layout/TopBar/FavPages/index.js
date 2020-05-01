@@ -23,7 +23,7 @@ class FavPages extends React.Component {
   componentDidMount() {
     const pagesList = () => {
       const { menuData = [] } = this.props
-      const _menuData = JSON.parse(JSON.stringify(menuData))
+      const menuDataProcessed = JSON.parse(JSON.stringify(menuData))
       const flattenItems = (items, key) =>
         items.reduce((flattenedItems, item) => {
           if (item.category) {
@@ -34,16 +34,16 @@ class FavPages extends React.Component {
             return flattenedItems
           }
           if (Array.isArray(item[key])) {
-            const items = item[key].map(child => {
+            const itemsProcessed = item[key].map(child => {
               child.icon = item.icon
               return child
             })
-            return flattenedItems.concat(flattenItems(items, key))
+            return flattenedItems.concat(flattenItems(itemsProcessed, key))
           }
           flattenedItems.push(item)
           return flattenedItems
         }, [])
-      return flattenItems(_menuData, 'children')
+      return flattenItems(menuDataProcessed, 'children')
     }
     setTimeout(() => {
       this.setState({
@@ -75,7 +75,7 @@ class FavPages extends React.Component {
       message.info('Only three pages can be added to your bookmarks.')
       return
     }
-    let items = [...favs]
+    const items = [...favs]
     items.push(item)
     store.set('app.topbar.favs', items)
     this.setState({
@@ -85,10 +85,10 @@ class FavPages extends React.Component {
 
   generatePageList = searchText => {
     const { pagesList, favs } = this.state
-    const _searchText = searchText ? searchText.toUpperCase() : ''
+    const searchTextProcessed = searchText ? searchText.toUpperCase() : ''
     return pagesList.map(item => {
       const isActive = favs.some(child => child.url === item.url)
-      if (!item.title.toUpperCase().includes(_searchText) && _searchText) {
+      if (!item.title.toUpperCase().includes(searchTextProcessed) && searchTextProcessed) {
         return null
       }
       return (
@@ -96,6 +96,12 @@ class FavPages extends React.Component {
           <div
             className={`${style.setIcon} ${isActive ? style.setIconActive : ''}`}
             onClick={e => this.setFav(e, item)}
+            role="button"
+            tabIndex="0"
+            onFocus={e => {
+              e.preventDefault()
+            }}
+            onKeyPress={e => this.setFav(e, item)}
           >
             <i className="fe fe-star" />
           </div>

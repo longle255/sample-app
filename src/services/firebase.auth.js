@@ -17,7 +17,7 @@ const firebaseApp = firebase.initializeApp(firebaseConfig)
 const firebaseAuth = firebase.auth
 export default firebaseApp
 
-export async function FB_login(email, password) {
+export async function fbLogin(email, password) {
   return firebaseAuth()
     .signInWithEmailAndPassword(email, password)
     .then(() => true)
@@ -29,7 +29,7 @@ export async function FB_login(email, password) {
     })
 }
 
-export async function FB_currentAccount() {
+export async function fbCurrentAccount() {
   let userLoaded = false
   function getCurrentUser(auth) {
     return new Promise((resolve, reject) => {
@@ -46,7 +46,7 @@ export async function FB_currentAccount() {
   return getCurrentUser(firebaseAuth())
 }
 
-export async function FB_logout() {
+export async function fbLogout() {
   return firebaseAuth()
     .signOut()
     .then(() => true)

@@ -1,6 +1,5 @@
 import React from 'react'
-import { Form } from 'antd'
-import { Input, Button } from 'antd'
+import { Input, Button, Form } from 'antd'
 import { Link } from 'react-router-dom'
 import style from '../style.module.scss'
 

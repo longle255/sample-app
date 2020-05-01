@@ -337,7 +337,7 @@ class Router extends React.Component {
                           path={path}
                           key={path}
                           exact={exact}
-                          render={props => {
+                          render={() => {
                             return (
                               <div className={routerAnimation}>
                                 <Suspense fallback={null}>

@@ -23,11 +23,11 @@ class MenuTop extends React.Component {
     selectedKeys: store.get('app.menu.selectedKeys') || [],
   }
 
-  UNSAFE_componentWillMount() {
+  componentWillMount() {
     this.setSelectedKeys(this.props)
   }
 
-  UNSAFE_componentWillReceiveProps(newProps) {
+  componentWillReceiveProps(newProps) {
     this.setSelectedKeys(newProps)
   }
 
@@ -75,13 +75,14 @@ class MenuTop extends React.Component {
       if (item.url) {
         return (
           <Menu.Item key={key} disabled={disabled}>
-            {item.target ? (
+            {item.target && (
               <a href={url} target={item.target} rel="noopener noreferrer">
                 {icon && <span className={`${icon} ${style.icon}`} />}
                 <span className={style.title}>{title}</span>
                 {count && <span className="badge badge-success ml-2">{count}</span>}
               </a>
-            ) : (
+            )}
+            {!item.target && (
               <Link to={url}>
                 {icon && <span className={`${icon} ${style.icon}`} />}
                 <span className={style.title}>{title}</span>

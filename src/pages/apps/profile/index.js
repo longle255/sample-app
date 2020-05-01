@@ -13,8 +13,8 @@ const { TabPane } = Tabs
 const AppsProfile = () => {
   const [tabKey, setTabKey] = useState('1')
 
-  const changeTab = tabKey => {
-    setTabKey(tabKey)
+  const changeTab = key => {
+    setTabKey(key)
   }
 
   return (

@@ -11,10 +11,11 @@ const FAKE_USERS = [
   },
 ]
 
-const fake_fetch = (url, params) => {
+const fakeFetch = (url, params) => {
+  console.log(params)
   switch (url) {
     case 'api/login':
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         resolve({
           headers: '',
           jwt: FAKE_JWT,
@@ -22,7 +23,7 @@ const fake_fetch = (url, params) => {
         })
       })
     case 'api/currentUser':
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         resolve({
           headers: '',
           jwt: FAKE_JWT,
@@ -30,7 +31,7 @@ const fake_fetch = (url, params) => {
         })
       })
     case 'api/logout':
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         resolve(true)
       })
     default:
@@ -38,14 +39,14 @@ const fake_fetch = (url, params) => {
   }
 }
 
-export async function JWT_login(email, password) {
+export async function jwtLogin(email, password) {
   const user = {
     email,
     password,
   }
   return (
     // replace this with real fetch() method
-    fake_fetch('api/login', {
+    fakeFetch('api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -57,19 +58,18 @@ export async function JWT_login(email, password) {
       .then(data => {
         if (data.message) {
           return false
-        } else {
-          store.set('jwt.token', data.jwt)
-          return data.data
         }
+        store.set('jwt.token', data.jwt)
+        return data.data
       })
   )
 }
 
-export async function JWT_currentAccount() {
+export async function jwtCurrentAccount() {
   const jwt = store.get('jwt.token')
   return (
     // replace this with real fetch() method
-    fake_fetch('api/currentUser', {
+    fakeFetch('api/currentUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -81,18 +81,17 @@ export async function JWT_currentAccount() {
       .then(data => {
         if (data.message) {
           return false
-        } else {
-          return data.data
         }
+        return data.data
       })
   )
 }
 
-export async function JWT_logout() {
+export async function jwtLogout() {
   const jwt = store.get('jwt.token')
   return (
     // replace this with real fetch() method
-    fake_fetch('api/logout', {
+    fakeFetch('api/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -104,10 +103,9 @@ export async function JWT_logout() {
       .then(data => {
         if (data.message) {
           return false
-        } else {
-          store.remove('jwt.token')
-          return true
         }
+        store.remove('jwt.token')
+        return true
       })
   )
 }

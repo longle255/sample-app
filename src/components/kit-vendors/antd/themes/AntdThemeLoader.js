@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable class-methods-use-this */
 
-// const preProcessor = ClassConstructor => class _PreProcessor extends ClassConstructor {
+// const preProcessor = ClassConstructor => class PreProcessor extends ClassConstructor {
 //   constructor(options) {
 //     super(options)
 //     this.options = options
@@ -15,7 +15,7 @@
 // }
 
 // original code: https://github.com/atvilelas/antd-theming-engine/blob/master/PostImportPrefixCleanUp.js
-const postProcessor = ClassConstructor => class _PostProcessor extends ClassConstructor {
+const postProcessor = ClassConstructor => class PostProcessor extends ClassConstructor {
   constructor(options) {
     super(options)
     this.options = options
@@ -40,7 +40,7 @@ const postProcessor = ClassConstructor => class _PostProcessor extends ClassCons
       }
 
       const finder = new RegExp(escapedMark, 'g')
-      const finderNested = new RegExp('(?<!^(?<!s))' + escapedMark + ' ', 'g')
+      const finderNested = new RegExp(`(?<!^(?<!s))${escapedMark} `, 'g')
       const replaceNestedLine = line.replace(finderNested, '')
       const replaceLine = `${antDesignTemplateMark} ${replaceNestedLine.replace(finder, '')}`
       const removeTwoSpace = replaceLine.replace(/( {2})/g, ' ')
@@ -57,8 +57,8 @@ module.exports = class LessPlugin {
   constructor(options) {
     this.options = options
     this.install = this.install.bind(this)
-    this._PostProcessor = null
-    this._PreProcessor = null
+    this.PostProcessor = null
+    this.PreProcessor = null
     this.minVersion = [0, 0, 1]
 
     this.setOptions = (theOptions) => {
@@ -67,14 +67,14 @@ module.exports = class LessPlugin {
   }
 
   install(less, pluginManager) {
-    // this._PreProcessor = preProcessor(less.FileManager)
-    // pluginManager.addPreProcessor(new this._PreProcessor({
+    // this.PreProcessor = preProcessor(less.FileManager)
+    // pluginManager.addPreProcessor(new this.PreProcessor({
     //   ...this.options,
     //   less,
     // }))
 
-    this._PostProcessor = postProcessor(less.FileManager)
-    pluginManager.addPostProcessor(new this._PostProcessor({
+    this.PostProcessor = postProcessor(less.FileManager)
+    pluginManager.addPostProcessor(new this.PostProcessor({
       ...this.options,
       less,
     }))

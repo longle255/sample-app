@@ -219,15 +219,15 @@ class DashboardGamma extends React.Component {
                       </div>
                       <div className="text-center mb-4">
                         <span className="mr-2">
-                          <span className="kit__utils__donut kit__utils__donut--success"></span>
+                          <span className="kit__utils__donut kit__utils__donut--success" />
                           Ready
                         </span>
                         <span className="mr-2">
-                          <span className="kit__utils__donut kit__utils__donut--primary"></span>
+                          <span className="kit__utils__donut kit__utils__donut--primary" />
                           In Progress
                         </span>
                         <span className="mr-2">
-                          <span className="kit__utils__donut kit__utils__donut--danger"></span>
+                          <span className="kit__utils__donut kit__utils__donut--danger" />
                           Defected
                         </span>
                       </div>
