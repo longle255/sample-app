@@ -1,4 +1,4 @@
-@import 'components/kit-core/mixins';
+@import 'components/kit-core/mixins.scss';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /* SELECTBOXES */
@@ -19,7 +19,7 @@ select {
 }
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   select.form-control {
     background-color: $dark-gray-5;
     border-color: $dark-gray-4;

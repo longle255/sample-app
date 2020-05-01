@@ -1,4 +1,4 @@
-@import 'components/kit-core/mixins';
+@import 'components/kit-core/mixins.scss';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /* TABLE */
@@ -102,7 +102,7 @@
 }
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   .table {
     thead {
       th {

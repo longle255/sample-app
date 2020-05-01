@@ -48,7 +48,7 @@
 }
 
 // dark theme
-:global(body.kit__dark) {
+[data-kit-theme='dark'] {
   .itemPic {
     background: $dark-gray-4;
   }

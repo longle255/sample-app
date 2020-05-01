@@ -1,4 +1,4 @@
-@import 'components/kit-core/mixins';
+@import 'components/kit-core/mixins.scss';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /* BUTTONS */
@@ -408,7 +408,7 @@ label.btn {
 
 // dark theme
 
-body.kit__dark {
+[data-kit-theme='dark'] {
   .btn,
   .show > .btn {
     &.btn-light,

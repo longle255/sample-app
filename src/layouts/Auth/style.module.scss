@@ -83,7 +83,7 @@
 }
 
 // dark theme
-:global(body.kit__dark) {
+[data-kit-theme='dark'] {
   .container {
     background: transparent !important;
   }

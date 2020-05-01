@@ -34,7 +34,7 @@
 }
 
 // dark theme
-:global(body.kit__dark) {
+[data-kit-theme='dark'] {
   .textDivider {
     &::before,
     &::after {

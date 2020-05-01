@@ -20,7 +20,7 @@
 }
 
 // dark theme
-:global(body.kit__dark) {
+[data-kit-theme='dark'] {
   .footer {
     background: $dark-gray-4;
   }

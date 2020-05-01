@@ -55,7 +55,7 @@
 }
 
 // dark theme
-:global(body.kit__dark) {
+[data-kit-theme='dark'] {
   .itemDots {
     opacity: 0.1;
   }

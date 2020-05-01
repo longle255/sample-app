@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Register from 'components/system/Auth/Register'
+import Register from 'components/cui-system/Auth/Register'
 
 class SystemRegister extends React.Component {
   render() {

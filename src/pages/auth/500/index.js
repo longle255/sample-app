@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Error500 from 'components/system/Errors/500'
+import Error500 from 'components/cui-system/Errors/500'
 
 class System500 extends React.Component {
   render() {

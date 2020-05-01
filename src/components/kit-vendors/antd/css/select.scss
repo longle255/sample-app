@@ -1,50 +1,66 @@
 // Import mixins
 @import 'components/kit-core/mixins.scss';
 
-body {
-  .ant-select {
-    &-open {
-      .ant-select-selection {
-        border-color: $primary;
-      }
-    }
-
-    &-selection {
-      &:hover {
-        border-color: $primary;
-      }
+.ant-select {
+  &-open {
+    .ant-select-selection {
+      border-color: $primary;
     }
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////////////
-  // DARK THEME STYLES
-  &.kit__dark {
-    .ant-select {
-      &-selection {
-        &--multiple {
-          .ant-select-selection__choice {
-            color: $dark-gray-1;
-            background: $primary;
+  &-selection {
+    &:hover {
+      border-color: $primary;
+    }
+  }
+}
 
-            &__remove {
-              color: $dark-gray-3;
-            }
-          }
+////////////////////////////////////////////////////////////////////////////////////////////
+// DARK THEME STYLES
+[data-kit-theme='dark'] {
+  .ant-select {
+    &-multiple {
+      .ant-select-selection-item {
+        color: $dark-gray-1;
+        background: $primary;
+
+        &-remove {
+          color: $dark-gray-1;
         }
       }
+    }
 
-      &-dropdown-menu-item {
-        &-selected {
+    &-item-option-active:not(.ant-select-item-option-disabled),
+    &-item-option-selected:not(.ant-select-item-option-disabled) {
+      color: $dark-gray-1;
+      background: $primary;
+    }
+
+    // antd v3 styles
+    &-selection {
+      &--multiple {
+        .ant-select-selection__choice {
           color: $dark-gray-1;
           background: $primary;
+
+          &-remove {
+            color: $dark-gray-3;
+          }
         }
       }
+    }
 
-      &-tree-dropdown {
-        .ant-select-dropdown-search {
-          .ant-select-search__field {
-            background: $dark-gray-5;
-          }
+    &-dropdown-menu-item {
+      &-selected {
+        color: $dark-gray-1;
+        background: $primary;
+      }
+    }
+
+    &-tree-dropdown {
+      .ant-select-dropdown-search {
+        .ant-select-search__field {
+          background: $dark-gray-5;
         }
       }
     }

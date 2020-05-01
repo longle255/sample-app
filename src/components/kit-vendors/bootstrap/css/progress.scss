@@ -1,10 +1,10 @@
-@import 'components/kit-core/mixins';
+@import 'components/kit-core/mixins.scss';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /* PROGRESS */
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   .progress {
     background: $dark-gray-4;
   }

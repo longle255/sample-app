@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Login from 'components/system/Auth/Login'
+import Login from 'components/cui-system/Auth/Login'
 
 class SystemLogin extends React.Component {
   render() {

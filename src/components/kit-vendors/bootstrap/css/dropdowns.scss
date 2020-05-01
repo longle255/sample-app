@@ -1,5 +1,5 @@
 // Import mixins from "core" module
-@import 'components/kit-core/mixins';
+@import 'components/kit-core/mixins.scss';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /* DROPDOWNS */
@@ -95,7 +95,7 @@
 }
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   .dropdown-menu {
     background-color: $dark-gray-6;
   }

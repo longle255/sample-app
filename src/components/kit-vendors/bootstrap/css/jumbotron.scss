@@ -1,11 +1,11 @@
 // Import mixins from "core" module
-@import 'components/kit-core/mixins';
+@import 'components/kit-core/mixins.scss';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /* JUMBOTRON */
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   .jumbotron {
     background: $dark-gray-4;
   }

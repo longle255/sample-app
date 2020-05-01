@@ -1,17 +1,16 @@
 // Import mixins
 @import 'components/kit-core/mixins.scss';
 
-body {
-  ////////////////////////////////////////////////////////////////////////////////////////////
-  // DARK THEME STYLES
-  &.kit__dark {
-    .ant-breadcrumb {
-      &-link {
-        color: $dark-gray-1;
-      }
-      &-separator {
-        color: $dark-gray-3;
-      }
+////////////////////////////////////////////////////////////////////////////////////////////
+// DARK THEME STYLES
+[data-kit-theme='dark'] {
+  .ant-breadcrumb {
+    &-link,
+    &-link a {
+      color: $dark-gray-1;
+    }
+    &-separator {
+      color: $dark-gray-3;
     }
   }
 }

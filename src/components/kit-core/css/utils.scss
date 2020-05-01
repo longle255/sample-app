@@ -466,7 +466,7 @@
 }
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   .kit {
     &__utils {
       &__link {

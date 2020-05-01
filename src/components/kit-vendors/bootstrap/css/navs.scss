@@ -1,4 +1,4 @@
-@import 'components/kit-core/mixins';
+@import 'components/kit-core/mixins.scss';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /* NAVS */
@@ -127,7 +127,7 @@
 }
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   .nav-tabs {
     border-color: $dark-gray-4;
     &:not(.nav-tabs-line) {

@@ -45,7 +45,7 @@
 }
 
 // dark theme
-:global(body.kit__dark) {
+[data-kit-theme='dark'] {
   .tabs {
     :global(.ant-tabs-bar) {
       &::before {

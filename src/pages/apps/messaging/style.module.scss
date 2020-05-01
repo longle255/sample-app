@@ -101,7 +101,7 @@
 }
 
 // dark theme
-:global(body.kit__dark) {
+[data-kit-theme='dark'] {
   .messageContent {
     background-color: $dark-gray-5;
     &:before {

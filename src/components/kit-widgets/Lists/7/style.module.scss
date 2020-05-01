@@ -146,7 +146,7 @@
 }
 
 // dark theme
-:global(body.kit__dark) {
+[data-kit-theme='dark'] {
   .list {
     &:before {
       background: $dark-gray-4;

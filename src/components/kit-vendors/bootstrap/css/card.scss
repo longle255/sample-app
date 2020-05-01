@@ -1,4 +1,4 @@
-@import 'components/kit-core/mixins';
+@import 'components/kit-core/mixins.scss';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /* CARDS */
@@ -76,7 +76,7 @@
 }
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   .card {
     background: $dark-gray-6;
     border-color: $dark-gray-4;

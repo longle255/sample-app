@@ -271,7 +271,7 @@
 }
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   .ct-grid {
     stroke: $dark-gray-3;
   }

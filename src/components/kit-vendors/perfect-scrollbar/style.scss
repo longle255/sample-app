@@ -39,7 +39,7 @@
 }
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   .ps__thumb-y {
     background: #32304b !important;
   }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Error404 from 'components/system/Errors/404'
+import Error404 from 'components/cui-system/Errors/404'
 
 class System404 extends React.Component {
   render() {

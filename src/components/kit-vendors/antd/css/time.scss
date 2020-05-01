@@ -1,19 +1,17 @@
 // Import mixins
 @import 'components/kit-core/mixins.scss';
 
-body {
-  ////////////////////////////////////////////////////////////////////////////////////////////
-  // DARK THEME STYLES
-  &.kit__dark {
-    .ant-time-picker {
-      &-panel-input {
-        background: transparent;
-      }
-      &-panel-select-option-selected {
+////////////////////////////////////////////////////////////////////////////////////////////
+// DARK THEME STYLES
+[data-kit-theme='dark'] {
+  .ant-time-picker {
+    &-panel-input {
+      background: transparent;
+    }
+    &-panel-select-option-selected {
+      background: $primary;
+      &:hover {
         background: $primary;
-        &:hover {
-          background: $primary;
-        }
       }
     }
   }

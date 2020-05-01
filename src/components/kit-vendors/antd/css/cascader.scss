@@ -1,17 +1,15 @@
 // Import mixins
 @import 'components/kit-core/mixins.scss';
 
-body {
-  ////////////////////////////////////////////////////////////////////////////////////////////
-  // DARK THEME STYLES
-  &.kit__dark {
-    .ant-cascader {
-      &-menu-item-active {
-        background: $primary;
+////////////////////////////////////////////////////////////////////////////////////////////
+// DARK THEME STYLES
+[data-kit-theme='dark'] {
+  .ant-cascader {
+    &-menu-item-active {
+      background: $primary;
 
-        &:hover {
-          background: $primary;
-        }
+      &:hover {
+        background: $primary;
       }
     }
   }

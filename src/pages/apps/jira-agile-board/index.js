@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Sortable from 'react-sortablejs'
+import { ReactSortable } from 'react-sortablejs'
 import style from './style.module.scss'
 
 class ExtraAppsJiraAgileBoard extends React.Component {
@@ -134,7 +134,7 @@ class ExtraAppsJiraAgileBoard extends React.Component {
           <div className="col-lg-3 col-md-6">
             <div className="card bg-light py-3 px-2">
               <h3 className="font-weight-bold text-dark font-size-18 mb-3">Backlog</h3>
-              <Sortable
+              <ReactSortable
                 options={{
                   group: 'shared',
                 }}
@@ -142,13 +142,13 @@ class ExtraAppsJiraAgileBoard extends React.Component {
                 style={{ minHeight: 500 }}
               >
                 {backlogItems}
-              </Sortable>
+              </ReactSortable>
             </div>
           </div>
           <div className="col-lg-3 col-md-6">
             <div className="card bg-light py-3 px-2">
               <h3 className="font-weight-bold text-dark font-size-18 mb-3">To Do</h3>
-              <Sortable
+              <ReactSortable
                 options={{
                   group: 'shared',
                 }}
@@ -156,13 +156,13 @@ class ExtraAppsJiraAgileBoard extends React.Component {
                 style={{ minHeight: 500 }}
               >
                 {todoItems}
-              </Sortable>
+              </ReactSortable>
             </div>
           </div>
           <div className="col-lg-3 col-md-6">
             <div className="card bg-light py-3 px-2">
               <h3 className="font-weight-bold text-dark font-size-18 mb-3">In Progress</h3>
-              <Sortable
+              <ReactSortable
                 options={{
                   group: 'shared',
                 }}
@@ -170,13 +170,13 @@ class ExtraAppsJiraAgileBoard extends React.Component {
                 style={{ minHeight: 500 }}
               >
                 {inprogressItems}
-              </Sortable>
+              </ReactSortable>
             </div>
           </div>
           <div className="col-lg-3 col-md-6">
             <div className="card bg-light py-3 px-2">
               <h3 className="font-weight-bold text-dark font-size-18 mb-3">Completed</h3>
-              <Sortable
+              <ReactSortable
                 options={{
                   group: 'shared',
                 }}

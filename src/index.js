@@ -1,3 +1,8 @@
+import 'antd/lib/style/index.less' // antd core styles
+import './components/kit-vendors/antd/themes/default.less' // default theme antd components
+import './components/kit-vendors/antd/themes/dark.less' // dark theme antd components
+import './global.scss' // app & third-party component styles
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createHashHistory } from 'history'
@@ -12,9 +17,6 @@ import sagas from './redux/sagas'
 import Localization from './localization'
 import Router from './router'
 import * as serviceWorker from './serviceWorker'
-
-// app styles
-import './global.scss'
 
 // middlewared
 const history = createHashHistory()

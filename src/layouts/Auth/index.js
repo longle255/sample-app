@@ -4,8 +4,8 @@ import { Layout } from 'antd'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
-import Sidebar from 'components/layout/Sidebar'
-import SupportChat from 'components/layout/SupportChat'
+import Sidebar from 'components/cui-layout/Sidebar'
+import SupportChat from 'components/cui-layout/SupportChat'
 import style from './style.module.scss'
 
 const mapStateToProps = ({ settings }) => ({

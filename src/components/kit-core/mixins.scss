@@ -87,3 +87,6 @@ $md-min-width: 768px;
 $md-max-width: 767px;
 $sm-min-width: 576px;
 $sm-max-width: 575px;
+
+// import Clean UI Admin Template mixins
+@import 'src/components/cui-styles/mixins.scss';

@@ -1,4 +1,4 @@
-@import 'components/kit-core/mixins';
+@import 'components/kit-core/mixins.scss';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /* UTILITIES */
@@ -74,14 +74,14 @@
   }
 }
 
-// dark theme
-body.kit__dark {
+// dark-theme
+[data-kit-theme='dark'] {
   .text {
     &-light {
       color: $dark !important;
     }
     &-dark {
-      color: $dark-gray-1 !important;
+      color: $dark-gray-2 !important;
     }
     &-muted {
       color: $dark-gray-3 !important;
@@ -93,7 +93,7 @@ body.kit__dark {
       background-color: $dark !important;
     }
     &-dark {
-      background-color: $dark-gray-2 !important;
+      background-color: $dark-gray-1 !important;
     }
   }
 

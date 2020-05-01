@@ -41,7 +41,7 @@
 }
 
 // dark theme
-:global(body.kit__dark) {
+[data-kit-theme='dark'] {
   .item {
     border-bottom: 1px solid $dark-gray-4;
     &:hover {

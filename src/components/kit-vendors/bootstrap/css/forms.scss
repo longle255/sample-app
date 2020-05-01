@@ -1,4 +1,4 @@
-@import 'components/kit-core/mixins';
+@import 'components/kit-core/mixins.scss';
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /* FORMS */
@@ -124,7 +124,7 @@ span.input-group-addon {
 }
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   input::-webkit-input-placeholder {
     color: $dark-gray-3 !important;
   }

@@ -772,7 +772,7 @@
 }
 
 // dark theme
-body.kit__dark {
+[data-kit-theme='dark'] {
   .rst__rowContents {
     background: $dark-gray-4;
     border-color: $dark-gray-4;

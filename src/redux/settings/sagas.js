@@ -4,9 +4,6 @@ import qs from 'qs'
 import { history, store as reduxStore } from 'index'
 import actions from './actions'
 
-import AntDesignDarkTheme from 'components/kit-vendors/antd/themes/themeDark'
-import AntDesignLightTheme from 'components/kit-vendors/antd/themes/themeLight'
-
 export function* CHANGE_SETTING({ payload: { setting, value } }) {
   yield store.set(`app.settings.${setting}`, value)
   yield put({
@@ -43,9 +40,8 @@ export function* SET_PRIMARY_COLOR({ payload: { color } }) {
 
 export function* SET_THEME({ payload: { theme } }) {
   const toggleTheme = () => {
-    if (theme === 'light') {
-      document.querySelector('body').classList.remove('kit__dark')
-      window.less.modifyVars(AntDesignLightTheme)
+    document.querySelector('html').setAttribute('data-kit-theme', theme)
+    if (theme === 'default') {
       reduxStore.dispatch({
         type: 'settings/CHANGE_SETTING',
         payload: {
@@ -55,8 +51,6 @@ export function* SET_THEME({ payload: { theme } }) {
       })
     }
     if (theme === 'dark') {
-      document.querySelector('body').classList.add('kit__dark')
-      window.less.modifyVars(AntDesignDarkTheme)
       reduxStore.dispatch({
         type: 'settings/CHANGE_SETTING',
         payload: {
@@ -126,7 +120,7 @@ export function* SETUP() {
   const initTheme = () => {
     const { search } = history.location
     const query = qs.parse(search, { ignoreQueryPrefix: true })
-    const theme = query.theme || store.get('app.settings.theme') || 'light'
+    const theme = query.theme || store.get('app.settings.theme') || 'default'
     reduxStore.dispatch({
       type: 'settings/SET_THEME',
       payload: {
