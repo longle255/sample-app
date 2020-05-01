@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Checkbox, Button, Icon } from 'antd'
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
+import { Checkbox, Button } from 'antd'
 import data from './data.json'
 import style from './style.module.scss'
 
@@ -25,10 +26,10 @@ class AppsGallery extends React.Component {
                       <div className={style.itemControlContainer}>
                         <Button.Group size="default">
                           <Button>
-                            <Icon type="edit" />
+                            <EditOutlined />
                           </Button>
                           <Button>
-                            <Icon type="delete" />
+                            <DeleteOutlined />
                           </Button>
                         </Button.Group>
                       </div>

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react'
-import { Comment, Icon, Tooltip, Avatar } from 'antd'
+import { Icon as LegacyIcon } from '@ant-design/compatible'
+import { Comment, Tooltip, Avatar } from 'antd'
 import moment from 'moment'
 
 class AntdCommentExample extends React.Component {
@@ -32,7 +33,7 @@ class AntdCommentExample extends React.Component {
     const actions = [
       <span key="comment-basic-like">
         <Tooltip title="Like">
-          <Icon
+          <LegacyIcon
             type="like"
             theme={action === 'liked' ? 'filled' : 'outlined'}
             onClick={this.like}
@@ -42,7 +43,7 @@ class AntdCommentExample extends React.Component {
       </span>,
       <span key=' key="comment-basic-dislike"'>
         <Tooltip title="Dislike">
-          <Icon
+          <LegacyIcon
             type="dislike"
             theme={action === 'disliked' ? 'filled' : 'outlined'}
             onClick={this.dislike}

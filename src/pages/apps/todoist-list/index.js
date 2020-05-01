@@ -2,7 +2,8 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import SortableTree, { changeNodeAtPath } from 'react-sortable-tree'
-import { Input, Icon, Tooltip, Checkbox } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
+import { Input, Tooltip, Checkbox } from 'antd'
 import Table6 from 'components/kit-widgets/Tables/6'
 import Chart4 from 'components/kit-widgets/Charts/4'
 import Chart4v1 from 'components/kit-widgets/Charts/4v1'
@@ -66,7 +67,7 @@ class ExtraAppsTodoistList extends React.Component {
           <div className="col-12 col-md-3">
             <div className="mb-4">
               <Input
-                prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder="Search mail..."
               />
             </div>

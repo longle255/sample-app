@@ -1,6 +1,9 @@
 /* eslint-disable */
 import React from 'react'
-import { Table, Icon, Switch, Radio, Form, Divider } from 'antd'
+import { DownOutlined } from '@ant-design/icons'
+import { Form } from '@ant-design/compatible'
+import '@ant-design/compatible/assets/index.css'
+import { Table, Switch, Radio, Divider } from 'antd'
 
 const columns = [
   {
@@ -29,7 +32,7 @@ const columns = [
         <a>Delete</a>
         <Divider type="vertical" />
         <a className="ant-dropdown-link">
-          More actions <Icon type="down" />
+          More actions <DownOutlined />
         </a>
       </span>
     ),

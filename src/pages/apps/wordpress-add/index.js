@@ -1,7 +1,10 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Editor } from 'react-draft-wysiwyg'
-import { Form, Input, Checkbox, Select, Upload, Icon } from 'antd'
+import { InboxOutlined } from '@ant-design/icons'
+import { Form } from '@ant-design/compatible'
+import '@ant-design/compatible/assets/index.css'
+import { Input, Checkbox, Select, Upload } from 'antd'
 
 const FormItem = Form.Item
 const { Dragger } = Upload
@@ -89,7 +92,7 @@ class ExtraAppsWordpressAdd extends React.Component {
                   {form.getFieldDecorator('Files')(
                     <Dragger>
                       <p className="ant-upload-drag-icon">
-                        <Icon type="inbox" />
+                        <InboxOutlined />
                       </p>
                       <p className="ant-upload-text">Click or drag file to this area to upload</p>
                       <p className="ant-upload-hint">

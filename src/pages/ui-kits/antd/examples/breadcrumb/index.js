@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react'
-import { Breadcrumb, Icon } from 'antd'
+import { HomeOutlined, UserOutlined } from '@ant-design/icons'
+import { Breadcrumb } from 'antd'
 
 class AntdBreadcrumbExample extends React.Component {
   render() {
@@ -27,10 +28,10 @@ class AntdBreadcrumbExample extends React.Component {
         <div className="mb-5">
           <Breadcrumb>
             <Breadcrumb.Item href="">
-              <Icon type="home" />
+              <HomeOutlined />
             </Breadcrumb.Item>
             <Breadcrumb.Item href="">
-              <Icon type="user" />
+              <UserOutlined />
               <span>Application List</span>
             </Breadcrumb.Item>
             <Breadcrumb.Item>Application</Breadcrumb.Item>

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react'
-import { Card, Avatar, Icon } from 'antd'
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons'
+import { Card, Avatar } from 'antd'
 
 const { Meta } = Card
 
@@ -50,9 +51,9 @@ class AntdCardExample extends React.Component {
                     />
                   }
                   actions={[
-                    <Icon type="setting" key="setting" />,
-                    <Icon type="edit" key="edit" />,
-                    <Icon type="ellipsis" key="ellipsis" />,
+                    <SettingOutlined key="setting" />,
+                    <EditOutlined key="edit" />,
+                    <EllipsisOutlined key="ellipsis" />,
                   ]}
                 >
                   <Meta

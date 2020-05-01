@@ -1,6 +1,9 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Form, Icon, Input, Button, Upload } from 'antd'
+import { MailOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
+import { Form } from '@ant-design/compatible'
+import '@ant-design/compatible/assets/index.css'
+import { Input, Button, Upload } from 'antd'
 import General15 from 'components/kit-widgets/General/15'
 import List15 from 'components/kit-widgets/Lists/15'
 
@@ -122,7 +125,7 @@ class ExtraAppsWordpressPost extends React.Component {
                   <FormItem>
                     {form.getFieldDecorator('userName')(
                       <Input
-                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         placeholder="Your name"
                       />,
                     )}
@@ -130,7 +133,7 @@ class ExtraAppsWordpressPost extends React.Component {
                   <FormItem>
                     {form.getFieldDecorator('mail')(
                       <Input
-                        prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         placeholder="Your email"
                       />,
                     )}
@@ -147,7 +150,7 @@ class ExtraAppsWordpressPost extends React.Component {
                     </Button>
                     <Upload>
                       <Button>
-                        <Icon type="upload" />
+                        <UploadOutlined />
                         Attach File
                       </Button>
                     </Upload>

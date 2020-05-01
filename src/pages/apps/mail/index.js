@@ -1,5 +1,6 @@
 import React from 'react'
-import { Input, Icon, Tabs, Table } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
+import { Input, Tabs, Table } from 'antd'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { Helmet } from 'react-helmet'
 import mails from './data.json'
@@ -70,7 +71,7 @@ class AppsMail extends React.Component {
           <div className="col-12 col-md-3">
             <div className="mb-4">
               <Input
-                prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder="Search mail..."
               />
             </div>

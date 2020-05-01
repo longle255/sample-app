@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react'
-import { Upload, message, Button, Icon } from 'antd'
+import { InboxOutlined, UploadOutlined } from '@ant-design/icons'
+import { Upload, message, Button } from 'antd'
 
 const { Dragger } = Upload
 
@@ -32,7 +33,7 @@ class AntdUploadExample extends React.Component {
         <div className="mb-5">
           <Upload {...props}>
             <Button>
-              <Icon type="upload" /> Click to Upload
+              <UploadOutlined /> Click to Upload
             </Button>
           </Upload>
         </div>
@@ -42,7 +43,7 @@ class AntdUploadExample extends React.Component {
         <div className="mb-5">
           <Dragger {...props}>
             <p className="ant-upload-drag-icon">
-              <Icon type="inbox" />
+              <InboxOutlined />
             </p>
             <p className="ant-upload-text">Click or drag file to this area to upload</p>
             <p className="ant-upload-hint">

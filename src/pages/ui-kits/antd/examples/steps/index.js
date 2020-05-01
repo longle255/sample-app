@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react'
-import { Steps, Icon } from 'antd'
+import { LoadingOutlined, SmileOutlined, SolutionOutlined, UserOutlined } from '@ant-design/icons'
+import { Steps } from 'antd'
 
 const { Step } = Steps
 
@@ -23,10 +24,10 @@ class AntdStepsExample extends React.Component {
         </h5>
         <div className="mb-5">
           <Steps>
-            <Step status="finish" title="Login" icon={<Icon type="user" />} />
-            <Step status="finish" title="Verification" icon={<Icon type="solution" />} />
-            <Step status="process" title="Pay" icon={<Icon type="loading" />} />
-            <Step status="wait" title="Done" icon={<Icon type="smile" />} />
+            <Step status="finish" title="Login" icon={<UserOutlined />} />
+            <Step status="finish" title="Verification" icon={<SolutionOutlined />} />
+            <Step status="process" title="Pay" icon={<LoadingOutlined />} />
+            <Step status="wait" title="Done" icon={<SmileOutlined />} />
           </Steps>
         </div>
         <h5 className="mb-3">

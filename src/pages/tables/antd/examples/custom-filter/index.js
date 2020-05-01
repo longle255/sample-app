@@ -1,5 +1,6 @@
 import React from 'react'
-import { Table, Input, Button, Icon } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
+import { Table, Input, Button } from 'antd'
 import Highlighter from 'react-highlight-words'
 import data from './data.json'
 
@@ -24,7 +25,7 @@ class TablesAntdCustomFilter extends React.Component {
         <Button
           type="primary"
           onClick={() => this.handleSearch(selectedKeys, confirm)}
-          icon="search"
+          icon={<SearchOutlined />}
           size="small"
           style={{ width: 90, marginRight: 8 }}
         >
@@ -35,9 +36,7 @@ class TablesAntdCustomFilter extends React.Component {
         </Button>
       </div>
     ),
-    filterIcon: filtered => (
-      <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
-    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
     onFilter: (value, record) =>
       record[dataIndex]
         .toString()

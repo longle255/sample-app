@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Radio, Tooltip } from 'antd'
+import { Form } from '@ant-design/compatible'
+import '@ant-design/compatible/assets/index.css'
+import { Input, Button, Radio, Tooltip } from 'antd'
 import { Link } from 'react-router-dom'
 import style from '../style.module.scss'
 

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react'
-import { Menu, Dropdown, Icon, Button } from 'antd'
+import { DownOutlined } from '@ant-design/icons'
+import { Menu, Dropdown, Button } from 'antd'
 const menu = (
   <Menu>
     <Menu.Item>
@@ -33,7 +34,7 @@ class AntdDropdownExample extends React.Component {
             <div className="mb-5">
               <Dropdown overlay={menu}>
                 <a className="ant-dropdown-link">
-                  Hover me <Icon type="down" />
+                  Hover me <DownOutlined />
                 </a>
               </Dropdown>
             </div>

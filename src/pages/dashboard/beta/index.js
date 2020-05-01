@@ -1,5 +1,6 @@
 import React from 'react'
-import { Slider, Calendar, Badge, Table, Input, Dropdown, Button, Icon, Menu, Progress } from 'antd'
+import { DownOutlined, SearchOutlined } from '@ant-design/icons'
+import { Slider, Calendar, Badge, Table, Input, Dropdown, Button, Menu, Progress } from 'antd'
 import ChartistGraph from 'react-chartist'
 import { Helmet } from 'react-helmet'
 import General19 from 'components/kit-widgets/General/19'
@@ -178,7 +179,7 @@ class DashboardBeta extends React.Component {
           <div className="pull-right">
             <Dropdown overlay={dropdownMenu}>
               <Button style={{ marginLeft: 8 }} size="small">
-                Action <Icon type="down" />
+                Action <DownOutlined />
               </Button>
             </Dropdown>
           </div>
@@ -205,7 +206,7 @@ class DashboardBeta extends React.Component {
             </Button>
           </div>
         ),
-        filterIcon: <Icon type="search" style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
+        filterIcon: <SearchOutlined style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
         filterDropdownVisible,
         onFilterDropdownVisibleChange: visible => {
           this.setState(

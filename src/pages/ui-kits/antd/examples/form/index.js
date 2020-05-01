@@ -1,6 +1,8 @@
 /* eslint-disable */
 import React from 'react'
-import { Form, Input, DatePicker, TimePicker, Select, Cascader, InputNumber } from 'antd'
+import { Form } from '@ant-design/compatible'
+import '@ant-design/compatible/assets/index.css'
+import { Input, DatePicker, TimePicker, Select, Cascader, InputNumber } from 'antd'
 
 const { Option } = Select
 

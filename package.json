@@ -29,8 +29,9 @@
     ]
   },
   "dependencies": {
+    "@ant-design/icons": "^4.1.0",
     "@rowno/sparkline": "^4.0.0",
-    "antd": "^3.26.2",
+    "antd": "^4.2.0",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "chartist": "^0.11.4",

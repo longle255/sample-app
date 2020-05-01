@@ -1,5 +1,6 @@
 import React from 'react'
-import { Table, Icon, Input, Button } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
+import { Table, Input, Button } from 'antd'
 import { Helmet } from 'react-helmet'
 import table from './data.json'
 
@@ -93,7 +94,7 @@ class EcommerceOrders extends React.Component {
             </Button>
           </div>
         ),
-        filterIcon: <Icon type="search" style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
+        filterIcon: <SearchOutlined style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
         filterDropdownVisible,
         onFilterDropdownVisibleChange: visible => {
           this.setState(

@@ -1,6 +1,7 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
+import { UserOutlined } from '@ant-design/icons'
 import { Menu, Dropdown, Avatar, Badge } from 'antd'
 import styles from './style.module.scss'
 
@@ -82,7 +83,7 @@ class ProfileMenu extends React.Component {
       <Dropdown overlay={menu} trigger={['click']} onVisibleChange={this.addCount}>
         <div className={styles.dropdown}>
           <Badge count={count}>
-            <Avatar className={styles.avatar} shape="square" size="large" icon="user" />
+            <Avatar className={styles.avatar} shape="square" size="large" icon={<UserOutlined />} />
           </Badge>
         </div>
       </Dropdown>

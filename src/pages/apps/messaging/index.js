@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Input, Icon, Tooltip } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
+import { Input, Tooltip } from 'antd'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import dialogs from './data.json'
 import style from './style.module.scss'
@@ -27,7 +28,7 @@ class AppsMessaging extends React.Component {
           <div className="col-12 col-md-3">
             <div className="mb-4">
               <Input
-                prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder="Search users..."
               />
             </div>

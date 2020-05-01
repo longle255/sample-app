@@ -1,6 +1,12 @@
 /* eslint-disable */
 import React from 'react'
-import { Icon } from 'antd'
+import {
+  HomeOutlined,
+  LoadingOutlined,
+  SettingFilled,
+  SmileOutlined,
+  SyncOutlined,
+} from '@ant-design/icons'
 
 class AntdIconExample extends React.Component {
   render() {
@@ -10,12 +16,12 @@ class AntdIconExample extends React.Component {
           <strong>Icons Usage</strong>
         </h5>
         <div className="mb-5">
-          <Icon type="home" className="mr-3 mb-3 font-size-24" />
-          <Icon type="setting" theme="filled" className="mr-3 mb-3 font-size-24" />
-          <Icon type="smile" theme="outlined" className="mr-3 mb-3 font-size-24" />
-          <Icon type="sync" spin className="mr-3 mb-3 font-size-24" />
-          <Icon type="smile" rotate={180} className="mr-3 mb-3 font-size-24" />
-          <Icon type="loading" className="mr-3 mb-3 font-size-24" />
+          <HomeOutlined className="mr-3 mb-3 font-size-24" />
+          <SettingFilled className="mr-3 mb-3 font-size-24" />
+          <SmileOutlined className="mr-3 mb-3 font-size-24" />
+          <SyncOutlined spin className="mr-3 mb-3 font-size-24" />
+          <SmileOutlined rotate={180} className="mr-3 mb-3 font-size-24" />
+          <LoadingOutlined className="mr-3 mb-3 font-size-24" />
         </div>
       </div>
     )

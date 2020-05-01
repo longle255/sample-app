@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react'
-import { Button, Radio, Icon } from 'antd'
+import { DownloadOutlined, LeftOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons'
+import { Button, Radio } from 'antd'
 
 class AntdButtonExample extends React.Component {
   state = {
@@ -61,36 +62,42 @@ class AntdButtonExample extends React.Component {
               Link
             </Button>
             <br />
-            <Button type="primary" icon="download" size={size} className="mr-3 mb-3" />
+            <Button type="primary" icon={<DownloadOutlined />} size={size} className="mr-3 mb-3" />
             <Button
               type="primary"
               shape="circle"
-              icon="download"
+              icon={<DownloadOutlined />}
               size={size}
               className="mr-3 mb-3"
             />
             <Button
               type="primary"
               shape="round"
-              icon="download"
+              icon={<DownloadOutlined />}
               size={size}
               className="mr-3 mb-3"
             />
-            <Button type="primary" shape="round" icon="download" size={size} className="mr-3 mb-3">
+            <Button
+              type="primary"
+              shape="round"
+              icon={<DownloadOutlined />}
+              size={size}
+              className="mr-3 mb-3"
+            >
               Download
             </Button>
-            <Button type="primary" icon="download" size={size} className="mr-3 mb-3">
+            <Button type="primary" icon={<DownloadOutlined />} size={size} className="mr-3 mb-3">
               Download
             </Button>
             <br />
             <Button.Group size={size} className="mr-3 mb-3">
               <Button type="primary">
-                <Icon type="left" />
+                <LeftOutlined />
                 Backward
               </Button>
               <Button type="primary">
                 Forward
-                <Icon type="right" />
+                <RightOutlined />
               </Button>
             </Button.Group>
           </div>
@@ -130,24 +137,24 @@ class AntdButtonExample extends React.Component {
             <strong>Default</strong>
           </h5>
           <div className="mb-5">
-            <Button type="primary" shape="circle" icon="search" className="mr-3 mb-3" />
+            <Button type="primary" shape="circle" icon={<SearchOutlined />} className="mr-3 mb-3" />
             <Button type="primary" shape="circle" className="mr-3 mb-3">
               A
             </Button>
-            <Button type="primary" icon="search" className="mr-3 mb-3">
+            <Button type="primary" icon={<SearchOutlined />} className="mr-3 mb-3">
               Search
             </Button>
-            <Button shape="circle" icon="search" className="mr-3 mb-3" />
-            <Button icon="search" className="mr-3 mb-3">
+            <Button shape="circle" icon={<SearchOutlined />} className="mr-3 mb-3" />
+            <Button icon={<SearchOutlined />} className="mr-3 mb-3">
               Search
             </Button>
             <br />
-            <Button shape="circle" icon="search" className="mr-3 mb-3" />
-            <Button icon="search" className="mr-3 mb-3">
+            <Button shape="circle" icon={<SearchOutlined />} className="mr-3 mb-3" />
+            <Button icon={<SearchOutlined />} className="mr-3 mb-3">
               Search
             </Button>
-            <Button type="dashed" shape="circle" icon="search" className="mr-3 mb-3" />
-            <Button type="dashed" icon="search" className="mr-3 mb-3">
+            <Button type="dashed" shape="circle" icon={<SearchOutlined />} className="mr-3 mb-3" />
+            <Button type="dashed" icon={<SearchOutlined />} className="mr-3 mb-3">
               Search
             </Button>
           </div>

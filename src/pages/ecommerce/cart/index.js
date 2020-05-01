@@ -1,6 +1,9 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Table, InputNumber, Form, Input, Icon } from 'antd'
+import { CreditCardOutlined } from '@ant-design/icons'
+import { Form } from '@ant-design/compatible'
+import '@ant-design/compatible/assets/index.css'
+import { Table, InputNumber, Input } from 'antd'
 import { ordersTableData } from './data.json'
 
 const FormItem = Form.Item
@@ -134,12 +137,7 @@ class EcommerceCart extends React.Component {
                     <FormItem label="Card Number">
                       {form.getFieldDecorator('cardnum', {
                         rules: [{ required: true, message: 'Please input Card Number!' }],
-                      })(
-                        <Input
-                          addonBefore={<Icon type="credit-card" />}
-                          placeholder="Card Number"
-                        />,
-                      )}
+                      })(<Input addonBefore={<CreditCardOutlined />} placeholder="Card Number" />)}
                     </FormItem>
                   </div>
                   <div className="row">

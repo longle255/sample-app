@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react'
-import { Menu, Icon } from 'antd'
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons'
+import { Menu } from 'antd'
 
 const { SubMenu } = Menu
 
@@ -25,17 +26,17 @@ class AntdMenuExample extends React.Component {
         <div className="mb-5">
           <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
             <Menu.Item key="mail">
-              <Icon type="mail" />
+              <MailOutlined />
               Navigation One
             </Menu.Item>
             <Menu.Item key="app" disabled>
-              <Icon type="appstore" />
+              <AppstoreOutlined />
               Navigation Two
             </Menu.Item>
             <SubMenu
               title={
                 <span className="submenu-title-wrapper">
-                  <Icon type="setting" />
+                  <SettingOutlined />
                   Navigation Three - Submenu
                 </span>
               }
@@ -65,7 +66,7 @@ class AntdMenuExample extends React.Component {
               key="sub1"
               title={
                 <span>
-                  <Icon type="mail" />
+                  <MailOutlined />
                   <span>Navigation One</span>
                 </span>
               }
@@ -83,7 +84,7 @@ class AntdMenuExample extends React.Component {
               key="sub2"
               title={
                 <span>
-                  <Icon type="appstore" />
+                  <AppstoreOutlined />
                   <span>Navigation Two</span>
                 </span>
               }
@@ -99,7 +100,7 @@ class AntdMenuExample extends React.Component {
               key="sub4"
               title={
                 <span>
-                  <Icon type="setting" />
+                  <SettingOutlined />
                   <span>Navigation Three</span>
                 </span>
               }

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react'
-import { Badge, Icon } from 'antd'
+import { ClockCircleOutlined } from '@ant-design/icons'
+import { Badge } from 'antd'
 
 class AntdBadgeExample extends React.Component {
   render() {
@@ -35,7 +36,7 @@ class AntdBadgeExample extends React.Component {
             </Badge>
           </div>
           <div className="d-inline-block mr-4">
-            <Badge count={<Icon type="clock-circle" style={{ color: '#f5222d' }} />}>
+            <Badge count={<ClockCircleOutlined style={{ color: '#f5222d' }} />}>
               <div
                 style={{
                   width: '30px',

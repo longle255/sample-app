@@ -1,17 +1,9 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import {
-  Form,
-  Input,
-  Slider,
-  Cascader,
-  Upload,
-  Icon,
-  message,
-  Checkbox,
-  Select,
-  Button,
-} from 'antd'
+import { InboxOutlined } from '@ant-design/icons'
+import { Form } from '@ant-design/compatible'
+import '@ant-design/compatible/assets/index.css'
+import { Input, Slider, Cascader, Upload, message, Checkbox, Select, Button } from 'antd'
 
 const { Dragger } = Upload
 const { Option } = Select
@@ -236,7 +228,7 @@ class AdvancedFormExamples extends React.Component {
                     {form.getFieldDecorator('upload3')(
                       <Dragger {...opts}>
                         <p className="ant-upload-drag-icon">
-                          <Icon type="inbox" />
+                          <InboxOutlined />
                         </p>
                         <p className="ant-upload-text">Click or drag file to this area to upload</p>
                         <p className="ant-upload-hint">
