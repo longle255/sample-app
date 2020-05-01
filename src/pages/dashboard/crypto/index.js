@@ -1,7 +1,5 @@
 import React from 'react'
-import { Form } from '@ant-design/compatible'
-import '@ant-design/compatible/assets/index.css'
-import { Spin, Alert, Table, Select, Tag, Radio, Input, Affix } from 'antd'
+import { Spin, Alert, Table, Select, Tag, Radio, Input, Affix, Form } from 'antd'
 import { Helmet } from 'react-helmet'
 import TradeChart from './TradeChart'
 import getData from './TradeChart/utils'
