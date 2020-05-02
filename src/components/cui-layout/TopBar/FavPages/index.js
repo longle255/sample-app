@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { injectIntl } from 'react-intl'
@@ -11,18 +11,19 @@ const mapStateToProps = ({ menu }) => ({
   menuData: menu.menuData,
 })
 
-@injectIntl
-@connect(mapStateToProps)
-class FavPages extends React.Component {
-  state = {
-    searchText: '',
-    favs: store.get('app.topbar.favs') || [],
-    pagesList: [],
-  }
+const FavPages = ({ menuData = [], intl: { formatMessage } }) => {
+  // state = {
+  //   searchText: '',
+  //   favs: store.get('app.topbar.favs') || [],
+  //   pagesList: [],
+  // }
 
-  componentDidMount() {
-    const pagesList = () => {
-      const { menuData = [] } = this.props
+  const [searchText, setSearchText] = useState('')
+  const [favs, setFavs] = useState(store.get('app.topbar.favs') || [])
+  const [pagesList, setPagesList] = useState([])
+
+  useEffect(() => {
+    const getPagesList = () => {
       const menuDataProcessed = JSON.parse(JSON.stringify(menuData))
       const flattenItems = (items, key) =>
         items.reduce((flattenedItems, item) => {
@@ -45,30 +46,22 @@ class FavPages extends React.Component {
         }, [])
       return flattenItems(menuDataProcessed, 'children')
     }
-    setTimeout(() => {
-      this.setState({
-        pagesList: pagesList(),
-      })
-    })
+    setPagesList(getPagesList())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const changeSearchText = e => {
+    setSearchText(e.target.value)
   }
 
-  changeSearchText = e => {
-    this.setState({
-      searchText: e.target.value,
-    })
-  }
-
-  setFav = (e, item) => {
+  const setFav = (e, item) => {
     e.preventDefault()
     e.stopPropagation()
-    const { favs } = this.state
     const isActive = favs.some(child => child.url === item.url)
     if (isActive) {
       const filtered = favs.filter(child => child.url !== item.url)
       store.set('app.topbar.favs', filtered)
-      this.setState({
-        favs: filtered,
-      })
+      setFavs(filtered)
       return
     }
     if (favs.length >= 3) {
@@ -78,13 +71,10 @@ class FavPages extends React.Component {
     const items = [...favs]
     items.push(item)
     store.set('app.topbar.favs', items)
-    this.setState({
-      favs: items,
-    })
+    setFavs(items)
   }
 
-  generatePageList = searchText => {
-    const { pagesList, favs } = this.state
+  const generatePageList = () => {
     const searchTextProcessed = searchText ? searchText.toUpperCase() : ''
     return pagesList.map(item => {
       const isActive = favs.some(child => child.url === item.url)
@@ -95,13 +85,13 @@ class FavPages extends React.Component {
         <Link to={item.url} className={style.link} key={item.key}>
           <div
             className={`${style.setIcon} ${isActive ? style.setIconActive : ''}`}
-            onClick={e => this.setFav(e, item)}
+            onClick={e => setFav(e, item)}
             role="button"
             tabIndex="0"
             onFocus={e => {
               e.preventDefault()
             }}
-            onKeyPress={e => this.setFav(e, item)}
+            onKeyPress={e => setFav(e, item)}
           >
             <i className="fe fe-star" />
           </div>
@@ -114,55 +104,47 @@ class FavPages extends React.Component {
     })
   }
 
-  render() {
-    const {
-      intl: { formatMessage },
-    } = this.props
-    const { searchText, favs } = this.state
-    const list = this.generatePageList(searchText)
-
-    const menu = (
-      <React.Fragment>
-        <div className="card cui__utils__shadow width-300">
-          <div className="card-body p-1 ">
-            <div className="p-2">
-              <Input
-                placeholder={formatMessage({ id: 'topBar.findPages' })}
-                value={searchText}
-                onChange={this.changeSearchText}
-                allowClear
-              />
-            </div>
-            <div className="height-200">
-              <PerfectScrollbar>
-                <div className="px-2 pb-2">{list}</div>
-              </PerfectScrollbar>
-            </div>
+  const menu = (
+    <React.Fragment>
+      <div className="card cui__utils__shadow width-300">
+        <div className="card-body p-1 ">
+          <div className="p-2">
+            <Input
+              placeholder={formatMessage({ id: 'topBar.findPages' })}
+              value={searchText}
+              onChange={changeSearchText}
+              allowClear
+            />
+          </div>
+          <div className="height-200">
+            <PerfectScrollbar>
+              <div className="px-2 pb-2">{generatePageList(searchText)}</div>
+            </PerfectScrollbar>
           </div>
         </div>
-      </React.Fragment>
-    )
-    return (
-      <div className={style.container}>
-        {favs.map(item => {
-          return (
-            <Tooltip key={item.key} placement="bottom" title={item.title}>
-              <Link to={item.url} className={`${style.item} mr-3`}>
-                <i className={`${style.icon} fe ${item.icon}`} />
-              </Link>
-            </Tooltip>
-          )
-        })}
-        <Tooltip placement="bottom" title="Bookmarks">
-          <Dropdown overlay={menu} trigger={['click']} placement="bottomLeft">
-            <span className={style.item}>
-              <i className={`${style.icon} fe fe-star`} />
-            </span>
-          </Dropdown>
-        </Tooltip>
       </div>
-    )
-  }
+    </React.Fragment>
+  )
+  return (
+    <div className={style.container}>
+      {favs.map(item => {
+        return (
+          <Tooltip key={item.key} placement="bottom" title={item.title}>
+            <Link to={item.url} className={`${style.item} mr-3`}>
+              <i className={`${style.icon} fe ${item.icon}`} />
+            </Link>
+          </Tooltip>
+        )
+      })}
+      <Tooltip placement="bottom" title="Bookmarks">
+        <Dropdown overlay={menu} trigger={['click']} placement="bottomLeft">
+          <span className={style.item}>
+            <i className={`${style.icon} fe fe-star`} />
+          </span>
+        </Dropdown>
+      </Tooltip>
+    </div>
+  )
 }
 
-export default FavPages
+export default injectIntl(connect(mapStateToProps)(FavPages))
