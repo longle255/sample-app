@@ -1,4 +1,4 @@
-{
+module.exports = {
   "extends": [
     "react-app",
     "airbnb",
@@ -31,7 +31,8 @@
     "no-param-reassign": 0,
     "import/no-unresolved": 0,
     "no-console": 0,
-    "react/no-multi-comp": 0
+    "react/no-multi-comp": 0,
+    // "no-unused-vars": 0
   },
   "parserOptions": {
     "ecmaFeatures": {
