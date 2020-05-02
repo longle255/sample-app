@@ -437,7 +437,7 @@
       line-height: rem(40);
       font-size: rem(36);
       padding: rem(10) rem(30);
-      box-sizing: content-box;
+      box-sizing: content-box !important;
       border-radius: 3px;
       background: $gray-1;
       margin: rem(10);

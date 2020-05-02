@@ -14,77 +14,56 @@ const Layouts = {
   main: MainLayout,
 }
 
-@withRouter
-@connect(({ user }) => ({ user }))
-class Layout extends React.PureComponent {
-  previousPath = ''
+const mapStateToProps = ({ user }) => ({ user })
+let previousPath = ''
 
-  componentDidUpdate(prevProps) {
-    const {
-      location: { pathname },
-    } = this.props
-    const {
-      location: { pathname: prevPathname },
-    } = prevProps
-    if (pathname !== prevPathname) {
-      window.scrollTo(0, 0)
+const Layout = ({ user, children, location: { pathname, search } }) => {
+  // NProgress & ScrollTop Management
+  const currentPath = pathname + search
+  if (currentPath !== previousPath) {
+    window.scrollTo(0, 0)
+    NProgress.start()
+  }
+  setTimeout(() => {
+    NProgress.done()
+    previousPath = currentPath
+  }, 300)
+
+  // Layout Rendering
+  const getLayout = () => {
+    if (pathname === '/') {
+      return 'public'
     }
+    if (/^\/auth(?=\/|$)/i.test(pathname)) {
+      return 'auth'
+    }
+    return 'main'
   }
 
-  render() {
-    const {
-      children,
-      location: { pathname, search },
-      user,
-    } = this.props
+  const Container = Layouts[getLayout()]
+  const isUserAuthorized = user.authorized
+  const isUserLoading = user.loading
+  const isAuthLayout = getLayout() === 'auth'
 
-    // NProgress Management
-    const currentPath = pathname + search
-    if (currentPath !== this.previousPath) {
-      NProgress.start()
+  const BootstrappedLayout = () => {
+    // show loader when user in check authorization process, not authorized yet and not on login pages
+    if (isUserLoading && !isUserAuthorized && !isAuthLayout) {
+      return null
     }
-
-    setTimeout(() => {
-      NProgress.done()
-      this.previousPath = currentPath
-    }, 300)
-
-    // Layout Rendering
-    const getLayout = () => {
-      if (pathname === '/') {
-        return 'public'
-      }
-      if (/^\/auth(?=\/|$)/i.test(pathname)) {
-        return 'auth'
-      }
-      return 'main'
+    // redirect to login page if current is not login page and user not authorized
+    if (!isAuthLayout && !isUserAuthorized) {
+      return <Redirect to="/auth/login" />
     }
-
-    const Container = Layouts[getLayout()]
-    const isUserAuthorized = user.authorized
-    const isUserLoading = user.loading
-    const isAuthLayout = getLayout() === 'auth'
-
-    const BootstrappedLayout = () => {
-      // show loader when user in check authorization process, not authorized yet and not on login pages
-      if (isUserLoading && !isUserAuthorized && !isAuthLayout) {
-        return null
-      }
-      // redirect to login page if current is not login page and user not authorized
-      if (!isAuthLayout && !isUserAuthorized) {
-        return <Redirect to="/auth/login" />
-      }
-      // in other case render previously set layout
-      return <Container>{children}</Container>
-    }
-
-    return (
-      <Fragment>
-        <Helmet titleTemplate="Clean UI Pro React | %s" title="React Admin Template" />
-        {BootstrappedLayout()}
-      </Fragment>
-    )
+    // in other case render previously set layout
+    return <Container>{children}</Container>
   }
+
+  return (
+    <Fragment>
+      <Helmet titleTemplate="Clean UI Pro React | %s" title="React Admin Template" />
+      {BootstrappedLayout()}
+    </Fragment>
+  )
 }
 
-export default Layout
+export default withRouter(connect(mapStateToProps)(Layout))
