@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Drawer } from 'antd'
 import { connect } from 'react-redux'
 import MenuLeft from './MenuLeft'
@@ -12,13 +12,11 @@ const mapStateToProps = ({ settings }) => ({
   leftMenuWidth: settings.leftMenuWidth,
 })
 
-@connect(mapStateToProps)
-class Menu extends React.PureComponent {
-  touchStartPrev = 0
+let touchStartPrev = 0
+let touchStartLocked = false
 
-  touchStartLocked = false
-
-  componentDidMount() {
+const Menu = ({ dispatch, isMobileMenuOpen, isMobileView, menuLayoutType, leftMenuWidth }) => {
+  useEffect(() => {
     // mobile menu touch slide opener
     const unify = e => {
       return e.changedTouches ? e.changedTouches[0] : e
@@ -27,8 +25,8 @@ class Menu extends React.PureComponent {
       'touchstart',
       e => {
         const x = unify(e).clientX
-        this.touchStartPrev = x
-        this.touchStartLocked = x > 70
+        touchStartPrev = x
+        touchStartLocked = x > 70
       },
       { passive: false },
     )
@@ -36,18 +34,18 @@ class Menu extends React.PureComponent {
       'touchmove',
       e => {
         const x = unify(e).clientX
-        const prev = this.touchStartPrev
-        if (x - prev > 50 && !this.touchStartLocked) {
-          this.toggleMobileMenu()
-          this.touchStartLocked = true
+        const prev = touchStartPrev
+        if (x - prev > 50 && !touchStartLocked) {
+          toggleMobileMenu()
+          touchStartLocked = true
         }
       },
       { passive: false },
     )
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-  toggleMobileMenu = () => {
-    const { dispatch, isMobileMenuOpen } = this.props
+  const toggleMobileMenu = () => {
     dispatch({
       type: 'settings/CHANGE_SETTING',
       payload: {
@@ -57,51 +55,47 @@ class Menu extends React.PureComponent {
     })
   }
 
-  render() {
-    const { isMobileMenuOpen, isMobileView, menuLayoutType, leftMenuWidth } = this.props
-
-    const GetMenu = () => {
-      if (isMobileView) {
-        return (
-          <div>
-            <div
-              className={style.handler}
-              onClick={this.toggleMobileMenu}
-              onFocus={e => {
-                e.preventDefault()
-              }}
-              onKeyPress={this.toggleMobileMenu}
-              role="button"
-              tabIndex="0"
-            >
-              <div className={style.handlerIcon} />
-            </div>
-            <Drawer
-              closable={false}
-              visible={isMobileMenuOpen}
-              placement="left"
-              className={style.mobileMenu}
-              onClose={this.toggleMobileMenu}
-              maskClosable
-              getContainer={null}
-              width={leftMenuWidth}
-            >
-              <MenuLeft />
-            </Drawer>
+  const GetMenu = () => {
+    if (isMobileView) {
+      return (
+        <div>
+          <div
+            className={style.handler}
+            onClick={toggleMobileMenu}
+            onFocus={e => {
+              e.preventDefault()
+            }}
+            onKeyPress={toggleMobileMenu}
+            role="button"
+            tabIndex="0"
+          >
+            <div className={style.handlerIcon} />
           </div>
-        )
-      }
-      if (menuLayoutType === 'top') {
-        return <MenuTop />
-      }
-      if (menuLayoutType === 'nomenu') {
-        return null
-      }
-      return <MenuLeft />
+          <Drawer
+            closable={false}
+            visible={isMobileMenuOpen}
+            placement="left"
+            className={style.mobileMenu}
+            onClose={toggleMobileMenu}
+            maskClosable
+            getContainer={null}
+            width={leftMenuWidth}
+          >
+            <MenuLeft />
+          </Drawer>
+        </div>
+      )
     }
-
-    return GetMenu()
+    if (menuLayoutType === 'top') {
+      return <MenuTop />
+    }
+    if (menuLayoutType === 'nomenu') {
+      return null
+    }
+    return <MenuLeft />
   }
+
+  return GetMenu()
 }
 
-export default Menu
+export default connect(mapStateToProps)(Menu)

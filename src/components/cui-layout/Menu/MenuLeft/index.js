@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { Menu, Layout } from 'antd'
@@ -13,7 +13,6 @@ const mapStateToProps = ({ menu, settings, user }) => ({
   menuData: menu.menuData,
   isMenuCollapsed: settings.isMenuCollapsed,
   isMobileView: settings.isMobileView,
-  isMobileMenuOpen: settings.isMobileMenuOpen,
   isMenuUnfixed: settings.isMenuUnfixed,
   isMenuShadow: settings.isMenuShadow,
   leftMenuWidth: settings.leftMenuWidth,
@@ -22,29 +21,29 @@ const mapStateToProps = ({ menu, settings, user }) => ({
   role: user.role,
 })
 
-@withRouter
-@connect(mapStateToProps)
-class MenuLeft extends React.Component {
-  state = {
-    selectedKeys: store.get('app.menu.selectedKeys') || [],
-    openedKeys: store.get('app.menu.openedKeys') || [],
-  }
+const MenuLeft = ({
+  dispatch,
+  menuData = [],
+  location: { pathname },
 
-  componentWillMount() {
-    this.setSelectedKeys(this.props)
-  }
+  isMenuCollapsed,
+  isMobileView,
+  isMenuUnfixed,
+  isMenuShadow,
+  leftMenuWidth,
+  menuColor,
+  logo,
+  role,
+}) => {
+  const [selectedKeys, setSelectedKeys] = useState(store.get('app.menu.selectedKeys') || [])
+  const [openedKeys, setOpenedKeys] = useState(store.get('app.menu.openedKeys') || [])
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.isMenuCollapsed && !newProps.isMobileView) {
-      this.setState({
-        openedKeys: [],
-      })
-    }
-    this.setSelectedKeys(newProps)
-  }
+  useEffect(() => {
+    applySelectedKeys()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
 
-  setSelectedKeys = props => {
-    const { menuData } = this.props
+  const applySelectedKeys = () => {
     const flattenItems = (items, key) =>
       items.reduce((flattenedItems, item) => {
         flattenedItems.push(item)
@@ -53,18 +52,14 @@ class MenuLeft extends React.Component {
         }
         return flattenedItems
       }, [])
-    const selectedItem = find(flattenItems(menuData, 'children'), ['url', props.location.pathname])
-    this.setState({
-      selectedKeys: selectedItem ? [selectedItem.key] : [],
-    })
+    const selectedItem = find(flattenItems(menuData, 'children'), ['url', pathname])
+    setSelectedKeys(selectedItem ? [selectedItem.key] : [])
   }
 
-  onCollapse = (value, type) => {
-    const { dispatch, isMenuCollapsed } = this.props
+  const onCollapse = (value, type) => {
     if (type === 'responsive' && isMenuCollapsed) {
       return
     }
-
     dispatch({
       type: 'settings/CHANGE_SETTING',
       payload: {
@@ -72,29 +67,20 @@ class MenuLeft extends React.Component {
         value: !isMenuCollapsed,
       },
     })
-
-    this.setState({
-      openedKeys: [],
-    })
+    setOpenedKeys([])
   }
 
-  onOpenChange = openedKeys => {
-    store.set('app.menu.openedKeys', openedKeys)
-    this.setState({
-      openedKeys,
-    })
+  const onOpenChange = keys => {
+    store.set('app.menu.openedKeys', keys)
+    setOpenedKeys(keys)
   }
 
-  handleClick = e => {
+  const handleClick = e => {
     store.set('app.menu.selectedKeys', [e.key])
-    this.setState({
-      selectedKeys: [e.key],
-      // openedKeys: e.keyPath,
-    })
+    setSelectedKeys([e.key])
   }
 
-  generateMenuItems = () => {
-    const { menuData = [], role } = this.props
+  const generateMenuItems = () => {
     const generateItem = item => {
       const { key, title, url, icon, disabled, count } = item
       if (item.category) {
@@ -170,87 +156,73 @@ class MenuLeft extends React.Component {
     })
   }
 
-  render() {
-    const { selectedKeys, openedKeys } = this.state
-    const {
-      isMobileView,
-      isMenuCollapsed,
-      menuColor,
-      leftMenuWidth,
-      logo,
-      isMenuUnfixed,
-      isMenuShadow,
-    } = this.props
-    const menuSettings = isMobileView
-      ? {
-          width: leftMenuWidth,
-          collapsible: false,
-          collapsed: false,
-          onCollapse: this.onCollapse,
-        }
-      : {
-          width: leftMenuWidth,
-          collapsible: true,
-          collapsed: isMenuCollapsed,
-          onCollapse: this.onCollapse,
-          breakpoint: 'lg',
-        }
+  const menuSettings = isMobileView
+    ? {
+        width: leftMenuWidth,
+        collapsible: false,
+        collapsed: false,
+        onCollapse,
+      }
+    : {
+        width: leftMenuWidth,
+        collapsible: true,
+        collapsed: isMenuCollapsed,
+        onCollapse,
+        breakpoint: 'lg',
+      }
 
-    const menu = this.generateMenuItems()
-
-    return (
-      <Layout.Sider
-        {...menuSettings}
-        className={classNames(`${style.menu}`, {
-          [style.white]: menuColor === 'white',
-          [style.gray]: menuColor === 'gray',
-          [style.dark]: menuColor === 'dark',
-          [style.unfixed]: isMenuUnfixed,
-          [style.shadow]: isMenuShadow,
-        })}
+  return (
+    <Layout.Sider
+      {...menuSettings}
+      className={classNames(`${style.menu}`, {
+        [style.white]: menuColor === 'white',
+        [style.gray]: menuColor === 'gray',
+        [style.dark]: menuColor === 'dark',
+        [style.unfixed]: isMenuUnfixed,
+        [style.shadow]: isMenuShadow,
+      })}
+    >
+      <div
+        className={style.menuOuter}
+        style={{
+          width: isMenuCollapsed && !isMobileView ? 80 : leftMenuWidth,
+          height: isMobileView || isMenuUnfixed ? 'calc(100% - 64px)' : 'calc(100% - 110px)',
+        }}
       >
-        <div
-          className={style.menuOuter}
-          style={{
-            width: isMenuCollapsed && !isMobileView ? 80 : leftMenuWidth,
-            height: isMobileView || isMenuUnfixed ? 'calc(100% - 64px)' : 'calc(100% - 110px)',
-          }}
-        >
-          <div className={style.logoContainer}>
-            <div className={style.logo}>
-              <img src="resources/images/logo.svg" className="mr-2" alt="Clean UI" />
-              <div className={style.name}>{logo}</div>
-              {logo === 'Clean UI Pro' && <div className={style.descr}>React</div>}
-            </div>
+        <div className={style.logoContainer}>
+          <div className={style.logo}>
+            <img src="resources/images/logo.svg" className="mr-2" alt="Clean UI" />
+            <div className={style.name}>{logo}</div>
+            {logo === 'Clean UI Pro' && <div className={style.descr}>React</div>}
           </div>
-          <PerfectScrollbar>
-            <Menu
-              onClick={this.handleClick}
-              selectedKeys={selectedKeys}
-              openKeys={openedKeys}
-              onOpenChange={this.onOpenChange}
-              mode="inline"
-              className={style.navigation}
-              inlineIndent="15"
-            >
-              {menu}
-            </Menu>
-            <div className={style.banner}>
-              <p>More components, more style, more themes, and premium support!</p>
-              <a
-                href="https://themeforest.net/item/clean-ui-react-admin-template/21938700"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-sm btn-success btn-rounded px-3"
-              >
-                Buy Bundle
-              </a>
-            </div>
-          </PerfectScrollbar>
         </div>
-      </Layout.Sider>
-    )
-  }
+        <PerfectScrollbar>
+          <Menu
+            onClick={handleClick}
+            selectedKeys={selectedKeys}
+            openKeys={openedKeys}
+            onOpenChange={onOpenChange}
+            mode="inline"
+            className={style.navigation}
+            inlineIndent="15"
+          >
+            {generateMenuItems()}
+          </Menu>
+          <div className={style.banner}>
+            <p>More components, more style, more themes, and premium support!</p>
+            <a
+              href="https://themeforest.net/item/clean-ui-react-admin-template/21938700"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-sm btn-success btn-rounded px-3"
+            >
+              Buy Bundle
+            </a>
+          </div>
+        </PerfectScrollbar>
+      </div>
+    </Layout.Sider>
+  )
 }
 
-export default MenuLeft
+export default withRouter(connect(mapStateToProps)(MenuLeft))

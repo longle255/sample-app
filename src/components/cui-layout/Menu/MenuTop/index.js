@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Menu } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
@@ -9,30 +9,27 @@ import style from './style.module.scss'
 
 const mapStateToProps = ({ menu, settings, user }) => ({
   menuData: menu.menuData,
-  isLightTheme: settings.isLightTheme,
-  isSettingsOpen: settings.isSettingsOpen,
   logo: settings.logo,
   menuColor: settings.menuColor,
   role: user.role,
 })
 
-@withRouter
-@connect(mapStateToProps)
-class MenuTop extends React.Component {
-  state = {
-    selectedKeys: store.get('app.menu.selectedKeys') || [],
-  }
+const MenuTop = ({
+  menuData = [],
+  location: { pathname },
 
-  componentWillMount() {
-    this.setSelectedKeys(this.props)
-  }
+  menuColor,
+  logo,
+  role,
+}) => {
+  const [selectedKeys, setSelectedKeys] = useState(store.get('app.menu.selectedKeys') || [])
 
-  componentWillReceiveProps(newProps) {
-    this.setSelectedKeys(newProps)
-  }
+  useEffect(() => {
+    applySelectedKeys()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
 
-  setSelectedKeys = props => {
-    const { menuData } = this.props
+  const applySelectedKeys = () => {
     const flattenItems = (items, key) =>
       items.reduce((flattenedItems, item) => {
         flattenedItems.push(item)
@@ -41,32 +38,16 @@ class MenuTop extends React.Component {
         }
         return flattenedItems
       }, [])
-    const selectedItem = find(flattenItems(menuData, 'children'), ['url', props.location.pathname])
-    this.setState({
-      selectedKeys: selectedItem ? [selectedItem.key] : [],
-    })
+    const selectedItem = find(flattenItems(menuData, 'children'), ['url', pathname])
+    setSelectedKeys(selectedItem ? [selectedItem.key] : [])
   }
 
-  handleClick = e => {
-    const { dispatch, isSettingsOpen } = this.props
+  const handleClick = e => {
     store.set('app.menu.selectedKeys', [e.key])
-    if (e.key === 'settings') {
-      dispatch({
-        type: 'settings/CHANGE_SETTING',
-        payload: {
-          setting: 'isSettingsOpen',
-          value: !isSettingsOpen,
-        },
-      })
-      return
-    }
-    this.setState({
-      selectedKeys: [e.key],
-    })
+    setSelectedKeys([e.key])
   }
 
-  generateMenuItems = () => {
-    const { menuData = [], role } = this.props
+  const generateMenuItems = () => {
     const generateItem = item => {
       const { key, title, url, icon, disabled, count } = item
       if (item.category) {
@@ -140,32 +121,28 @@ class MenuTop extends React.Component {
     })
   }
 
-  render() {
-    const { selectedKeys } = this.state
-    const { logo, menuColor } = this.props
-    return (
-      <div
-        className={classNames(`${style.menu}`, {
-          [style.white]: menuColor === 'white',
-          [style.gray]: menuColor === 'gray',
-          [style.dark]: menuColor === 'dark',
-        })}
-      >
-        <div className={style.logoContainer}>
-          <div className={style.logo}>
-            <img src="resources/images/logo.svg" className="mr-2" alt="Clean UI" />
-            <div className={style.name}>{logo}</div>
-            {logo === 'Clean UI Pro' && <div className={style.descr}>React</div>}
-          </div>
-        </div>
-        <div className={style.navigation}>
-          <Menu onClick={this.handleClick} selectedKeys={selectedKeys} mode="horizontal">
-            {this.generateMenuItems()}
-          </Menu>
+  return (
+    <div
+      className={classNames(`${style.menu}`, {
+        [style.white]: menuColor === 'white',
+        [style.gray]: menuColor === 'gray',
+        [style.dark]: menuColor === 'dark',
+      })}
+    >
+      <div className={style.logoContainer}>
+        <div className={style.logo}>
+          <img src="resources/images/logo.svg" className="mr-2" alt="Clean UI" />
+          <div className={style.name}>{logo}</div>
+          {logo === 'Clean UI Pro' && <div className={style.descr}>React</div>}
         </div>
       </div>
-    )
-  }
+      <div className={style.navigation}>
+        <Menu onClick={handleClick} selectedKeys={selectedKeys} mode="horizontal">
+          {generateMenuItems()}
+        </Menu>
+      </div>
+    </div>
+  )
 }
 
-export default MenuTop
+export default withRouter(connect(mapStateToProps)(MenuTop))

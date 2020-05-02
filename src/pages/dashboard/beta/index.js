@@ -263,12 +263,14 @@ const DashboardBeta = () => {
             <div className="card-body">
               <div className="row">
                 <div className="col-lg-12">
-                  <Table
-                    columns={taskTableColumns}
-                    dataSource={taskTableData}
-                    rowSelection={taskTableRowSelection}
-                    pagination={false}
-                  />
+                  <div className="kit__utils__table">
+                    <Table
+                      columns={taskTableColumns}
+                      dataSource={taskTableData}
+                      rowSelection={taskTableRowSelection}
+                      pagination={false}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -425,7 +427,9 @@ const DashboardBeta = () => {
               <div className="mb-4">
                 <General22 />
               </div>
-              <Table columns={tableColumns} dataSource={tableData} />
+              <div className="kit__utils__table">
+                <Table columns={tableColumns} dataSource={tableData} />
+              </div>
             </div>
           </div>
           <div className="card">
