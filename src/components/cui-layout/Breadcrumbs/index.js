@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { reduce } from 'lodash'
@@ -8,29 +8,17 @@ const mapStateToProps = ({ menu }) => ({
   menuData: menu.menuData,
 })
 
-@withRouter
-@connect(mapStateToProps)
-class Breadcrumbs extends React.Component {
-  state = {
-    breadcrumb: [],
-  }
+const Breadcrumbs = props => {
+  const [breadcrumbs, setBreadcrumbs] = useState([])
+  const {
+    location: { pathname },
+  } = props
+  useEffect(() => {
+    setBreadcrumbs(() => getBreadcrumbs(props.menuData))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
 
-  componentDidMount() {
-    this.setBreadcrumbs(this.props)
-  }
-
-  componentWillReceiveProps(newProps) {
-    this.setBreadcrumbs(newProps)
-  }
-
-  setBreadcrumbs = props => {
-    const { menuData } = this.props
-    this.setState({
-      breadcrumb: this.getBreadcrumb(props, menuData),
-    })
-  }
-
-  getPath(data, url, parents = []) {
+  const getPath = (data, url, parents = []) => {
     const items = reduce(
       data,
       (result, entry) => {
@@ -41,7 +29,7 @@ class Breadcrumbs extends React.Component {
           return [entry].concat(parents)
         }
         if (entry.children) {
-          const nested = this.getPath(entry.children, url, [entry].concat(parents))
+          const nested = getPath(entry.children, url, [entry].concat(parents))
           return (result || []).concat(nested.filter(e => !!e))
         }
         return result
@@ -51,8 +39,8 @@ class Breadcrumbs extends React.Component {
     return items.length > 0 ? items : [false]
   }
 
-  getBreadcrumb = (props, items) => {
-    const [activeMenuItem, ...path] = this.getPath(items, props.location.pathname)
+  const getBreadcrumbs = items => {
+    const [activeMenuItem, ...path] = getPath(items, pathname)
 
     if (!activeMenuItem) {
       return null
@@ -85,17 +73,14 @@ class Breadcrumbs extends React.Component {
     )
   }
 
-  render() {
-    const { breadcrumb } = this.state
-    return breadcrumb ? (
-      <div className={styles.breadcrumbs}>
-        <div className={styles.path}>
-          <Link to="/dashboard/alpha">Home</Link>
-          {breadcrumb}
-        </div>
+  return breadcrumbs.length ? (
+    <div className={styles.breadcrumbs}>
+      <div className={styles.path}>
+        <Link to="/dashboard/alpha">Home</Link>
+        {breadcrumbs}
       </div>
-    ) : null
-  }
+    </div>
+  ) : null
 }
 
-export default Breadcrumbs
+export default withRouter(connect(mapStateToProps)(Breadcrumbs))
