@@ -1,12 +1,9 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-@withRouter
-class PublicLayout extends React.PureComponent {
-  render() {
-    const { children } = this.props
-    return children
-  }
+const PublicLayout = ({ children }) => {
+  return children
 }
 
-export default PublicLayout
+export default withRouter(PublicLayout)

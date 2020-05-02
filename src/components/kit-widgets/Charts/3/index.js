@@ -38,36 +38,34 @@ const listener = {
   },
 }
 
-class Chart3 extends React.Component {
-  render() {
-    return (
-      <div>
-        <ChartistGraph
-          className="height-200"
-          data={data}
-          options={options}
-          type="Bar"
-          listener={listener}
-        />
-        <div className="d-flex flex-wrap">
-          <div className="mr-5 mb-2">
-            <div className="text-nowrap text-uppercase text-gray-4">
-              <div className={`${style.donut} ${style.success}`} />
-              Gross revenue
-            </div>
-            <div className="font-weight-bold font-size-18 text-dark">+$125,367.36</div>
+const Chart3 = () => {
+  return (
+    <div>
+      <ChartistGraph
+        className="height-200"
+        data={data}
+        options={options}
+        type="Bar"
+        listener={listener}
+      />
+      <div className="d-flex flex-wrap">
+        <div className="mr-5 mb-2">
+          <div className="text-nowrap text-uppercase text-gray-4">
+            <div className={`${style.donut} ${style.success}`} />
+            Gross revenue
           </div>
-          <div className="mr-5 mb-2">
-            <div className="text-nowrap text-uppercase text-gray-4">
-              <div className={`${style.donut} ${style.primary}`} />
-              Gross Earnings
-            </div>
-            <div className="font-weight-bold font-size-18 text-dark">+$125,367.36</div>
+          <div className="font-weight-bold font-size-18 text-dark">+$125,367.36</div>
+        </div>
+        <div className="mr-5 mb-2">
+          <div className="text-nowrap text-uppercase text-gray-4">
+            <div className={`${style.donut} ${style.primary}`} />
+            Gross Earnings
           </div>
+          <div className="font-weight-bold font-size-18 text-dark">+$125,367.36</div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Chart3

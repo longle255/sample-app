@@ -26,21 +26,19 @@ const options = {
   seriesBarDistance: 5,
 }
 
-class Chart5 extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className="text-dark font-size-18 font-weight-bold mb-1">Year Profit</div>
-        <div className="text-gray-6 mb-2">Revenue by location and date</div>
-        <ChartistGraph
-          className={`height-200 ${style.chart}`}
-          data={data}
-          options={options}
-          type="Bar"
-        />
-      </div>
-    )
-  }
+const Chart5 = () => {
+  return (
+    <div>
+      <div className="text-dark font-size-18 font-weight-bold mb-1">Year Profit</div>
+      <div className="text-gray-6 mb-2">Revenue by location and date</div>
+      <ChartistGraph
+        className={`height-200 ${style.chart}`}
+        data={data}
+        options={options}
+        type="Bar"
+      />
+    </div>
+  )
 }
 
 export default Chart5

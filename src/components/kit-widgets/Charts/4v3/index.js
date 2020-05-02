@@ -25,16 +25,14 @@ const options = {
   showArea: false,
 }
 
-class Chart4v2 extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className="font-weight-bold text-dark font-size-24">$78.62M</div>
-        <div>Paid in Crypto</div>
-        <ChartistGraph className="height-200" data={data} options={options} type="Line" />
-      </div>
-    )
-  }
+const Chart4v2 = () => {
+  return (
+    <div>
+      <div className="font-weight-bold text-dark font-size-24">$78.62M</div>
+      <div>Paid in Crypto</div>
+      <ChartistGraph className="height-200" data={data} options={options} type="Line" />
+    </div>
+  )
 }
 
 export default Chart4v2

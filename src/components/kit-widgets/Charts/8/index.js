@@ -77,26 +77,24 @@ const rowSelection = {
   },
 }
 
-class Chart8 extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className={`${style.textDivider} mb-2`}>
-          <h4 className={`${style.textDividerContent} font-size-24 font-weight-bold`}>
-            Waiting actions
-          </h4>
-        </div>
-        <div className={style.table}>
-          <Table
-            columns={columns}
-            dataSource={data.table}
-            pagination={false}
-            rowSelection={rowSelection}
-          />
-        </div>
+const Chart8 = () => {
+  return (
+    <div>
+      <div className={`${style.textDivider} mb-2`}>
+        <h4 className={`${style.textDividerContent} font-size-24 font-weight-bold`}>
+          Waiting actions
+        </h4>
       </div>
-    )
-  }
+      <div className={style.table}>
+        <Table
+          columns={columns}
+          dataSource={data.table}
+          pagination={false}
+          rowSelection={rowSelection}
+        />
+      </div>
+    </div>
+  )
 }
 
 export default Chart8

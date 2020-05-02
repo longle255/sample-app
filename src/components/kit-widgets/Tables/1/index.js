@@ -36,16 +36,14 @@ const columns = [
   },
 ]
 
-class Table1 extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className={style.table}>
-          <Table columns={columns} dataSource={data} pagination={false} />
-        </div>
+const Table1 = () => {
+  return (
+    <div>
+      <div className={style.table}>
+        <Table columns={columns} dataSource={data} pagination={false} />
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Table1

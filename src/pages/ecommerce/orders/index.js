@@ -1,58 +1,10 @@
 import React from 'react'
-import { SearchOutlined } from '@ant-design/icons'
-import { Table, Input, Button } from 'antd'
+import { Table } from 'antd'
 import { Helmet } from 'react-helmet'
 import table from './data.json'
 
 class EcommerceOrders extends React.Component {
-  state = {
-    tableData: table.data,
-    data: table.data,
-    filterDropdownVisible: false,
-    searchText: '',
-    filtered: false,
-  }
-
-  onInputChange = e => {
-    this.setState({ searchText: e.target.value })
-  }
-
-  onSearch = () => {
-    const { searchText, tableData } = this.state
-    const reg = new RegExp(searchText, 'gi')
-    this.setState({
-      filterDropdownVisible: false,
-      filtered: !!searchText,
-      data: tableData
-        .map(record => {
-          const match = record.customer.match(reg)
-          if (!match) {
-            return null
-          }
-          return {
-            ...record,
-            name: (
-              <span>
-                {record.customer
-                  .split(reg)
-                  .map((text, i) =>
-                    i > 0 ? [<span className="highlight">{match[0]}</span>, text] : text,
-                  )}
-              </span>
-            ),
-          }
-        })
-        .filter(record => !!record),
-    })
-  }
-
-  refSearchInput = node => {
-    this.searchInput = node
-  }
-
   render() {
-    const { data, searchText, filterDropdownVisible, filtered } = this.state
-
     const columns = [
       {
         title: 'ID',
@@ -80,30 +32,6 @@ class EcommerceOrders extends React.Component {
             {text}
           </a>
         ),
-        filterDropdown: (
-          <div className="custom-filter-dropdown">
-            <Input
-              ref={this.refSearchInput}
-              placeholder="Search name"
-              value={searchText}
-              onChange={this.onInputChange}
-              onPressEnter={this.onSearch}
-            />
-            <Button type="primary" onClick={this.onSearch}>
-              Search
-            </Button>
-          </div>
-        ),
-        filterIcon: <SearchOutlined style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
-        filterDropdownVisible,
-        onFilterDropdownVisibleChange: visible => {
-          this.setState(
-            {
-              filterDropdownVisible: visible,
-            },
-            () => this.searchInput && this.searchInput.focus(),
-          )
-        },
       },
       {
         title: 'Grand Total',
@@ -188,7 +116,7 @@ class EcommerceOrders extends React.Component {
           </div>
           <div className="card-body">
             <div className="text-nowrap">
-              <Table columns={columns} dataSource={data} onChange={this.handleTableChange} />
+              <Table columns={columns} dataSource={table.data} onChange={this.handleTableChange} />
             </div>
           </div>
         </div>

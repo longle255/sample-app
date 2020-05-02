@@ -4,7 +4,7 @@ import { Input, Button, Radio, Tooltip, Form } from 'antd'
 import { Link } from 'react-router-dom'
 import style from '../style.module.scss'
 
-const mapState = ({ user, settings, dispatch }) => ({
+const mapStateToProps = ({ user, settings, dispatch }) => ({
   dispatch,
   user,
   authProvider: settings.authProvider,
@@ -107,4 +107,4 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
   )
 }
 
-export default connect(mapState)(Login)
+export default connect(mapStateToProps)(Login)

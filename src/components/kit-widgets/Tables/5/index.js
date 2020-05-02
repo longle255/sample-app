@@ -57,19 +57,17 @@ const columns = [
   },
 ]
 
-class Table5 extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className="text-nowrap text-dark font-size-50 font-weight-bold">
-          $29,931 <sup className="text-uppercase text-gray-6 font-size-30">paid</sup>
-        </div>
-        <div className={style.table}>
-          <Table columns={columns} dataSource={data} pagination={false} />
-        </div>
+const Table5 = () => {
+  return (
+    <div>
+      <div className="text-nowrap text-dark font-size-50 font-weight-bold">
+        $29,931 <sup className="text-uppercase text-gray-6 font-size-30">paid</sup>
       </div>
-    )
-  }
+      <div className={style.table}>
+        <Table columns={columns} dataSource={data} pagination={false} />
+      </div>
+    </div>
+  )
 }
 
 export default Table5

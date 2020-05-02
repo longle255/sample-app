@@ -72,26 +72,19 @@ const rowSelection = {
   },
 }
 
-class Table7 extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className={`${style.textDivider} mb-2`}>
-          <h4 className={`${style.textDividerContent} font-size-24 font-weight-bold`}>
-            Active Users
-          </h4>
-        </div>
-        <div className={style.table}>
-          <Table
-            columns={columns}
-            dataSource={data}
-            pagination={false}
-            rowSelection={rowSelection}
-          />
-        </div>
+const Table7 = () => {
+  return (
+    <div>
+      <div className={`${style.textDivider} mb-2`}>
+        <h4 className={`${style.textDividerContent} font-size-24 font-weight-bold`}>
+          Active Users
+        </h4>
       </div>
-    )
-  }
+      <div className={style.table}>
+        <Table columns={columns} dataSource={data} pagination={false} rowSelection={rowSelection} />
+      </div>
+    </div>
+  )
 }
 
 export default Table7

@@ -1,17 +1,18 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { history } from '../../../index'
 import { notification } from 'antd'
+import { history } from '../../../index'
 
-@connect(({ user }) => ({ user }))
-class ACL extends React.PureComponent {
-  UNSAFE_componentWillMount() {
-    const {
-      user: { role },
-      redirect = false,
-      defaultRedirect = '/auth/404',
-      roles = [],
-    } = this.props
+const mapStateToProps = ({ user }) => ({ user })
+
+const ACL = ({
+  user: { role },
+  redirect = false,
+  defaultRedirect = '/auth/404',
+  roles = [],
+  children,
+}) => {
+  useEffect(() => {
     const authorized = roles.includes(role)
     // if user not equal needed role and if component is a page - make redirect to needed route
     if (!authorized && redirect) {
@@ -22,32 +23,26 @@ class ACL extends React.PureComponent {
           <div>
             You have no rights to access this page.
             <br />
-            Redirected to "{url}"
+            Redirected to &#34;{url}&#34;
           </div>
         ),
       })
       history.push(url)
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-  render() {
-    const {
-      user: { role },
-      children,
-      roles = [],
-    } = this.props
-    const authorized = roles.includes(role)
-    const AuthorizedChildren = () => {
-      // if user not authorized return null to component
-      if (!authorized) {
-        return null
-      }
-      // if access is successful render children
-      return <Fragment>{children}</Fragment>
+  const authorized = roles.includes(role)
+  const AuthorizedChildren = () => {
+    // if user not authorized return null to component
+    if (!authorized) {
+      return null
     }
-
-    return AuthorizedChildren()
+    // if access is successful render children
+    return <Fragment>{children}</Fragment>
   }
+
+  return AuthorizedChildren()
 }
 
-export default ACL
+export default connect(mapStateToProps)(ACL)

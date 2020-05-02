@@ -2,15 +2,13 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import Register from 'components/cui-system/Auth/Register'
 
-class SystemRegister extends React.Component {
-  render() {
-    return (
-      <div>
-        <Helmet title="Register" />
-        <Register />
-      </div>
-    )
-  }
+const SystemRegister = () => {
+  return (
+    <div>
+      <Helmet title="Register" />
+      <Register />
+    </div>
+  )
 }
 
 export default SystemRegister

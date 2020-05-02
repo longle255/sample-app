@@ -52,160 +52,156 @@ const tableColumns = [
   },
 ]
 
-class DashboardAlpha extends React.Component {
-  render() {
-    return (
-      <div>
-        <Helmet title="Dashboard: Analytics" />
-        <div className="cui__utils__heading">
-          <strong>Today Statistics</strong>
-        </div>
-        <div className="row">
-          <div className="col-xl-4">
-            <div className="card">
-              <Chart11 />
-            </div>
-          </div>
-          <div className="col-xl-4">
-            <div className="card">
-              <Chart11v1 />
-            </div>
-          </div>
-          <div className="col-xl-4">
-            <div className="card">
-              <Chart11v2 />
-            </div>
+const DashboardAlpha = () => {
+  return (
+    <div>
+      <Helmet title="Dashboard: Analytics" />
+      <div className="cui__utils__heading">
+        <strong>Today Statistics</strong>
+      </div>
+      <div className="row">
+        <div className="col-xl-4">
+          <div className="card">
+            <Chart11 />
           </div>
         </div>
-        <div className="cui__utils__heading">
-          <strong>Last Month Statistics</strong>
+        <div className="col-xl-4">
+          <div className="card">
+            <Chart11v1 />
+          </div>
         </div>
-        <div className="row">
-          <div className="col-xl-3 col-lg-6">
-            <div className="card">
-              <div className="card-body">
-                <Chart4 />
-              </div>
-            </div>
+        <div className="col-xl-4">
+          <div className="card">
+            <Chart11v2 />
           </div>
-          <div className="col-xl-3 col-lg-6">
-            <div className="card">
-              <div className="card-body">
-                <Chart4v1 />
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-lg-6">
-            <div className="card">
-              <div className="card-body">
-                <Chart4v2 />
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-lg-6">
-            <div className="card">
-              <div className="card-body">
-                <Chart4v3 />
-              </div>
+        </div>
+      </div>
+      <div className="cui__utils__heading">
+        <strong>Last Month Statistics</strong>
+      </div>
+      <div className="row">
+        <div className="col-xl-3 col-lg-6">
+          <div className="card">
+            <div className="card-body">
+              <Chart4 />
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Recently Referrals</strong>
-                </div>
-                <div className="text-muted">
-                  Block with important Recently Referrals information
-                </div>
-              </div>
-              <div className="card-body">
-                <div className="kit__utils__table">
-                  <Table columns={tableColumns} dataSource={tableData} pagination={false} />
-                </div>
-              </div>
+        <div className="col-xl-3 col-lg-6">
+          <div className="card">
+            <div className="card-body">
+              <Chart4v1 />
             </div>
           </div>
         </div>
-        <div className="cui__utils__heading mb-3">
-          <strong>Your Cards (3)</strong>
-          <Button className="ml-3">View All</Button>
-        </div>
-        <div className="row">
-          <div className="col-lg-4">
-            <div className="card">
-              <General17 />
-            </div>
-          </div>
-          <div className="col-lg-4">
-            <div className="card">
-              <General17v1 />
-            </div>
-          </div>
-          <div className="col-lg-4">
-            <div className="card">
-              <General17v2 />
+        <div className="col-xl-3 col-lg-6">
+          <div className="card">
+            <div className="card-body">
+              <Chart4v2 />
             </div>
           </div>
         </div>
-        <div className="cui__utils__heading mb-3">
-          <strong>Your Accounts (6)</strong>
-          <Button className="ml-3">View All</Button>
-        </div>
-        <div className="row">
-          <div className="col-lg-6">
-            <div className="card">
-              <General18 />
-            </div>
-          </div>
-          <div className="col-lg-6">
-            <div className="card">
-              <General18v1 />
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-6">
-            <div className="card">
-              <General18v1 />
-            </div>
-          </div>
-          <div className="col-lg-6">
-            <div className="card">
-              <General18 />
-            </div>
-          </div>
-        </div>
-        <div className="cui__utils__heading mb-3">
-          <strong>Recent Transactions (167)</strong>
-          <Button className="ml-3">View All</Button>
-        </div>
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <General6 />
-            </div>
-            <div className="card">
-              <General6v1 />
-            </div>
-            <div className="card">
-              <General6 />
-            </div>
-            <div className="card">
-              <General6v1 />
-            </div>
-            <div className="text-center pb-5">
-              <Button type="primary" className="width-200" loading>
-                Load More...
-              </Button>
+        <div className="col-xl-3 col-lg-6">
+          <div className="card">
+            <div className="card-body">
+              <Chart4v3 />
             </div>
           </div>
         </div>
       </div>
-    )
-  }
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Recently Referrals</strong>
+              </div>
+              <div className="text-muted">Block with important Recently Referrals information</div>
+            </div>
+            <div className="card-body">
+              <div className="kit__utils__table">
+                <Table columns={tableColumns} dataSource={tableData} pagination={false} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="cui__utils__heading mb-3">
+        <strong>Your Cards (3)</strong>
+        <Button className="ml-3">View All</Button>
+      </div>
+      <div className="row">
+        <div className="col-lg-4">
+          <div className="card">
+            <General17 />
+          </div>
+        </div>
+        <div className="col-lg-4">
+          <div className="card">
+            <General17v1 />
+          </div>
+        </div>
+        <div className="col-lg-4">
+          <div className="card">
+            <General17v2 />
+          </div>
+        </div>
+      </div>
+      <div className="cui__utils__heading mb-3">
+        <strong>Your Accounts (6)</strong>
+        <Button className="ml-3">View All</Button>
+      </div>
+      <div className="row">
+        <div className="col-lg-6">
+          <div className="card">
+            <General18 />
+          </div>
+        </div>
+        <div className="col-lg-6">
+          <div className="card">
+            <General18v1 />
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-lg-6">
+          <div className="card">
+            <General18v1 />
+          </div>
+        </div>
+        <div className="col-lg-6">
+          <div className="card">
+            <General18 />
+          </div>
+        </div>
+      </div>
+      <div className="cui__utils__heading mb-3">
+        <strong>Recent Transactions (167)</strong>
+        <Button className="ml-3">View All</Button>
+      </div>
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="card">
+            <General6 />
+          </div>
+          <div className="card">
+            <General6v1 />
+          </div>
+          <div className="card">
+            <General6 />
+          </div>
+          <div className="card">
+            <General6v1 />
+          </div>
+          <div className="text-center pb-5">
+            <Button type="primary" className="width-200" loading>
+              Load More...
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default DashboardAlpha

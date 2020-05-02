@@ -80,32 +80,30 @@ const columns = [
   },
 ]
 
-class Table3 extends React.Component {
-  render() {
-    return (
-      <div>
-        <Tabs className={style.tabs} defaultActiveKey="1">
-          <TabPane tab="History" key="1" />
-          <TabPane
-            tab={
-              <Dropdown overlay={dropdownMenu} placement="bottomRight">
-                <a className="nav-link dropdown-toggle" role="button">
-                  Dropdown
-                </a>
-              </Dropdown>
-            }
-            key="2"
-          />
-          <TabPane tab="Actions" key="3" />
-        </Tabs>
-        <div className="pb-4 px-4">
-          <div className={style.table}>
-            <Table columns={columns} dataSource={data} pagination={false} />
-          </div>
+const Table3 = () => {
+  return (
+    <div>
+      <Tabs className={style.tabs} defaultActiveKey="1">
+        <TabPane tab="History" key="1" />
+        <TabPane
+          tab={
+            <Dropdown overlay={dropdownMenu} placement="bottomRight">
+              <a className="nav-link dropdown-toggle" role="button">
+                Dropdown
+              </a>
+            </Dropdown>
+          }
+          key="2"
+        />
+        <TabPane tab="Actions" key="3" />
+      </Tabs>
+      <div className="pb-4 px-4">
+        <div className={style.table}>
+          <Table columns={columns} dataSource={data} pagination={false} />
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Table3

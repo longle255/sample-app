@@ -12,7 +12,9 @@ const FAKE_USERS = [
 ]
 
 const fakeFetch = (url, params) => {
-  console.log(params)
+  if (!params) {
+    console.log('no params')
+  }
   switch (url) {
     case 'api/login':
       return new Promise(resolve => {

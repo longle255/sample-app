@@ -56,26 +56,19 @@ const rowSelection = {
   },
 }
 
-class Table6 extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className={`${style.textDivider} mb-2`}>
-          <h4 className={`${style.textDividerContent} font-size-24 font-weight-bold`}>
-            Waiting actions
-          </h4>
-        </div>
-        <div className={`${style.table}`}>
-          <Table
-            columns={columns}
-            dataSource={data}
-            pagination={false}
-            rowSelection={rowSelection}
-          />
-        </div>
+const Table6 = () => {
+  return (
+    <div>
+      <div className={`${style.textDivider} mb-2`}>
+        <h4 className={`${style.textDividerContent} font-size-24 font-weight-bold`}>
+          Waiting actions
+        </h4>
       </div>
-    )
-  }
+      <div className={`${style.table}`}>
+        <Table columns={columns} dataSource={data} pagination={false} rowSelection={rowSelection} />
+      </div>
+    </div>
+  )
 }
 
 export default Table6

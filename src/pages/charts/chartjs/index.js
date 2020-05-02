@@ -161,91 +161,84 @@ const doughnutData = {
 
 const doughnutOptions = {}
 
-class ChartsChartjs extends React.Component {
-  render() {
-    return (
-      <div>
-        <Helmet title="Charts / Chartjs" />
-        <div className="kit__utils__heading">
-          <h5>
-            <span className="mr-3">Charts / Chartjs</span>
-            <a
-              href="http://www.chartjs.org/"
-              rel="noopener noreferrer"
-              target="_blank"
-              className="btn btn-sm btn-light"
-            >
-              Official Documentation
-              <i className="fe fe-corner-right-up" />
-            </a>
-          </h5>
-        </div>
-        <div className="card">
-          <div className="card-body">
-            <div className="row">
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Line Chart</strong>
-                </h5>
-                <div className="mb-5">
-                  <Line data={lineData} options={lineOptions} width={400} height={200} />
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Bar Chart</strong>
-                </h5>
-                <div className="mb-5">
-                  <Bar data={barData} options={barOptions} width={400} height={200} />
-                </div>
+const ChartsChartjs = () => {
+  return (
+    <div>
+      <Helmet title="Charts / Chartjs" />
+      <div className="kit__utils__heading">
+        <h5>
+          <span className="mr-3">Charts / Chartjs</span>
+          <a
+            href="http://www.chartjs.org/"
+            rel="noopener noreferrer"
+            target="_blank"
+            className="btn btn-sm btn-light"
+          >
+            Official Documentation
+            <i className="fe fe-corner-right-up" />
+          </a>
+        </h5>
+      </div>
+      <div className="card">
+        <div className="card-body">
+          <div className="row">
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Line Chart</strong>
+              </h5>
+              <div className="mb-5">
+                <Line data={lineData} options={lineOptions} width={400} height={200} />
               </div>
             </div>
-            <div className="row">
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Radar Chart</strong>
-                </h5>
-                <div className="mb-5">
-                  <Radar data={radarData} options={radarOptions} width={400} height={200} />
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Polar Area Chart</strong>
-                </h5>
-                <div className="mb-5">
-                  <Polar data={polarData} options={polarOptions} width={400} height={200} />
-                </div>
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Bar Chart</strong>
+              </h5>
+              <div className="mb-5">
+                <Bar data={barData} options={barOptions} width={400} height={200} />
               </div>
             </div>
-            <div className="row">
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Pie Chart</strong>
-                </h5>
-                <div className="mb-5">
-                  <Pie data={pieData} options={pieOptions} width={400} height={200} />
-                </div>
+          </div>
+          <div className="row">
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Radar Chart</strong>
+              </h5>
+              <div className="mb-5">
+                <Radar data={radarData} options={radarOptions} width={400} height={200} />
               </div>
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Doughnut Chart</strong>
-                </h5>
-                <div className="mb-5">
-                  <Doughnut
-                    data={doughnutData}
-                    options={doughnutOptions}
-                    width={400}
-                    height={200}
-                  />
-                </div>
+            </div>
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Polar Area Chart</strong>
+              </h5>
+              <div className="mb-5">
+                <Polar data={polarData} options={polarOptions} width={400} height={200} />
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Pie Chart</strong>
+              </h5>
+              <div className="mb-5">
+                <Pie data={pieData} options={pieOptions} width={400} height={200} />
+              </div>
+            </div>
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Doughnut Chart</strong>
+              </h5>
+              <div className="mb-5">
+                <Doughnut data={doughnutData} options={doughnutOptions} width={400} height={200} />
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default ChartsChartjs

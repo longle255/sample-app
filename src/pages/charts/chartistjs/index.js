@@ -350,204 +350,202 @@ const simplePieOptions = {
   plugins: [ChartistTooltip({ anchorToPoint: false, appendToBody: true, seriesName: false })],
 }
 
-class ChartsChartistjs extends React.Component {
-  render() {
-    return (
-      <div>
-        <Helmet title="Charts / Chartist.js" />
-        <div className="kit__utils__heading">
-          <h5>
-            <span className="mr-3">Chartist.js</span>
-            <a
-              href="https://gionkunz.github.io/chartist-js/"
-              rel="noopener noreferrer"
-              target="_blank"
-              className="btn btn-sm btn-light"
-            >
-              Official Documentation
-              <i className="fe fe-corner-right-up" />
-            </a>
-          </h5>
-        </div>
-        <div className="card">
-          <div className="card-body">
-            <div className="row">
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>CSS Styling & Animations</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300 chart-css-animations chartist-theme-dark chartist-animated"
-                    data={animationData}
-                    options={animatonOptions}
-                    type="Line"
-                  />
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>SMIL Animations</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300 chart-smil-animations"
-                    data={smilData}
-                    options={smilOptions}
-                    type="Line"
-                    listener={smilListener}
-                  />
-                </div>
+const ChartsChartistjs = () => {
+  return (
+    <div>
+      <Helmet title="Charts / Chartist.js" />
+      <div className="kit__utils__heading">
+        <h5>
+          <span className="mr-3">Chartist.js</span>
+          <a
+            href="https://gionkunz.github.io/chartist-js/"
+            rel="noopener noreferrer"
+            target="_blank"
+            className="btn btn-sm btn-light"
+          >
+            Official Documentation
+            <i className="fe fe-corner-right-up" />
+          </a>
+        </h5>
+      </div>
+      <div className="card">
+        <div className="card-body">
+          <div className="row">
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>CSS Styling & Animations</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300 chart-css-animations chartist-theme-dark chartist-animated"
+                  data={animationData}
+                  options={animatonOptions}
+                  type="Line"
+                />
               </div>
             </div>
-            <div className="row">
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Line</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300"
-                    data={lineData}
-                    options={lineOptions}
-                    type="Line"
-                  />
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Area</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300"
-                    data={areaData}
-                    options={areaOptions}
-                    type="Line"
-                  />
-                </div>
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>SMIL Animations</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300 chart-smil-animations"
+                  data={smilData}
+                  options={smilOptions}
+                  type="Line"
+                  listener={smilListener}
+                />
               </div>
             </div>
-            <div className="row">
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Scatter</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300"
-                    data={scatterData}
-                    options={scatterOptions}
-                    responsive-options={scatterResponsiveOptions}
-                    type="Line"
-                  />
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Horizontal Bar</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300"
-                    type="Bar"
-                    data={horizontalData}
-                    options={horizontalOptions}
-                  />
-                </div>
+          </div>
+          <div className="row">
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Line</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300"
+                  data={lineData}
+                  options={lineOptions}
+                  type="Line"
+                />
               </div>
             </div>
-            <div className="row">
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Bi-polar Line</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300"
-                    data={biPolarLineData}
-                    options={biPolarLineOptions}
-                    type="Line"
-                  />
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Bi-polar Bar</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300"
-                    data={biPolarBarData}
-                    options={biPolarBarOptions}
-                    type="Bar"
-                  />
-                </div>
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Area</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300"
+                  data={areaData}
+                  options={areaOptions}
+                  type="Line"
+                />
               </div>
             </div>
-            <div className="row">
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Stacked Bar</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300"
-                    data={stackedBarData}
-                    options={stackedBarOptions}
-                    type="Bar"
-                  />
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Overlapping Bar</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300"
-                    data={overlappingBarData}
-                    options={overlappingBarOptions}
-                    responsive-options={overlappingResponsiveOptions}
-                    type="Bar"
-                  />
-                </div>
+          </div>
+          <div className="row">
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Scatter</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300"
+                  data={scatterData}
+                  options={scatterOptions}
+                  responsive-options={scatterResponsiveOptions}
+                  type="Line"
+                />
               </div>
             </div>
-            <div className="row">
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Simple Pie</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300"
-                    data={simplePieData}
-                    options={simplePieOptions}
-                    type="Pie"
-                  />
-                </div>
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Horizontal Bar</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300"
+                  type="Bar"
+                  data={horizontalData}
+                  options={horizontalOptions}
+                />
               </div>
-              <div className="col-xl-6 col-lg-12">
-                <h5 className="mb-4">
-                  <strong>Pie w/ Labels</strong>
-                </h5>
-                <div className="mb-5">
-                  <ChartistGraph
-                    className="height-300"
-                    data={labelsPieData}
-                    options={labelsPieOptions}
-                    responsive-options={labelsPieResponsiveOptions}
-                    type="Pie"
-                  />
-                </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Bi-polar Line</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300"
+                  data={biPolarLineData}
+                  options={biPolarLineOptions}
+                  type="Line"
+                />
+              </div>
+            </div>
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Bi-polar Bar</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300"
+                  data={biPolarBarData}
+                  options={biPolarBarOptions}
+                  type="Bar"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Stacked Bar</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300"
+                  data={stackedBarData}
+                  options={stackedBarOptions}
+                  type="Bar"
+                />
+              </div>
+            </div>
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Overlapping Bar</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300"
+                  data={overlappingBarData}
+                  options={overlappingBarOptions}
+                  responsive-options={overlappingResponsiveOptions}
+                  type="Bar"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Simple Pie</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300"
+                  data={simplePieData}
+                  options={simplePieOptions}
+                  type="Pie"
+                />
+              </div>
+            </div>
+            <div className="col-xl-6 col-lg-12">
+              <h5 className="mb-4">
+                <strong>Pie w/ Labels</strong>
+              </h5>
+              <div className="mb-5">
+                <ChartistGraph
+                  className="height-300"
+                  data={labelsPieData}
+                  options={labelsPieOptions}
+                  responsive-options={labelsPieResponsiveOptions}
+                  type="Pie"
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default ChartsChartistjs

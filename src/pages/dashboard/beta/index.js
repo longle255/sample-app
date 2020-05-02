@@ -1,6 +1,6 @@
-import React from 'react'
-import { DownOutlined, SearchOutlined } from '@ant-design/icons'
-import { Slider, Calendar, Badge, Table, Input, Dropdown, Button, Menu, Progress } from 'antd'
+import React, { useState } from 'react'
+import { DownOutlined } from '@ant-design/icons'
+import { Slider, Calendar, Badge, Table, Dropdown, Button, Menu, Progress } from 'antd'
 import ChartistGraph from 'react-chartist'
 import { Helmet } from 'react-helmet'
 import General19 from 'components/kit-widgets/General/19'
@@ -85,445 +85,364 @@ const monthChartistOptions = {
   seriesBarDistance: 10,
 }
 
-class DashboardBeta extends React.Component {
-  state = {
-    taskTableSelectedRowKeys: [],
-    filterDropdownVisible: false,
-    searchText: '',
-    filtered: false,
-    data: tableData,
+const DashboardBeta = () => {
+  const [taskTableSelectedRowKeys, setTaskTableSelectedRowKeys] = useState([])
+
+  const onSelectChange = keys => {
+    setTaskTableSelectedRowKeys(keys)
   }
 
-  // Task Table Settings //
-  onSelectChange = taskTableSelectedRowKeys => {
-    this.setState({ taskTableSelectedRowKeys })
+  const taskTableRowSelection = {
+    taskTableSelectedRowKeys,
+    onChange: onSelectChange,
   }
 
-  onInputChange = e => {
-    this.setState({ searchText: e.target.value })
-  }
+  const dropdownMenu = (
+    <Menu>
+      <Menu.Item key="1">1st menu item</Menu.Item>
+      <Menu.Item key="2">2nd menu item</Menu.Item>
+      <Menu.Item key="3">3rd item</Menu.Item>
+    </Menu>
+  )
 
-  onSearch = () => {
-    const { searchText, data } = this.state
-    const reg = new RegExp(searchText, 'gi')
-    this.setState({
-      filterDropdownVisible: false,
-      filtered: !!searchText,
-      data: data
-        .map(record => {
-          const match = record.name.match(reg)
-          if (!match) {
-            return null
-          }
-          return {
-            ...record,
-            name: (
-              <span>
-                {record.name
-                  .split(reg)
-                  .map((text, i) =>
-                    i > 0
-                      ? [<span style={{ backgroundColor: 'yellow' }}>{match[0]}</span>, text]
-                      : text,
-                  )}
-              </span>
-            ),
-          }
-        })
-        .filter(record => !!record),
-    })
-  }
-
-  refSearchInput = node => {
-    this.searchInput = node
-  }
-
-  render() {
-    const {
-      taskTableSelectedRowKeys,
-      searchText,
-      filtered,
-      filterDropdownVisible,
-      data,
-    } = this.state
-
-    // Task Table Settings //
-    const taskTableRowSelection = {
-      taskTableSelectedRowKeys,
-      onChange: this.onSelectChange,
-    }
-
-    const dropdownMenu = (
-      <Menu>
-        <Menu.Item key="1">1st menu item</Menu.Item>
-        <Menu.Item key="2">2nd menu item</Menu.Item>
-        <Menu.Item key="3">3rd item</Menu.Item>
-      </Menu>
-    )
-
-    const taskTableColumns = [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        render: text => <a href="">{text}</a>,
-      },
-      {
-        title: 'Username',
-        dataIndex: 'username',
-        render: text => <a href="">{text}</a>,
-      },
-      {
-        title: 'Actions',
-        dataIndex: 'actions',
-        render: () => (
-          <div className="pull-right">
-            <Dropdown overlay={dropdownMenu}>
-              <Button style={{ marginLeft: 8 }} size="small">
-                Action <DownOutlined />
-              </Button>
-            </Dropdown>
-          </div>
-        ),
-      },
-    ]
-
-    const tableColumns = [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        filterDropdown: (
-          <div className="custom-filter-dropdown">
-            <Input
-              ref={this.refSearchInput}
-              placeholder="Search name"
-              value={searchText}
-              onChange={this.onInputChange}
-              onPressEnter={this.onSearch}
-            />
-            <Button type="primary" onClick={this.onSearch}>
-              Search
+  const taskTableColumns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      render: text => <a href="">{text}</a>,
+    },
+    {
+      title: 'Username',
+      dataIndex: 'username',
+      render: text => <a href="">{text}</a>,
+    },
+    {
+      title: 'Actions',
+      dataIndex: 'actions',
+      render: () => (
+        <div className="pull-right">
+          <Dropdown overlay={dropdownMenu}>
+            <Button style={{ marginLeft: 8 }} size="small">
+              Action <DownOutlined />
             </Button>
-          </div>
-        ),
-        filterIcon: <SearchOutlined style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
-        filterDropdownVisible,
-        onFilterDropdownVisibleChange: visible => {
-          this.setState(
-            {
-              filterDropdownVisible: visible,
-            },
-            () => this.searchInput && this.searchInput.focus(),
-          )
-        },
-      },
-      {
-        title: 'Position',
-        dataIndex: 'position',
-        key: 'position',
-      },
-      {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-        sorter: (a, b) => a.age - b.age,
-      },
-      {
-        title: 'Office',
-        dataIndex: 'office',
-        key: 'office',
-      },
-      {
-        title: 'Date',
-        dataIndex: 'date',
-        key: 'date',
-      },
-      {
-        title: 'Salary',
-        dataIndex: 'salary',
-        key: 'salary',
-        sorter: (a, b) => a.salary - b.salary,
-      },
-    ]
+          </Dropdown>
+        </div>
+      ),
+    },
+  ]
 
-    return (
-      <div>
-        <Helmet title="Dashboard: Beta" />
-        <div className="row">
-          <div className="col-lg-12 col-xl-6">
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Account Information</strong>
-                </div>
-                <div className="text-muted">Block with important Account information</div>
+  const tableColumns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Position',
+      dataIndex: 'position',
+      key: 'position',
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+      sorter: (a, b) => a.age - b.age,
+    },
+    {
+      title: 'Office',
+      dataIndex: 'office',
+      key: 'office',
+    },
+    {
+      title: 'Date',
+      dataIndex: 'date',
+      key: 'date',
+    },
+    {
+      title: 'Salary',
+      dataIndex: 'salary',
+      key: 'salary',
+      sorter: (a, b) => a.salary - b.salary,
+    },
+  ]
+
+  return (
+    <div>
+      <Helmet title="Dashboard: Beta" />
+      <div className="row">
+        <div className="col-lg-12 col-xl-6">
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Account Information</strong>
               </div>
-              <div className="card-body">
-                <General19 />
-              </div>
+              <div className="text-muted">Block with important Account information</div>
             </div>
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Work Progress</strong>
-                </div>
-                <div className="text-muted">Block with important Work Progress information</div>
-              </div>
-              <div className="card-body">
-                <div>
-                  <strong>{progressGroup.first.name}</strong>
-                  <p className="text-muted mb-1">{progressGroup.first.description}</p>
-                  <div className="mb-3">
-                    <Progress
-                      percent={progressGroup.first.progress}
-                      status={progressGroup.first.status}
-                    />
-                  </div>
-                  <strong>{progressGroup.second.name}</strong>
-                  <p className="text-muted mb-1">{progressGroup.second.description}</p>
-                  <div className="mb-3">
-                    <Progress
-                      percent={progressGroup.second.progress}
-                      status={progressGroup.second.status}
-                    />
-                  </div>
-                  <strong>{progressGroup.third.name}</strong>
-                  <p className="text-muted mb-1">{progressGroup.third.description}</p>
-                  <div className="mb-3">
-                    <Progress
-                      percent={progressGroup.third.progress}
-                      status={progressGroup.third.status}
-                    />
-                  </div>
-                  <strong>{progressGroup.fourth.name}</strong>
-                  <p className="text-muted mb-1">{progressGroup.fourth.description}</p>
-                  <div className="mb-3">
-                    <Progress
-                      percent={progressGroup.fourth.progress}
-                      status={progressGroup.fourth.status}
-                    />
-                  </div>
-                  <strong>{progressGroup.fives.name}</strong>
-                  <p className="text-muted mb-1">{progressGroup.fives.description}</p>
-                  <div className="mb-3">
-                    <Progress percent={progressGroup.fives.progress} />
-                  </div>
-                </div>
-              </div>
+            <div className="card-body">
+              <General19 />
             </div>
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Employees</strong>
-                </div>
-                <div className="text-muted">Block with Employees important information</div>
+          </div>
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Work Progress</strong>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="card bg-light border-0 mb-0">
-                      <General23 />
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="card border-0 mb-0">
-                      <General23v1 />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div className="text-muted">Block with important Work Progress information</div>
             </div>
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Task Table</strong>
+            <div className="card-body">
+              <div>
+                <strong>{progressGroup.first.name}</strong>
+                <p className="text-muted mb-1">{progressGroup.first.description}</p>
+                <div className="mb-3">
+                  <Progress
+                    percent={progressGroup.first.progress}
+                    status={progressGroup.first.status}
+                  />
                 </div>
-                <div className="text-muted">Block with important Task Table information</div>
-              </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-lg-12">
-                    <Table
-                      columns={taskTableColumns}
-                      dataSource={taskTableData}
-                      rowSelection={taskTableRowSelection}
-                      pagination={false}
-                    />
-                  </div>
+                <strong>{progressGroup.second.name}</strong>
+                <p className="text-muted mb-1">{progressGroup.second.description}</p>
+                <div className="mb-3">
+                  <Progress
+                    percent={progressGroup.second.progress}
+                    status={progressGroup.second.status}
+                  />
+                </div>
+                <strong>{progressGroup.third.name}</strong>
+                <p className="text-muted mb-1">{progressGroup.third.description}</p>
+                <div className="mb-3">
+                  <Progress
+                    percent={progressGroup.third.progress}
+                    status={progressGroup.third.status}
+                  />
+                </div>
+                <strong>{progressGroup.fourth.name}</strong>
+                <p className="text-muted mb-1">{progressGroup.fourth.description}</p>
+                <div className="mb-3">
+                  <Progress
+                    percent={progressGroup.fourth.progress}
+                    status={progressGroup.fourth.status}
+                  />
+                </div>
+                <strong>{progressGroup.fives.name}</strong>
+                <p className="text-muted mb-1">{progressGroup.fives.description}</p>
+                <div className="mb-3">
+                  <Progress percent={progressGroup.fives.progress} />
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Information Cards</strong>
-                </div>
-                <div className="text-muted">Block with important Information Cards information</div>
+          </div>
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Employees</strong>
               </div>
-              <div className="card-body">
-                <div className="card bg-primary border-0 mb-4">
-                  <div className="card-body">
-                    <General24 />
+              <div className="text-muted">Block with Employees important information</div>
+            </div>
+            <div className="card-body">
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="card bg-light border-0 mb-0">
+                    <General23 />
                   </div>
                 </div>
-                <div className="card bg-light border-0 mb-0">
-                  <div className="card-body">
-                    <General24v1 />
+                <div className="col-md-6">
+                  <div className="card border-0 mb-0">
+                    <General23v1 />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-lg-12 col-xl-6">
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Server Info</strong>
-                </div>
-                <div className="text-muted">Block with important Server Info information</div>
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Task Table</strong>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-lg-6">
-                    <div className="overflow-hidden rounded card border-0 mb-0">
-                      <General20 />
-                    </div>
-                  </div>
-                  <div className="col-lg-6">
-                    <div className="overflow-hidden rounded card border-0 mb-0">
-                      <General20v1 />
-                    </div>
-                  </div>
+              <div className="text-muted">Block with important Task Table information</div>
+            </div>
+            <div className="card-body">
+              <div className="row">
+                <div className="col-lg-12">
+                  <Table
+                    columns={taskTableColumns}
+                    dataSource={taskTableData}
+                    rowSelection={taskTableRowSelection}
+                    pagination={false}
+                  />
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Server Statistics</strong>
-                </div>
-                <div className="text-muted">Block with important Server Statistics information</div>
+          </div>
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Information Cards</strong>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-lg-6">
-                    <General21 />
-                    <General21v1 />
-                  </div>
-                  <div className="col-lg-6">
-                    <General21v2 />
-                    <General21v3 />
-                  </div>
-                </div>
-              </div>
+              <div className="text-muted">Block with important Information Cards information</div>
             </div>
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Server Configuration</strong>
-                </div>
-                <div className="text-muted">
-                  Block with important Server Configuration information
+            <div className="card-body">
+              <div className="card bg-primary border-0 mb-4">
+                <div className="card-body">
+                  <General24 />
                 </div>
               </div>
-              <div className="card-body">
-                <div className="mb-5">
-                  <Slider marks={rangeMarks} defaultValue={rangeSlider.first} />
+              <div className="card bg-light border-0 mb-0">
+                <div className="card-body">
+                  <General24v1 />
                 </div>
-                <div className="mb-4">
-                  <Slider range marks={rangeMarks} defaultValue={rangeSlider.second} />
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Week Revenue Statistics, Billions</strong>
-                </div>
-                <span className="mr-2">
-                  <span className="kit__utils__donut kit__utils__donut--primary" />
-                  Nuts
-                </span>
-                <span className="mr-2">
-                  <span className="kit__utils__donut kit__utils__donut--success" />
-                  Apples
-                </span>
-                <span className="mr-2">
-                  <span className="kit__utils__donut kit__utils__donut--yellow" />
-                  Peaches
-                </span>
-              </div>
-              <div className="card-body">
-                <ChartistGraph
-                  data={weekChartistData}
-                  options={weekChartistOptions}
-                  type="Line"
-                  className="chart-area height-300 mt-4 chartist"
-                />
-              </div>
-            </div>
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Month Site Visits Growth, %</strong>
-                </div>
-                <span className="mr-2">
-                  <span className="kit__utils__donut kit__utils__donut--primary" />
-                  Income
-                </span>
-                <span className="mr-2">
-                  <span className="kit__utils__donut kit__utils__donut--success" />
-                  Outcome
-                </span>
-              </div>
-              <div className="card-body">
-                <ChartistGraph
-                  data={monthCartistData}
-                  options={monthChartistOptions}
-                  type="Bar"
-                  className="chart-area height-300 mt-4 chartist"
-                />
-              </div>
-            </div>
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Chat</strong>
-                </div>
-                <div className="text-muted">Block with important Chat information</div>
-              </div>
-              <div className="card-body">
-                <General14 />
               </div>
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-body">
-                <div className="mb-4">
-                  <General22 />
+        <div className="col-lg-12 col-xl-6">
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Server Info</strong>
+              </div>
+              <div className="text-muted">Block with important Server Info information</div>
+            </div>
+            <div className="card-body">
+              <div className="row">
+                <div className="col-lg-6">
+                  <div className="overflow-hidden rounded card border-0 mb-0">
+                    <General20 />
+                  </div>
                 </div>
-                <Table columns={tableColumns} dataSource={data} onChange={this.handleChange} />
+                <div className="col-lg-6">
+                  <div className="overflow-hidden rounded card border-0 mb-0">
+                    <General20v1 />
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header">
-                <div className="cui__utils__heading mb-0">
-                  <strong>Calendar</strong>
+          </div>
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Server Statistics</strong>
+              </div>
+              <div className="text-muted">Block with important Server Statistics information</div>
+            </div>
+            <div className="card-body">
+              <div className="row">
+                <div className="col-lg-6">
+                  <General21 />
+                  <General21v1 />
                 </div>
-                <div className="text-muted">Block with important Calendar information</div>
+                <div className="col-lg-6">
+                  <General21v2 />
+                  <General21v3 />
+                </div>
               </div>
-              <div className="card-body">
-                <Calendar dateCellRender={dateCellRender} />
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Server Configuration</strong>
               </div>
+              <div className="text-muted">
+                Block with important Server Configuration information
+              </div>
+            </div>
+            <div className="card-body">
+              <div className="mb-5">
+                <Slider marks={rangeMarks} defaultValue={rangeSlider.first} />
+              </div>
+              <div className="mb-4">
+                <Slider range marks={rangeMarks} defaultValue={rangeSlider.second} />
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Week Revenue Statistics, Billions</strong>
+              </div>
+              <span className="mr-2">
+                <span className="kit__utils__donut kit__utils__donut--primary" />
+                Nuts
+              </span>
+              <span className="mr-2">
+                <span className="kit__utils__donut kit__utils__donut--success" />
+                Apples
+              </span>
+              <span className="mr-2">
+                <span className="kit__utils__donut kit__utils__donut--yellow" />
+                Peaches
+              </span>
+            </div>
+            <div className="card-body">
+              <ChartistGraph
+                data={weekChartistData}
+                options={weekChartistOptions}
+                type="Line"
+                className="chart-area height-300 mt-4 chartist"
+              />
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Month Site Visits Growth, %</strong>
+              </div>
+              <span className="mr-2">
+                <span className="kit__utils__donut kit__utils__donut--primary" />
+                Income
+              </span>
+              <span className="mr-2">
+                <span className="kit__utils__donut kit__utils__donut--success" />
+                Outcome
+              </span>
+            </div>
+            <div className="card-body">
+              <ChartistGraph
+                data={monthCartistData}
+                options={monthChartistOptions}
+                type="Bar"
+                className="chart-area height-300 mt-4 chartist"
+              />
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Chat</strong>
+              </div>
+              <div className="text-muted">Block with important Chat information</div>
+            </div>
+            <div className="card-body">
+              <General14 />
             </div>
           </div>
         </div>
       </div>
-    )
-  }
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="card">
+            <div className="card-body">
+              <div className="mb-4">
+                <General22 />
+              </div>
+              <Table columns={tableColumns} dataSource={tableData} />
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-header">
+              <div className="cui__utils__heading mb-0">
+                <strong>Calendar</strong>
+              </div>
+              <div className="text-muted">Block with important Calendar information</div>
+            </div>
+            <div className="card-body">
+              <Calendar dateCellRender={dateCellRender} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default DashboardBeta

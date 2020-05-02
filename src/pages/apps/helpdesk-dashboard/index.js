@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { Table, Checkbox } from 'antd'
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -48,123 +48,116 @@ const columns = [
   },
 ]
 
-class ExtraAppsHelpdeskDashboard extends React.Component {
-  state = {
-    treeData: [
-      { name: 'IT Manager', checked: true },
-      {
-        name: 'Regional Managers',
-        expanded: true,
-        children: [
-          { name: 'Branch Manager', checked: true },
-          { name: 'QA Engineer', checked: true },
-          { name: 'Network Administrator', checked: false },
-          { name: 'Project Manager', checked: false },
-          { name: 'Team Leader', checked: true },
-        ],
-      },
-    ],
-  }
+const ExtraAppsHelpdeskDashboard = () => {
+  const treeDataDefault = [
+    { name: 'IT Manager', checked: true },
+    {
+      name: 'Regional Managers',
+      expanded: true,
+      children: [
+        { name: 'Branch Manager', checked: true },
+        { name: 'QA Engineer', checked: true },
+        { name: 'Network Administrator', checked: false },
+        { name: 'Project Manager', checked: false },
+        { name: 'Team Leader', checked: true },
+      ],
+    },
+  ]
 
-  render() {
-    const { treeData } = this.state
-    const getNodeKey = ({ treeIndex }) => treeIndex
+  const [treeData, setTreeData] = useState(treeDataDefault)
+  const getNodeKey = ({ treeIndex }) => treeIndex
 
-    return (
-      <div>
-        <Helmet title="Helpdesk Dashboard" />
-        <div className="row">
-          <div className="col-lg-4">
-            <div className="card">
-              <div className="card-body">
-                <General2 />
-              </div>
+  return (
+    <div>
+      <Helmet title="Helpdesk Dashboard" />
+      <div className="row">
+        <div className="col-lg-4">
+          <div className="card">
+            <div className="card-body">
+              <General2 />
             </div>
           </div>
-          <div className="col-lg-4">
-            <div className="card">
-              <div className="card-body">
-                <General2v1 />
-              </div>
+        </div>
+        <div className="col-lg-4">
+          <div className="card">
+            <div className="card-body">
+              <General2v1 />
             </div>
           </div>
-          <div className="col-lg-4">
-            <div className="card">
-              <div className="card-body">
-                <General2v2 />
+        </div>
+        <div className="col-lg-4">
+          <div className="card">
+            <div className="card-body">
+              <General2v2 />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-lg-5">
+          <div className="card">
+            <div className="card-body">
+              <h6 className="text-uppercase text-dark font-weight-bold mb-3">To Do</h6>
+              <p className="mb-3">Welcome to Todoist! Let&apos;s get you started with a few tips</p>
+              <div className="height-300">
+                <PerfectScrollbar>
+                  <div className="height-300">
+                    <SortableTree
+                      treeData={treeData}
+                      onChange={tree => setTreeData(tree)}
+                      generateNodeProps={({ node, path }) => ({
+                        title: !node.children ? (
+                          <Checkbox
+                            checked={node.checked}
+                            onChange={event => {
+                              const { checked } = event.target
+                              setTreeData(
+                                changeNodeAtPath({
+                                  treeData,
+                                  path,
+                                  getNodeKey,
+                                  newNode: { ...node, checked },
+                                }),
+                              )
+                            }}
+                          >
+                            {node.name}
+                          </Checkbox>
+                        ) : (
+                          <span>{node.name}:</span>
+                        ),
+                      })}
+                    />
+                  </div>
+                </PerfectScrollbar>
               </div>
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-5">
-            <div className="card">
-              <div className="card-body">
-                <h6 className="text-uppercase text-dark font-weight-bold mb-3">To Do</h6>
-                <p className="mb-3">
-                  Welcome to Todoist! Let&apos;s get you started with a few tips
-                </p>
-                <div className="height-300">
-                  <PerfectScrollbar>
-                    <div className="height-300">
-                      <SortableTree
-                        treeData={treeData}
-                        onChange={tree => this.setState({ treeData: tree })}
-                        generateNodeProps={({ node, path }) => ({
-                          title: !node.children ? (
-                            <Checkbox
-                              checked={node.checked}
-                              onChange={event => {
-                                const { checked } = event.target
-
-                                this.setState(state => ({
-                                  treeData: changeNodeAtPath({
-                                    treeData: state.treeData,
-                                    path,
-                                    getNodeKey,
-                                    newNode: { ...node, checked },
-                                  }),
-                                }))
-                              }}
-                            >
-                              {node.name}
-                            </Checkbox>
-                          ) : (
-                            <span>{node.name}:</span>
-                          ),
-                        })}
-                      />
-                    </div>
-                  </PerfectScrollbar>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-7">
-            <div className="card">
-              <div className="card-body">
-                <h6 className="text-uppercase text-dark font-weight-bold mb-3">
-                  Recent help requests
-                </h6>
-                <div className="kit__utils__table">
-                  <Table columns={columns} dataSource={data} pagination={false} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-body">
-                <Table7 />
+        <div className="col-lg-7">
+          <div className="card">
+            <div className="card-body">
+              <h6 className="text-uppercase text-dark font-weight-bold mb-3">
+                Recent help requests
+              </h6>
+              <div className="kit__utils__table">
+                <Table columns={columns} dataSource={data} pagination={false} />
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
-  }
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="card">
+            <div className="card-body">
+              <Table7 />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default ExtraAppsHelpdeskDashboard

@@ -15,22 +15,17 @@ const locales = {
   'zh-CN': chinese,
 }
 
-@connect(({ settings }) => ({ settings }))
-class Localization extends React.Component {
-  render() {
-    const {
-      children,
-      settings: { locale },
-    } = this.props
-    const currentLocale = locales[locale]
-    return (
-      <ConfigProvider locale={currentLocale.localeAntd}>
-        <IntlProvider locale={currentLocale.locale} messages={currentLocale.messages}>
-          {children}
-        </IntlProvider>
-      </ConfigProvider>
-    )
-  }
+const mapStateToProps = ({ settings }) => ({ settings })
+
+const Localization = ({ children, settings: { locale } }) => {
+  const currentLocale = locales[locale]
+  return (
+    <ConfigProvider locale={currentLocale.localeAntd}>
+      <IntlProvider locale={currentLocale.locale} messages={currentLocale.messages}>
+        {children}
+      </IntlProvider>
+    </ConfigProvider>
+  )
 }
 
-export default Localization
+export default connect(mapStateToProps)(Localization)

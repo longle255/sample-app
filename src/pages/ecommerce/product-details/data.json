@@ -10,7 +10,7 @@
   "products": [
     {
       "isNew": true,
-      "isFavorite": false,
+      "isFav": false,
       "image": "resources/images/products/001.jpg",
       "name": "TP-Link AC1750 Smart WiFi Router - Dual Band Gigabit Wireless Internet Routers for Home",
       "price": "199.28",
@@ -18,7 +18,7 @@
     },
     {
       "isNew": false,
-      "isFavorite": true,
+      "isFav": true,
       "image": "resources/images/products/002.jpg",
       "name": "TP-Link AC1750 Smart WiFi Router - Dual Band Gigabit Wireless Internet Routers for Home",
       "price": "99.99",
@@ -26,7 +26,7 @@
     },
     {
       "isNew": false,
-      "isFavorite": false,
+      "isFav": false,
       "image": "resources/images/products/003.jpg",
       "name": "TP-Link AC1750 Smart WiFi Router - Dual Band Gigabit Wireless Internet Routers for Home",
       "price": "245.21",

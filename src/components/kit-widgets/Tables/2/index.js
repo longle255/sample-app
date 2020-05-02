@@ -36,24 +36,22 @@ const columns = [
   },
 ]
 
-class Table2 extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className={style.table}>
-          <Table columns={columns} dataSource={data} pagination={false} />
-        </div>
-        <div className="mt-4 d-flex align-items-center flex-wrap">
-          <button type="button" className="btn btn-primary mr-2 mb-2">
-            Save
-          </button>
-          <button type="button" className="btn btn-link mb-2">
-            Cancel
-          </button>
-        </div>
+const Table2 = () => {
+  return (
+    <div>
+      <div className={style.table}>
+        <Table columns={columns} dataSource={data} pagination={false} />
       </div>
-    )
-  }
+      <div className="mt-4 d-flex align-items-center flex-wrap">
+        <button type="button" className="btn btn-primary mr-2 mb-2">
+          Save
+        </button>
+        <button type="button" className="btn btn-link mb-2">
+          Cancel
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export default Table2

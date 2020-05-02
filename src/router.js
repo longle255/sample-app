@@ -312,53 +312,49 @@ const mapStateToProps = ({ settings }) => ({
   routerAnimation: settings.routerAnimation,
 })
 
-@connect(mapStateToProps)
-class Router extends React.Component {
-  render() {
-    const { history, routerAnimation } = this.props
-    return (
-      <ConnectedRouter history={history}>
-        <Layout>
-          <Route
-            render={state => {
-              const { location } = state
-              return (
-                <SwitchTransition>
-                  <CSSTransition
-                    key={location.pathname}
-                    appear
-                    classNames={routerAnimation}
-                    timeout={routerAnimation === 'none' ? 0 : 300}
-                  >
-                    <Switch location={location}>
-                      <Route exact path="/" render={() => <Redirect to="/dashboard/alpha" />} />
-                      {routes.map(({ path, Component, exact }) => (
-                        <Route
-                          path={path}
-                          key={path}
-                          exact={exact}
-                          render={() => {
-                            return (
-                              <div className={routerAnimation}>
-                                <Suspense fallback={null}>
-                                  <Component />
-                                </Suspense>
-                              </div>
-                            )
-                          }}
-                        />
-                      ))}
-                      <Redirect to="/auth/404" />
-                    </Switch>
-                  </CSSTransition>
-                </SwitchTransition>
-              )
-            }}
-          />
-        </Layout>
-      </ConnectedRouter>
-    )
-  }
+const Router = ({ history, routerAnimation }) => {
+  return (
+    <ConnectedRouter history={history}>
+      <Layout>
+        <Route
+          render={state => {
+            const { location } = state
+            return (
+              <SwitchTransition>
+                <CSSTransition
+                  key={location.pathname}
+                  appear
+                  classNames={routerAnimation}
+                  timeout={routerAnimation === 'none' ? 0 : 300}
+                >
+                  <Switch location={location}>
+                    <Route exact path="/" render={() => <Redirect to="/dashboard/alpha" />} />
+                    {routes.map(({ path, Component, exact }) => (
+                      <Route
+                        path={path}
+                        key={path}
+                        exact={exact}
+                        render={() => {
+                          return (
+                            <div className={routerAnimation}>
+                              <Suspense fallback={null}>
+                                <Component />
+                              </Suspense>
+                            </div>
+                          )
+                        }}
+                      />
+                    ))}
+                    <Redirect to="/auth/404" />
+                  </Switch>
+                </CSSTransition>
+              </SwitchTransition>
+            )
+          }}
+        />
+      </Layout>
+    </ConnectedRouter>
+  )
 }
 
-export default Router
+export default connect(mapStateToProps)(Router)
