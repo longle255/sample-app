@@ -5,10 +5,9 @@
 
 const fs = require('fs')
 const dree = require('dree')
-const packageJson = require('../package.json')
 
 const scanFolder = '../'
-const filename = `${packageJson.name}-tree.json`
+const filename = `file-tree.json`
 
 const options = {
   stat: false,
