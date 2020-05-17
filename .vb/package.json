@@ -1,0 +1,12 @@
+{
+  "name": "cleanui-admin-template-react-cra-vb",
+  "version": "0.1.0",
+  "visualBuilderVersion": "0.1.0",
+  "private": true,
+  "scripts": {
+    "structure": "node ./generateFileTree"
+  },
+  "dependencies": {
+    "dree": "^2.4.14"
+  }
+}
