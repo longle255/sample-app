@@ -1,21 +1,20 @@
-import { all, takeEvery, put, call } from 'redux-saga/effects'
+import { all, takeEvery, put } from 'redux-saga/effects'
 import { notification } from 'antd'
-import { history, store as reduxStore } from 'index'
-import { fbLogin, fbCurrentAccount, fbLogout } from 'services/firebase.auth'
-import { jwtLogin, jwtCurrentAccount, jwtLogout } from 'services/jwt.auth'
+import { history } from 'index'
 import actions from './actions'
+// import { authLogin, authGetUserData, authLogout } from 'services/auth.service'
 
 export function* LOGIN({ payload }) {
   const { email, password } = payload
-  const provider = reduxStore.getState().settings.authProvider
-  const login = provider === 'firebase' ? fbLogin : jwtLogin
+  console.log('login', `${email}:${password}`)
   yield put({
     type: 'user/SET_STATE',
     payload: {
       loading: true,
     },
   })
-  const success = yield call(login, email, password)
+  // replace "success" with login api endpoint call, example: const success = yield call(authLogin, email, password)
+  const success = true
   yield put({
     type: 'user/LOAD_CURRENT_ACCOUNT',
   })
@@ -29,41 +28,39 @@ export function* LOGIN({ payload }) {
 }
 
 export function* LOAD_CURRENT_ACCOUNT() {
-  const provider = reduxStore.getState().settings.authProvider
-  const currentAccount = provider === 'firebase' ? fbCurrentAccount : jwtCurrentAccount
   yield put({
     type: 'user/SET_STATE',
     payload: {
       loading: true,
     },
   })
-  const response = yield call(currentAccount)
+  // replace "response" with get user data api endpoint call, example: const response = yield call(authGetUserData)
+  const response = {
+    id: 1,
+    name: 'Administrator',
+    email: 'hello@mediatec.org',
+    role: 'admin',
+  }
   if (response) {
-    const { uid: id, email, photoURL: avatar } = response
+    const { id, name, email, role } = response
     yield put({
       type: 'user/SET_STATE',
       payload: {
         id,
-        name: 'Administrator',
+        name,
         email,
-        avatar,
-        role: 'admin',
-        authorized: true,
+        role,
+        avatar: '',
+        authorized: true, // set app to authorized state
+        loading: false,
       },
     })
   }
-  yield put({
-    type: 'user/SET_STATE',
-    payload: {
-      loading: false,
-    },
-  })
 }
 
 export function* LOGOUT() {
-  const provider = reduxStore.getState().settings.authProvider
-  const logout = provider === 'firebase' ? fbLogout : jwtLogout
-  yield call(logout)
+  // uncomment next line for call logout api endpoint
+  // yield call(authLogout)
   yield put({
     type: 'user/SET_STATE',
     payload: {

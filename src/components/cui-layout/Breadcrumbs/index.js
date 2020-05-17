@@ -12,11 +12,12 @@ const Breadcrumbs = props => {
   const [breadcrumbs, setBreadcrumbs] = useState([])
   const {
     location: { pathname },
+    menuData = [],
   } = props
   useEffect(() => {
-    setBreadcrumbs(() => getBreadcrumbs(props.menuData))
+    setBreadcrumbs(() => getBreadcrumbs())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname])
+  }, [pathname, menuData])
 
   const getPath = (data, url, parents = []) => {
     const items = reduce(
@@ -39,8 +40,8 @@ const Breadcrumbs = props => {
     return items.length > 0 ? items : [false]
   }
 
-  const getBreadcrumbs = items => {
-    const [activeMenuItem, ...path] = getPath(items, pathname)
+  const getBreadcrumbs = () => {
+    const [activeMenuItem, ...path] = getPath(menuData, pathname)
 
     if (!activeMenuItem) {
       return null
@@ -73,14 +74,17 @@ const Breadcrumbs = props => {
     )
   }
 
-  return breadcrumbs.length ? (
-    <div className={styles.breadcrumbs}>
-      <div className={styles.path}>
-        <Link to="/dashboard/alpha">Home</Link>
-        {breadcrumbs}
+  return (
+    breadcrumbs &&
+    (breadcrumbs.length ? (
+      <div className={styles.breadcrumbs}>
+        <div className={styles.path}>
+          <Link to="/dashboard/alpha">Home</Link>
+          {breadcrumbs}
+        </div>
       </div>
-    </div>
-  ) : null
+    ) : null)
+  )
 }
 
 export default withRouter(connect(mapStateToProps)(Breadcrumbs))

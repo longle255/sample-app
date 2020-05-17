@@ -40,7 +40,7 @@ const MenuLeft = ({
   useEffect(() => {
     applySelectedKeys()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname])
+  }, [pathname, menuData])
 
   const applySelectedKeys = () => {
     const flattenItems = (items, key) =>
