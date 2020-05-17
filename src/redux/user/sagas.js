@@ -1,20 +1,18 @@
-import { all, takeEvery, put } from 'redux-saga/effects'
+import { all, takeEvery, put, call } from 'redux-saga/effects'
 import { notification } from 'antd'
 import { history } from 'index'
+import { login, currentAccount, logout } from 'services/firebase.auth.service'
 import actions from './actions'
-// import { authLogin, authGetUserData, authLogout } from 'services/auth.service'
 
 export function* LOGIN({ payload }) {
   const { email, password } = payload
-  console.log('login', `${email}:${password}`)
   yield put({
     type: 'user/SET_STATE',
     payload: {
       loading: true,
     },
   })
-  // replace "success" with login api endpoint call, example: const success = yield call(authLogin, email, password)
-  const success = true
+  const success = yield call(login, email, password)
   yield put({
     type: 'user/LOAD_CURRENT_ACCOUNT',
   })
@@ -34,33 +32,31 @@ export function* LOAD_CURRENT_ACCOUNT() {
       loading: true,
     },
   })
-  // replace "response" with get user data api endpoint call, example: const response = yield call(authGetUserData)
-  const response = {
-    id: 1,
-    name: 'Administrator',
-    email: 'hello@mediatec.org',
-    role: 'admin',
-  }
+  const response = yield call(currentAccount)
   if (response) {
-    const { id, name, email, role } = response
+    const { uid: id, email, photoURL: avatar } = response
     yield put({
       type: 'user/SET_STATE',
       payload: {
         id,
-        name,
+        name: 'Administrator',
         email,
-        role,
-        avatar: '',
-        authorized: true, // set app to authorized state
-        loading: false,
+        avatar,
+        role: 'admin',
+        authorized: true,
       },
     })
   }
+  yield put({
+    type: 'user/SET_STATE',
+    payload: {
+      loading: false,
+    },
+  })
 }
 
 export function* LOGOUT() {
-  // uncomment next line for call logout api endpoint
-  // yield call(authLogout)
+  yield call(logout)
   yield put({
     type: 'user/SET_STATE',
     payload: {

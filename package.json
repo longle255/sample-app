@@ -42,6 +42,7 @@
     "d3-format": "^1.4.4",
     "d3-time-format": "^2.2.3",
     "draft-js": "^0.11.5",
+    "firebase": "^7.14.2",
     "history": "^4.10.1",
     "lodash": "^4.17.15",
     "moment": "2.24.0",

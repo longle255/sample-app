@@ -45,6 +45,8 @@ const Layout = ({ user, children, location: { pathname, search } }) => {
   const isUserLoading = user.loading
   const isAuthLayout = getLayout() === 'auth'
 
+  console.log(isUserAuthorized)
+
   const BootstrappedLayout = () => {
     // show loader when user in check authorization process, not authorized yet and not on login pages
     if (isUserLoading && !isUserAuthorized && !isAuthLayout) {

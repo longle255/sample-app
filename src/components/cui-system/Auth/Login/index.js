@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Input, Button, Radio, Form } from 'antd'
+import { Input, Button, Radio, Form, Tooltip } from 'antd'
 import { Link } from 'react-router-dom'
 import style from '../style.module.scss'
 
@@ -55,8 +55,16 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
         <div className="mb-4">
           <Radio.Group onChange={e => changeAuthProvider(e.target.value)} value={authProvider}>
             <Radio value="firebase">Firebase</Radio>
-            <Radio value="jwt">JWT</Radio>
-            <Radio value="auth0">Auth0</Radio>
+            <Tooltip title="Read docs — Auth/JWT section">
+              <Radio value="jwt" disabled>
+                JWT
+              </Radio>
+            </Tooltip>
+            <Tooltip title="Read docs — Auth/Auth0 section">
+              <Radio value="auth0" disabled>
+                Auth0
+              </Radio>
+            </Tooltip>
           </Radio.Group>
         </div>
         <Form
