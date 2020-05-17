@@ -23,7 +23,7 @@ const initialState = {
     menuLayoutType: 'left', // left, top, nomenu
     routerAnimation: 'slide-fadein-up', // none, slide-fadein-up, slide-fadein-right, fadein, zoom-fadein
     menuColor: 'white', // white, dark, gray
-    theme: 'light', // light, dark
+    theme: 'default', // default, dark
     authPagesColor: 'white', // white, gray, image
     primaryColor: '#4b7cf3',
     leftMenuWidth: 256,

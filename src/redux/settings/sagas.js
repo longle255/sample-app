@@ -94,6 +94,14 @@ export function* SETUP() {
           value,
         },
       })
+      if (key === 'theme') {
+        reduxStore.dispatch({
+          type: 'settings/SET_THEME',
+          payload: {
+            theme: value,
+          },
+        })
+      }
     })
   }
   yield changeSettings(history.location.search)
