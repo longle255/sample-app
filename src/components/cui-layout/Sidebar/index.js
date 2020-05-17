@@ -72,6 +72,13 @@ const Sidebar = ({
         theme: nextTheme,
       },
     })
+    dispatch({
+      type: 'settings/CHANGE_SETTING',
+      payload: {
+        setting: 'menuColor',
+        value: nextTheme === 'dark' ? 'dark' : 'light',
+      },
+    })
   }
 
   const resetColor = () => {

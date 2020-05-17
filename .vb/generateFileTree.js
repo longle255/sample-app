@@ -15,7 +15,7 @@ const options = {
   hash: false,
   sizeInBytes: false,
   normalize: true,
-  exclude: [/node_modules/, /.cloudflare/, /.vb/, /yarn.lock/, /.git/, /.DS_Store/],
+  exclude: [/node_modules/, /.cloudflare/, /.vb/, /yarn.lock/, /.git/, /.DS_Store/, /build/, /dist/],
 }
 
 const tree = dree.scan(scanFolder, options);

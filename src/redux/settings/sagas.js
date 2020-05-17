@@ -39,33 +39,13 @@ export function* SET_PRIMARY_COLOR({ payload: { color } }) {
 }
 
 export function* SET_THEME({ payload: { theme } }) {
-  const toggleTheme = () => {
-    document.querySelector('html').setAttribute('data-kit-theme', theme)
-    if (theme === 'default') {
-      reduxStore.dispatch({
-        type: 'settings/CHANGE_SETTING',
-        payload: {
-          setting: 'menuColor',
-          value: 'light',
-        },
-      })
-    }
-    if (theme === 'dark') {
-      reduxStore.dispatch({
-        type: 'settings/CHANGE_SETTING',
-        payload: {
-          setting: 'menuColor',
-          value: 'dark',
-        },
-      })
-    }
-  }
-  yield toggleTheme()
+  const nextTheme = theme === 'dark' ? 'dark' : 'default'
+  yield document.querySelector('html').setAttribute('data-kit-theme', nextTheme)
   yield reduxStore.dispatch({
     type: 'settings/CHANGE_SETTING',
     payload: {
       setting: 'theme',
-      value: theme,
+      value: nextTheme,
     },
   })
 }
@@ -87,13 +67,6 @@ export function* SETUP() {
           value = query[key]
           break
       }
-      reduxStore.dispatch({
-        type: 'settings/CHANGE_SETTING',
-        payload: {
-          setting: key,
-          value,
-        },
-      })
       if (key === 'theme') {
         reduxStore.dispatch({
           type: 'settings/SET_THEME',
@@ -101,7 +74,15 @@ export function* SETUP() {
             theme: value,
           },
         })
+        return
       }
+      reduxStore.dispatch({
+        type: 'settings/CHANGE_SETTING',
+        payload: {
+          setting: key,
+          value,
+        },
+      })
     })
   }
   yield changeSettings(history.location.search)

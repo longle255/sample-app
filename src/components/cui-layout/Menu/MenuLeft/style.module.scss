@@ -5,7 +5,7 @@
 .menu {
   background: $white !important;
   color: $text;
-  transition: none;
+  transition: none !important;
   font-size: rem(15);
 
   .menuOuter {

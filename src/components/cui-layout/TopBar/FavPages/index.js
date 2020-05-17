@@ -12,12 +12,6 @@ const mapStateToProps = ({ menu }) => ({
 })
 
 const FavPages = ({ menuData = [], intl: { formatMessage } }) => {
-  // state = {
-  //   searchText: '',
-  //   favs: store.get('app.topbar.favs') || [],
-  //   pagesList: [],
-  // }
-
   const [searchText, setSearchText] = useState('')
   const [favs, setFavs] = useState(store.get('app.topbar.favs') || [])
   const [pagesList, setPagesList] = useState([])
@@ -48,7 +42,7 @@ const FavPages = ({ menuData = [], intl: { formatMessage } }) => {
     }
     setPagesList(getPagesList())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [menuData])
 
   const changeSearchText = e => {
     setSearchText(e.target.value)
