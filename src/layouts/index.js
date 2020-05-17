@@ -40,12 +40,13 @@ const Layout = ({ user, children, location: { pathname, search } }) => {
     return 'main'
   }
 
+  // auth for demo build, remove it in your app
+  const DEMO_AUTH = process.env.REACT_APP_AUTHENTICATED === 'true'
+
   const Container = Layouts[getLayout()]
-  const isUserAuthorized = user.authorized
+  const isUserAuthorized = DEMO_AUTH || user.authorized
   const isUserLoading = user.loading
   const isAuthLayout = getLayout() === 'auth'
-
-  console.log(isUserAuthorized)
 
   const BootstrappedLayout = () => {
     // show loader when user in check authorization process, not authorized yet and not on login pages

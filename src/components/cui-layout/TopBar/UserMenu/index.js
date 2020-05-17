@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
 import { UserOutlined } from '@ant-design/icons'
 import { Menu, Dropdown, Avatar, Badge } from 'antd'
+import { history } from 'index'
 import styles from './style.module.scss'
 
 const mapStateToProps = ({ user }) => ({ user })
@@ -15,6 +16,7 @@ const ProfileMenu = ({ dispatch, user }) => {
     dispatch({
       type: 'user/LOGOUT',
     })
+    history.push('/auth/login')
   }
 
   const addCount = () => {
