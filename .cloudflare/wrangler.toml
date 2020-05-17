@@ -6,5 +6,5 @@ route = "react.cleanuitemplate.com/*"
 zone_id = "f97fb61fdf15fe0e0461e9b715430db1"
 
 [site]
-bucket = "../../build"
+bucket = "../build"
 entry-point = "workers-site"
