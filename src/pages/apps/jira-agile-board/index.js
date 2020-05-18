@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { ReactSortable } from 'react-sortablejs'
 import style from './style.module.scss'
 
 const ExtraAppsJiraAgileBoard = () => {
-  const backlogItems = [
+  const [backlogItems, setBacklogItems] = useState([
     <div className={style.card} key={1}>
       <div className={style.content}>
         <div className={`${style.flag} bg-primary`} />
@@ -59,10 +59,10 @@ const ExtraAppsJiraAgileBoard = () => {
         </div>
       </div>
     </div>,
-  ]
+  ])
 
-  const todoItems = [
-    <div className={style.card} key={1}>
+  const [todoItems, setTodoItems] = useState([
+    <div className={style.card} key={4}>
       <div className={style.content}>
         <div className={`${style.flag} bg-danger`} />
         <div className="d-flex flex-wrap-reverse align-items-center">
@@ -80,9 +80,9 @@ const ExtraAppsJiraAgileBoard = () => {
         </div>
       </div>
     </div>,
-  ]
+  ])
 
-  const inprogressItems = [
+  const [inprogressItems, setInprogressItems] = useState([
     <div className={style.card} key={1}>
       <div className={style.content}>
         <div className={`${style.flag} bg-success`} />
@@ -101,7 +101,9 @@ const ExtraAppsJiraAgileBoard = () => {
         </div>
       </div>
     </div>,
-  ]
+  ])
+
+  const [completed, setCompleted] = useState([])
 
   return (
     <div>
@@ -134,13 +136,12 @@ const ExtraAppsJiraAgileBoard = () => {
           <div className="card bg-light py-3 px-2">
             <h3 className="font-weight-bold text-dark font-size-18 mb-3">Backlog</h3>
             <ReactSortable
-              options={{
-                group: 'shared',
-              }}
-              tag="div"
+              group="issues"
               style={{ minHeight: 500 }}
+              list={backlogItems}
+              setList={setBacklogItems}
             >
-              {backlogItems}
+              {backlogItems.map(item => item)}
             </ReactSortable>
           </div>
         </div>
@@ -148,13 +149,12 @@ const ExtraAppsJiraAgileBoard = () => {
           <div className="card bg-light py-3 px-2">
             <h3 className="font-weight-bold text-dark font-size-18 mb-3">To Do</h3>
             <ReactSortable
-              options={{
-                group: 'shared',
-              }}
-              tag="div"
+              group="issues"
               style={{ minHeight: 500 }}
+              list={todoItems}
+              setList={setTodoItems}
             >
-              {todoItems}
+              {todoItems.map(item => item)}
             </ReactSortable>
           </div>
         </div>
@@ -162,13 +162,12 @@ const ExtraAppsJiraAgileBoard = () => {
           <div className="card bg-light py-3 px-2">
             <h3 className="font-weight-bold text-dark font-size-18 mb-3">In Progress</h3>
             <ReactSortable
-              options={{
-                group: 'shared',
-              }}
-              tag="div"
+              group="issues"
               style={{ minHeight: 500 }}
+              list={inprogressItems}
+              setList={setInprogressItems}
             >
-              {inprogressItems}
+              {inprogressItems.map(item => item)}
             </ReactSortable>
           </div>
         </div>
@@ -176,12 +175,13 @@ const ExtraAppsJiraAgileBoard = () => {
           <div className="card bg-light py-3 px-2">
             <h3 className="font-weight-bold text-dark font-size-18 mb-3">Completed</h3>
             <ReactSortable
-              options={{
-                group: 'shared',
-              }}
-              tag="div"
+              group="issues"
               style={{ minHeight: 500 }}
-            />
+              list={completed}
+              setList={setCompleted}
+            >
+              {completed.map(item => item)}
+            </ReactSortable>
           </div>
         </div>
       </div>
