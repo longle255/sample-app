@@ -1,14 +1,5 @@
-
-/* stylelint-disable */
-/* prettier-ignore */
-@plugin (
-  {
-    "wrappers": [
-      "[data-kit-theme=\"default\"]"
-    ]
-  }
-) 'AntdThemeLoader';
-/* stylelint-enable */
+@plugin 'AntdThemeLoader';
+apply("default");
 
 [data-kit-theme="default"] {
   @import '~antd/lib/style/components.less';

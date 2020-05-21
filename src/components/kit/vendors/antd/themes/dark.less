@@ -1,13 +1,5 @@
-/* stylelint-disable */
-/* prettier-ignore */
-@plugin (
-  {
-    "wrappers": [
-      "[data-kit-theme=\"dark\"]"
-    ]
-  }
-) 'AntdThemeLoader';
-/* stylelint-enable */
+@plugin 'AntdThemeLoader';
+apply("dark");
 
 [data-kit-theme="dark"] {
   @import '~antd/lib/style/components.less';
