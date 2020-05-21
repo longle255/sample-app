@@ -1,5 +1,6 @@
 import React from 'react'
 import ChartistGraph from 'react-chartist'
+import ChartistTooltip from 'chartist-plugin-tooltips-updated'
 import data from './data.json'
 
 const options = {
@@ -10,7 +11,7 @@ const options = {
     bottom: 5,
   },
   fullWidth: true,
-  showPoint: false,
+  showPoint: true,
   lineSmooth: true,
   axisY: {
     showGrid: false,
@@ -18,11 +19,18 @@ const options = {
     offset: 0,
   },
   axisX: {
-    showGrid: false,
-    showLabel: false,
-    offset: 0,
+    showGrid: true,
+    showLabel: true,
+    offset: 20,
   },
   showArea: false,
+  plugins: [
+    ChartistTooltip({
+      anchorToPoint: false,
+      appendToBody: true,
+      seriesName: false,
+    }),
+  ],
 }
 
 const Chart4v2 = () => {
@@ -30,7 +38,12 @@ const Chart4v2 = () => {
     <div>
       <div className="font-weight-bold text-dark font-size-24">900</div>
       <div>Completed</div>
-      <ChartistGraph className="height-200" data={data} options={options} type="Line" />
+      <ChartistGraph
+        className="height-200 ct-hidden-points"
+        data={data}
+        options={options}
+        type="Line"
+      />
     </div>
   )
 }

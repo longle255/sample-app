@@ -270,9 +270,26 @@
   }
 }
 
+.ct-hidden-points {
+  .ct-point {
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    stroke-linecap: square;
+  }
+
+  &:hover {
+    .ct-point {
+      opacity: 1;
+    }
+  }
+}
+
 // dark theme
 [data-kit-theme='dark'] {
   .ct-grid {
     stroke: $dark-gray-3;
+  }
+  .ct-label {
+    color: $dark-gray-2;
   }
 }

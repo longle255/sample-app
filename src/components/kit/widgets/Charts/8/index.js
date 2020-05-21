@@ -1,5 +1,6 @@
 import React from 'react'
 import ChartistGraph from 'react-chartist'
+import ChartistTooltip from 'chartist-plugin-tooltips-updated'
 import { Table } from 'antd'
 import data from './data.json'
 import style from './style.module.scss'
@@ -41,7 +42,9 @@ const columns = [
     key: 'chart',
     className: 'text-right text-gray-6',
     render: chart => {
-      return <ChartistGraph data={chart} options={options} type="Line" />
+      return (
+        <ChartistGraph className="ct-hidden-points" data={chart} options={options} type="Line" />
+      )
     },
   },
 ]
@@ -56,7 +59,7 @@ const options = {
     bottom: 5,
   },
   fullWidth: true,
-  showPoint: false,
+  showPoint: true,
   lineSmooth: true,
   axisY: {
     showGrid: false,
@@ -69,6 +72,13 @@ const options = {
     offset: 0,
   },
   showArea: false,
+  plugins: [
+    ChartistTooltip({
+      anchorToPoint: false,
+      appendToBody: true,
+      seriesName: false,
+    }),
+  ],
 }
 
 const rowSelection = {

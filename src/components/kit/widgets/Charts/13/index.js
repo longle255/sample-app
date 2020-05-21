@@ -1,5 +1,6 @@
 import React from 'react'
 import ChartistGraph from 'react-chartist'
+import ChartistTooltip from 'chartist-plugin-tooltips-updated'
 import Chartist from 'chartist'
 import chartData from './data.json'
 
@@ -25,6 +26,13 @@ const Chart13 = () => {
     },
     chartPadding: 0,
     low: 0,
+    plugins: [
+      ChartistTooltip({
+        anchorToPoint: false,
+        appendToBody: true,
+        seriesName: false,
+      }),
+    ],
   }
 
   return (
@@ -33,7 +41,12 @@ const Chart13 = () => {
         <div className="font-weight-bold font-size-36 font-weight-bold text-primary">246 / Day</div>
       </div>
       <div className="position-relative">
-        <ChartistGraph data={chartData} options={chartOptions} type="Line" className="height-200" />
+        <ChartistGraph
+          data={chartData}
+          options={chartOptions}
+          type="Line"
+          className="height-200 ct-hidden-points"
+        />
       </div>
     </div>
   )

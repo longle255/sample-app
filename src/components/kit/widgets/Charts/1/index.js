@@ -1,5 +1,6 @@
 import React from 'react'
 import ChartistGraph from 'react-chartist'
+import ChartistTooltip from 'chartist-plugin-tooltips-updated'
 import data from './data.json'
 import style from './style.module.scss'
 
@@ -11,6 +12,13 @@ const options = {
     showLabel: false,
     offset: 0,
   },
+  plugins: [
+    ChartistTooltip({
+      anchorToPoint: false,
+      appendToBody: true,
+      seriesName: false,
+    }),
+  ],
 }
 
 const Chart1 = () => {

@@ -1,19 +1,46 @@
 import React from 'react'
-import Sparkline from '@rowno/sparkline'
+import ChartistGraph from 'react-chartist'
+import ChartistTooltip from 'chartist-plugin-tooltips-updated'
 import style from './style.module.scss'
 
 const Chart11v2 = () => {
+  const data = {
+    series: [[42, 80, 67, 84, 74, 82, 64]],
+  }
+
   const options = {
-    width: 120,
-    height: 110,
-    lines: [
-      {
-        values: [42, 40, 80, 67, 84, 20, 97],
-        colors: {
-          area: 'rgba(75,124,243, 0.1)',
-          line: '#4b7cf3',
-        },
-      },
+    axisX: {
+      showLabel: false,
+      showGrid: false,
+      offset: 0,
+    },
+    axisY: {
+      showLabel: false,
+      showGrid: false,
+      offset: 0,
+    },
+    showArea: true,
+    high: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    chartPadding: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    fullWidth: true,
+    height: '110px',
+    showPoint: true,
+    plugins: [
+      ChartistTooltip({
+        anchorToPoint: false,
+        appendToBody: true,
+        seriesName: false,
+      }),
     ],
   }
 
@@ -22,9 +49,12 @@ const Chart11v2 = () => {
       <div className="font-size-36 font-weight-bold text-dark mb-n2">$56.12</div>
       <div className="text-uppercase">Outcome</div>
       <div className={style.chartContainer}>
-        <div className={style.chart}>
-          <Sparkline {...options} />
-        </div>
+        <ChartistGraph
+          className={`height-200 ct-hidden-points ${style.chart}`}
+          data={data}
+          options={options}
+          type="Line"
+        />
       </div>
     </div>
   )
