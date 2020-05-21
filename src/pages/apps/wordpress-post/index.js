@@ -2,8 +2,8 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { MailOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
 import { Input, Button, Upload, Form } from 'antd'
-import General15 from 'components/kit-widgets/General/15'
-import List15 from 'components/kit-widgets/Lists/15'
+import General15 from 'components/kit/widgets/General/15'
+import List15 from 'components/kit/widgets/Lists/15'
 
 const { TextArea } = Input
 

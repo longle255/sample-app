@@ -1,12 +1,12 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Chart1 from 'components/kit-widgets/Charts/1'
-import Chart2 from 'components/kit-widgets/Charts/2'
-import Chart5 from 'components/kit-widgets/Charts/5'
-import Chart9 from 'components/kit-widgets/Charts/9'
-import Chart10 from 'components/kit-widgets/Charts/10'
-import List12 from 'components/kit-widgets/Lists/12'
-import List15 from 'components/kit-widgets/Lists/15'
+import Chart1 from 'components/kit/widgets/Charts/1'
+import Chart2 from 'components/kit/widgets/Charts/2'
+import Chart5 from 'components/kit/widgets/Charts/5'
+import Chart9 from 'components/kit/widgets/Charts/9'
+import Chart10 from 'components/kit/widgets/Charts/10'
+import List12 from 'components/kit/widgets/Lists/12'
+import List15 from 'components/kit/widgets/Lists/15'
 
 const ExtraAppsGoogleAnalytics = () => {
   return (

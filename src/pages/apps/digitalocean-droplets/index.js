@@ -1,11 +1,11 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Tabs, Dropdown, Menu } from 'antd'
-import Chart4 from 'components/kit-widgets/Charts/4'
-import Chart4v1 from 'components/kit-widgets/Charts/4v1'
-import Chart4v2 from 'components/kit-widgets/Charts/4v2'
-import Chart4v3 from 'components/kit-widgets/Charts/4v3'
-import List5 from 'components/kit-widgets/Lists/5'
+import Chart4 from 'components/kit/widgets/Charts/4'
+import Chart4v1 from 'components/kit/widgets/Charts/4v1'
+import Chart4v2 from 'components/kit/widgets/Charts/4v2'
+import Chart4v3 from 'components/kit/widgets/Charts/4v3'
+import List5 from 'components/kit/widgets/Lists/5'
 
 const { TabPane } = Tabs
 

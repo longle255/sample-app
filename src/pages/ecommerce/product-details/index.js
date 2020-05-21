@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { Select, Tabs } from 'antd'
-import General16 from 'components/kit-widgets/General/16'
+import General16 from 'components/kit/widgets/General/16'
 import style from './style.module.scss'
 import data from './data.json'
 

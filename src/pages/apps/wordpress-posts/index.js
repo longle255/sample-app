@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Pagination } from 'antd'
-import List15 from 'components/kit-widgets/Lists/15'
+import List15 from 'components/kit/widgets/Lists/15'
 
 const ExtraAppsWordpressPosts = () => {
   return (

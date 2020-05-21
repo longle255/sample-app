@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { Tabs, Input, Button, Upload, Form } from 'antd'
-import General1 from 'components/kit-widgets/General/1'
-import General10v1 from 'components/kit-widgets/General/10v1'
-import General12v1 from 'components/kit-widgets/General/12v1'
-import General14 from 'components/kit-widgets/General/14'
-import General15 from 'components/kit-widgets/General/15'
-import List19 from 'components/kit-widgets/Lists/19'
+import General1 from 'components/kit/widgets/General/1'
+import General10v1 from 'components/kit/widgets/General/10v1'
+import General12v1 from 'components/kit/widgets/General/12v1'
+import General14 from 'components/kit/widgets/General/14'
+import General15 from 'components/kit/widgets/General/15'
+import List19 from 'components/kit/widgets/Lists/19'
 
 const { TabPane } = Tabs
 

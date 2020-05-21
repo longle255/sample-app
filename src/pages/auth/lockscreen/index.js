@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Lockscreen from 'components/cui-system/Auth/Lockscreen'
+import Lockscreen from 'components/cleanui/system/Auth/Lockscreen'
 
 const SystemLockscreen = () => {
   return (

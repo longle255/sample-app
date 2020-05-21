@@ -1,8 +1,8 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import List21 from 'components/kit-widgets/Lists/21'
-import List21v1 from 'components/kit-widgets/Lists/21v1'
-import List21v2 from 'components/kit-widgets/Lists/21v2'
+import List21 from 'components/kit/widgets/Lists/21'
+import List21v1 from 'components/kit/widgets/Lists/21v1'
+import List21v2 from 'components/kit/widgets/Lists/21v2'
 
 const SystemPricingTables = () => {
   return (

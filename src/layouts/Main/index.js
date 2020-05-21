@@ -3,12 +3,12 @@ import { Layout } from 'antd'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
-import TopBar from 'components/cui-layout/TopBar'
-import Breadcrumbs from 'components/cui-layout/Breadcrumbs'
-import Menu from 'components/cui-layout/Menu'
-import Footer from 'components/cui-layout/Footer'
-import Sidebar from 'components/cui-layout/Sidebar'
-import SupportChat from 'components/cui-layout/SupportChat'
+import TopBar from 'components/cleanui/layout/TopBar'
+import Breadcrumbs from 'components/cleanui/layout/Breadcrumbs'
+import Menu from 'components/cleanui/layout/Menu'
+import Footer from 'components/cleanui/layout/Footer'
+import Sidebar from 'components/cleanui/layout/Sidebar'
+import SupportChat from 'components/cleanui/layout/SupportChat'
 
 const mapStateToProps = ({ settings }) => ({
   isContentMaxWidth: settings.isContentMaxWidth,

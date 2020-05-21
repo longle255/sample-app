@@ -1,6 +1,6 @@
 {
   "name": "cleanui-admin-template-react-cra",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "private": true,
   "scripts": {
     "start": "react-app-rewired start",

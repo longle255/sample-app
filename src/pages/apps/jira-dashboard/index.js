@@ -2,11 +2,11 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Menu, Dropdown } from 'antd'
 
-import General1 from 'components/kit-widgets/General/1'
-import General6 from 'components/kit-widgets/General/6'
-import General6v1 from 'components/kit-widgets/General/6v1'
-import List11 from 'components/kit-widgets/Lists/11'
-import Table1 from 'components/kit-widgets/Tables/1'
+import General1 from 'components/kit/widgets/General/1'
+import General6 from 'components/kit/widgets/General/6'
+import General6v1 from 'components/kit/widgets/General/6v1'
+import List11 from 'components/kit/widgets/Lists/11'
+import Table1 from 'components/kit/widgets/Tables/1'
 
 const dropdownMenu = (
   <Menu>

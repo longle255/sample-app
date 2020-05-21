@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { Layout } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
 import classNames from 'classnames'
-import Sidebar from 'components/cui-layout/Sidebar'
-import SupportChat from 'components/cui-layout/SupportChat'
+import Sidebar from 'components/cleanui/layout/Sidebar'
+import SupportChat from 'components/cleanui/layout/SupportChat'
 import style from './style.module.scss'
 
 const mapStateToProps = ({ settings }) => ({

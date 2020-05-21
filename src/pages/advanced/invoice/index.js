@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Table8 from 'components/kit-widgets/Tables/8'
+import Table8 from 'components/kit/widgets/Tables/8'
 
 const SystemInvoice = () => {
   return (

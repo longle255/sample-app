@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Pagination } from 'antd'
-import General16 from 'components/kit-widgets/General/16'
+import General16 from 'components/kit/widgets/General/16'
 import productsData from './data.json'
 
 const EcommerceProductCatalog = () => {
