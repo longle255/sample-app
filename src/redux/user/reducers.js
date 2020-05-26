@@ -6,7 +6,7 @@ const initialState = {
   role: '',
   email: '',
   avatar: '',
-  authorized: false,
+  authorized: process.env.REACT_APP_AUTHENTICATED, // false is default value
   loading: false,
 }
 

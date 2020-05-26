@@ -45,7 +45,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
           An excellent front-end solution for web applications built upon Ant Design.
           <br />
           Credentials for testing purposes - <strong>demo@sellpixels.com</strong> /{' '}
-          <strong>password</strong>
+          <strong>demo123</strong>
         </p>
       </div>
       <div className={`card ${style.container}`}>
@@ -74,7 +74,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           className="mb-4"
-          initialValues={{ email: 'demo@sellpixels.com', password: 'password' }}
+          initialValues={{ email: 'demo@sellpixels.com', password: 'demo123' }}
         >
           <Form.Item
             name="email"

@@ -40,11 +40,8 @@ const Layout = ({ user, children, location: { pathname, search } }) => {
     return 'main'
   }
 
-  // auth for demo build, remove it in your app
-  const DEMO_AUTH = process.env.REACT_APP_AUTHENTICATED === 'true'
-
   const Container = Layouts[getLayout()]
-  const isUserAuthorized = DEMO_AUTH || user.authorized
+  const isUserAuthorized = user.authorized
   const isUserLoading = user.loading
   const isAuthLayout = getLayout() === 'auth'
 

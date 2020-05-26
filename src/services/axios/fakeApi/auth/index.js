@@ -5,7 +5,7 @@ const users = [
   {
     id: 1,
     email: 'demo@sellpixels.com',
-    password: 'password',
+    password: 'demo123',
     name: 'Tom Jones',
     avatar: '',
     role: 'admin',

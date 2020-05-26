@@ -1,5 +1,5 @@
 import { all, put, call } from 'redux-saga/effects'
-import getMenuData from 'services/menu/menu.service'
+import getMenuData from 'services/menu'
 
 export function* GET_DATA() {
   const menuData = yield call(getMenuData)

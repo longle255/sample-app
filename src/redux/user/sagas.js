@@ -1,8 +1,8 @@
 import { all, takeEvery, put, call, select } from 'redux-saga/effects'
 import { notification } from 'antd'
 import { history } from 'index'
-import * as firebase from 'services/auth/firebase.service'
-import * as jwt from 'services/auth/jwt.service'
+import * as firebase from 'services/firebase'
+import * as jwt from 'services/jwt'
 import actions from './actions'
 
 const mapAuthProviders = {
@@ -22,13 +22,13 @@ const mapAuthProviders = {
 
 export function* LOGIN({ payload }) {
   const { email, password } = payload
-  const { authProvider: autProviderName } = yield select(state => state.settings)
   yield put({
     type: 'user/SET_STATE',
     payload: {
       loading: true,
     },
   })
+  const { authProvider: autProviderName } = yield select(state => state.settings)
   const success = yield call(mapAuthProviders[autProviderName].login, email, password)
   if (success) {
     yield put({
@@ -52,13 +52,13 @@ export function* LOGIN({ payload }) {
 
 export function* REGISTER({ payload }) {
   const { email, password, name } = payload
-  const { authProvider } = yield select(state => state.settings)
   yield put({
     type: 'user/SET_STATE',
     payload: {
       loading: true,
     },
   })
+  const { authProvider } = yield select(state => state.settings)
   const success = yield call(mapAuthProviders[authProvider].register, email, password, name)
   if (success) {
     yield put({
@@ -81,13 +81,13 @@ export function* REGISTER({ payload }) {
 }
 
 export function* LOAD_CURRENT_ACCOUNT() {
-  const { authProvider } = yield select(state => state.settings)
   yield put({
     type: 'user/SET_STATE',
     payload: {
       loading: true,
     },
   })
+  const { authProvider } = yield select(state => state.settings)
   const response = yield call(mapAuthProviders[authProvider].currentAccount)
   if (response) {
     const { id, email, name, avatar, role } = response

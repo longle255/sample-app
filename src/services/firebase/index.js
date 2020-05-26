@@ -2,8 +2,6 @@ import firebase from 'firebase/app'
 import { notification } from 'antd'
 import 'firebase/auth'
 import 'firebase/database'
-import 'firebase/storage'
-import 'firebase/functions'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBJVhr2WZshEGR7egcxoygQIphKOkKVIYQ',
@@ -14,11 +12,12 @@ const firebaseConfig = {
   messagingSenderId: '338219933237',
 }
 
-export const firebaseApp = firebase.initializeApp(firebaseConfig)
-const firebaseAuth = firebase.auth
+firebase.initializeApp(firebaseConfig)
+export const firebaseAuth = firebase.auth()
+export const firebaseDatabase = firebase.database()
 
 export async function login(email, password) {
-  return firebaseAuth()
+  return firebaseAuth
     .signInWithEmailAndPassword(email, password)
     .then(() => true)
     .catch(error => {
@@ -29,10 +28,22 @@ export async function login(email, password) {
     })
 }
 
-export async function register(email, password) {
-  return firebaseAuth()
+export async function register(email, password, name) {
+  return firebaseAuth
     .createUserWithEmailAndPassword(email, password)
-    .then(() => true)
+    .then(response => {
+      if (response.user) {
+        const { uid } = response.user
+        firebaseDatabase
+          .ref('users')
+          .child(uid)
+          .set({
+            role: 'admin',
+            name,
+          })
+      }
+      return true
+    })
     .catch(error => {
       notification.warning({
         message: error.code,
@@ -51,16 +62,32 @@ export async function currentAccount() {
       const unsubscribe = auth.onAuthStateChanged(user => {
         userLoaded = true
         unsubscribe()
-        console.log('user', user)
-        resolve(user)
+        const getUserData = async () => {
+          if (user) {
+            const userFields = await firebaseDatabase
+              .ref('users')
+              .child(user.uid)
+              .once('value')
+              .then(snapshot => {
+                return snapshot.val()
+              })
+            const mergedUser = Object.assign(user, {
+              id: user.uid,
+              name: userFields.name,
+              role: userFields.role,
+              avatar: user.photoUrl,
+            })
+            return mergedUser
+          }
+          return user
+        }
+        resolve(getUserData())
       }, reject)
     })
   }
-  return getCurrentUser(firebaseAuth())
+  return getCurrentUser(firebaseAuth)
 }
 
 export async function logout() {
-  return firebaseAuth()
-    .signOut()
-    .then(() => true)
+  return firebaseAuth.signOut().then(() => true)
 }

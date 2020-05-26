@@ -4,9 +4,9 @@ import { Input, Button, Form } from 'antd'
 import { Link } from 'react-router-dom'
 import style from '../style.module.scss'
 
-const mapStateToProps = ({ dispatch }) => ({ dispatch })
+const mapStateToProps = ({ user, dispatch }) => ({ user, dispatch })
 
-const Register = ({ dispatch }) => {
+const Register = ({ dispatch, user }) => {
   const onFinish = values => {
     dispatch({
       type: 'user/REGISTER',
@@ -55,7 +55,13 @@ const Register = ({ dispatch }) => {
           >
             <Input type="password" size="large" placeholder="Password" />
           </Form.Item>
-          <Button type="primary" htmlType="submit" size="large" className="text-center w-100">
+          <Button
+            type="primary"
+            htmlType="submit"
+            size="large"
+            className="text-center w-100"
+            loading={user.loading}
+          >
             <strong>Sign up</strong>
           </Button>
         </Form>
