@@ -1,8 +1,8 @@
 ### Clean UI Pro React Admin Template Preview ###
-https://react.cleanuitemplate.com
+https://react.cleanui.cloud
 
 ### Documentation ###
-Please read documentation here https://docs.cleanuitemplate.com
+Please read documentation here https://docs.sellpixels.com
 
 ### Quick Start ###
 * Install node.js: https://nodejs.org​
