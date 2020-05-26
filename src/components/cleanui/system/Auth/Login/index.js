@@ -44,8 +44,8 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
           <br />
           An excellent front-end solution for web applications built upon Ant Design.
           <br />
-          Credentials for testing purposes - <strong>admin@mediatec.org</strong> /{' '}
-          <strong>cleanui</strong>
+          Credentials for testing purposes - <strong>demo@sellpixels.com</strong> /{' '}
+          <strong>password</strong>
         </p>
       </div>
       <div className={`card ${style.container}`}>
@@ -55,14 +55,15 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
         <div className="mb-4">
           <Radio.Group onChange={e => changeAuthProvider(e.target.value)} value={authProvider}>
             <Radio value="firebase">Firebase</Radio>
-            <Tooltip title="Read docs — Auth/JWT section">
-              <Radio value="jwt" disabled>
-                JWT
+            <Radio value="jwt">JWT</Radio>
+            <Tooltip title="Read Docs Guide">
+              <Radio value="Auth0" disabled>
+                Auth0
               </Radio>
             </Tooltip>
-            <Tooltip title="Read docs — Auth/Auth0 section">
-              <Radio value="auth0" disabled>
-                Auth0
+            <Tooltip title="Read Docs Guide">
+              <Radio value="Strapi" disabled>
+                Strapi
               </Radio>
             </Tooltip>
           </Radio.Group>
@@ -73,7 +74,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           className="mb-4"
-          initialValues={{ email: 'admin@mediatec.org', password: 'cleanui' }}
+          initialValues={{ email: 'demo@sellpixels.com', password: 'password' }}
         >
           <Form.Item
             name="email"

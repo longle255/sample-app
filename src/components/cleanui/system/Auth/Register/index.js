@@ -1,11 +1,17 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Input, Button, Form } from 'antd'
 import { Link } from 'react-router-dom'
 import style from '../style.module.scss'
 
-const Register = () => {
+const mapStateToProps = ({ dispatch }) => ({ dispatch })
+
+const Register = ({ dispatch }) => {
   const onFinish = values => {
-    console.log('Success:', values)
+    dispatch({
+      type: 'user/REGISTER',
+      payload: values,
+    })
   }
 
   const onFinishFailed = errorInfo => {
@@ -32,7 +38,7 @@ const Register = () => {
           className="mb-4"
         >
           <Form.Item
-            name="fullname"
+            name="name"
             rules={[{ required: true, message: 'Please input your full name' }]}
           >
             <Input size="large" placeholder="Full Name" />
@@ -74,4 +80,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default connect(mapStateToProps)(Register)

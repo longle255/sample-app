@@ -3,23 +3,35 @@ import { notification } from 'antd'
 import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/storage'
+import 'firebase/functions'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAE5G0RI2LwzwTBizhJbnRKIKbiXQIA1dY',
-  authDomain: 'cleanui-72a42.firebaseapp.com',
-  databaseURL: 'https://cleanui-72a42.firebaseio.com',
-  projectId: 'cleanui-72a42',
+  apiKey: 'AIzaSyBJVhr2WZshEGR7egcxoygQIphKOkKVIYQ',
+  authDomain: 'sellpixels-7d5d4.firebaseapp.com',
+  databaseURL: 'https://sellpixels-7d5d4.firebaseio.com',
+  projectId: 'sellpixels-7d5d4',
   storageBucket: 'cleanui-72a42.appspot.com',
-  messagingSenderId: '583382839121',
+  messagingSenderId: '338219933237',
 }
 
-const firebaseApp = firebase.initializeApp(firebaseConfig)
+export const firebaseApp = firebase.initializeApp(firebaseConfig)
 const firebaseAuth = firebase.auth
-export default firebaseApp
 
 export async function login(email, password) {
   return firebaseAuth()
     .signInWithEmailAndPassword(email, password)
+    .then(() => true)
+    .catch(error => {
+      notification.warning({
+        message: error.code,
+        description: error.message,
+      })
+    })
+}
+
+export async function register(email, password) {
+  return firebaseAuth()
+    .createUserWithEmailAndPassword(email, password)
     .then(() => true)
     .catch(error => {
       notification.warning({
@@ -39,6 +51,7 @@ export async function currentAccount() {
       const unsubscribe = auth.onAuthStateChanged(user => {
         userLoaded = true
         unsubscribe()
+        console.log('user', user)
         resolve(user)
       }, reject)
     })
