@@ -40,7 +40,6 @@ mock.onPost('/api/auth/register').reply(request => {
   const isAlreadyRegistered = users.find(user => user.email === email)
 
   if (!isAlreadyRegistered) {
-    console.log(email, password, name)
     const user = {
       id: users.length + 1,
       email,
