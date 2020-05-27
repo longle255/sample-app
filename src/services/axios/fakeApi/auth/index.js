@@ -38,7 +38,6 @@ mock.onPost('/api/auth/login').reply(request => {
 mock.onPost('/api/auth/register').reply(request => {
   const { email, password, name } = JSON.parse(request.data)
   const isAlreadyRegistered = users.find(user => user.email === email)
-  console.log(email, password, name)
 
   if (!isAlreadyRegistered) {
     console.log(email, password, name)
@@ -66,16 +65,21 @@ mock.onPost('/api/auth/register').reply(request => {
 
 mock.onGet('/api/auth/account').reply(request => {
   const { AccessToken } = request.headers
-  const { id } = jwt.verify(AccessToken, jwtConfig.secret)
-  const userData = Object.assign(
-    {},
-    users.find(item => item.id === id),
-  )
-  delete userData.password
-  userData.accessToken = jwt.sign({ id: userData.id }, jwtConfig.secret, {
-    expiresIn: jwtConfig.expiresIn,
-  }) // refresh jwt token
-  return AccessToken ? [200, userData] : [401]
+  if (AccessToken) {
+    const { id } = jwt.verify(AccessToken, jwtConfig.secret)
+    const userData = Object.assign(
+      {},
+      users.find(item => item.id === id),
+    )
+    delete userData.password
+    userData.accessToken = jwt.sign({ id: userData.id }, jwtConfig.secret, {
+      expiresIn: jwtConfig.expiresIn,
+    }) // refresh jwt token
+
+    return [200, userData]
+  }
+
+  return [401]
 })
 
 mock.onGet('/api/auth/logout').reply(() => {
