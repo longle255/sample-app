@@ -37,7 +37,7 @@ const ProfileMenu = ({ dispatch, user }) => {
           <strong>
             <FormattedMessage id="topBar.profileMenu.role" />:{' '}
           </strong>
-          {user.role}
+          {user.role || '—'}
         </div>
       </Menu.Item>
       <Menu.Divider />
@@ -46,12 +46,12 @@ const ProfileMenu = ({ dispatch, user }) => {
           <strong>
             <FormattedMessage id="topBar.profileMenu.email" />:{' '}
           </strong>
-          {user.email}
+          {user.email || '—'}
           <br />
           <strong>
             <FormattedMessage id="topBar.profileMenu.phone" />:{' '}
           </strong>
-          {user.phone || '— '}
+          {user.phone || '—'}
         </div>
       </Menu.Item>
       <Menu.Divider />
