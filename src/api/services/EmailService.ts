@@ -4,7 +4,8 @@ import { Logger } from '../../lib/logger';
 import { env } from '../../env';
 import path from 'path';
 import nodemailer, { Transporter, SendMailOptions } from 'nodemailer';
-import mg from 'nodemailer-mailgun-transport';
+// import mg from 'nodemailer-mailgun-transport';
+import sendgrid from 'nodemailer-sendgrid';
 import { JobService } from './JobService';
 import EmailTemplate from 'email-templates';
 import { IUser } from '../models/User';
@@ -21,10 +22,7 @@ const templatesDir = path.resolve(__dirname, '../../templates/emails');
 //   },
 // };
 const sendgridAuth = {
-  auth: {
-    api_key: env.sendgrid.username,
-    domain: env.sendgrid.password,
-  },
+  apiKey: env.sendgrid.apiKey,
 };
 const NO_BCC = [];
 const LINK_EMAIL_CONFIRMATION = `${env.app.uri}/account/confirm-email?token=`;
@@ -38,7 +36,7 @@ const defaultValues = {
 export class EmailService extends BaseService<IEmail> {
   constructor(
     // private mailer: Transporter = nodemailer.createTransport(mg(mailgunAuth)),
-    private mailer: Transporter = nodemailer.createTransport(mg(sendgridAuth)),
+    private mailer: Transporter = nodemailer.createTransport(sendgrid(sendgridAuth)),
     private jobService: JobService = Container.get<JobService>(JobService),
   ) {
     super(new Logger(__filename), Email);
@@ -56,7 +54,7 @@ export class EmailService extends BaseService<IEmail> {
     await this.renderAndQueueJob({
       template: 'default',
       locals: content,
-      from: env.mailgun.sender,
+      from: env.sendgrid.sender,
       to: address,
       subject,
     });
@@ -75,7 +73,7 @@ export class EmailService extends BaseService<IEmail> {
     await this.renderAndQueueJob({
       template: 'reset-password',
       locals: content,
-      from: env.mailgun.sender,
+      from: env.sendgrid.sender,
       to: user.email,
       subject,
       user,
@@ -95,7 +93,7 @@ export class EmailService extends BaseService<IEmail> {
     await this.renderAndQueueJob({
       template: 'registration',
       locals: content,
-      from: env.mailgun.sender,
+      from: env.sendgrid.sender,
       to: user.email,
       subject,
       user,

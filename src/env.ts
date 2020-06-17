@@ -40,7 +40,6 @@ export const env = {
   jwt: {
     secret: getOsEnv('JWT_SECRET'),
     expiresIn: toNumber(getOsEnv('JWT_EXPIRES_IN')),
-    // signOptions: 'HS256',
     signOptions: {
       algorithm: 'HS256',
     },
@@ -68,8 +67,7 @@ export const env = {
   },
   sendgrid: {
     apiKey: getOsEnv('SENDGRID_API_KEY'),
-    username: getOsEnv('SENDGRID_USERNAME'),
-    password: getOsEnv('SENDGRID_PASSWORD'),
+    sender: getOsEnv('SENDGRID_SENDER_EMAIL'),
   },
   agenda: {
     name: getHostname(),

@@ -1,6 +1,6 @@
 import { Context } from 'koa';
 import { KoaMiddlewareInterface, Middleware } from 'routing-controllers';
-import { RequestLog } from '../models/RequestLog';
+import { RequestLog, IRequestLog } from '../models/RequestLog';
 
 const sanitizedKeys = (object: any) => {
   if (!object) {
@@ -47,7 +47,7 @@ export class RequestLoggerMiddleware implements KoaMiddlewareInterface {
         resCode: ctx.res.statusCode,
         resBody: ctx.res.statusMessage,
         resTime: delta,
-      });
+      } as IRequestLog);
     });
   }
 }
