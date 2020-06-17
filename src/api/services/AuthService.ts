@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import Koa from 'koa';
 import axios from 'axios';
 import _ from 'lodash';
@@ -285,7 +285,7 @@ export class AuthService {
         iat: moment().unix(),
         sub: user._id,
       };
-      const access_token = jwt.sign(payload, env.jwt.secret, env.jwt.signOptions);
+      const access_token = jwt.sign(payload, env.jwt.secret, env.jwt.signOptions as SignOptions);
       await this.identityTokenService.generateToken(user, TokenTypes.REFRESH_TOKEN);
       const tokenData: ITokenInfo = {
         token_type: 'Bearer',

@@ -14,10 +14,16 @@ import { BaseService } from './BaseService';
 
 const templatesDir = path.resolve(__dirname, '../../templates/emails');
 
-const mailgunAuth = {
+// const mailgunAuth = {
+//   auth: {
+//     api_key: env.mailgun.apiKey,
+//     domain: env.mailgun.domain,
+//   },
+// };
+const sendgridAuth = {
   auth: {
-    api_key: env.mailgun.apiKey,
-    domain: env.mailgun.domain,
+    api_key: env.sendgrid.username,
+    domain: env.sendgrid.password,
   },
 };
 const NO_BCC = [];
@@ -31,7 +37,8 @@ const defaultValues = {
 @Service()
 export class EmailService extends BaseService<IEmail> {
   constructor(
-    private mailer: Transporter = nodemailer.createTransport(mg(mailgunAuth)),
+    // private mailer: Transporter = nodemailer.createTransport(mg(mailgunAuth)),
+    private mailer: Transporter = nodemailer.createTransport(mg(sendgridAuth)),
     private jobService: JobService = Container.get<JobService>(JobService),
   ) {
     super(new Logger(__filename), Email);
