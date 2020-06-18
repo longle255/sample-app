@@ -18,6 +18,8 @@ import { UserService } from '../services/UserService';
 import { DocumentType } from '@typegoose/typegoose';
 import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 import { Pagination } from '../services/Pagination';
+import { UserChangePasswordSchema } from './request-schemas/UserChangePasswordSchema';
+import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
 
 @Authorized('admin')
 @JsonController('/users')
@@ -31,12 +33,6 @@ export class UserController {
       page: params.page ? parseInt(params.page, 10) : 0,
       cond: params.cond ? params.cond : {},
     });
-  }
-
-  @Get('/profile')
-  @Authorized('user')
-  public async findMe(@Req() req: any, @CurrentUser() user?: DocumentType<IUser>): Promise<DocumentType<IUser>> {
-    return this.userService.findOne({ _id: user._id });
   }
 
   @Get('/:id([0-9a-f]{24})')
@@ -59,5 +55,20 @@ export class UserController {
   @Delete('/:id')
   public delete(@Param('id') id: string): Promise<void> {
     return this.userService.delete(id);
+  }
+
+  @Get('/profile')
+  @Authorized('user')
+  public async findMe(@Req() req: any, @CurrentUser() user?: DocumentType<IUser>): Promise<DocumentType<IUser>> {
+    return this.userService.findOne({ _id: user._id });
+  }
+
+  @Post('/profile/change-password')
+  @Authorized('user')
+  public async changePassword(
+    @CurrentUser() user: DocumentType<IUser>,
+    @Body({ validate: true }) body: UserChangePasswordSchema,
+  ): Promise<DefaultResponseSchema> {
+    return this.userService.changePasswordWithVerification(user._id, body);
   }
 }
