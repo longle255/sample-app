@@ -27,6 +27,7 @@ const sendgridAuth = {
 const NO_BCC = [];
 const LINK_EMAIL_CONFIRMATION = `${env.app.uri}/account/confirm-email?token=`;
 const LINK_RESET_PASSWORD = `${env.app.uri}/account/reset-password?token=`;
+const LINK_INVITATION = `${env.app.uri}/account/signup?ref=`;
 
 const defaultValues = {
   appName: env.app.name,
@@ -95,6 +96,26 @@ export class EmailService extends BaseService<IEmail> {
       locals: content,
       from: env.sendgrid.sender,
       to: user.email,
+      subject,
+      user,
+    });
+  }
+
+  public async sendInvitationEmail(user: IUser, addresses: string): Promise<void> {
+    const subject = `[${env.app.name}] You have got an invitation from ${user.fullName}`;
+    const content = {
+      subject,
+      host: env.app.host,
+      name: user.fullName,
+      email: user.email,
+      link: LINK_INVITATION + user.referralCode,
+      data: [],
+    };
+    await this.renderAndQueueJob({
+      template: 'invitation',
+      locals: content,
+      from: env.sendgrid.sender,
+      to: addresses,
       subject,
       user,
     });

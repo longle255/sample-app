@@ -11,10 +11,14 @@ import { env } from '../../env';
 import { verify2FAToken, generate2FAToken, generateQR } from '../../utils/2FA';
 import { UserConfirm2FASchema } from '../controllers/request-schemas/UserConfirm2FASchema';
 import { UserDisable2FASchema } from '../controllers/request-schemas/UserDisable2FASchema';
+import { UserSendInvitationEmailSchema } from '../controllers/request-schemas/UserSendInvitationEmailSchema';
+import { InvitationService } from './InvitationService';
+import { IInvitation } from '../models/Invitation';
+import { EmailService } from './EmailService';
 
 @Service()
 export class UserService extends BaseService<IUser> {
-  constructor() {
+  constructor(private invitationService: InvitationService, private emailService: EmailService) {
     super(new Logger(__filename), User);
   }
 
@@ -124,6 +128,22 @@ export class UserService extends BaseService<IUser> {
         },
       );
       return resolve(new DefaultResponseSchema(true, `Two-factor authentication has been disabled for your account`));
+    });
+  }
+
+  public async sendInvitationEmail(id: any, input: UserSendInvitationEmailSchema): Promise<DefaultResponseSchema> {
+    return new Promise<DefaultResponseSchema>(async (resolve, reject) => {
+      const user = await this.findOne({ _id: id });
+      if (!user || !user.isActive) {
+        return reject(new BadRequestError('User does not exist, not active, or 2FA is not enabled'));
+      }
+      for (const email of input.emails) {
+        await this.invitationService.create({ invitedBy: id, email } as IInvitation);
+      }
+      const addresses = input.emails.join(',');
+      this.log.debug('Sending invitations from [%s] to addresses [%s]', user.email, addresses);
+      await this.emailService.sendInvitationEmail(user, addresses);
+      return resolve(new DefaultResponseSchema(true, `Invitations has been sent to your friends`));
     });
   }
 }
