@@ -130,6 +130,15 @@ export class IUser extends BaseSchema {
   @prop()
   public service: string; // service
 
+  @prop()
+  public twoFATempSecret: string;
+
+  @prop()
+  public twoFASecret: string;
+
+  @prop({ default: false })
+  public twoFAEnabled: boolean;
+
   public async comparePassword(this: DocumentType<IUser>, password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
   }

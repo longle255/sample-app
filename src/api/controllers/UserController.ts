@@ -20,6 +20,8 @@ import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 import { Pagination } from '../services/Pagination';
 import { UserChangePasswordSchema } from './request-schemas/UserChangePasswordSchema';
 import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
+import { UserConfirm2FASchema } from './request-schemas/UserConfirm2FASchema';
+import { UserDisable2FASchema } from './request-schemas/UserDisable2FASchema';
 
 @Authorized('admin')
 @JsonController('/users')
@@ -70,5 +72,29 @@ export class UserController {
     @Body({ validate: true }) body: UserChangePasswordSchema,
   ): Promise<DefaultResponseSchema> {
     return this.userService.changePasswordWithVerification(user._id, body);
+  }
+
+  @Post('/profile/enable-2fa')
+  @Authorized('user')
+  public async enable2FA(@CurrentUser() user: DocumentType<IUser>): Promise<any> {
+    return this.userService.enable2FA(user._id);
+  }
+
+  @Post('/profile/confirm-2fa')
+  @Authorized('user')
+  public async confirm2FA(
+    @CurrentUser() user: DocumentType<IUser>,
+    @Body({ validate: true }) body: UserConfirm2FASchema,
+  ): Promise<DefaultResponseSchema> {
+    return this.userService.confirm2FA(user._id, body);
+  }
+
+  @Post('/profile/disable-2fa')
+  @Authorized('user')
+  public async disable2FA(
+    @CurrentUser() user: DocumentType<IUser>,
+    @Body({ validate: true }) body: UserDisable2FASchema,
+  ): Promise<DefaultResponseSchema> {
+    return this.userService.disable2FA(user._id, body);
   }
 }
