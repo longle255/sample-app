@@ -65,6 +65,10 @@ export const env = {
     domain: getOsEnv('MAILGUN_DOMAIN'),
     sender: getOsEnv('MAILGUN_SENDER_EMAIL'),
   },
+  sendgrid: {
+    apiKey: getOsEnv('SENDGRID_API_KEY'),
+    sender: getOsEnv('SENDGRID_SENDER_EMAIL'),
+  },
   agenda: {
     name: getHostname(),
     collectionName: getOsEnv('AGENDA_COLLECTION_NAME'),

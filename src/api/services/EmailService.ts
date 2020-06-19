@@ -4,7 +4,8 @@ import { Logger } from '../../lib/logger';
 import { env } from '../../env';
 import path from 'path';
 import nodemailer, { Transporter, SendMailOptions } from 'nodemailer';
-import mg from 'nodemailer-mailgun-transport';
+// import mg from 'nodemailer-mailgun-transport';
+import sendgrid from 'nodemailer-sendgrid';
 import { JobService } from './JobService';
 import EmailTemplate from 'email-templates';
 import { IUser } from '../models/User';
@@ -14,15 +15,19 @@ import { BaseService } from './BaseService';
 
 const templatesDir = path.resolve(__dirname, '../../templates/emails');
 
-const mailgunAuth = {
-  auth: {
-    api_key: env.mailgun.apiKey,
-    domain: env.mailgun.domain,
-  },
+// const mailgunAuth = {
+//   auth: {
+//     api_key: env.mailgun.apiKey,
+//     domain: env.mailgun.domain,
+//   },
+// };
+const sendgridAuth = {
+  apiKey: env.sendgrid.apiKey,
 };
 const NO_BCC = [];
 const LINK_EMAIL_CONFIRMATION = `${env.app.uri}/account/confirm-email?token=`;
 const LINK_RESET_PASSWORD = `${env.app.uri}/account/reset-password?token=`;
+const LINK_INVITATION = `${env.app.uri}/account/signup?ref=`;
 
 const defaultValues = {
   appName: env.app.name,
@@ -31,7 +36,8 @@ const defaultValues = {
 @Service()
 export class EmailService extends BaseService<IEmail> {
   constructor(
-    private mailer: Transporter = nodemailer.createTransport(mg(mailgunAuth)),
+    // private mailer: Transporter = nodemailer.createTransport(mg(mailgunAuth)),
+    private mailer: Transporter = nodemailer.createTransport(sendgrid(sendgridAuth)),
     private jobService: JobService = Container.get<JobService>(JobService),
   ) {
     super(new Logger(__filename), Email);
@@ -49,7 +55,7 @@ export class EmailService extends BaseService<IEmail> {
     await this.renderAndQueueJob({
       template: 'default',
       locals: content,
-      from: env.mailgun.sender,
+      from: env.sendgrid.sender,
       to: address,
       subject,
     });
@@ -68,7 +74,7 @@ export class EmailService extends BaseService<IEmail> {
     await this.renderAndQueueJob({
       template: 'reset-password',
       locals: content,
-      from: env.mailgun.sender,
+      from: env.sendgrid.sender,
       to: user.email,
       subject,
       user,
@@ -88,8 +94,28 @@ export class EmailService extends BaseService<IEmail> {
     await this.renderAndQueueJob({
       template: 'registration',
       locals: content,
-      from: env.mailgun.sender,
+      from: env.sendgrid.sender,
       to: user.email,
+      subject,
+      user,
+    });
+  }
+
+  public async sendInvitationEmail(user: IUser, addresses: string): Promise<void> {
+    const subject = `[${env.app.name}] You have got an invitation from ${user.fullName}`;
+    const content = {
+      subject,
+      host: env.app.host,
+      name: user.fullName,
+      email: user.email,
+      link: LINK_INVITATION + user.referralCode,
+      data: [],
+    };
+    await this.renderAndQueueJob({
+      template: 'invitation',
+      locals: content,
+      from: env.sendgrid.sender,
+      to: addresses,
       subject,
       user,
     });

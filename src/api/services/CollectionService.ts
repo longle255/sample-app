@@ -8,6 +8,7 @@ import { DocumentType } from '@typegoose/typegoose';
 import { Like } from '../models/Like';
 import { BadRequestError } from 'routing-controllers';
 import { PaginationOptionsInterface, Pagination, defaultOption } from './Pagination';
+import { UpdateQuery } from 'mongoose';
 
 @Service()
 export class CollectionService extends BaseService<ICollection> {
@@ -69,7 +70,8 @@ export class CollectionService extends BaseService<ICollection> {
     this.log.debug(`Find one ${this.model.modelName} ${colId} and increase view for user ${JSON.stringify(user)}`);
     return new Promise<ICollection>(async (resolve, reject) => {
       try {
-        const result = await this.model.findOneAndUpdate({ _id: colId }, { $inc: { views: 1 } }, { new: true });
+        const update = { $inc: { views: 1 } } as UpdateQuery<ICollection>;
+        const result = await this.model.findOneAndUpdate({ _id: colId }, update, { new: true });
         const liked = await Like.findOne({ coll: colId, user, isActive: true });
         const obj = result.toJSON();
         obj.photosCount = obj.photos.length;
@@ -89,7 +91,8 @@ export class CollectionService extends BaseService<ICollection> {
         if (like) {
           return reject(new BadRequestError('Already like this collection'));
         }
-        let coll = await this.model.findOneAndUpdate({ _id: colId }, { $inc: { likes: 1 } }, { new: true });
+        const update = { $inc: { likes: 1 } } as UpdateQuery<ICollection>;
+        let coll = await this.model.findOneAndUpdate({ _id: colId }, update, { new: true });
         if (!coll) {
           return resolve(coll);
         }
@@ -118,7 +121,8 @@ export class CollectionService extends BaseService<ICollection> {
         if (!like) {
           return reject(new BadRequestError('Have not liked this collection'));
         }
-        let coll = await this.model.findOneAndUpdate({ _id: colId }, { $inc: { likes: -1 } }, { new: true });
+        const update = { $inc: { likes: -1 } } as UpdateQuery<ICollection>;
+        let coll = await this.model.findOneAndUpdate({ _id: colId }, update, { new: true });
         if (!coll) {
           return resolve(coll);
         }

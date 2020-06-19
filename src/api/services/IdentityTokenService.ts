@@ -37,7 +37,7 @@ export class IdentityTokenService extends BaseService<IIdentityToken> {
         email,
         expires,
         type: tokenType,
-      })
+      } as IIdentityToken)
         .then((result: IIdentityToken) => {
           resolve(result);
         })
