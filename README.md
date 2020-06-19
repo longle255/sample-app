@@ -1,7 +1,7 @@
 <h1 align="center">Sample API</h1>
 
 <p align="center">
-  <b>Instantloan RESTful API Services with beautiful code written in TypeScript.</b></br>
+  <b>Sample RESTful API Services in TypeScript.</b></br>
 </p>
 
 <br />
