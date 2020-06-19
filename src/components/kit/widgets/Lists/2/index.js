@@ -7,7 +7,7 @@ const { TabPane } = Tabs
 const List2 = () => {
   return (
     <div>
-      <Tabs className={style.tabs} defaultActiveKey="1">
+      <Tabs className={`${style.tabs} kit-tabs-bordered`} defaultActiveKey="1">
         <TabPane tab="Alerts" key="1">
           <div className="text-gray-6">
             <ul className="list-unstyled">
