@@ -5,7 +5,7 @@ export const JobDefinitions = [TestJobDefinition, SendEmailJobDefinition, Transa
 export const JobNames = [SendEmailJobName, TestJobName, TransactionMonitorJobName];
 export const RecurringJobs = [
   ['1 hours', 'Test'],
-  ['1 minutes', 'TransactionMonitor'],
+  // ['1 minutes', 'TransactionMonitor'],
 ];
 export { TestJob } from './TestJob';
 

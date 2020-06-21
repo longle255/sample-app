@@ -124,6 +124,7 @@ export class IUser extends BaseSchema {
   @prop({
     unique: true,
     index: true,
+    sparse: true, // unique if not null
   })
   public serviceUserId: string; // id for social service
 

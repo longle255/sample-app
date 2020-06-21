@@ -114,4 +114,14 @@ export class UserController {
   ): Promise<DefaultResponseSchema> {
     return this.userService.sendInvitationEmail(user._id, body);
   }
+
+  @Get('/profile/referrals')
+  @Authorized('user')
+  public async getReferrals(@CurrentUser() user: DocumentType<IUser>, @QueryParams() params: any): Promise<Pagination<IUser>> {
+    return this.userService.getReferrals(user._id, {
+      limit: params.limit ? parseInt(params.limit, 10) : 10,
+      page: params.page ? parseInt(params.page, 10) : 0,
+      cond: params.cond ? params.cond : {},
+    });
+  }
 }

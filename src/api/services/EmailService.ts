@@ -161,7 +161,7 @@ export class EmailService extends BaseService<IEmail> {
   public queueSendingJob(mailOption: SendMailOptions, recipientVars?: any): Promise<void> {
     return new Promise((resolve, reject) => {
       let data;
-      if (env.isProduction) {
+      if (env.isProduction || !env.emailDebug) {
         data = {
           from: mailOption.from,
           to: mailOption.to,
