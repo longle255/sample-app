@@ -8,8 +8,7 @@ import nodemailer, { Transporter, SendMailOptions } from 'nodemailer';
 import sendgrid from 'nodemailer-sendgrid';
 import { JobService } from './JobService';
 import EmailTemplate from 'email-templates';
-import { IUser } from '../models/User';
-import { Email, IEmail } from '../models/Email';
+import { IUser, Email, IEmail } from '../models';
 import { DocumentType } from '@typegoose/typegoose';
 import { BaseService } from './BaseService';
 

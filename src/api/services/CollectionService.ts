@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { Service } from 'typedi';
 import { Logger } from '../../lib/logger';
 import { BaseService } from './BaseService';
-import { ICollection, Collection } from '../models/Collection';
+import { ICollection, Collection } from '../models';
 import { IUser } from '../models/User';
 import { DocumentType } from '@typegoose/typegoose';
 import { Like } from '../models/Like';

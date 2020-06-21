@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { Service } from 'typedi';
 import { Logger } from '../../lib/logger';
-import { IInvitation, Invitation } from '../models/Invitation';
+import { IInvitation, Invitation } from '../models';
 import { BaseService } from './BaseService';
 
 @Service()

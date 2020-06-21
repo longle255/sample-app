@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { Service } from 'typedi';
 import { DocumentType } from '@typegoose/typegoose';
 import { Logger } from '../../lib/logger';
-import { IUser, User } from '../models/User';
+import { IInvitation, IUser, User } from '../models';
 import { BaseService } from './BaseService';
 import { UserChangePasswordSchema } from '../controllers/request-schemas/UserChangePasswordSchema';
 import { DefaultResponseSchema } from '../controllers/response-schemas/DefaultResponseSchema';
@@ -13,7 +13,6 @@ import { UserConfirm2FASchema } from '../controllers/request-schemas/UserConfirm
 import { UserDisable2FASchema } from '../controllers/request-schemas/UserDisable2FASchema';
 import { UserSendInvitationEmailSchema } from '../controllers/request-schemas/UserSendInvitationEmailSchema';
 import { InvitationService } from './InvitationService';
-import { IInvitation } from '../models/Invitation';
 import { EmailService } from './EmailService';
 
 @Service()

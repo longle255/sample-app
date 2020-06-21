@@ -86,4 +86,7 @@ export const env = {
     secretKey: getOsEnv('RECAPTCHA_SECRET'),
     enabled: toBool(getOsEnv('RECAPTCHA_ENABLED')),
   },
+  cardanoConfig: {
+    graphqlUrl: getOsEnv('ADA_EXPLORER_GRAPHQL_URL'),
+  },
 };
