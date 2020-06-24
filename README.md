@@ -1,4 +1,4 @@
-### Clean UI Pro React Admin Template Preview ###
+### Clean UI Pro React (Create-React-App) Admin Template Preview ###
 https://react.cleanui.cloud
 
 ### Documentation ###
