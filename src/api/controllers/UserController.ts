@@ -34,7 +34,7 @@ export class UserController {
   @Authorized('admin')
   public findAll(@QueryParams() params: any): Promise<Pagination<IUser>> {
     return this.userService.paginate({
-      limit: params.limit ? parseInt(params.limit, 10) : 10,
+      pageSize: params.pageSize ? parseInt(params.pageSize, 10) : 10,
       page: params.page ? parseInt(params.page, 10) : 0,
       cond: params.cond ? params.cond : {},
     });
@@ -119,7 +119,7 @@ export class UserController {
   @Authorized('user')
   public async getReferrals(@CurrentUser() user: DocumentType<IUser>, @QueryParams() params: any): Promise<Pagination<IUser>> {
     return this.userService.getReferrals(user._id, {
-      limit: params.limit ? parseInt(params.limit, 10) : 10,
+      pageSize: params.pageSize ? parseInt(params.pageSize, 10) : 10,
       page: params.page ? parseInt(params.page, 10) : 0,
       cond: params.cond ? params.cond : {},
     });

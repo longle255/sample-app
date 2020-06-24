@@ -29,25 +29,25 @@ export abstract class BaseService<E extends BaseSchema> {
       { $sort: options.sort },
       {
         $facet: {
-          paging: [{ $count: 'total' }, { $addFields: { page: options.page, limit: options.limit } }],
-          results: [{ $skip: options.page * options.limit }, { $limit: options.limit }], // add projection here wish you re-shape the docs
+          paging: [{ $count: 'total' }, { $addFields: { page: options.page, limit: options.pageSize } }],
+          results: [{ $skip: options.page * options.pageSize }, { $limit: options.pageSize }], // add projection here wish you re-shape the docs
         },
       },
     ]);
     if (!ret.length) {
       return new Pagination<E>({
-        itemsCount: 0,
+        total: 0,
         pagesCount: 0,
         page: 0,
-        limit: options.limit,
+        pageSize: options.pageSize,
         results: [],
       });
     }
     return new Pagination<E>({
-      itemsCount: ret[0].paging[0].total,
-      pagesCount: Math.ceil(ret[0].paging[0].total / options.limit),
+      total: ret[0].paging[0].total,
+      pagesCount: Math.ceil(ret[0].paging[0].total / options.pageSize),
       page: ret[0].paging[0].page,
-      limit: options.limit,
+      pageSize: options.pageSize,
       results: ret[0].results.map(d => new this.model(d).toJSON()),
     });
   }

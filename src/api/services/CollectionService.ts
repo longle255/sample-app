@@ -23,17 +23,17 @@ export class CollectionService extends BaseService<ICollection> {
       { $sort: options.sort },
       {
         $facet: {
-          paging: [{ $count: 'total' }, { $addFields: { page: options.page, limit: options.limit } }],
-          results: [{ $skip: options.page * options.limit }, { $limit: options.limit }], // add projection here wish you re-shape the docs
+          paging: [{ $count: 'total' }, { $addFields: { page: options.page, limit: options.pageSize } }],
+          results: [{ $skip: options.page * options.pageSize }, { $limit: options.pageSize }], // add projection here wish you re-shape the docs
         },
       },
     ]);
     if (!ret.length) {
       return new Pagination<ICollection>({
-        itemsCount: 0,
+        total: 0,
         pagesCount: 0,
         page: 0,
-        limit: options.limit,
+        pageSize: options.pageSize,
         results: [],
       });
     }
@@ -42,10 +42,10 @@ export class CollectionService extends BaseService<ICollection> {
       new this.model(coll).reduce(liked.indexOf(coll._id.toHexString()) >= 0),
     );
     return new Pagination<ICollection>({
-      itemsCount: ret[0].paging[0].total,
-      pagesCount: Math.ceil(ret[0].paging[0].total / options.limit),
+      total: ret[0].paging[0].total,
+      pagesCount: Math.ceil(ret[0].paging[0].total / options.pageSize),
       page: ret[0].paging[0].page,
-      limit: options.limit,
+      pageSize: options.pageSize,
       results,
     });
   }
@@ -53,19 +53,19 @@ export class CollectionService extends BaseService<ICollection> {
   public async getLikes(user: DocumentType<IUser>, options: PaginationOptionsInterface): Promise<Pagination<ICollection>> {
     options = Object.assign({}, defaultOption, options);
     const total = await Like.count({ user, isActive: true });
-    const pageCount = Math.ceil(total / options.limit);
+    const pageCount = Math.ceil(total / options.pageSize);
     const page = options.page;
     const likes = await Like.find({ user, isActive: true })
-      .skip(options.page * options.limit)
-      .limit(options.limit)
+      .skip(options.page * options.pageSize)
+      .limit(options.pageSize)
       .populate('coll');
     const results: any = likes.map((like: any) => like.coll).map(coll => coll.reduce(true));
     return new Pagination<ICollection>({
       results,
-      itemsCount: total,
+      total,
       pagesCount: pageCount,
       page,
-      limit: options.limit,
+      pageSize: options.pageSize,
     });
   }
 

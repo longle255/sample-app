@@ -155,18 +155,18 @@ export class UserService extends BaseService<IUser> {
         return reject(new BadRequestError('User does not exist, not active, or 2FA is not enabled'));
       }
       const total = user.referrals.length;
-      const pageCount = Math.ceil(total / options.limit);
+      const pageCount = Math.ceil(total / options.pageSize);
       const page = options.page;
       const results = await User.find({ email: { $in: user.referrals }, isActive: true })
-        .skip(options.page * options.limit)
-        .limit(options.limit)
+        .skip(options.page * options.pageSize)
+        .limit(options.pageSize)
         .lean();
       return resolve(
         new Pagination<any>({
-          itemsCount: total,
+          total,
           pagesCount: pageCount,
           page,
-          limit: options.limit,
+          pageSize: options.pageSize,
           results: results.map((o: any) => {
             // o._id = o._id.toString();
             delete o.password;
