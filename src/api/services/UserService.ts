@@ -6,7 +6,7 @@ import { IInvitation, IUser, User } from '../models';
 import { BaseService } from './BaseService';
 import { DefaultResponseSchema } from '../controllers/response-schemas/DefaultResponseSchema';
 import { PaginationOptionsInterface, Pagination, defaultOption } from './Pagination';
-import { BadRequestError } from 'routing-controllers';
+import { BadRequestError, ForbiddenError } from 'routing-controllers';
 import { env } from '../../env';
 import { verify2FAToken, generate2FAToken, generateQR } from '../../utils/2FA';
 import { InvitationService } from './InvitationService';
@@ -54,6 +54,18 @@ export class UserService extends BaseService<IUser> {
       if (!user || !user.isActive) {
         return reject(new BadRequestError('User does not exist or is not active'));
       }
+
+      if (user.twoFAEnabled && !data.twoFAToken) {
+        return reject(new ForbiddenError('Missing two-factor authentication token'));
+      }
+
+      if (user.twoFAEnabled) {
+        const verify = verify2FAToken(data.twoFAToken, user.twoFASecret);
+        if (!verify) {
+          return reject(new ForbiddenError('Incorrect two-factor authentication token'));
+        }
+      }
+
       const passwordMatch: boolean = await user.comparePassword(data.oldPassword);
       if (!passwordMatch) {
         return reject(new BadRequestError('Invalid password'));

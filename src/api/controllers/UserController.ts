@@ -83,7 +83,7 @@ export class UserController {
     return this.userService.updateProfile(user._id, body);
   }
 
-  @Post('/profile/change-password')
+  @Put('/profile/change-password')
   @Authorized('user')
   public async changePassword(
     @CurrentUser() user: DocumentType<IUser>,
