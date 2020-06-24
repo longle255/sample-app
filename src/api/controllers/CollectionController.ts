@@ -27,7 +27,7 @@ export class CollectionController {
   public findAll(@QueryParams() params: any, @CurrentUser() user?: DocumentType<IUser>): Promise<Pagination<ICollection>> {
     return this.collectionService.getAll(user, {
       pageSize: params.pageSize ? parseInt(params.pageSize, 10) : 10,
-      page: params.page ? parseInt(params.page, 10) : 0,
+      pageNumber: params.pageNumber ? parseInt(params.pageNumber, 10) : 0,
       cond: params.cond ? params.cond : {},
     });
   }
@@ -44,7 +44,7 @@ export class CollectionController {
   public likes(@QueryParams() params: any, @CurrentUser() user?: DocumentType<IUser>): Promise<Pagination<ICollection>> {
     return this.collectionService.getLikes(user, {
       pageSize: params.pageSize ? parseInt(params.pageSize, 10) : 10,
-      page: params.page ? parseInt(params.page, 10) : 0,
+      pageNumber: params.pageNumber ? parseInt(params.pageNumber, 10) : 0,
       cond: params.cond ? params.cond : {},
     });
   }

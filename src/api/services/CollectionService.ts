@@ -23,8 +23,8 @@ export class CollectionService extends BaseService<ICollection> {
       { $sort: options.sort },
       {
         $facet: {
-          paging: [{ $count: 'total' }, { $addFields: { page: options.page, limit: options.pageSize } }],
-          results: [{ $skip: options.page * options.pageSize }, { $limit: options.pageSize }], // add projection here wish you re-shape the docs
+          paging: [{ $count: 'total' }, { $addFields: { page: options.pageNumber, limit: options.pageSize } }],
+          results: [{ $skip: options.pageNumber * options.pageSize }, { $limit: options.pageSize }], // add projection here wish you re-shape the docs
         },
       },
     ]);
@@ -32,7 +32,7 @@ export class CollectionService extends BaseService<ICollection> {
       return new Pagination<ICollection>({
         total: 0,
         pagesCount: 0,
-        page: 0,
+        pageNumber: 0,
         pageSize: options.pageSize,
         results: [],
       });
@@ -44,7 +44,7 @@ export class CollectionService extends BaseService<ICollection> {
     return new Pagination<ICollection>({
       total: ret[0].paging[0].total,
       pagesCount: Math.ceil(ret[0].paging[0].total / options.pageSize),
-      page: ret[0].paging[0].page,
+      pageNumber: ret[0].paging[0].page,
       pageSize: options.pageSize,
       results,
     });
@@ -54,9 +54,9 @@ export class CollectionService extends BaseService<ICollection> {
     options = Object.assign({}, defaultOption, options);
     const total = await Like.count({ user, isActive: true });
     const pageCount = Math.ceil(total / options.pageSize);
-    const page = options.page;
+    const pageNumber = options.pageNumber;
     const likes = await Like.find({ user, isActive: true })
-      .skip(options.page * options.pageSize)
+      .skip(options.pageNumber * options.pageSize)
       .limit(options.pageSize)
       .populate('coll');
     const results: any = likes.map((like: any) => like.coll).map(coll => coll.reduce(true));
@@ -64,7 +64,7 @@ export class CollectionService extends BaseService<ICollection> {
       results,
       total,
       pagesCount: pageCount,
-      page,
+      pageNumber,
       pageSize: options.pageSize,
     });
   }

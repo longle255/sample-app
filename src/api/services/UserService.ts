@@ -156,16 +156,16 @@ export class UserService extends BaseService<IUser> {
       }
       const total = user.referrals.length;
       const pageCount = Math.ceil(total / options.pageSize);
-      const page = options.page;
+      const pageNumber = options.pageNumber;
       const results = await User.find({ email: { $in: user.referrals }, isActive: true })
-        .skip(options.page * options.pageSize)
+        .skip(options.pageNumber * options.pageSize)
         .limit(options.pageSize)
         .lean();
       return resolve(
         new Pagination<any>({
           total,
           pagesCount: pageCount,
-          page,
+          pageNumber,
           pageSize: options.pageSize,
           results: results.map((o: any) => {
             // o._id = o._id.toString();

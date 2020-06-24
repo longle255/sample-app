@@ -29,8 +29,8 @@ export abstract class BaseService<E extends BaseSchema> {
       { $sort: options.sort },
       {
         $facet: {
-          paging: [{ $count: 'total' }, { $addFields: { page: options.page, limit: options.pageSize } }],
-          results: [{ $skip: options.page * options.pageSize }, { $limit: options.pageSize }], // add projection here wish you re-shape the docs
+          paging: [{ $count: 'total' }, { $addFields: { page: options.pageNumber, limit: options.pageSize } }],
+          results: [{ $skip: options.pageNumber * options.pageSize }, { $limit: options.pageSize }], // add projection here wish you re-shape the docs
         },
       },
     ]);
@@ -38,7 +38,7 @@ export abstract class BaseService<E extends BaseSchema> {
       return new Pagination<E>({
         total: 0,
         pagesCount: 0,
-        page: 0,
+        pageNumber: 0,
         pageSize: options.pageSize,
         results: [],
       });
@@ -46,7 +46,7 @@ export abstract class BaseService<E extends BaseSchema> {
     return new Pagination<E>({
       total: ret[0].paging[0].total,
       pagesCount: Math.ceil(ret[0].paging[0].total / options.pageSize),
-      page: ret[0].paging[0].page,
+      pageNumber: ret[0].paging[0].page,
       pageSize: options.pageSize,
       results: ret[0].results.map(d => new this.model(d).toJSON()),
     });
