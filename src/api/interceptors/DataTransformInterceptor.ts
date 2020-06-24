@@ -1,14 +1,21 @@
 import { Interceptor, InterceptorInterface, Action } from 'routing-controllers';
+import { Pagination } from '../services/Pagination';
+import { objectIdToString } from '../../utils/Utils';
 
 @Interceptor()
 export class DataTransformInterceptor implements InterceptorInterface {
-  public intercept(action: Action, result: any): any | Promise<any> {
-    if (result && result.toJSON) {
-      result = result.toJSON();
-      if (result._id && result._id.toString) {
-        result._id = result._id.toString();
-      }
+  public intercept(action: Action, response: any): any | Promise<any> {
+    if (!response) {
+      return response;
     }
-    return result;
+
+    if (response instanceof Pagination && response.results?.length) {
+      // transform pagination response
+      response.results = response.results.map(e => objectIdToString(e));
+    } else if (response.toJSON) {
+      // transform single document response
+      response = objectIdToString(response.toJSON());
+    }
+    return response;
   }
 }
