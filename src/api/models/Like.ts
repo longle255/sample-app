@@ -1,15 +1,15 @@
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
 import { prop, getModelForClass, modelOptions, Ref } from '@typegoose/typegoose';
-import { BaseSchema, defaultOptions } from './BaseModel';
+import { BaseSchema, defaultSchemaOptions, defaultOptions } from './BaseModel';
 import { IUser } from './User';
 import { ICollection } from './Collection';
 
-const schemaOptions = Object.assign({}, defaultOptions, {
+const schemaOptions = Object.assign({}, defaultSchemaOptions, {
   collection: 'likes',
 });
 
-@modelOptions({ existingMongoose: mongoose, schemaOptions })
+@modelOptions({ existingMongoose: mongoose, schemaOptions, options: defaultOptions })
 export class ILike extends BaseSchema {
   @prop({ ref: IUser, required: true })
   public user: Ref<IUser>;

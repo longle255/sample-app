@@ -2,7 +2,7 @@ import _ from 'lodash';
 import mongoose from 'mongoose';
 import { prop, getModelForClass, modelOptions, arrayProp } from '@typegoose/typegoose';
 
-import { defaultOptions } from './BaseModel';
+import { defaultSchemaOptions, defaultOptions } from './BaseModel';
 
 export enum Certificates {
   STAKE_DELEGATION = 'StakeDelegation',
@@ -25,9 +25,10 @@ export enum UtxoTypes {
 
 @modelOptions({
   existingMongoose: mongoose,
-  schemaOptions: Object.assign({}, defaultOptions, {
+  schemaOptions: Object.assign({}, defaultSchemaOptions, {
     collection: 'cardano-pools',
   }),
+  options: defaultOptions,
 })
 // tslint:disable-next-line: max-classes-per-file
 export class IPool {
@@ -47,7 +48,7 @@ export class IPool {
     } as IPool;
   }
 
-  @prop({ index: true, unique: true })
+  @prop({ type: String })
   public _id: string;
 
   @prop()
@@ -162,9 +163,10 @@ export class Certificate {
 
 @modelOptions({
   existingMongoose: mongoose,
-  schemaOptions: Object.assign({}, defaultOptions, {
+  schemaOptions: Object.assign({}, defaultSchemaOptions, {
     collection: 'cardano-transactions',
   }),
+  options: defaultOptions,
 })
 // tslint:disable-next-line: max-classes-per-file
 export class ITransaction {
@@ -179,7 +181,7 @@ export class ITransaction {
     } as ITransaction;
   }
 
-  @prop({ index: true, unique: true })
+  @prop({ type: String })
   public _id: string;
 
   @prop({ index: true, required: true })
@@ -204,9 +206,10 @@ export class ITransaction {
 
 @modelOptions({
   existingMongoose: mongoose,
-  schemaOptions: Object.assign({}, defaultOptions, {
+  schemaOptions: Object.assign({}, defaultSchemaOptions, {
     collection: 'cardano-addresses',
   }),
+  options: defaultOptions,
 })
 // tslint:disable-next-line: max-classes-per-file
 export class IAddress {
@@ -214,7 +217,7 @@ export class IAddress {
     return {} as IAddress;
   }
 
-  @prop({ index: true, unique: true })
+  @prop({ type: String })
   public _id: string;
 
   @arrayProp({ _id: false, items: String })
@@ -232,9 +235,10 @@ export class IAddress {
 
 @modelOptions({
   existingMongoose: mongoose,
-  schemaOptions: Object.assign({}, defaultOptions, {
+  schemaOptions: Object.assign({}, defaultSchemaOptions, {
     collection: 'cardano-blocks',
   }),
+  options: defaultOptions,
 })
 // tslint:disable-next-line: max-classes-per-file
 export class IBlock {
@@ -250,7 +254,7 @@ export class IBlock {
     } as IBlock;
   }
 
-  @prop({ index: true, unique: true })
+  @prop({ type: String })
   public _id: string;
 
   @prop()

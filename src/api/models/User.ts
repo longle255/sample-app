@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import mongoose from 'mongoose';
 import { DocumentType, pre, prop, Ref, getModelForClass, modelOptions, arrayProp } from '@typegoose/typegoose';
 
-import { BaseSchema, defaultOptions } from './BaseModel';
+import { BaseSchema, defaultSchemaOptions, defaultOptions } from './BaseModel';
 
 export enum Roles {
   ADMIN = 'admin',
@@ -14,7 +14,7 @@ export enum Roles {
 
 export const ROLES_ALL = ['admin', 'contributor', 'user', 'app'];
 
-const schemaOptions = Object.assign({}, defaultOptions, {
+const schemaOptions = Object.assign({}, defaultSchemaOptions, {
   collection: 'users',
 });
 
@@ -47,7 +47,7 @@ async function genUniqueReferralCode(): Promise<string> {
     return next(error);
   }
 })
-@modelOptions({ existingMongoose: mongoose, schemaOptions })
+@modelOptions({ existingMongoose: mongoose, schemaOptions, options: defaultOptions })
 export class IUser extends BaseSchema {
   public static hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, 10);
