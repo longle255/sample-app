@@ -9,9 +9,9 @@ export class DataTransformInterceptor implements InterceptorInterface {
       return response;
     }
 
-    if (response instanceof Pagination && response.results?.length) {
+    if (response instanceof Pagination && response.data?.length) {
       // transform pagination response
-      response.results = response.results.map(e => objectIdToString(e));
+      response.data = response.data.map(e => objectIdToString(e));
     } else if (response.toJSON) {
       // transform single document response
       response = objectIdToString(response.toJSON());

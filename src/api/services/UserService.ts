@@ -157,7 +157,7 @@ export class UserService extends BaseService<IUser> {
       const total = user.referrals.length;
       const pageCount = Math.ceil(total / options.pageSize);
       const pageNumber = options.pageNumber;
-      const results = await User.find({ email: { $in: user.referrals }, isActive: true })
+      const data = await User.find({ email: { $in: user.referrals }, isActive: true })
         .skip(options.pageNumber * options.pageSize)
         .limit(options.pageSize)
         .lean();
@@ -167,7 +167,7 @@ export class UserService extends BaseService<IUser> {
           pagesCount: pageCount,
           pageNumber,
           pageSize: options.pageSize,
-          results: results.map((o: any) => {
+          data: data.map((o: any) => {
             // o._id = o._id.toString();
             delete o.password;
             return o;

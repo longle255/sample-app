@@ -40,7 +40,7 @@ export abstract class BaseService<E extends BaseSchema> {
         pagesCount: 0,
         pageNumber: 0,
         pageSize: options.pageSize,
-        results: [],
+        data: [],
       });
     }
     return new Pagination<E>({
@@ -48,7 +48,7 @@ export abstract class BaseService<E extends BaseSchema> {
       pagesCount: Math.ceil(ret[0].paging[0].total / options.pageSize),
       pageNumber: ret[0].paging[0].page,
       pageSize: options.pageSize,
-      results: ret[0].results.map(d => new this.model(d).toJSON()),
+      data: ret[0].results.map(d => new this.model(d).toJSON()),
     });
   }
 

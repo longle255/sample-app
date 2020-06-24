@@ -3,19 +3,19 @@ export class Pagination<PaginationEntity> {
   public pagesCount: number;
   public pageSize: number;
   public pageNumber: number;
-  public results: PaginationEntity[];
+  public data: PaginationEntity[];
 
   constructor(paginationResults: PaginationResultInterface<PaginationEntity>) {
     this.total = paginationResults.total;
     this.pagesCount = paginationResults.pagesCount;
     this.pageNumber = paginationResults.pageNumber;
-    this.results = paginationResults.results;
+    this.data = paginationResults.data;
     this.pageSize = paginationResults.pageSize;
   }
 }
 
 export interface PaginationResultInterface<PaginationEntity> {
-  results: PaginationEntity[];
+  data: PaginationEntity[];
   total: number;
   pagesCount: number;
   pageNumber: number;
