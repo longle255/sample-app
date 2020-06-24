@@ -137,6 +137,18 @@ export class IUser extends BaseSchema {
   @prop()
   public twoFASecret: string;
 
+  @prop()
+  public phone: string;
+
+  @prop()
+  public country: string;
+
+  @prop()
+  public city: string;
+
+  @prop()
+  public address: string;
+
   @prop({ default: false })
   public twoFAEnabled: boolean;
 

@@ -30,7 +30,6 @@ export enum UtxoTypes {
   }),
   options: defaultOptions,
 })
-// tslint:disable-next-line: max-classes-per-file
 export class IPool {
   public static fromGraphql(data: any): IPool {
     return {
@@ -102,7 +101,6 @@ export class Utxo {
   public type: string;
 }
 
-// tslint:disable-next-line: max-classes-per-file
 export class Certificate {
   public static fromGraphql(data: any): Certificate {
     const ret: Certificate = {
@@ -168,7 +166,6 @@ export class Certificate {
   }),
   options: defaultOptions,
 })
-// tslint:disable-next-line: max-classes-per-file
 export class ITransaction {
   public static fromGraphql(data: any): ITransaction {
     return {
@@ -211,7 +208,6 @@ export class ITransaction {
   }),
   options: defaultOptions,
 })
-// tslint:disable-next-line: max-classes-per-file
 export class IAddress {
   public static fromGraphql(data: any): IAddress {
     return {} as IAddress;
@@ -240,7 +236,6 @@ export class IAddress {
   }),
   options: defaultOptions,
 })
-// tslint:disable-next-line: max-classes-per-file
 export class IBlock {
   public static fromGraphql(data: any): IBlock {
     return {

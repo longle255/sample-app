@@ -1,5 +1,12 @@
-export { RegisterRequestSchema } from './RegisterRequestSchema';
-export { LoginRequestSchema } from './LoginRequestSchema';
+export { BaseRequestSchema } from './BaseRequestSchema';
 export { ConfirmEmailRequestSchema } from './ConfirmEmailRequestSchema';
 export { EmailRequestSchema } from './EmailRequestSchema';
+export { LoginRequestSchema } from './LoginRequestSchema';
+export { RegisterRequestSchema } from './RegisterRequestSchema';
 export { ResetPasswordRequestSchema } from './ResetPasswordRequestSchema';
+export { UserChangePasswordSchema } from './UserChangePasswordSchema';
+export { UserConfirm2FASchema } from './UserConfirm2FASchema';
+export { UserUpdateProfileSchema } from './UserUpdateProfileSchema';
+export { UserDisable2FASchema } from './UserDisable2FASchema';
+export { UserSendInvitationEmailSchema } from './UserSendInvitationEmailSchema';
+export { SocialAuthRequestSchema } from './SocialAuthRequestSchema';

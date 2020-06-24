@@ -155,9 +155,11 @@ export class AuthService {
         return reject(new ForbiddenError('Missing two-factor authentication token'));
       }
 
-      const verify = verify2FAToken(credential.twoFAToken, user.twoFASecret);
-      if (!verify) {
-        return reject(new ForbiddenError('Incorrect two-factor authentication token'));
+      if (user.twoFAEnabled) {
+        const verify = verify2FAToken(credential.twoFAToken, user.twoFASecret);
+        if (!verify) {
+          return reject(new ForbiddenError('Incorrect two-factor authentication token'));
+        }
       }
 
       const pwMatched = await user.comparePassword(credential.password);

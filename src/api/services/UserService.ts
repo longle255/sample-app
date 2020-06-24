@@ -4,17 +4,20 @@ import { DocumentType } from '@typegoose/typegoose';
 import { Logger } from '../../lib/logger';
 import { IInvitation, IUser, User } from '../models';
 import { BaseService } from './BaseService';
-import { UserChangePasswordSchema } from '../controllers/request-schemas/UserChangePasswordSchema';
 import { DefaultResponseSchema } from '../controllers/response-schemas/DefaultResponseSchema';
 import { PaginationOptionsInterface, Pagination, defaultOption } from './Pagination';
 import { BadRequestError } from 'routing-controllers';
 import { env } from '../../env';
 import { verify2FAToken, generate2FAToken, generateQR } from '../../utils/2FA';
-import { UserConfirm2FASchema } from '../controllers/request-schemas/UserConfirm2FASchema';
-import { UserDisable2FASchema } from '../controllers/request-schemas/UserDisable2FASchema';
-import { UserSendInvitationEmailSchema } from '../controllers/request-schemas/UserSendInvitationEmailSchema';
 import { InvitationService } from './InvitationService';
 import { EmailService } from './EmailService';
+import {
+  UserChangePasswordSchema,
+  UserConfirm2FASchema,
+  UserDisable2FASchema,
+  UserUpdateProfileSchema,
+  UserSendInvitationEmailSchema,
+} from '../controllers/request-schemas';
 
 @Service()
 export class UserService extends BaseService<IUser> {
@@ -59,6 +62,16 @@ export class UserService extends BaseService<IUser> {
       await user.save();
       // await this.update({ _id: id }, { $set: { password: data.password } });
       return resolve(new DefaultResponseSchema(true, `Password has been changed successfully`));
+    });
+  }
+
+  public async updateProfile(id: any, data: UserUpdateProfileSchema): Promise<DocumentType<IUser>> {
+    this.log.debug('Update profile of user %s', id);
+    return new Promise<DocumentType<IUser>>(async (resolve, reject) => {
+      const user = await this.update(id, {
+        $set: data,
+      });
+      return resolve(user);
     });
   }
 

@@ -8,7 +8,6 @@ import {
   Param,
   Post,
   Put,
-  Req,
   QueryParams,
   CurrentUser,
   HttpCode,
@@ -20,11 +19,14 @@ import { UserService } from '../services/UserService';
 import { DocumentType } from '@typegoose/typegoose';
 import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 import { Pagination } from '../services/Pagination';
-import { UserChangePasswordSchema } from './request-schemas/UserChangePasswordSchema';
 import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
-import { UserConfirm2FASchema } from './request-schemas/UserConfirm2FASchema';
-import { UserDisable2FASchema } from './request-schemas/UserDisable2FASchema';
-import { UserSendInvitationEmailSchema } from './request-schemas/UserSendInvitationEmailSchema';
+import {
+  UserChangePasswordSchema,
+  UserConfirm2FASchema,
+  UserDisable2FASchema,
+  UserUpdateProfileSchema,
+  UserSendInvitationEmailSchema,
+} from './request-schemas';
 
 @JsonController('/users')
 export class UserController {
@@ -68,8 +70,17 @@ export class UserController {
 
   @Get('/profile')
   @Authorized('user')
-  public async findMe(@Req() req: any, @CurrentUser() user?: DocumentType<IUser>): Promise<DocumentType<IUser>> {
+  public async findMe(@CurrentUser() user?: DocumentType<IUser>): Promise<DocumentType<IUser>> {
     return this.userService.findOne({ _id: user._id });
+  }
+
+  @Put('/profile/update')
+  @Authorized('user')
+  public async updateProfile(
+    @CurrentUser() user: DocumentType<IUser>,
+    @Body({ validate: { whitelist: true, forbidNonWhitelisted: true } }) body: UserUpdateProfileSchema,
+  ): Promise<DocumentType<IUser>> {
+    return this.userService.updateProfile(user._id, body);
   }
 
   @Post('/profile/change-password')
