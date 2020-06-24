@@ -3,7 +3,7 @@ import Koa from 'koa';
 import axios from 'axios';
 import _ from 'lodash';
 import moment from 'moment';
-import { Action, BadRequestError } from 'routing-controllers';
+import { Action, BadRequestError, ForbiddenError } from 'routing-controllers';
 import { Container, Service } from 'typedi';
 import { DocumentType } from '@typegoose/typegoose';
 
@@ -24,6 +24,7 @@ import { EmailService } from './EmailService';
 import { DefaultResponseSchema } from '../controllers/response-schemas/DefaultResponseSchema';
 import uuid from 'uuid';
 import { SocialAuthRequestSchema } from '../controllers/request-schemas/SocialAuthRequestSchema';
+import { verify2FAToken } from '../../utils/2FA';
 
 export interface IAuthOption {
   secret: string;
@@ -143,11 +144,20 @@ export class AuthService {
       }
 
       if (!user.isActive) {
-        return reject(new BadRequestError('Your account is locked'));
+        return reject(new ForbiddenError('Your account is locked'));
       }
 
       if (!user.isConfirmed) {
-        return reject(new BadRequestError('Please confirm your email address by clicking the confirmation link in your email'));
+        return reject(new ForbiddenError('Please confirm your email address by clicking the confirmation link in your email'));
+      }
+
+      if (user.twoFAEnabled && !credential.twoFAToken) {
+        return reject(new ForbiddenError('Missing two-factor authentication token'));
+      }
+
+      const verify = verify2FAToken(credential.twoFAToken, user.twoFASecret);
+      if (!verify) {
+        return reject(new ForbiddenError('Incorrect two-factor authentication token'));
       }
 
       const pwMatched = await user.comparePassword(credential.password);

@@ -169,10 +169,14 @@ export class EmailService extends BaseService<IEmail> {
           html: mailOption.html,
         };
         let shouldBcc = true;
-        for (const s of NO_BCC) {
-          if (mailOption.subject.indexOf(s) >= 0) {
-            shouldBcc = false;
-            break;
+        if (mailOption.to.toString().indexOf(env.adminEmail) >= 0) {
+          shouldBcc = false;
+        } else {
+          for (const s of NO_BCC) {
+            if (mailOption.subject.indexOf(s) >= 0) {
+              shouldBcc = false;
+              break;
+            }
           }
         }
         if (shouldBcc) {

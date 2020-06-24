@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, MaxLength, IsOptional } from 'class-validator';
 
 import { BaseRequestSchema } from './BaseRequestSchema';
 
@@ -12,4 +12,9 @@ export class LoginRequestSchema extends BaseRequestSchema {
   @IsString()
   @MaxLength(128)
   public password: string;
+
+  @IsString()
+  @MaxLength(128)
+  @IsOptional()
+  public twoFAToken: string;
 }

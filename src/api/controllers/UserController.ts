@@ -81,13 +81,13 @@ export class UserController {
     return this.userService.changePasswordWithVerification(user._id, body);
   }
 
-  @Post('/profile/enable-2fa')
+  @Put('/profile/enable-2fa')
   @Authorized('user')
   public async enable2FA(@CurrentUser() user: DocumentType<IUser>): Promise<any> {
     return this.userService.enable2FA(user._id);
   }
 
-  @Post('/profile/confirm-2fa')
+  @Put('/profile/confirm-2fa')
   @Authorized('user')
   public async confirm2FA(
     @CurrentUser() user: DocumentType<IUser>,
@@ -96,7 +96,7 @@ export class UserController {
     return this.userService.confirm2FA(user._id, body);
   }
 
-  @Post('/profile/disable-2fa')
+  @Put('/profile/disable-2fa')
   @Authorized('user')
   public async disable2FA(
     @CurrentUser() user: DocumentType<IUser>,
