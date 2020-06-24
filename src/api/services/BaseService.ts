@@ -36,16 +36,18 @@ export abstract class BaseService<E extends BaseSchema> {
     ]);
     if (!ret.length) {
       return new Pagination<E>({
-        results: [],
-        items_count: 0,
-        pages_count: 0,
+        itemsCount: 0,
+        pagesCount: 0,
         page: 0,
+        limit: options.limit,
+        results: [],
       });
     }
     return new Pagination<E>({
-      items_count: ret[0].paging[0].total,
-      pages_count: Math.ceil(ret[0].paging[0].total / options.limit),
+      itemsCount: ret[0].paging[0].total,
+      pagesCount: Math.ceil(ret[0].paging[0].total / options.limit),
       page: ret[0].paging[0].page,
+      limit: options.limit,
       results: ret[0].results.map(d => new this.model(d).toJSON()),
     });
   }

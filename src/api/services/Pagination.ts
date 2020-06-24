@@ -1,22 +1,25 @@
 export class Pagination<PaginationEntity> {
-  public items_count: number;
-  public pages_count: number;
+  public itemsCount: number;
+  public pagesCount: number;
+  public limit: number;
   public page: number;
   public results: PaginationEntity[];
 
   constructor(paginationResults: PaginationResultInterface<PaginationEntity>) {
-    this.items_count = paginationResults.items_count;
-    this.pages_count = paginationResults.pages_count;
+    this.itemsCount = paginationResults.itemsCount;
+    this.pagesCount = paginationResults.pagesCount;
     this.page = paginationResults.page;
     this.results = paginationResults.results;
+    this.limit = paginationResults.limit;
   }
 }
 
 export interface PaginationResultInterface<PaginationEntity> {
   results: PaginationEntity[];
-  items_count: number;
-  pages_count: number;
+  itemsCount: number;
+  pagesCount: number;
   page: number;
+  limit: number;
   next?: string;
   previous?: string;
 }

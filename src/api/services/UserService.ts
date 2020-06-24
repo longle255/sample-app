@@ -163,14 +163,15 @@ export class UserService extends BaseService<IUser> {
         .lean();
       return resolve(
         new Pagination<any>({
+          itemsCount: total,
+          pagesCount: pageCount,
+          page,
+          limit: options.limit,
           results: results.map((o: any) => {
             // o._id = o._id.toString();
             delete o.password;
             return o;
           }),
-          items_count: total,
-          pages_count: pageCount,
-          page,
         }),
       );
     });

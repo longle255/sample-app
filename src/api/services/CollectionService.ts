@@ -30,10 +30,11 @@ export class CollectionService extends BaseService<ICollection> {
     ]);
     if (!ret.length) {
       return new Pagination<ICollection>({
-        results: [],
-        items_count: 0,
-        pages_count: 0,
+        itemsCount: 0,
+        pagesCount: 0,
         page: 0,
+        limit: options.limit,
+        results: [],
       });
     }
     const liked = (await Like.find({ user, isActive: true })).map((like: any) => like.coll._id.toString());
@@ -41,9 +42,10 @@ export class CollectionService extends BaseService<ICollection> {
       new this.model(coll).reduce(liked.indexOf(coll._id.toHexString()) >= 0),
     );
     return new Pagination<ICollection>({
-      items_count: ret[0].paging[0].total,
-      pages_count: Math.ceil(ret[0].paging[0].total / options.limit),
+      itemsCount: ret[0].paging[0].total,
+      pagesCount: Math.ceil(ret[0].paging[0].total / options.limit),
       page: ret[0].paging[0].page,
+      limit: options.limit,
       results,
     });
   }
@@ -60,9 +62,10 @@ export class CollectionService extends BaseService<ICollection> {
     const results: any = likes.map((like: any) => like.coll).map(coll => coll.reduce(true));
     return new Pagination<ICollection>({
       results,
-      items_count: total,
-      pages_count: pageCount,
+      itemsCount: total,
+      pagesCount: pageCount,
       page,
+      limit: options.limit,
     });
   }
 
