@@ -112,7 +112,7 @@ module.exports = {
         hiddenFromHelp: true,
       },
       public: {
-        script: copy('./src/public/*', './dist/public'),
+        script: copy('./src/public/*', './dist'),
         hiddenFromHelp: true,
       },
       tmp: {
