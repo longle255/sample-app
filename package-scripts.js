@@ -104,7 +104,7 @@ module.exports = {
      */
     copy: {
       default: {
-        script: series(`nps copy.swagger`, `nps copy.public`),
+        script: series(`nps copy.swagger`, `nps copy.public`, `nps copy.templates`),
         hiddenFromHelp: true,
       },
       swagger: {
@@ -112,11 +112,15 @@ module.exports = {
         hiddenFromHelp: true,
       },
       public: {
-        script: copy('./src/public/*', './dist'),
+        script: copy('./src/public/*', './dist/public'),
         hiddenFromHelp: true,
       },
       tmp: {
         script: copyDir('./.tmp/src', './dist'),
+        hiddenFromHelp: true,
+      },
+      templates: {
+        script: copyDir('./src/templates/*', './dist/templates'),
         hiddenFromHelp: true,
       },
     },

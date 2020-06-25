@@ -11,7 +11,7 @@ export enum TokenTypes {
   EMAIL_CONFIRMATION = 'email-confirmation',
 }
 const schemaOptions = Object.assign({}, defaultSchemaOptions, {
-  collection: 'emails',
+  collection: 'identity-tokens',
 });
 
 @modelOptions({ existingMongoose: mongoose, schemaOptions, options: defaultOptions })
