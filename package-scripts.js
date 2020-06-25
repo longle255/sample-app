@@ -120,7 +120,7 @@ module.exports = {
         hiddenFromHelp: true,
       },
       templates: {
-        script: copyDir('./src/templates/*', './dist/templates'),
+        script: copyDir('./src/templates', './dist/templates'),
         hiddenFromHelp: true,
       },
     },
