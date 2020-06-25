@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { Service } from 'typedi';
 import { Logger } from '../../lib/logger';
 import { BaseService } from './BaseService';
-import { ICollection, Collection } from '../models/Collection';
+import { ICollection, Collection } from '../models';
 import { IUser } from '../models/User';
 import { DocumentType } from '@typegoose/typegoose';
 import { Like } from '../models/Like';
@@ -23,46 +23,49 @@ export class CollectionService extends BaseService<ICollection> {
       { $sort: options.sort },
       {
         $facet: {
-          paging: [{ $count: 'total' }, { $addFields: { page: options.page, limit: options.limit } }],
-          results: [{ $skip: options.page * options.limit }, { $limit: options.limit }], // add projection here wish you re-shape the docs
+          paging: [{ $count: 'total' }, { $addFields: { page: options.pageNumber, limit: options.pageSize } }],
+          results: [{ $skip: options.pageNumber * options.pageSize }, { $limit: options.pageSize }], // add projection here wish you re-shape the docs
         },
       },
     ]);
     if (!ret.length) {
       return new Pagination<ICollection>({
-        results: [],
-        items_count: 0,
-        pages_count: 0,
-        page: 0,
+        total: 0,
+        pagesCount: 0,
+        pageNumber: 0,
+        pageSize: options.pageSize,
+        data: [],
       });
     }
     const liked = (await Like.find({ user, isActive: true })).map((like: any) => like.coll._id.toString());
-    const results = ret[0].results.map((coll: DocumentType<ICollection>) =>
+    const data = ret[0].results.map((coll: DocumentType<ICollection>) =>
       new this.model(coll).reduce(liked.indexOf(coll._id.toHexString()) >= 0),
     );
     return new Pagination<ICollection>({
-      items_count: ret[0].paging[0].total,
-      pages_count: Math.ceil(ret[0].paging[0].total / options.limit),
-      page: ret[0].paging[0].page,
-      results,
+      total: ret[0].paging[0].total,
+      pagesCount: Math.ceil(ret[0].paging[0].total / options.pageSize),
+      pageNumber: ret[0].paging[0].page,
+      pageSize: options.pageSize,
+      data,
     });
   }
 
   public async getLikes(user: DocumentType<IUser>, options: PaginationOptionsInterface): Promise<Pagination<ICollection>> {
     options = Object.assign({}, defaultOption, options);
     const total = await Like.count({ user, isActive: true });
-    const pageCount = Math.ceil(total / options.limit);
-    const page = options.page;
+    const pageCount = Math.ceil(total / options.pageSize);
+    const pageNumber = options.pageNumber;
     const likes = await Like.find({ user, isActive: true })
-      .skip(options.page * options.limit)
-      .limit(options.limit)
+      .skip(options.pageNumber * options.pageSize)
+      .limit(options.pageSize)
       .populate('coll');
-    const results: any = likes.map((like: any) => like.coll).map(coll => coll.reduce(true));
+    const data: any = likes.map((like: any) => like.coll).map(coll => coll.reduce(true));
     return new Pagination<ICollection>({
-      results,
-      items_count: total,
-      pages_count: pageCount,
-      page,
+      data,
+      total,
+      pagesCount: pageCount,
+      pageNumber,
+      pageSize: options.pageSize,
     });
   }
 

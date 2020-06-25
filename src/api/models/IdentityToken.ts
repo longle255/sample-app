@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import mongoose from 'mongoose';
 import { prop, Ref, getModelForClass, modelOptions } from '@typegoose/typegoose';
 
-import { BaseSchema, defaultOptions } from './BaseModel';
+import { BaseSchema, defaultSchemaOptions, defaultOptions } from './BaseModel';
 import { IUser } from './User';
 
 export enum TokenTypes {
@@ -10,11 +10,11 @@ export enum TokenTypes {
   REFRESH_TOKEN = 'refresh-token',
   EMAIL_CONFIRMATION = 'email-confirmation',
 }
-const schemaOptions = Object.assign({}, defaultOptions, {
+const schemaOptions = Object.assign({}, defaultSchemaOptions, {
   collection: 'emails',
 });
 
-@modelOptions({ existingMongoose: mongoose, schemaOptions })
+@modelOptions({ existingMongoose: mongoose, schemaOptions, options: defaultOptions })
 export class IIdentityToken extends BaseSchema {
   @prop({ required: true, index: true })
   public token: string;

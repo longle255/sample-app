@@ -8,8 +8,7 @@ import nodemailer, { Transporter, SendMailOptions } from 'nodemailer';
 import sendgrid from 'nodemailer-sendgrid';
 import { JobService } from './JobService';
 import EmailTemplate from 'email-templates';
-import { IUser } from '../models/User';
-import { Email, IEmail } from '../models/Email';
+import { IUser, Email, IEmail } from '../models';
 import { DocumentType } from '@typegoose/typegoose';
 import { BaseService } from './BaseService';
 
@@ -162,7 +161,7 @@ export class EmailService extends BaseService<IEmail> {
   public queueSendingJob(mailOption: SendMailOptions, recipientVars?: any): Promise<void> {
     return new Promise((resolve, reject) => {
       let data;
-      if (env.isProduction) {
+      if (env.isProduction || !env.emailDebug) {
         data = {
           from: mailOption.from,
           to: mailOption.to,
@@ -170,10 +169,14 @@ export class EmailService extends BaseService<IEmail> {
           html: mailOption.html,
         };
         let shouldBcc = true;
-        for (const s of NO_BCC) {
-          if (mailOption.subject.indexOf(s) >= 0) {
-            shouldBcc = false;
-            break;
+        if (mailOption.to.toString().indexOf(env.adminEmail) >= 0) {
+          shouldBcc = false;
+        } else {
+          for (const s of NO_BCC) {
+            if (mailOption.subject.indexOf(s) >= 0) {
+              shouldBcc = false;
+              break;
+            }
           }
         }
         if (shouldBcc) {

@@ -2,14 +2,14 @@ import * as _ from 'lodash';
 import mongoose from 'mongoose';
 import { prop, Ref, getModelForClass, modelOptions } from '@typegoose/typegoose';
 
-import { BaseSchema, defaultOptions } from './BaseModel';
+import { BaseSchema, defaultSchemaOptions, defaultOptions } from './BaseModel';
 import { IUser } from './User';
 
-const schemaOptions = Object.assign({}, defaultOptions, {
+const schemaOptions = Object.assign({}, defaultSchemaOptions, {
   collection: 'request-logs',
 });
 
-@modelOptions({ existingMongoose: mongoose, schemaOptions })
+@modelOptions({ existingMongoose: mongoose, schemaOptions, options: defaultOptions })
 export class IRequestLog extends BaseSchema {
   @prop({ ref: IUser, required: false })
   public user: Ref<IUser>;

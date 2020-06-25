@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
 import { DocumentType, prop, getModelForClass, modelOptions, arrayProp } from '@typegoose/typegoose';
-import { BaseSchema, defaultOptions } from './BaseModel';
+import { BaseSchema, defaultSchemaOptions, defaultOptions } from './BaseModel';
 import { env } from '../../env';
 
 export class Photo {
@@ -21,7 +21,7 @@ export class Photo {
     this.direction = direction;
   }
 }
-const schemaOptions = Object.assign({}, defaultOptions, {
+const schemaOptions = Object.assign({}, defaultSchemaOptions, {
   collection: 'collections',
   toJSON: {
     virtuals: true,
@@ -40,7 +40,7 @@ const schemaOptions = Object.assign({}, defaultOptions, {
 });
 
 // tslint:disable-next-line: max-classes-per-file
-@modelOptions({ existingMongoose: mongoose, schemaOptions })
+@modelOptions({ existingMongoose: mongoose, schemaOptions, options: defaultOptions })
 export class ICollection extends BaseSchema {
   @prop({ required: true })
   public name: string;

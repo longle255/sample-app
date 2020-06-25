@@ -14,7 +14,17 @@ import { swaggerLoader } from './loaders/swaggerLoader';
 import { winstonLoader } from './loaders/winstonLoader';
 
 // tslint:disable-next-line:no-var-requires
-Promise = require('bluebird');
+import { Promise } from 'bluebird';
+
+Promise.config({
+  longStackTraces: true,
+  cancellation: true,
+  // monitoring: true,
+  warnings: true,
+});
+
+global.Promise = Promise as any;
+
 /**
  * KOA TYPESCRIPT BOILERPLATE
  * ----------------------------------------

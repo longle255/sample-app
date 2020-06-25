@@ -5,6 +5,7 @@ import { env } from '../env';
 
 function createConnection(connectionOptions: any): Promise<mongoose.Connection> {
   return new Promise((resolve, reject) => {
+    mongoose.set('debug', connectionOptions.debug);
     mongoose
       .connect(connectionOptions.uri, {
         useUnifiedTopology: true,
@@ -17,7 +18,6 @@ function createConnection(connectionOptions: any): Promise<mongoose.Connection> 
         console.log(`DB Connection Error: ${err.message}`);
         return reject(err);
       });
-    mongoose.set('debug', connectionOptions.debug);
   });
 }
 

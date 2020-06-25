@@ -4,23 +4,24 @@ import { validate, ValidatorOptions } from 'class-validator';
 import { ValidateResult } from '../../validators/ValidateResult';
 
 const validatorOptions: ValidatorOptions = {
-    skipMissingProperties: false,
-    validationError: {
-        target: false,
-    },
+  skipMissingProperties: false,
+  validationError: {
+    target: false,
+  },
+  forbidUnknownValues: true,
 };
 
 export abstract class BaseRequestSchema {
-    protected data?: any;
+  protected data?: any;
 
-    public async validate?(): Promise<ValidateResult> {
-        const errors = await validate(this, validatorOptions);
-        const isValid = errors.length === 0;
-        const result = new ValidateResult(isValid, errors);
-        return result;
-    }
+  public async validate?(): Promise<ValidateResult> {
+    const errors = await validate(this, validatorOptions);
+    const isValid = errors.length === 0;
+    const result = new ValidateResult(isValid, errors);
+    return result;
+  }
 
-    public toObject?(): any {
-        return classToPlain(this, { excludePrefixes: ['_'] });
-    }
+  public toObject?(): any {
+    return classToPlain(this, { excludePrefixes: ['_'] });
+  }
 }

@@ -1,6 +1,7 @@
-import { Types } from 'mongoose';
-import { prop } from '@typegoose/typegoose';
+import { Types, SchemaOptions } from 'mongoose';
+import { prop, Severity } from '@typegoose/typegoose';
 import { Base } from '@typegoose/typegoose/lib/defaultClasses';
+import { ICustomOptions } from '@typegoose/typegoose/lib/types';
 
 export abstract class BaseSchema extends Base {
   @prop({ required: true, default: true })
@@ -13,7 +14,7 @@ export abstract class BaseSchema extends Base {
   public updatedBy: Types.ObjectId;
 }
 
-export const defaultOptions = {
+export const defaultSchemaOptions: SchemaOptions = {
   validateBeforeSave: false,
   versionKey: '_v',
   timestamps: {
@@ -34,4 +35,8 @@ export const defaultOptions = {
   },
   usePushEach: true,
   autoIndex: true,
+};
+
+export const defaultOptions: ICustomOptions = {
+  allowMixed: Severity.ALLOW,
 };

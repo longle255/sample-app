@@ -8,7 +8,6 @@ import {
   Param,
   Post,
   Put,
-  Req,
   QueryParams,
   CurrentUser,
   HttpCode,
@@ -20,11 +19,14 @@ import { UserService } from '../services/UserService';
 import { DocumentType } from '@typegoose/typegoose';
 import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 import { Pagination } from '../services/Pagination';
-import { UserChangePasswordSchema } from './request-schemas/UserChangePasswordSchema';
 import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
-import { UserConfirm2FASchema } from './request-schemas/UserConfirm2FASchema';
-import { UserDisable2FASchema } from './request-schemas/UserDisable2FASchema';
-import { UserSendInvitationEmailSchema } from './request-schemas/UserSendInvitationEmailSchema';
+import {
+  UserChangePasswordSchema,
+  UserConfirm2FASchema,
+  UserDisable2FASchema,
+  UserUpdateProfileSchema,
+  UserSendInvitationEmailSchema,
+} from './request-schemas';
 
 @JsonController('/users')
 export class UserController {
@@ -34,8 +36,8 @@ export class UserController {
   @Authorized('admin')
   public findAll(@QueryParams() params: any): Promise<Pagination<IUser>> {
     return this.userService.paginate({
-      limit: params.limit ? parseInt(params.limit, 10) : 10,
-      page: params.page ? parseInt(params.page, 10) : 0,
+      pageSize: params.pageSize ? parseInt(params.pageSize, 10) : 10,
+      pageNumber: params.pageNumber ? parseInt(params.pageNumber, 10) : 0,
       cond: params.cond ? params.cond : {},
     });
   }
@@ -68,11 +70,20 @@ export class UserController {
 
   @Get('/profile')
   @Authorized('user')
-  public async findMe(@Req() req: any, @CurrentUser() user?: DocumentType<IUser>): Promise<DocumentType<IUser>> {
+  public async findMe(@CurrentUser() user?: DocumentType<IUser>): Promise<DocumentType<IUser>> {
     return this.userService.findOne({ _id: user._id });
   }
 
-  @Post('/profile/change-password')
+  @Put('/profile/update')
+  @Authorized('user')
+  public async updateProfile(
+    @CurrentUser() user: DocumentType<IUser>,
+    @Body({ validate: { whitelist: true, forbidNonWhitelisted: true } }) body: UserUpdateProfileSchema,
+  ): Promise<DocumentType<IUser>> {
+    return this.userService.updateProfile(user._id, body);
+  }
+
+  @Put('/profile/change-password')
   @Authorized('user')
   public async changePassword(
     @CurrentUser() user: DocumentType<IUser>,
@@ -81,13 +92,13 @@ export class UserController {
     return this.userService.changePasswordWithVerification(user._id, body);
   }
 
-  @Post('/profile/enable-2fa')
+  @Put('/profile/enable-2fa')
   @Authorized('user')
   public async enable2FA(@CurrentUser() user: DocumentType<IUser>): Promise<any> {
     return this.userService.enable2FA(user._id);
   }
 
-  @Post('/profile/confirm-2fa')
+  @Put('/profile/confirm-2fa')
   @Authorized('user')
   public async confirm2FA(
     @CurrentUser() user: DocumentType<IUser>,
@@ -96,7 +107,7 @@ export class UserController {
     return this.userService.confirm2FA(user._id, body);
   }
 
-  @Post('/profile/disable-2fa')
+  @Put('/profile/disable-2fa')
   @Authorized('user')
   public async disable2FA(
     @CurrentUser() user: DocumentType<IUser>,
@@ -113,5 +124,15 @@ export class UserController {
     @Body({ validate: true }) body: UserSendInvitationEmailSchema,
   ): Promise<DefaultResponseSchema> {
     return this.userService.sendInvitationEmail(user._id, body);
+  }
+
+  @Get('/profile/referrals')
+  @Authorized('user')
+  public async getReferrals(@CurrentUser() user: DocumentType<IUser>, @QueryParams() params: any): Promise<Pagination<IUser>> {
+    return this.userService.getReferrals(user._id, {
+      pageSize: params.pageSize ? parseInt(params.pageSize, 10) : 10,
+      pageNumber: params.pageNumber ? parseInt(params.pageNumber, 10) : 0,
+      cond: params.cond ? params.cond : {},
+    });
   }
 }

@@ -1,22 +1,25 @@
 export class Pagination<PaginationEntity> {
-  public items_count: number;
-  public pages_count: number;
-  public page: number;
-  public results: PaginationEntity[];
+  public total: number;
+  public pagesCount: number;
+  public pageSize: number;
+  public pageNumber: number;
+  public data: PaginationEntity[];
 
   constructor(paginationResults: PaginationResultInterface<PaginationEntity>) {
-    this.items_count = paginationResults.items_count;
-    this.pages_count = paginationResults.pages_count;
-    this.page = paginationResults.page;
-    this.results = paginationResults.results;
+    this.total = paginationResults.total;
+    this.pagesCount = paginationResults.pagesCount;
+    this.pageNumber = paginationResults.pageNumber;
+    this.data = paginationResults.data;
+    this.pageSize = paginationResults.pageSize;
   }
 }
 
 export interface PaginationResultInterface<PaginationEntity> {
-  results: PaginationEntity[];
-  items_count: number;
-  pages_count: number;
-  page: number;
+  data: PaginationEntity[];
+  total: number;
+  pagesCount: number;
+  pageNumber: number;
+  pageSize: number;
   next?: string;
   previous?: string;
 }
@@ -24,15 +27,15 @@ export interface PaginationResultInterface<PaginationEntity> {
 export interface PaginationOptionsInterface {
   cond?: object;
   sort?: object;
-  limit?: number;
-  page?: number;
+  pageSize?: number;
+  pageNumber?: number;
 }
 
 export const defaultOption: PaginationOptionsInterface = {
   cond: {
     isActive: true,
   },
-  limit: 20,
-  page: 0,
+  pageSize: 20,
+  pageNumber: 0,
   sort: { createdAt: -1 },
 };

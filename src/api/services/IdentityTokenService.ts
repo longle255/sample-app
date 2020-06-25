@@ -5,8 +5,7 @@ import { Service } from 'typedi';
 import { DocumentType } from '@typegoose/typegoose';
 import { Logger } from '../../lib/logger';
 import { env } from '../../env';
-import { IdentityToken, IIdentityToken, TokenTypes } from '../models/IdentityToken';
-import { IUser } from '../models/User';
+import { IUser, IdentityToken, IIdentityToken, TokenTypes } from '../models';
 import { BaseService } from './BaseService';
 
 @Service()

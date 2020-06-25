@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsString, MaxLength, IsOptional } from 'class-validator';
 
 import { BaseRequestSchema } from './BaseRequestSchema';
 
@@ -17,4 +17,9 @@ export class UserChangePasswordSchema extends BaseRequestSchema {
   @IsString()
   @MaxLength(128)
   public passwordConfirm: string;
+
+  @IsString()
+  @MaxLength(128)
+  @IsOptional()
+  public twoFAToken: string;
 }
