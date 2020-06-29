@@ -43,9 +43,6 @@ export default class Agenda extends _Agenda {
         // <https://github.com/agenda/agenda/pull/501>
         this._isReady = true;
 
-        // output debug info
-        this.config.logger.info('agenda ready');
-
         // we cancel jobs here so we don't create duplicates
         // on every time the server restarts, or mongoose reconnects
         // (even though `agenda.every` uses single, just to be safe)
@@ -77,6 +74,9 @@ export default class Agenda extends _Agenda {
           });
 
           await _Agenda.prototype.start.call(this);
+          // output debug info
+          this.config.logger.info('agenda ready');
+          resolve();
         } catch (err) {
           this.config.logger.error(err);
           try {

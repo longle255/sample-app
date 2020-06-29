@@ -1,20 +1,21 @@
 import Agenda from '../lib/agenda';
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
 import { Logger } from '../lib/logger';
-import { env } from '../env';
 import { JobDefinitions, RecurringJobs } from '../jobs';
 import { Container } from 'typedi';
+import { env } from '../env';
 
-export const agenda: Agenda = new Agenda(env.agenda);
+export const agenda: Agenda = new Agenda();
 
-export const agendaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
+export const agendaLoader: MicroframeworkLoader = async (settings: MicroframeworkSettings | undefined) => {
   const log = new Logger(__filename);
   agenda.configure({
     logger: log,
     agendaJobDefinitions: JobDefinitions,
     agendaRecurringJobs: RecurringJobs,
   });
-  agenda.start();
+  agenda.mongo(settings.getData('mongoose').connection.db, env.agenda.collectionName);
+  await agenda.start();
   settings.setData('agenda', agenda);
   Container.set('agenda', agenda);
   async function graceful(): Promise<void> {

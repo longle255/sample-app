@@ -73,18 +73,6 @@ export const env = {
     name: getHostname(),
     collectionName: getOsEnv('AGENDA_COLLECTION_NAME'),
     maxConcurrency: toNumber(getOsEnv('AGENDA_MAX_CONCURRENCY')),
-    db: {
-      address: getOsEnv('MONGO_URI'),
-      collection: getOsEnv('AGENDA_COLLECTION_NAME'),
-      // hack for agenda DB deprecated options warning
-      options: {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        autoReconnect: undefined,
-        reconnectTries: undefined,
-        reconnectInterval: undefined,
-      },
-    },
   },
   recaptcha: {
     siteKey: getOsEnv('RECAPTCHA_KEY'),

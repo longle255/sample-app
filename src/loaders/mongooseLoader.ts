@@ -32,8 +32,7 @@ export const mongooseLoader: MicroframeworkLoader = async (settings: Microframew
 
   const connection = await createConnection(connectionOptions);
   if (settings) {
-    settings.setData('connection', connection);
+    settings.setData('mongoose', mongoose);
     settings.onShutdown(() => connection.close());
   }
-  settings.setData('mongoose', mongoose);
 };
