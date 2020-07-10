@@ -1,0 +1,11 @@
+{
+  "javascript.preferences.quoteStyle": "single",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.tabSize": 2,
+  "html.format.extraLiners": "/html",
+  "html.format.wrapLineLength": 140,
+  "eslint.nodePath": "./node_modules/eslint",
+  "eslint.enable": true,
+  "prettier.printWidth": 140,
+  "javascript.validate.enable": false
+}

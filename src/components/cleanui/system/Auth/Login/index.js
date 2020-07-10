@@ -1,27 +1,27 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Input, Button, Radio, Form, Tooltip } from 'antd'
-import { Link } from 'react-router-dom'
-import style from '../style.module.scss'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Input, Button, Radio, Form, Tooltip } from 'antd';
+import { Link } from 'react-router-dom';
+import style from '../style.module.scss';
 
-const mapStateToProps = ({ user, settings, dispatch }) => ({
+const mapStateToProps = ({ auth, settings, dispatch }) => ({
   dispatch,
-  user,
+  auth,
   authProvider: settings.authProvider,
   logo: settings.logo,
-})
+});
 
-const Login = ({ dispatch, user, authProvider, logo }) => {
+const Login = ({ dispatch, auth, authProvider, logo }) => {
   const onFinish = values => {
     dispatch({
       type: 'user/LOGIN',
       payload: values,
-    })
-  }
+    });
+  };
 
   const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo)
-  }
+    console.log('Failed:', errorInfo);
+  };
 
   const changeAuthProvider = value => {
     dispatch({
@@ -30,8 +30,8 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
         setting: 'authProvider',
         value,
       },
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -93,7 +93,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
             size="large"
             className="text-center w-100"
             htmlType="submit"
-            loading={user.loading}
+            loading={auth.isLoading}
           >
             <strong>Sign in</strong>
           </Button>
@@ -109,7 +109,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps)(Login);
