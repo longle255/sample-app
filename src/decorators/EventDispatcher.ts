@@ -1,8 +1,9 @@
 import { EventDispatcher as EventDispatcherClass } from 'event-dispatch';
 import { Container } from 'typedi';
 
-export function EventDispatcher(): any {
-  return (object: any, propertyName: string, index?: number): any => {
+export function EventDispatcher(): ParameterDecorator {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  return (object: object, propertyName: any, index?: number): any => {
     const eventDispatcher = new EventDispatcherClass();
     Container.registerHandler({ object, propertyName, index, value: () => eventDispatcher });
   };

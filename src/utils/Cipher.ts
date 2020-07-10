@@ -1,6 +1,6 @@
+import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
 
 exports.encryptWithPublicKey = (toEncrypt: string): string => {
   const absolutePath = path.resolve(__dirname, '..', 'assets/keys/wallet.pub');

@@ -1,8 +1,8 @@
-import * as _ from 'lodash';
 import mongoose from 'mongoose';
-import { prop, Ref, getModelForClass, modelOptions } from '@typegoose/typegoose';
 
-import { BaseSchema, defaultSchemaOptions, defaultOptions } from './BaseModel';
+import { getModelForClass, modelOptions, prop, Ref } from '@typegoose/typegoose';
+
+import { BaseSchema, defaultOptions, defaultSchemaOptions } from './BaseModel';
 import { IUser } from './User';
 
 const schemaOptions = Object.assign({}, defaultSchemaOptions, {

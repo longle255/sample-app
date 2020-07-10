@@ -1,6 +1,7 @@
 import { Context } from 'koa';
 import { KoaMiddlewareInterface, Middleware } from 'routing-controllers';
-import { RequestLog, IRequestLog } from '../models/RequestLog';
+
+import { IRequestLog, RequestLog } from '../models/RequestLog';
 
 const sanitizedKeys = (object: any) => {
   if (!object) {

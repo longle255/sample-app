@@ -1,7 +1,8 @@
-import reCAPTCHA from 'recaptcha2';
 import { Context } from 'koa';
-import { env } from '../../env';
+import reCAPTCHA from 'recaptcha2';
 import { KoaMiddlewareInterface, Middleware } from 'routing-controllers';
+
+import { env } from '../../env';
 import { InvalidCaptchaError } from '../errors/InvalidCaptchaError';
 
 const recaptchaObj = new reCAPTCHA({
@@ -25,7 +26,6 @@ export class CaptchaMiddleware implements KoaMiddlewareInterface {
       return next();
     } catch (err) {
       const errors = recaptchaObj.translateErrors(err);
-      // console.log(errors);
       if (!ctx.request.body.captcha) {
         throw new InvalidCaptchaError('Please solve the captcha', errors);
       }

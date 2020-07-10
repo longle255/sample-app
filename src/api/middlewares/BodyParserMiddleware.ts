@@ -9,7 +9,7 @@ export class BodyParserMiddleware implements KoaMiddlewareInterface {
       enableTypes: ['json', 'form'],
       formLimit: '10mb',
       jsonLimit: '10mb',
-      onerror: (err: Error, ctx1: Context): void => {
+      onerror: (_err: Error, ctx1: Context): void => {
         ctx1.throw('body parse error', 422);
       },
     })(ctx, next);

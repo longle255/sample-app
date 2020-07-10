@@ -9,4 +9,7 @@ export const events = {
   [User.modelName]: {
     created: 'onUserCreate',
   },
+  socket: {
+    connected: 'onSocketConnected',
+  },
 };

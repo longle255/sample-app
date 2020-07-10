@@ -29,6 +29,7 @@ export interface PaginationOptionsInterface {
   sort?: object;
   pageSize?: number;
   pageNumber?: number;
+  q?: string; // query term
 }
 
 export const defaultOption: PaginationOptionsInterface = {

@@ -1,10 +1,17 @@
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
 import { createKoaServer } from 'routing-controllers';
-import { currentUserChecker, authorizationChecker } from '../api/services/AuthService';
+import Container from 'typedi';
 
+import { authorizationChecker, currentUserChecker } from '../api/services/AuthService';
 import { env } from '../env';
+import { Logger } from '../lib/logger';
+import Socket from '../lib/websocket';
 
 export const koaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
+  const log = new Logger(__filename);
+  const now = Date.now();
+
+  log.debug('Loading koa started');
   if (settings) {
     /**
      * We create a new koa server instance.
@@ -43,10 +50,19 @@ export const koaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings
       currentUserChecker: currentUserChecker(),
     });
 
+    // const socket = new Socket();
+    const socket = Container.get(Socket);
+    socket.attach(koaApp);
+
     // Run application to listen on given port
     const server = koaApp.listen(env.app.port);
     // Here we can set the data for other loaders
     settings.setData('koa_server', server);
     settings.setData('koa_app', koaApp);
+
+    Container.set('koa_server', server);
+    Container.set('koa_app', koaApp);
+    Container.set('socket', socket);
   }
+  log.verbose('Koa loaded, took %d ms', Date.now() - now);
 };

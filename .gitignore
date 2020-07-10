@@ -45,3 +45,5 @@ src/public/cdn
 
 .DS_Store
 notes
+test.js
+decode.js

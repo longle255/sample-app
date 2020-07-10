@@ -1,4 +1,5 @@
-import { IsNotEmpty, Length, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsNotEmpty, IsString, Length, MaxLength, MinLength } from 'class-validator';
+
 import { BaseRequestSchema } from './BaseRequestSchema';
 
 export class ResetPasswordRequestSchema extends BaseRequestSchema {

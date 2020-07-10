@@ -1,5 +1,5 @@
-import { join } from 'path';
 import os from 'os';
+import { join } from 'path';
 
 export function getHostname(): string {
   return `${os.hostname()}-${process.pid}`;
@@ -35,7 +35,7 @@ export function getOsPaths(key: string): string[] {
   return getPaths(getOsEnvArray(key));
 }
 
-export function getOsEnvArray(key: string, delimiter: string = ','): string[] {
+export function getOsEnvArray(key: string, delimiter = ','): string[] {
   return (process.env[key] && process.env[key].split(delimiter)) || [];
 }
 

@@ -1,11 +1,11 @@
-import { TransactionMonitorJobDefinition, TransactionMonitorJobName } from './TransactionMonitorJob';
-import { TestJobDefinition, TestJobName } from './TestJob';
 import { SendEmailJobDefinition, SendEmailJobName } from './SendEmailJob';
-export const JobDefinitions = [TestJobDefinition, SendEmailJobDefinition, TransactionMonitorJobDefinition];
-export const JobNames = [SendEmailJobName, TestJobName, TransactionMonitorJobName];
+import { TestJobDefinition, TestJobName } from './TestJob';
+
+export const JobDefinitions = [TestJobDefinition, SendEmailJobDefinition];
+export const JobNames = [SendEmailJobName, TestJobName];
 export const RecurringJobs = [
-  ['1 hours', 'Test'],
-  // ['1 minutes', 'TransactionMonitor'],
+	// ['10 seconds', 'Test'],
+	['30 seconds', 'BlockMonitor'],
 ];
 export { TestJob } from './TestJob';
 

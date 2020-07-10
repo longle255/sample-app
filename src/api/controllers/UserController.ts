@@ -1,32 +1,34 @@
 import {
   Authorized,
   Body,
+  CurrentUser,
   Delete,
   Get,
+  HttpCode,
   JsonController,
   OnUndefined,
   Param,
   Post,
   Put,
   QueryParams,
-  CurrentUser,
-  HttpCode,
   UseBefore,
 } from 'routing-controllers';
+
+import { DocumentType } from '@typegoose/typegoose';
+
+import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 import { CaptchaMiddleware } from '../middlewares/CaptchaMiddleware';
 import { IUser } from '../models/User';
-import { UserService } from '../services/UserService';
-import { DocumentType } from '@typegoose/typegoose';
-import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 import { Pagination } from '../services/Pagination';
-import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
+import { UserService } from '../services/UserService';
 import {
   UserChangePasswordSchema,
   UserConfirm2FASchema,
   UserDisable2FASchema,
-  UserUpdateProfileSchema,
   UserSendInvitationEmailSchema,
+  UserUpdateProfileSchema,
 } from './request-schemas';
+import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
 
 @JsonController('/users')
 export class UserController {

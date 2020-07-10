@@ -14,7 +14,7 @@
             "runtimeArgs": [
                 "--nolazy",
                 "-r",
-                "ts-node/register"
+                "ts-node/register/transpile-only"
             ],
             "sourceMaps": true,
             "env": {

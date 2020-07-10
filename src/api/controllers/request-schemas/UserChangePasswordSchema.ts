@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MaxLength, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
 import { BaseRequestSchema } from './BaseRequestSchema';
 

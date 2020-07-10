@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsEmail } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
+
 import { BaseRequestSchema } from './BaseRequestSchema';
 
 export class EmailRequestSchema extends BaseRequestSchema {

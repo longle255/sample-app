@@ -2,6 +2,7 @@ import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3t
 import mongoose from 'mongoose';
 
 import { env } from '../env';
+import { Logger } from '../lib/logger';
 
 function createConnection(connectionOptions: any): Promise<mongoose.Connection> {
   return new Promise((resolve, reject) => {
@@ -22,6 +23,9 @@ function createConnection(connectionOptions: any): Promise<mongoose.Connection> 
 }
 
 export const mongooseLoader: MicroframeworkLoader = async (settings: MicroframeworkSettings | undefined) => {
+  const log = new Logger(__filename);
+  const now = Date.now();
+  log.debug('Loading mongoose started');
   const connectionOptions = Object.assign(
     {},
     {
@@ -35,4 +39,5 @@ export const mongooseLoader: MicroframeworkLoader = async (settings: Microframew
     settings.setData('mongoose', mongoose);
     settings.onShutdown(() => connection.close());
   }
+  log.verbose('Mongoose loaded, took %d ms', Date.now() - now);
 };

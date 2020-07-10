@@ -1,17 +1,17 @@
 import { Body, JsonController, Post, UseBefore } from 'routing-controllers';
 
-import { AuthService, ITokenInfo } from '../services/AuthService';
 import { CaptchaMiddleware } from '../middlewares/CaptchaMiddleware';
+import { IUser } from '../models/User';
+import { AuthService, ITokenInfo } from '../services/AuthService';
 import {
-  LoginRequestSchema,
-  RegisterRequestSchema,
   ConfirmEmailRequestSchema,
   EmailRequestSchema,
+  LoginRequestSchema,
+  RegisterRequestSchema,
   ResetPasswordRequestSchema,
 } from './request-schemas';
-import { IUser } from '../models/User';
-import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
 import { SocialAuthRequestSchema } from './request-schemas/SocialAuthRequestSchema';
+import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
 
 @JsonController('/auth')
 export class UserController {
@@ -25,7 +25,6 @@ export class UserController {
 
   @Post('/social')
   public async socialAuth(@Body() data: SocialAuthRequestSchema): Promise<ITokenInfo> {
-    console.log(data);
     return this.authService.socialAuth(data);
   }
 

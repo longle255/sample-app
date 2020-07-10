@@ -1,6 +1,9 @@
 import * as path from 'path';
+import { format, inspect } from 'util';
 import * as winston from 'winston';
-import { format } from 'util';
+
+import { env } from '../../env';
+
 /**
  * core.Log
  * ------------------------------------------------
@@ -12,6 +15,14 @@ import { format } from 'util';
  * this in the start up process in the core/index.ts file.
  */
 
+const LOG_LEVEL = {
+  silly: 6,
+  debug: 5,
+  verbose: 4,
+  info: 3,
+  warn: 2,
+  error: 1,
+};
 export class Logger {
   public static DEFAULT_SCOPE = 'app';
 
@@ -53,13 +64,20 @@ export class Logger {
     this.log('warn', message, args);
   }
 
-  public error(message: string, ...args: any[]): void {
+  public error(message: any, ...args: any[]): void {
     this.log('error', message, args);
   }
 
-  private log(level: string, message: string, args: any[]): void {
+  private log(level: string, message: any, args: any[]): void {
+    if (LOG_LEVEL[level] > LOG_LEVEL[env.log.level]) {
+      return;
+    }
+    // tslint:disable-next-line:no-null-keyword
+    const formattedArgs = args.map(a => (typeof a === 'object' ? inspect(a, { depth: null }) : a));
     if (winston) {
-      winston[level](`${this.formatScope()} ${args.length ? format(message, args) : message}`);
+      winston[level](
+        `${this.formatScope()} ${args.length ? format(message, formattedArgs) : message instanceof Error ? message.stack : message}`,
+      );
     }
   }
 

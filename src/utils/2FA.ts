@@ -1,6 +1,5 @@
-import { totp, generateSecret } from 'speakeasy';
-import { GeneratedSecret } from 'speakeasy';
 import QRCode from 'qrcode';
+import { GeneratedSecret, generateSecret, totp } from 'speakeasy';
 
 export function verify2FAToken(token: string, secret: string): boolean {
   return totp.verify({ secret, token, encoding: 'base32' });

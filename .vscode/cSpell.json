@@ -18,5 +18,8 @@
     // For example "hte" should be "the"
     "flagWords": [
         "hte"
+    ],
+    "enableFiletypes": [
+        "shellscript"
     ]
 }

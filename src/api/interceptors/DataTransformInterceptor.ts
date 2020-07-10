@@ -1,10 +1,11 @@
-import { Interceptor, InterceptorInterface, Action } from 'routing-controllers';
-import { Pagination } from '../services/Pagination';
+import { Action, Interceptor, InterceptorInterface } from 'routing-controllers';
+
 import { objectIdToString } from '../../utils/Utils';
+import { Pagination } from '../services/Pagination';
 
 @Interceptor()
 export class DataTransformInterceptor implements InterceptorInterface {
-  public intercept(action: Action, response: any): any | Promise<any> {
+  public intercept(_action: Action, response: any): any | Promise<any> {
     if (!response) {
       return response;
     }

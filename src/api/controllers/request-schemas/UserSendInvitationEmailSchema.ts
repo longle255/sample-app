@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEmail, IsArray } from 'class-validator';
+import { IsArray, IsEmail, IsNotEmpty } from 'class-validator';
 
 import { BaseRequestSchema } from './BaseRequestSchema';
 

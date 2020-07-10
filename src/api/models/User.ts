@@ -1,9 +1,10 @@
 import bcrypt from 'bcryptjs';
 import * as _ from 'lodash';
 import mongoose from 'mongoose';
-import { DocumentType, pre, prop, Ref, getModelForClass, modelOptions, arrayProp } from '@typegoose/typegoose';
 
-import { BaseSchema, defaultSchemaOptions, defaultOptions } from './BaseModel';
+import { arrayProp, DocumentType, getModelForClass, modelOptions, pre, prop, Ref } from '@typegoose/typegoose';
+
+import { BaseSchema, defaultOptions, defaultSchemaOptions } from './BaseModel';
 
 export enum Roles {
   ADMIN = 'admin',

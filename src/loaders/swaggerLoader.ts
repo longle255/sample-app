@@ -7,6 +7,7 @@ import { env } from '../env';
 export const swaggerLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
   if (settings && env.swagger.enabled) {
     const koaApp = settings.getData('koa_app');
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const swaggerFile = require(path.join(__dirname, '..', env.swagger.file));
 
     // Add npm infos to the swagger doc
