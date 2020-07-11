@@ -125,7 +125,7 @@ export const isSearchFileTemplates = (data: any) => {
   return action(AppActions.IS_SEARCH_FILE_TEMPLATES, data);
 };
 
-export const loginSuccedAction = (result, fromUrl) => (dispatch, getState) => {
+export const loginSucceedAction = (result, fromUrl) => (dispatch, getState) => {
   StorageService.setToken(result.access_token);
   StorageService.setData(APP_USER_KEY, result.profile);
 

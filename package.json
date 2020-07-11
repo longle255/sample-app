@@ -1,6 +1,6 @@
 {
-  "name": "cleanui-admin-template-react-cra",
-  "version": "3.2.1",
+  "name": "sample-app",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "react-app-rewired start",
@@ -71,6 +71,7 @@
     "react-intl": "^4.5.1",
     "react-jvectormap": "^0.0.1",
     "react-perfect-scrollbar": "^1.5.8",
+    "react-recaptcha": "^2.3.10",
     "react-redux": "^7.2.0",
     "react-redux-spinner": "^3.0.0",
     "react-resizable": "^1.10.1",
@@ -122,6 +123,7 @@
     ],
     "development": [
       "last 1 chrome version",
+      "last 1 edge version",
       "last 1 firefox version",
       "last 1 safari version"
     ]

@@ -1,3 +1,4 @@
+import { siteConfig } from 'config.js';
 import { SettingActions } from './actions';
 import { AuthActions } from '../auth/actions';
 
@@ -5,7 +6,7 @@ const initialState = {
   server: null,
 
   // app settings
-  logo: 'Clean UI Pro',
+  logo: siteConfig.siteName,
   locale: 'en-US',
   isSidebarOpen: false,
   isSupportChatOpen: false,
@@ -16,7 +17,7 @@ const initialState = {
   routerAnimation: 'slide-fadein-up', // none, slide-fadein-up, slide-fadein-right, fadein, zoom-fadein
   menuColor: 'white', // white, dark, gray
   theme: 'default', // default, dark
-  authPagesColor: 'white', // white, gray, image
+  authPagesColor: 'image', // white, gray, image
   primaryColor: '#4b7cf3',
   leftMenuWidth: 256,
   isMenuUnfixed: false,

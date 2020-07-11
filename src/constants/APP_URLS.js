@@ -1,5 +1,5 @@
 export const APP_URLS = {
-  login: '/auth/login',
+  signIn: '/auth/signin',
   signUp: '/auth/signup',
   forgotPassword: '/auth/forgot-password',
   resetPassword: '/auth/reset-password',

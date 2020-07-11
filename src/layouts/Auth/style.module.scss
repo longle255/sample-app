@@ -1,105 +1,96 @@
 @import 'components/mixins.scss';
 
-.container {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  flex-shrink: 0;
-
-  &.white {
-    background: $white;
-  }
-
-  &.gray {
-    background: $gray-1;
-  }
-}
-
-.containerInner {
-  max-width: 32rem;
-  width: 100%;
-}
-
-.topbar {
-  height: rem(64);
-  border-bottom: 1px solid $border;
-  background: $white;
-  margin-bottom: 7vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: rem(28);
-  width: 100%;
-
-  &.topbarGray {
-    background: $gray-1;
-  }
-}
-
-.logoContainer {
-  height: 64px;
-  display: flex;
-  align-items: center;
-  padding: 0 rem(28) 0 0;
-
-  .logo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: rem(24);
-    white-space: nowrap;
+.auth {
+  &__fullscreen {
+    position: fixed;
+    z-index: 20000;
+    top: 0;
+    left: 0;
+    height: 100%;
     width: 100%;
-  }
-  .name {
-    font-size: rem(20);
-    font-weight: 700;
-    color: $black;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 90%;
-    display: block;
-  }
-  .descr {
-    margin-left: rem(13);
-    padding-left: rem(13);
-    height: rem(38);
-    line-height: rem(38);
-    border-left: 1px solid $gray-2;
-    font-size: rem(14);
-  }
-}
+    overflow-y: auto;
+    overflow-x: hidden;
 
-.footerNav {
-  li {
-    margin: rem(5) rem(14);
-  }
-}
-
-// dark theme
-[data-kit-theme='dark'] {
-  .container {
-    background: transparent !important;
+    background-size: cover;
+    background-position: center center;
+    background-image: url('/images/bg-auth.jpg');
   }
 
-  .topbar {
-    background: $dark-gray-5 !important;
-    border-bottom: 1px solid $dark-gray-4 !important;
-  }
+  &__block {
+    padding: rem(80) rem(40) rem(80);
+    margin-bottom: rem(40);
+    margin-top: rem(40);
+    width: 100%;
+    align-self: center;
+    position: relative;
+    z-index: 2;
 
-  .logoContainer {
-    .name {
-      color: $white;
+    &__pb200 {
+      padding-bottom: rem(200) !important;
     }
-    .descr {
-      color: $dark-gray-2;
-      border-left: 1px solid $dark-gray-4;
+
+    @media (max-width: $md-max-width) {
+      padding: rem(40) rem(20) rem(80);
+    }
+
+    &__inner {
+      min-width: rem(300);
+      max-width: rem(382);
+
+      margin: 0 auto;
+      padding: rem(30) rem(40) rem(20);
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: $white;
+      position: relative;
+      box-shadow: 0 10px 40px -20px rgba(0, 0, 50, 0.2), 0 10px 80px -20px rgba(0, 0, 50, 0.1);
+    }
+    &__form {
+      position: relative;
+      z-index: 2;
+    }
+    &__promo {
+      padding: 0 0 rem(60);
+      max-width: rem(800);
+      font-size: rem(16);
+      line-height: rem(26);
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    &__sidebar {
+      display: none;
+    }
+  }
+  &__footer {
+    align-self: flex-end;
+    width: 100%;
+    color: $text;
+    padding: rem(40);
+
+    @media (max-width: $md-max-width) {
+      padding: rem(40) rem(20) rem(40);
+    }
+
+    ul {
+      margin-bottom: 0;
+      li {
+        margin-right: rem(20);
+        text-transform: uppercase;
+        &:last-child {
+          margin-right: 0;
+        }
+        a {
+          color: $text;
+          opacity: 0.7;
+          line-height: 1.4;
+          display: inline-block;
+          margin-right: rem(10);
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 }

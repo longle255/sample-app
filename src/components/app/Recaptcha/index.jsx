@@ -1,0 +1,23 @@
+import React, { useState } from 'react';
+import GRecaptcha from 'react-recaptcha';
+import { RecaptchaConfig } from '../../../config';
+
+export default function Recaptcha(props) {
+  const { onChange, forwardRef } = props;
+  const [recaptchaInstance, setRecaptchaInstance] = useState(null);
+
+  const verifyCallback = result => {
+    onChange(result); // notify the form after verified
+  };
+
+  return (
+    <GRecaptcha
+      render="explicit"
+      ref={forwardRef}
+      verifyCallback={verifyCallback}
+      sitekey={RecaptchaConfig.key}
+      size="normal"
+      {...props}
+    />
+  );
+}

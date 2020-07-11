@@ -10,12 +10,13 @@ const appConfig = {
 const siteConfig = {
   siteName: process.env.SITE_NAME,
   siteIcon: 'ion-android-cloud-circle',
-  footerText: 'Copyright 2018 © stakings.club. All rights reserved.',
+  footerText: 'Copyright 2020 © stakings.club. All rights reserved.',
   appVersion: process.env.APP_VERSION,
   buildDate: process.env.BUILD_DATE,
   buildNumber: process.env.BUILD_NUMBER || '',
   coinsImages: process.env.STATIC_HOST_COINS_IMAGES,
   discordLink: process.env.DISCORD_LINK,
+  tosLink: process.env.TOS_LINK,
 };
 
 const RecaptchaConfig = {
