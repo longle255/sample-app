@@ -1,16 +1,42 @@
-import React, { useRef } from 'react';
-import { Input, Button, Form } from 'antd';
+import React, { useState, useRef } from 'react';
+import { Input, Form, Alert } from 'antd';
 import { Link } from 'react-router-dom';
 import { APP_URLS } from 'constants/APP_URLS';
 import Recaptcha from 'components/app/Recaptcha';
-import style from 'components/styles/custom.module.scss';
 import classNames from 'classnames';
+import { authService } from 'services/AuthService';
+import style from 'components/styles/custom.module.scss';
 
 const ForgotPassword = () => {
   const recaptchaInstance = useRef(null);
 
-  const onFinish = values => {
-    console.log('Success:', values);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+
+  const resetCaptcha = () => {
+    return recaptchaInstance && recaptchaInstance.current && recaptchaInstance.current.reset();
+  };
+
+  const onFinish = async values => {
+    if (isProcessing) {
+      return;
+    }
+
+    setIsProcessing(true);
+
+    try {
+      const result = await authService.forgotPassword(values);
+      const { message } = result;
+      setIsProcessing(false);
+      setErrorMessage(null);
+      setSuccessMessage(message);
+    } catch (errorInfo) {
+      const errorMessage = errorInfo.message;
+      setErrorMessage(errorMessage);
+      setIsProcessing(false);
+    }
+    resetCaptcha();
   };
 
   const onFinishFailed = errorInfo => {
@@ -32,6 +58,7 @@ const ForgotPassword = () => {
       >
         <Form.Item
           name="email"
+          label="Please provide the email address that you used when you signed up for your account. We will send you an email that will allow you to reset your password."
           rules={[
             { type: 'email', message: 'The input is not a valid e-mail address' },
             { required: true, message: 'Please input your e-mail address' },
@@ -44,8 +71,11 @@ const ForgotPassword = () => {
           <Recaptcha forwardRef={recaptchaInstance} />
         </Form.Item>
 
+        {successMessage && <Alert message={successMessage} type="success" />}
+        {errorMessage && <Alert message={errorMessage} type="error" />}
+
         <Form.Item>
-          <button type="button" className={classNames(style.btn, 'width-150', 'height-40')}>
+          <button type="submit" className={classNames(style.btn, 'width-150', 'height-40')}>
             Send Request
           </button>
         </Form.Item>

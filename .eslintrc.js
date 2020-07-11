@@ -25,7 +25,7 @@ module.exports = {
     'import/no-unresolved': 0,
     'no-console': 0,
     'react/no-multi-comp': 0,
-    'no-unused-vars': 0,
+    'no-unused-vars': 1,
     'no-void': 0,
     'import/prefer-default-export': 0,
     'class-methods-use-this': 0,

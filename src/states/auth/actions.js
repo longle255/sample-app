@@ -1,12 +1,16 @@
 import { push } from 'connected-react-router';
 import { action } from 'typesafe-actions';
 import throttle from 'lodash-es/throttle';
-import { profileService } from 'services';
-import { APP_URLS } from 'services/../constants/APP_URLS';
+import { authService, StorageService, profileService } from 'services';
+import { APP_URLS, PUBLIC_URLS } from 'services/../constants/APP_URLS';
+import { setFromUrlAction } from 'states/app';
 
 export const AuthActions = {
   LOGIN: '[AUTH] LOGIN',
   LOGOUT: '[AUTH] LOGOUT',
+
+  SET_USER_STATE: '[AUTH] SET_USER_STATE',
+  SET_HIDE_LOGIN: '[AUTH] SET_HIDE_LOGIN',
 
   GET_USER_PROFILE: '[AUTH] GET_USER_PROFILE',
   IS_LOADING_USER_PROFILE: '[AUTH] IS_LOADING_USER_PROFILE',
@@ -23,34 +27,35 @@ export const AuthActions = {
 };
 
 export const REDUCER = 'login';
+const APP_USER_KEY = StorageService.USER_INFO_KEY;
 
 export const logOutAction = () => {
   return action(AuthActions.LOGOUT, null);
 };
 
 export const goToLoginPageAction = () => {
-  return async (dispatch, getState) => {
-    const url = APP_URLS.login;
+  return async dispatch => {
+    const url = APP_URLS.signIn;
     dispatch(push(url));
   };
 };
 
 export const goToSignUpPageAction = () => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     const url = APP_URLS.signUp;
     dispatch(push(url));
   };
 };
 
 export const goToForgotPasswordPageAction = () => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     const url = APP_URLS.forgotPassword;
     dispatch(push(url));
   };
 };
 
 export const goToSendVerifyEmailPageAction = () => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     const url = APP_URLS.sendVerifyEmail;
     dispatch(push(url));
   };
@@ -134,3 +139,113 @@ export const update2FAStateSuccessAction = data => {
 };
 
 /* #endregion */
+
+export const setUserState = payload => action(AuthActions.SET_USER_STATE, payload);
+const setHideLoginAction = payload => action(AuthActions.SET_HIDE_LOGIN, payload);
+
+export const initAuth = roles => (dispatch, getState) => {
+  const user = StorageService.getData(APP_USER_KEY) || {};
+  const state = getState();
+  const { location } = state.router;
+  const { pathname } = location;
+  const isPublicUrl = pathname !== '/' && PUBLIC_URLS.some(url => url.startsWith(pathname));
+
+  const setUser = userState => {
+    dispatch(
+      setUserState({
+        ...userState,
+      }),
+    );
+
+    if (!state.auth.userProfile) {
+      dispatch(getUserProfileAction());
+    }
+
+    if (!roles.find(role => role === user.role)) {
+      if (!(state.router.location.pathname === APP_URLS.dashboard)) {
+        dispatch(push(APP_URLS.dashboard));
+      }
+
+      return Promise.resolve(false);
+    }
+
+    return Promise.resolve(true);
+  };
+
+  const nonLoginUser = userState => {
+    dispatch(
+      setUserState({
+        ...userState,
+      }),
+    );
+
+    return Promise.resolve(true);
+  };
+
+  // Set the user ID for GA
+  if (window.ga) {
+    const userId = user.id || StorageService.getInstallId();
+    window.ga('set', 'userId', userId);
+  }
+
+  switch (user.role) {
+    case 'admin':
+    case 'user':
+      return setUser(user);
+
+    default:
+      if (isPublicUrl) {
+        return nonLoginUser(user);
+      }
+
+      const from = location.pathname + location.search;
+      dispatch(setFromUrlAction(from));
+      // TODO: switch this for pool
+      // dispatch(push(APP_URLS.poolStats));
+      dispatch(push(APP_URLS.login));
+      return Promise.reject();
+  }
+};
+
+export const loginSucceedAction = (result, fromUrl) => dispatch => {
+  StorageService.setToken(result.access_token);
+  StorageService.setData(APP_USER_KEY, result.profile);
+
+  // Set the user ID for GA
+  if (window.ga) {
+    const userId = result.profile.id;
+    window.ga('set', 'userId', userId);
+  }
+
+  dispatch(getUserProfileAction());
+  dispatch(setHideLoginAction(true));
+
+  // Get previous url
+  const url = fromUrl || APP_URLS.dashboard;
+  dispatch(push(url));
+};
+
+export const logout = () => dispatch => {
+  dispatch(
+    setUserState({
+      userState: {
+        email: '',
+        role: '',
+      },
+    }),
+  );
+  dispatch(logOutAction());
+
+  StorageService.removeToken();
+  StorageService.removeData(APP_USER_KEY);
+
+  dispatch(push(APP_URLS.login));
+};
+
+export const resetHideLogin = () => (dispatch, getState) => {
+  const state = getState();
+  if (state.pendingTasks === 0 && state.app.isHideLogin) {
+    dispatch(setHideLoginAction(false));
+  }
+  return Promise.resolve();
+};

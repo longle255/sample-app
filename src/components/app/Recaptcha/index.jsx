@@ -14,6 +14,7 @@ export default function Recaptcha(props) {
     <GRecaptcha
       render="explicit"
       ref={forwardRef}
+      onloadCallback={() => {}}
       verifyCallback={verifyCallback}
       sitekey={RecaptchaConfig.key}
       size="normal"

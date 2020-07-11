@@ -130,19 +130,25 @@ export class BaseService {
     } else if (status === HttpStatus.BAD_REQUEST || status === HttpStatus.CONFLICT) {
       if (data.errors) {
         data.errors.forEach(item => {
-          const { field, messages } = item;
-          hasMessages = !!messages.length;
+          if (item.field && item.messages) {
+            const { field, messages } = item;
+            hasMessages = !!messages.length;
 
-          messages.forEach((x: string) => {
-            const message = x.replace(`"${field}"`, upperFirst(field));
-            // errorMessages.push(message);
-
-            if (!errors[field]) {
-              errors[field] = [];
+            messages.forEach((x: string) => {
+              const message = x.replace(`"${field}"`, upperFirst(field));
+              // errorMessages.push(message);
+              if (!errors[field]) {
+                errors[field] = [];
+              }
+              errors[field].push(message);
+            });
+          } else if (item.constraints && item.property) {
+            errors[item.property] = [];
+            // eslint-disable-next-line no-restricted-syntax
+            for (const key of Object.keys(item.constraints)) {
+              errors[item.property].push(`[${key}]: ${item.constraints[key]}`);
             }
-
-            errors[field].push(message);
-          });
+          }
         });
       }
 

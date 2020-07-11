@@ -9,18 +9,16 @@ const initState = new Map({
 
 export function authReducer(state = initState, action) {
   switch (action.type) {
-    case AuthActions.LOGIN_SUCCESS:
-      return {
-        ...state,
-        idToken: action.payload,
-      };
-
     case AuthActions.LOGOUT:
       return {
         ...initState,
-        totalValueInfo: {},
-        balances: {},
         stateErrors: {},
+      };
+
+    case AuthActions.IS_LOGIN:
+      return {
+        ...initState,
+        isLoading: true,
       };
 
     case AuthActions.IS_LOADING_USER_PROFILE:
@@ -60,6 +58,12 @@ function actionSuccessReducer(state, action) {
   state.stateErrors = {};
 
   switch (subType) {
+    case AuthActions.LOGIN_SUCCESS:
+      return {
+        ...state,
+        idToken: data,
+      };
+
     case AuthActions.GET_USER_PROFILE:
       return {
         ...state,
