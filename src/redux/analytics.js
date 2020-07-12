@@ -5,7 +5,7 @@ import once from 'lodash-es/once';
 import GoogleAnalytics, { trackEvent, trackPageView } from '@redux-beacon/google-analytics';
 import logger from '@redux-beacon/logger';
 
-import { SampleActions } from 'states/sample';
+import { AuthActions } from 'redux/auth';
 import { EXCLUDING_URLS } from 'constants/APP_URLS';
 
 import { googleConfig } from '../config';
@@ -63,15 +63,15 @@ const emitLocationChanged = trackPageView(action => {
   };
 });
 
-const emitSampleAction = trackEvent(action => ({
-  category: 'SAMPLE',
-  action: 'ACTION',
-  test: action,
+const emitSignInAction = trackEvent(action => ({
+  category: 'AUTH',
+  action: 'SIGN_IN',
+  value: action,
 }));
 
 // Match the event definition to a Redux action:
 const eventsMap = {
-  [SampleActions.SAMPLE_ACTION]: emitSampleAction,
+  [AuthActions.SIGN_IN]: emitSignInAction,
   [LOCATION_CHANGE]: emitLocationChanged,
 };
 
