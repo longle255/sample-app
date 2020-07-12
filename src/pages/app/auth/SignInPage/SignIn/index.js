@@ -55,10 +55,6 @@ const Login = ({ authError, doSignIn, isLoading, doCleanUp }) => {
     resetCaptcha();
   };
 
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-  };
-
   const renderLogin = () => (
     <div>
       <img className="logo" src="/images/logo-auth.png" alt="Logo" />
@@ -70,7 +66,6 @@ const Login = ({ authError, doSignIn, isLoading, doCleanUp }) => {
         layout="vertical"
         hideRequiredMark
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         className="mb-3"
         initialValues={{ email: 'hoanglong25588@gmail.com', password: '12345678' }}
       >
@@ -149,13 +144,7 @@ const Login = ({ authError, doSignIn, isLoading, doCleanUp }) => {
         <strong>Two-factor authentication</strong>
       </div>
 
-      <Form
-        layout="vertical"
-        hideRequiredMark
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        className="mb-3"
-      >
+      <Form layout="vertical" hideRequiredMark onFinish={onFinish} className="mb-3">
         <Form.Item
           label="Authenticator App Token"
           name="twoFAToken"

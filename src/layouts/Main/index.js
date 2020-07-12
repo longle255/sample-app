@@ -44,8 +44,8 @@ const MainLayout = ({
           cui__layout__borderless: isBorderless,
         })}
       >
-        <Sidebar />
-        <SupportChat />
+        {/* <Sidebar /> */}
+        {/* <SupportChat /> */}
         <Menu />
         <Layout>
           <Layout.Header

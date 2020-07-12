@@ -50,10 +50,6 @@ const VerifyEmail = ({ router }) => {
     resetCaptcha();
   };
 
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-  };
-
   const renderInvalidToken = () => {
     return (
       <div>
@@ -105,13 +101,7 @@ const VerifyEmail = ({ router }) => {
       <div className="font-size-24 mb-3 text-center pt-3">
         <strong>Account confirmation</strong>
       </div>
-      <Form
-        layout="vertical"
-        hideRequiredMark
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        className="mb-4"
-      >
+      <Form layout="vertical" hideRequiredMark onFinish={onFinish} className="mb-4">
         <Form.Item
           label="Thank you for creating an account. Please active it by clicking button Verify."
           name="captcha"

@@ -68,10 +68,6 @@ const Register = ({ router, doSignUp, doCleanUp, regSuccess, regError, isLoading
     resetCaptcha();
   };
 
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-  };
-
   const renderSignUp = () => (
     <div>
       <img className="logo" src="/images/logo-auth.png" alt="Logo" />
@@ -79,13 +75,7 @@ const Register = ({ router, doSignUp, doCleanUp, regSuccess, regError, isLoading
         <strong>Sign up</strong>
       </div>
 
-      <Form
-        layout="vertical"
-        hideRequiredMark
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        className="mb-3"
-      >
+      <Form layout="vertical" hideRequiredMark onFinish={onFinish} className="mb-3">
         <Form.Item label="Your name">
           <Input.Group compact>
             <Form.Item

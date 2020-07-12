@@ -1,7 +1,6 @@
 import { all, takeEvery, put, call } from 'redux-saga/effects';
-import { notification } from 'antd';
 import { history } from 'index';
-import { StorageService, authService, profileService } from 'services';
+import { StorageService, authService, profileService, notificationService } from 'services';
 import { setUserProfileAction } from 'redux/user';
 import { APP_URLS } from 'constants/APP_URLS';
 import {
@@ -38,10 +37,7 @@ export function* signIn({ payload }) {
       }
       yield put(loadCurrentUserAction(result));
       yield put(signInSuccessAction(result));
-      notification.success({
-        message: 'Logged In',
-        description: 'You have successfully logged in!',
-      });
+      notificationService.showSuccessMessage('You have successfully logged in!', 'Logged In');
     }
   } catch (error) {
     const errorMessage = error.message;

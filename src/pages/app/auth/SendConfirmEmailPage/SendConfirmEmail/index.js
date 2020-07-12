@@ -38,23 +38,13 @@ const ForgotPassword = () => {
     resetCaptcha();
   };
 
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-  };
-
   return (
     <div>
       <img className="logo" src="/images/logo-auth.png" alt="Logo" />
       <div className="font-size-24 mb-3 text-center pt-3">
         <strong>Send confirm email</strong>
       </div>
-      <Form
-        layout="vertical"
-        hideRequiredMark
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        className="mb-4"
-      >
+      <Form layout="vertical" hideRequiredMark onFinish={onFinish} className="mb-4">
         <Form.Item
           name="email"
           label="Please provide the email address that you used when you signed up for your account. We will resend the confirmation email to activate your account."

@@ -51,10 +51,6 @@ const ResetPassword = ({ router }) => {
     }
   };
 
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-  };
-
   const renderResetPasswordSuccess = () => {
     return (
       <div>
@@ -106,13 +102,7 @@ const ResetPassword = ({ router }) => {
       <div className="font-size-24 mb-3 text-center pt-3">
         <strong>Reset Password</strong>
       </div>
-      <Form
-        layout="vertical"
-        hideRequiredMark
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        className="mb-4"
-      >
+      <Form layout="vertical" hideRequiredMark onFinish={onFinish} className="mb-4">
         <Form.Item
           label="Password"
           name="password"
