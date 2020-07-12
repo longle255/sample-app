@@ -5,6 +5,10 @@ const INSTALL_ID_KEY = 'INSTALL_ID';
 export class StorageService {
   static AUTH_TOKEN_KEY = 'app.AuthToken';
 
+  static AUTH_REFRESH_TOKEN_KEY = 'app.AuthRefreshToken';
+
+  static AUTH_EMAIL = 'app.AuthEmail';
+
   static USER_INFO_KEY = 'app.User';
 
   static getToken() {
@@ -14,6 +18,26 @@ export class StorageService {
   static setToken(token) {
     if (token) {
       window.localStorage.setItem(StorageService.AUTH_TOKEN_KEY, token);
+    }
+  }
+
+  static getRefreshToken() {
+    return window.localStorage.getItem(StorageService.AUTH_REFRESH_TOKEN_KEY);
+  }
+
+  static setRefreshToken(token) {
+    if (token) {
+      window.localStorage.setItem(StorageService.AUTH_REFRESH_TOKEN_KEY, token);
+    }
+  }
+
+  static getAuthEmail() {
+    return window.localStorage.getItem(StorageService.AUTH_EMAIL);
+  }
+
+  static setAuthEmail(token) {
+    if (token) {
+      window.localStorage.setItem(StorageService.AUTH_EMAIL, token);
     }
   }
 

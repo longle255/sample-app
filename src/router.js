@@ -9,48 +9,48 @@ import { APP_URLS } from './constants';
 const routes = [
   {
     path: APP_URLS.signIn,
-    Component: lazy(() => import('pages/auth/SignInPage')),
+    Component: lazy(() => import('pages/app/auth/SignInPage')),
   },
   {
     path: `${APP_URLS.signUp}:ref?`,
-    Component: lazy(() => import('pages/auth/SignUpPage')),
+    Component: lazy(() => import('pages/app/auth/SignUpPage')),
   },
   {
     path: APP_URLS.forgotPassword,
-    Component: lazy(() => import('pages/auth/ForgotPasswordPage')),
+    Component: lazy(() => import('pages/app/auth/ForgotPasswordPage')),
   },
   {
     path: APP_URLS.resetPassword,
-    Component: lazy(() => import('pages/auth/ResetPasswordPage')),
+    Component: lazy(() => import('pages/app/auth/ResetPasswordPage')),
   },
   {
     path: APP_URLS.verifyEmail,
-    Component: lazy(() => import('pages/auth/VerifyEmailPage')),
+    Component: lazy(() => import('pages/app/auth/VerifyEmailPage')),
   },
   {
     path: APP_URLS.sendVerifyEmail,
-    Component: lazy(() => import('pages/auth/SendConfirmEmailPage')),
+    Component: lazy(() => import('pages/app/auth/SendConfirmEmailPage')),
   },
-  // {
-  //   path: APP_URLS.dashboard,
-  //   component: lazy(() => import('pages/DashboardPage')),
-  // },
-  // {
-  //   path: APP_URLS.referral,
-  //   component: lazy(() => import('pages/ReferralPage')),
-  // },
-  // {
-  //   path: APP_URLS.bonus,
-  //   component: lazy(() => import('pages/BonusPage')),
-  // },
-  // {
-  //   path: APP_URLS.settings_Profile,
-  //   component: lazy(() => import('pages/SettingsPage')),
-  // },
-  // {
-  //   path: APP_URLS.settings_2FA,
-  //   component: lazy(() => import('pages/TwoFAPage')),
-  // },
+  {
+    path: APP_URLS.dashboard,
+    Component: lazy(() => import('pages/app/DashboardPage')),
+  },
+  {
+    path: APP_URLS.referral,
+    Component: lazy(() => import('pages/app/referral/ReferralPage')),
+  },
+  {
+    path: APP_URLS.bonus,
+    Component: lazy(() => import('pages/app/referral/BonusPage')),
+  },
+  {
+    path: APP_URLS.settings_Profile,
+    Component: lazy(() => import('pages/app/settings/SettingsPage')),
+  },
+  {
+    path: APP_URLS.settings_2FA,
+    Component: lazy(() => import('pages/app/settings/TwoFAPage')),
+  },
 ];
 const mapStateToProps = ({ settings }) => ({
   routerAnimation: settings.routerAnimation,

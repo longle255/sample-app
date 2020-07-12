@@ -8,8 +8,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { find } from 'lodash';
 import style from './style.module.scss';
 
-const mapStateToProps = ({ menu, settings, user }) => ({
-  menuData: menu.menuData,
+const mapStateToProps = ({ settings, user }) => ({
+  menuData: settings.menuData,
   isMenuCollapsed: settings.isMenuCollapsed,
   isMobileView: settings.isMobileView,
   isMenuUnfixed: settings.isMenuUnfixed,

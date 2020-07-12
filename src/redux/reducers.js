@@ -1,13 +1,15 @@
-import { combineReducers } from 'redux'
-import { connectRouter } from 'connected-react-router'
-import user from './user/reducers'
-import menu from './menu/reducers'
-import settings from './settings/reducers'
+import { pendingTasksReducer } from 'react-redux-spinner';
+import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
+import { userReducer } from './user';
+import { settingsReducer } from './settings';
+import { authReducer } from './auth';
 
-export default history =>
+export const createRootReducer = history =>
   combineReducers({
+    pendingTasks: pendingTasksReducer,
     router: connectRouter(history),
-    user,
-    menu,
-    settings,
-  })
+    user: userReducer,
+    settings: settingsReducer,
+    auth: authReducer,
+  });

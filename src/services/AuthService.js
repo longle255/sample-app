@@ -46,9 +46,7 @@ class AuthService extends BaseService {
   logIn(userInfo: any): Promise<ITokenInfo> {
     const url = 'api/v1/auth/login';
 
-    return this.post(url, userInfo).then((result: any) => {
-      return result;
-    });
+    return this.post(url, userInfo);
   }
 
   logOut(): void {

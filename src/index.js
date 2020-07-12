@@ -6,29 +6,6 @@ import './global.scss'; // app & third-party component styles
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-// import { createHashHistory } from 'history'
-// import { createStore, applyMiddleware, compose } from 'redux'
-// import { logger } from 'redux-logger'
-// import createSagaMiddleware from 'redux-saga'
-// import { routerMiddleware } from 'connected-react-router'
-
-// import reducers from './redux/reducers'
-// import sagas from './redux/sagas'
-
-// // mocking api
-// import 'services/axios/fakeApi'
-
-// // middlewared
-// const history = createHashHistory()
-// const sagaMiddleware = createSagaMiddleware()
-// const routeMiddleware = routerMiddleware(history)
-// const middlewares = [sagaMiddleware, routeMiddleware]
-// if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV !== 'production') {
-//   middlewares.push(logger)
-// }
-
-// const store = createStore(reducers(history), compose(applyMiddleware(...middlewares)))
-// sagaMiddleware.run(sagas)
 
 import * as serviceWorker from './serviceWorker';
 import Router from './router';
@@ -48,4 +25,5 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
 export { store, history };

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { reduce } from 'lodash';
 import styles from './style.module.scss';
 
-const mapStateToProps = ({ menu }) => ({
-  menuData: menu.menuData,
+const mapStateToProps = ({ settings }) => ({
+  menuData: settings.menuData,
 });
 
 const Breadcrumbs = props => {

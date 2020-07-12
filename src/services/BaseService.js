@@ -118,7 +118,7 @@ export class BaseService {
   }
 
   async handleError(response) {
-    const { status, statusText, data } = response;
+    const { status, data } = response;
     const errors = {};
     const errorMessages = [];
     const codeName = data ? data.codeName : null;

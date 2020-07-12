@@ -1,9 +1,11 @@
-const actions = {
-  SET_STATE: 'user/SET_STATE',
-  LOGIN: 'user/LOGIN',
-  REGISTER: 'user/REGISTER',
-  LOAD_CURRENT_ACCOUNT: 'user/LOAD_CURRENT_ACCOUNT',
-  LOGOUT: 'user/LOGOUT',
-}
+import { action } from 'typesafe-actions';
 
-export default actions
+export const UserActions = {
+  SET_PROFILE: '[USER] SET_PROFILE',
+
+  SAMPLE_ACTION: '[USER] SAMPLE_ACTION',
+};
+
+export const setUserProfileAction = profile => {
+  return action(UserActions.SET_PROFILE, profile);
+};

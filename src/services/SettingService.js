@@ -1,4 +1,3 @@
-import qs from 'qs';
 import { appConfig } from '../config';
 import { BaseService } from './BaseService';
 
@@ -9,7 +8,7 @@ class SettingService extends BaseService {
     super({ baseApiUrl: apiUrl });
   }
 
-  getServerSetting(model) {
+  getServerSetting() {
     const url = `api/settings`;
 
     return this.get(url);

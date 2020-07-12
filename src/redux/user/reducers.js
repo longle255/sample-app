@@ -1,20 +1,15 @@
-import actions from './actions'
+import { UserActions } from './actions';
 
 const initialState = {
-  id: '',
-  name: '',
-  role: '',
-  email: '',
-  avatar: '',
-  authorized: process.env.REACT_APP_AUTHENTICATED || false, // false is default value
-  loading: false,
-}
+  profile: null,
+  role: null,
+};
 
-export default function userReducer(state = initialState, action) {
+export function userReducer(state = initialState, action) {
   switch (action.type) {
-    case actions.SET_STATE:
-      return { ...state, ...action.payload }
+    case UserActions.SET_PROFILE:
+      return { ...state, profile: { ...action.payload }, role: action.payload.role };
     default:
-      return state
+      return state;
   }
 }
