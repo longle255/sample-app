@@ -2,13 +2,21 @@ import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { notification } from 'antd';
 import { history } from 'index';
+import { APP_URLS } from 'constants/APP_URLS';
 
 const mapStateToProps = ({ user: { role } }) => ({ role });
 
-const ACL = ({ redirect = false, defaultRedirect = '/auth/404', roles = [], children, role }) => {
+const ACL = ({
+  redirect = false,
+  defaultRedirect = APP_URLS.signIn,
+  roles = [],
+  children,
+  role,
+}) => {
   useEffect(() => {
     const authorized = roles.includes(role);
     // if user not equal needed role and if component is a page - make redirect to needed route
+    console.log('AAA', authorized);
     if (!authorized && redirect) {
       const url = typeof redirect === 'boolean' ? defaultRedirect : redirect;
       notification.error({

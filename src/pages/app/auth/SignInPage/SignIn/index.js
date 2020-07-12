@@ -117,7 +117,7 @@ const Login = ({ authError, doSignIn, isLoading, doCleanUp }) => {
           </Form.Item>
         )}
 
-        <Form.Item name="rememberMe">
+        <Form.Item>
           <Checkbox
             style={{ marginTop: '10px', marginLeft: '5px' }}
             onChange={e => setRememberMe(e.target.checked)}

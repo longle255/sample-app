@@ -38,7 +38,6 @@ export function* signIn({ payload }) {
       }
       yield put(loadCurrentUserAction(result));
       yield put(signInSuccessAction(result));
-      yield history.push('/');
       notification.success({
         message: 'Logged In',
         description: 'You have successfully logged in!',
@@ -72,15 +71,20 @@ export function* signUp({ payload }) {
 }
 
 export function* loadCurrentUser() {
-  yield put(isLoadingAction());
   try {
+    if (!StorageService.getToken()) {
+      return;
+    }
+    yield put(isLoadingAction());
     const result = yield call([profileService, 'getUserProfile']);
     if (result) {
+      yield put(signInSuccessAction(result));
       yield put(setUserProfileAction(result));
+      yield history.push('/');
     }
   } catch (error) {
     const errorMessage = error.message;
-    yield put(signUpFailureAction({ errorMessage }));
+    yield put(signInFailureAction({ errorMessage }));
   }
 }
 

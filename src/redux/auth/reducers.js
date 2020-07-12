@@ -8,7 +8,7 @@ const initialState = {
 
 export function authReducer(state = initialState, action) {
   switch (action.type) {
-    case AuthActions.IS_LOGGING_IN:
+    case AuthActions.IS_LOADING:
       return { ...state, isLoading: true };
     case AuthActions.SET_STATE:
       return { ...state, ...action.payload };

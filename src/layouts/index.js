@@ -14,10 +14,10 @@ const Layouts = {
   main: MainLayout,
 };
 
-const mapStateToProps = ({ auth }) => ({ auth });
+const mapStateToProps = ({ auth, user: { profile } }) => ({ auth, profile });
 let previousPath = '';
 
-const Layout = ({ auth, children, location: { pathname, search } }) => {
+const Layout = ({ auth, profile, children, location: { pathname, search } }) => {
   // NProgress & ScrollTop Management
   const currentPath = pathname + search;
   if (currentPath !== previousPath) {
@@ -41,7 +41,7 @@ const Layout = ({ auth, children, location: { pathname, search } }) => {
   };
 
   const Container = Layouts[getLayout()];
-  const isUserAuthorized = auth.idToken !== null;
+  const isUserAuthorized = profile !== null;
   const isUserLoading = auth.isLoading;
   const isAuthLayout = getLayout() === 'auth';
 
@@ -52,7 +52,8 @@ const Layout = ({ auth, children, location: { pathname, search } }) => {
     }
     // redirect to login page if current is not login page and user not authorized
     if (!isAuthLayout && !isUserAuthorized) {
-      return <Redirect to="/auth/login" />;
+      // debugger;
+      return <Redirect to="/auth/signin" />;
     }
     // in other case render previously set layout
     return <Container>{children}</Container>;
