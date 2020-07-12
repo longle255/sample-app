@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SettingsPage = () => {
-  return <div>Bonus Page</div>;
+  return <div>Settings Page</div>;
 };
 
 export default SettingsPage;

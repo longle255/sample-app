@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Referral = () => {
-  return <div>Bonus Page</div>;
+const ReferralPage = () => {
+  return <div>Referral Page</div>;
 };
 
-export default Referral;
+export default ReferralPage;

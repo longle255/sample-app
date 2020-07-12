@@ -3,7 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import NProgress from 'nprogress';
 import { Helmet } from 'react-helmet';
-// import Loader from 'components/cleanui/layout/Loader'
+import { siteConfig } from 'config.js';
 import PublicLayout from './Public';
 import AuthLayout from './Auth';
 import MainLayout from './Main';
@@ -61,7 +61,7 @@ const Layout = ({ auth, profile, children, location: { pathname, search } }) => 
 
   return (
     <Fragment>
-      <Helmet titleTemplate="Clean UI Pro React | %s" title="React Admin Template" />
+      <Helmet titleTemplate={`${siteConfig.siteName} | %s`} title={siteConfig.siteName} />
       {BootstrappedLayout()}
     </Fragment>
   );

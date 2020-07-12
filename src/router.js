@@ -51,6 +51,11 @@ const routes = [
     path: APP_URLS.settings_2FA,
     Component: lazy(() => import('pages/app/settings/TwoFAPage')),
   },
+
+  {
+    path: APP_URLS.notFound,
+    Component: lazy(() => import('pages/404')),
+  },
 ];
 const mapStateToProps = ({ settings }) => ({
   routerAnimation: settings.routerAnimation,
@@ -89,7 +94,7 @@ const Router = ({ history, routerAnimation }) => {
                         }}
                       />
                     ))}
-                    <Redirect to="/auth/404" />
+                    <Redirect to="/404" />
                   </Switch>
                 </CSSTransition>
               </SwitchTransition>

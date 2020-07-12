@@ -13,6 +13,9 @@ export const APP_URLS = {
   bonus: '/referral/bonus',
   settings_Profile: '/settings/profile',
   settings_2FA: '/settings/2fa',
+
+  notFound: '/404',
+  error: '/500',
 };
 
 export const PUBLIC_URLS = [];

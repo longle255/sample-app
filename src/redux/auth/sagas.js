@@ -84,6 +84,7 @@ export function* loadCurrentUser() {
     }
   } catch (error) {
     const errorMessage = error.message;
+    yield put(signOutAction());
     yield put(signInFailureAction({ errorMessage }));
   }
 }
@@ -93,7 +94,6 @@ export function* signOut() {
   StorageService.removeData(APP_USER_KEY);
   yield history.push(APP_URLS.login);
   yield put(setUserProfileAction({}));
-  yield put(signOutAction());
 }
 
 export default function* rootSaga() {
