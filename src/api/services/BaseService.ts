@@ -64,6 +64,11 @@ export abstract class BaseService<E extends BaseSchema> {
 		return this.model.findOne(cond);
 	}
 
+	public findOneAndRemove(cond: object): Promise<DocumentType<E> | undefined> {
+		this.log.debug(`Find one ${this.model.modelName} and remove with condition ${JSON.stringify(cond)}`);
+		return this.model.findOneAndRemove(cond);
+	}
+
 	public async create(instant: E): Promise<DocumentType<E>> {
 		this.log.verbose(`Create a new ${this.model.modelName} => `, JSON.stringify(instant));
 		try {

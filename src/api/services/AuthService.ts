@@ -26,6 +26,7 @@ import { IUser, ROLES_ALL, User } from '../models/User';
 import { EmailService } from './EmailService';
 import { IdentityTokenService } from './IdentityTokenService';
 import { UserService } from './UserService';
+import { RefreshTokenRequestSchema } from '../controllers/request-schemas/RefreshTokenRequestSchema';
 
 export interface IAuthOption {
 	secret: string;
@@ -46,6 +47,7 @@ interface IUserProfile {
 export interface ITokenInfo {
 	token_type: string;
 	access_token: string;
+  refresh_token: string;
 	expires_in: number | string;
 	profile: IUserProfile;
 }
@@ -144,6 +146,12 @@ export class AuthService {
 			throw new BadRequestError('Email and password combination is not valid');
 		}
 
+		const pwMatched = await user.comparePassword(credential.password);
+
+		if (!pwMatched) {
+			throw new BadRequestError('Email and password combination is not valid');
+		}
+
 		if (!user.isActive) {
 			throw new ForbiddenError('Your account is locked');
 		}
@@ -163,14 +171,40 @@ export class AuthService {
 			}
 		}
 
-		const pwMatched = await user.comparePassword(credential.password);
-
-		if (!pwMatched) {
-			throw new BadRequestError('Email and password combination is not valid');
-		}
-
 		const token = this.generateAuthToken(user);
 		return token;
+	}
+
+	public async refreshToken(token: RefreshTokenRequestSchema): Promise<ITokenInfo> {
+		const user: DocumentType<IUser> = await this.userService.findOne({ email: token.email });
+
+		if (!user) {
+			throw new BadRequestError('Email is not valid');
+		}
+
+		if (!user.isActive) {
+			throw new BadRequestError('Your account is locked');
+		}
+
+		if (!user.isConfirmed) {
+			throw new BadRequestError('Please confirm your email address by clicking the confirmation link in your email');
+		}
+
+		const refreshObject = await this.identityTokenService.findOneAndRemove({
+			email: token.email,
+			token: token.token,
+			type: TokenTypes.REFRESH_TOKEN,
+			expires: {
+				$gt: new Date(),
+			},
+		});
+
+		if (!refreshObject || refreshObject.email !== user.email) {
+			throw new BadRequestError('Token is not valid');
+		}
+
+		const newToken = this.generateAuthToken(user);
+		return newToken;
 	}
 
 	public async socialAuth(credential: SocialAuthRequestSchema): Promise<ITokenInfo> {
@@ -281,10 +315,11 @@ export class AuthService {
 			sub: user._id,
 		};
 		const access_token = jwt.sign(payload, env.jwt.secret, env.jwt.signOptions as SignOptions);
-		await this.identityTokenService.generateToken(user, TokenTypes.REFRESH_TOKEN);
+		const refresh_token = await this.identityTokenService.generateToken(user, TokenTypes.REFRESH_TOKEN);
 		const tokenData: ITokenInfo = {
 			token_type: 'Bearer',
 			access_token,
+        refresh_token: refresh_token.token,
 			expires_in: env.jwt.expiresIn,
 			profile: {
 				firstName: user.firstName,

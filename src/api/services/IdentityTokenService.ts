@@ -37,6 +37,6 @@ export class IdentityTokenService extends BaseService<IIdentityToken> {
 
 	public async invalidateToken(cond: any): Promise<IIdentityToken> {
 		this.log.verbose('invalidate all token with condition %s', cond);
-		return IdentityToken.update(cond, { $set: { expires: new Date() } }, { multi: true });
+		return IdentityToken.updateMany(cond, { $set: { expires: new Date() } });
 	}
 }

@@ -12,6 +12,7 @@ import {
 } from './request-schemas';
 import { SocialAuthRequestSchema } from './request-schemas/SocialAuthRequestSchema';
 import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
+import { RefreshTokenRequestSchema } from './request-schemas/RefreshTokenRequestSchema';
 
 @JsonController('/auth')
 export class UserController {
@@ -21,6 +22,11 @@ export class UserController {
   @UseBefore(CaptchaMiddleware)
   public async login(@Body({ validate: true }) credential: LoginRequestSchema): Promise<ITokenInfo> {
     return this.authService.login(credential);
+  }
+
+  @Post('/refresh-token')
+  public async refreshToken(@Body({ validate: true }) token: RefreshTokenRequestSchema): Promise<ITokenInfo> {
+    return this.authService.refreshToken(token);
   }
 
   @Post('/social')

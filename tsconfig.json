@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"paths": { "*": ["types/*"] },
+		"paths": { "*": ["types/*"], "tslib": ["node_modules/tslib/tslib.d.ts"] },
 		"target": "es6",
 		"module": "commonjs",
 		"moduleResolution": "node",
