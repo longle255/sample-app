@@ -1,17 +1,17 @@
 import { action } from 'typesafe-actions';
 
 export const ReferralActions = {
-  GET_REFERRALS: '[REFERAL_ACTIONS] GET_REFERRALS',
-  IS_LOADING_REFERRALS: '[REFERAL_ACTIONS] IS_LOADING_REFERRALS',
+  GET_REFERRALS: '[REFERAL] GET_REFERRALS',
+  IS_LOADING_REFERRALS: '[REFERAL] IS_LOADING_REFERRALS',
 
-  GET_REFERRAL_BONUSES: '[REFERAL_ACTIONS] GET_REFERRAL_BONUSES',
-  IS_LOADING_REFERRAL_BONUSES: '[REFERAL_ACTIONS] IS_LOADING_REFERRAL_BONUSES',
+  GET_REFERRAL_BONUSES: '[REFERAL] GET_REFERRAL_BONUSES',
+  IS_LOADING_REFERRAL_BONUSES: '[REFERAL] IS_LOADING_REFERRAL_BONUSES',
 
-  GET_WITHDRAWALS: '[REFERAL_ACTIONS] GET_WITHDRAWALS',
-  IS_LOADING_WITHDRAWALS: '[REFERAL_ACTIONS] IS_LOADING_WITHDRAWALS',
+  GET_WITHDRAWALS: '[REFERAL] GET_WITHDRAWALS',
+  IS_LOADING_WITHDRAWALS: '[REFERAL] IS_LOADING_WITHDRAWALS',
 
-  ACTION_SUCCEED: '[REFERAL_ACTIONS] ACTION_SUCCEED',
-  ACTION_FAILED: '[REFERAL_ACTIONS] ACTION_FAILED',
+  ACTION_SUCCEED: '[REFERAL] ACTION_SUCCEED',
+  ACTION_FAILED: '[REFERAL] ACTION_FAILED',
 };
 
 /* #region get referrers */
@@ -35,25 +35,6 @@ export const getReferralsFailureAction = error => {
 /* #region get bonus */
 export const getReferralBonusesAction = model => {
   return action(ReferralActions.GET_REFERRAL_BONUSES, model);
-  // return async (dispatch, getState) => {
-  //   dispatch(isLoadingReferralBonusesAction(model));
-
-  //   try {
-  //     const result = await referralService.getBonuses(model);
-  //     const data = {
-  //       ...model,
-  //       pagination: {
-  //         ...model.pagination,
-  //         total: result.total,
-  //       },
-  //       data: result.data,
-  //     };
-
-  //     dispatch(getReferralBonusesSuccessAction(data));
-  //   } catch (error) {
-  //     dispatch(getReferralBonusesFailureAction(error));
-  //   }
-  // };
 };
 
 export const isLoadingReferralBonusesAction = data => {
@@ -72,23 +53,6 @@ export const getReferralBonusesFailureAction = error => {
 /* #region Get Referral Withdrawal */
 export const getReferralWithdrawalsAction = model => {
   return action(ReferralActions.GET_WITHDRAWALS, model);
-  // return async (dispatch, getState) => {
-  //   dispatch(isLoadingReferralWithdrawalsAction(model));
-  //   try {
-  //     const result = await referralService.getWithdrawals(model);
-  //     const data = {
-  //       ...model,
-  //       pagination: {
-  //         ...model.pagination,
-  //         total: result.total,
-  //       },
-  //       data: result.data,
-  //     };
-  //     dispatch(getReferralWithdrawalsSuccessAction(data));
-  //   } catch (error) {
-  //     dispatch(getReferralWithdrawalsFailureAction(error));
-  //   }
-  // };
 };
 
 export const isLoadingReferralWithdrawalsAction = data => {
