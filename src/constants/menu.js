@@ -50,7 +50,7 @@ export const menu = [
         title: 'Bonus',
         key: 'bonus',
         url: APP_URLS.bonus,
-        icon: 'fe fe-money',
+        icon: 'fe fe-gift',
       },
     ],
   },

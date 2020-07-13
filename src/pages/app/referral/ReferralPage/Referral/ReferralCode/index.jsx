@@ -31,12 +31,14 @@ const ReferralCode = ({ userProfile, intl }) => {
     <div className="card shadow-sm bg-white referral-code-card">
       <div className="wrapper">
         <div className="referral-code-card-header">
-          <div className="coin-name title">
-            <FormattedMessage id="ReferralPage.ReferralCode.CODE" />
+          <div className="utils__title">
+            <strong>
+              <FormattedMessage id="ReferralPage.ReferralCode.CODE" />
+            </strong>
           </div>
-          <span className="description">
+          <div className="utils__titleDescription">
             <FormattedMessage id="ReferralPage.ReferralCode.YOU_CAN_COPY_THIS_CODE" />
-          </span>
+          </div>
         </div>
         <div className="referral-code-card-body mt-3">
           <CopyToClipboard text={referrerLink} onCopy={onCopy}>
