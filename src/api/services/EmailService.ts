@@ -15,9 +15,9 @@ import { JobService } from './JobService';
 const templatesDir = path.resolve(__dirname, '../../templates/emails');
 
 const NO_BCC = [];
-const LINK_EMAIL_CONFIRMATION = `${env.app.uri}/account/confirm-email?token=`;
-const LINK_RESET_PASSWORD = `${env.app.uri}/account/reset-password?token=`;
-const LINK_INVITATION = `${env.app.uri}/account/signup?ref=`;
+const LINK_EMAIL_CONFIRMATION = `${env.app.uri}/auth/confirm-email?token=`;
+const LINK_RESET_PASSWORD = `${env.app.uri}/auth/reset-password?token=`;
+const LINK_INVITATION = `${env.app.uri}/auth/signup?ref=`;
 
 const defaultValues = {
 	appName: env.app.name,
