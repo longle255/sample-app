@@ -16,7 +16,6 @@ const ACL = ({
   useEffect(() => {
     const authorized = roles.includes(role);
     // if user not equal needed role and if component is a page - make redirect to needed route
-    console.log('AAA', authorized);
     if (!authorized && redirect) {
       const url = typeof redirect === 'boolean' ? defaultRedirect : redirect;
       notification.error({

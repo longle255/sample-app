@@ -1,0 +1,204 @@
+import { Button, Form, Input, Alert, Select } from 'antd';
+import { Icon, Row, Col } from 'antd';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import TagsInput from 'react-tagsinput';
+import uniq from 'lodash-es/uniq';
+import { referralService, notificationService } from 'services';
+import Recaptcha from 'components/Recaptcha';
+import { COMMON } from 'services/../constants/COMMON';
+import * as HttpStatus from 'http-status-codes';
+import { FormHelper } from 'services/../helpers';
+import 'react-tagsinput/react-tagsinput.css';
+import './style.scss';
+
+const FormItem = Form.Item;
+const Option = Select.Option;
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+@Form.create()
+class SendInvitations extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      isProcessing: false,
+      hasSubmited: false,
+      recaptchaInstance: null,
+      tags: [],
+      tag: '',
+    };
+  }
+
+  handleChange = tags => {
+    this.setState({ tags });
+  };
+
+  handleChangeInput = tag => {
+    this.setState({ tag });
+  };
+
+  pasteSplit(data) {
+    const separators = [',', ';', '\\(', '\\)', '\\*', '/', ':', '\\?', '\n', '\r'];
+    return data.split(new RegExp(separators.join('|'))).map(d => d.trim());
+  }
+
+  renderInput(props) {
+    let { onChange, value, addTag, placeholder, ...other } = props;
+    return (
+      <input type="email" placeholder="Add an email" onChange={onChange} value={value} {...other} />
+    );
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    this.setState({
+      hasSubmited: true,
+    });
+
+    this.props.form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+
+      this.sendInvitations(values, this.props.form);
+    });
+  };
+
+  sendInvitations = async (values, form) => {
+    const { isProcessing, tags } = this.state;
+    if (isProcessing) {
+      return;
+    }
+
+    this.setState({
+      isProcessing: true,
+    });
+
+    const data = {
+      emails: uniq(tags),
+      captcha: values.captcha,
+    };
+
+    try {
+      const result = await referralService.sendInvitations(data);
+
+      this.setState({
+        isProcessing: false,
+        errorMessage: null,
+        hasSubmited: false,
+        tags: [],
+      });
+
+      const form = this.props.form;
+      form.resetFields();
+      this.recaptchaInstance.reset.call();
+
+      notificationService.showSuccessMessage('Invitaion was sent successful.');
+    } catch (errorInfo) {
+      const errorMessage = errorInfo.message;
+      const errors = errorInfo.errors;
+
+      if (errorInfo.statusCode === HttpStatus.BAD_REQUEST) {
+        FormHelper.setFormError(form, errorInfo);
+      } else if (errorInfo.statusCode === HttpStatus.CONFLICT) {
+        FormHelper.setFormError(form, errorInfo);
+      } else {
+        //
+      }
+
+      this.setState({
+        isProcessing: false,
+        errorMessage: errorMessage,
+      });
+
+      this.recaptchaInstance.reset.call();
+    }
+  };
+
+  render() {
+    const { hasSubmited, isProcessing, errorMessage } = this.state;
+    const { getFieldDecorator } = this.props.form;
+    const { tags } = this.state;
+
+    return (
+      <div className="card stakingsclub-card send-invitatons-card shadow-sm bg-white">
+        <div className="card-header">
+          <div className="utils__title">
+            <strong>Invite</strong>
+          </div>
+          <div className="utils__titleDescription">
+            You can invite your friends by sending email
+          </div>
+        </div>
+        <div className="card-body">
+          <div className="row">
+            <div className="col-md-12">
+              <Form
+                onSubmit={this.handleSubmit}
+                className="send-invitatons-form"
+                autoComplete="off"
+              >
+                <FormItem label="Emails">
+                  {getFieldDecorator('emails', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input the emails',
+                      },
+                    ],
+                    initialValue: tags,
+                  })(
+                    <TagsInput
+                      className="email-list-tag"
+                      renderInput={this.renderInput}
+                      onChange={this.handleChange}
+                      inputValue={this.state.tag}
+                      onlyUnique={true}
+                      validationRegex={EMAIL_REGEX}
+                      maxTags={30}
+                      pasteSplit={this.pasteSplit}
+                      onChangeInput={this.handleChangeInput}
+                    />,
+                  )}
+                </FormItem>
+
+                <FormItem>
+                  {getFieldDecorator('captcha', {
+                    initialValue: '',
+                    rules: [{ required: true, message: 'Please solve captcha' }],
+                  })(
+                    <Recaptcha
+                      ref={e => (this.recaptchaInstance = e)}
+                      reset={this.resetRecaptcha}
+                    />,
+                  )}
+                </FormItem>
+
+                {errorMessage && (
+                  <FormItem label=" " colon={false}>
+                    <Alert message={errorMessage} type="error" />
+                  </FormItem>
+                )}
+                <FormItem className="form-actions">
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="btn-invite float-right"
+                    loading={isProcessing}
+                  >
+                    Invite
+                  </Button>
+                </FormItem>
+              </Form>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default SendInvitations;

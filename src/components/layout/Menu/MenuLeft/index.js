@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import store from 'store';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { find } from 'lodash';
+import { siteConfig } from 'config.js';
 import style from './style.module.scss';
 
 const mapStateToProps = ({ settings, user }) => ({
@@ -191,8 +192,7 @@ const MenuLeft = ({
         <div className={style.logoContainer}>
           <div className={style.logo}>
             <img src="resources/images/logo.svg" className="mr-2" alt="Clean UI" />
-            <div className={style.name}>{logo}</div>
-            {logo === 'Clean UI Pro' && <div className={style.descr}>React</div>}
+            <div className={style.name}>{siteConfig.siteName}</div>
           </div>
         </div>
         <PerfectScrollbar>

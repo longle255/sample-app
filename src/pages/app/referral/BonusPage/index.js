@@ -6,7 +6,7 @@ import Bonus from './Bonus';
 
 const BonusPage = () => {
   return (
-    <ACL roles={['admin']} redirect={APP_URLS.notFound}>
+    <ACL roles={['user']} redirect={APP_URLS.notFound}>
       <Helmet title="Sign In" />
       <Bonus />
     </ACL>

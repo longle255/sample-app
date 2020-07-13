@@ -38,6 +38,8 @@ export function* signIn({ payload }) {
       yield put(loadCurrentUserAction(result));
       yield put(signInSuccessAction(result));
       notificationService.showSuccessMessage('You have successfully logged in!', 'Logged In');
+    } else {
+      throw new Error('Error while signIn');
     }
   } catch (error) {
     const errorMessage = error.message;
@@ -59,6 +61,8 @@ export function* signUp({ payload }) {
     const result = yield call([authService, 'registerNewUser'], payload);
     if (result) {
       yield put(signUpSuccessAction(result));
+    } else {
+      throw new Error('Error while signUp');
     }
   } catch (error) {
     const errorMessage = error.message;
@@ -77,6 +81,8 @@ export function* loadCurrentUser() {
       yield put(signInSuccessAction(result));
       yield put(setUserProfileAction(result));
       yield history.push('/');
+    } else {
+      throw new Error('Error while loadCurrentUser');
     }
   } catch (error) {
     const errorMessage = error.message;
@@ -88,8 +94,8 @@ export function* loadCurrentUser() {
 export function* signOut() {
   StorageService.removeToken();
   StorageService.removeData(APP_USER_KEY);
-  yield history.push(APP_URLS.login);
   yield put(setUserProfileAction({}));
+  yield history.push(APP_URLS.signIn);
 }
 
 export default function* rootSaga() {

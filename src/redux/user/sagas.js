@@ -16,8 +16,9 @@ export function* getUserProfile() {
     const result = yield call([profileService, 'getUserProfile']);
     if (result) {
       yield put(getUserProfileSuccessAction(result));
+    } else {
+      throw new Error('Error while getReferrals');
     }
-    throw new Error('Error while getUserProfile');
   } catch (error) {
     yield put(getUserProfileFailureAction(error));
   }
