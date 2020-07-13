@@ -64,6 +64,7 @@
     "react-c3js": "^0.1.20",
     "react-chartist": "^0.14.3",
     "react-chartjs-2": "^2.9.0",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
     "react-draft-wysiwyg": "^1.14.5",
     "react-helmet": "^6.0.0",

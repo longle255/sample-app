@@ -70,7 +70,7 @@ export function* signUp({ payload }) {
   }
 }
 
-export function* loadCurrentUser() {
+export function* loadCurrentUser(pathname) {
   try {
     if (!StorageService.getToken()) {
       return;
@@ -80,7 +80,7 @@ export function* loadCurrentUser() {
     if (result) {
       yield put(signInSuccessAction(result));
       yield put(setUserProfileAction(result));
-      yield history.push('/');
+      yield history.push(pathname);
     } else {
       throw new Error('Error while loadCurrentUser');
     }
@@ -104,6 +104,7 @@ export default function* rootSaga() {
     takeEvery(AuthActions.SIGN_UP, signUp),
     takeEvery(AuthActions.LOAD_CURRENT_USER, loadCurrentUser),
     takeEvery(AuthActions.SIGN_OUT, signOut),
-    loadCurrentUser(), // run once on app load to check user auth
+    // eslint-disable-next-line no-restricted-globals
+    loadCurrentUser(location.pathname), // run once on app load to check user auth
   ]);
 }

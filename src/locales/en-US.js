@@ -53,6 +53,19 @@ const messages = {
   'Disable2FACard.PLEASE_PROVIDE_THE_CODE': 'Please provide the code!',
   'Disable2FACard.TWOFACTOR_AUTHENTICATION_HAS_BEEN_DISABLED':
     'Two-factor authentication has been disabled.',
+
+  'ReferralPage.REFERRAL': 'Referral',
+  'ReferralPage.ReferralsCard.REFERRALS_STATISTICS': 'Referrals Statistics',
+  'ReferralPage.ReferralsCard.ACTIVE_TIME': 'Active time',
+  'ReferralPage.ReferralsCard.NAME': 'Name',
+  'ReferralPage.ReferralCode.CODE': 'Code',
+  'ReferralPage.ReferralCode.YOU_CAN_COPY_THIS_CODE':
+    'You can copy this code and send it to your friends',
+  'ReferralPage.ReferralCode.COPIED': 'Copied',
+  'ReferralPage.ReferralCode.COPY': 'Copy',
+  'ReferralPage.ReferralsState.REFERRALS': 'Referrals',
+  'ReferralPage.ReferralsState.THE_NUMBER_OF_NEW_USERS':
+    'The number of new users that you have introduced',
 };
 
 export default {
