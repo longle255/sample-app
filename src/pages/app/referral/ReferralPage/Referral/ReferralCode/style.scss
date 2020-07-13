@@ -1,0 +1,19 @@
+@import 'src/components/mixins.scss';
+.referral-code-card {
+  padding: $paddingSize;
+  border-radius: $borderRadiusSize;
+  margin-bottom: $marginBottom;
+  > .wrapper {
+    align-items: center;
+    > .referral-code-card-header {
+      .title {
+        font-weight: lighter;
+        font-size: 1.2em;
+      }
+      .description {
+        color: $gray;
+        font-weight: 0.8em;
+      }
+    }
+  }
+}

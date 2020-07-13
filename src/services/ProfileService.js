@@ -15,7 +15,6 @@ class ProfileService extends BaseService {
 
     return this.get(url).then((result: any) => {
       CacheService.currentUserProfile = result;
-
       return result;
     });
   }

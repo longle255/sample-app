@@ -7,8 +7,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import store from 'store';
 import style from './style.module.scss';
 
-const mapStateToProps = ({ menu }) => ({
-  menuData: menu.menuData,
+const mapStateToProps = ({ settings }) => ({
+  menuData: settings.menuData,
 });
 
 const FavPages = ({ menuData = [], intl: { formatMessage } }) => {

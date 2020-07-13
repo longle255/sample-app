@@ -6,17 +6,17 @@ import classNames from 'classnames';
 import store from 'store';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { find } from 'lodash';
+import { siteConfig } from 'config.js';
 import style from './style.module.scss';
 
-const mapStateToProps = ({ menu, settings, user }) => ({
-  menuData: menu.menuData,
+const mapStateToProps = ({ settings, user }) => ({
+  menuData: settings.menuData,
   isMenuCollapsed: settings.isMenuCollapsed,
   isMobileView: settings.isMobileView,
   isMenuUnfixed: settings.isMenuUnfixed,
   isMenuShadow: settings.isMenuShadow,
   leftMenuWidth: settings.leftMenuWidth,
   menuColor: settings.menuColor,
-  logo: settings.logo,
   role: user.role,
 });
 
@@ -31,7 +31,6 @@ const MenuLeft = ({
   isMenuShadow,
   leftMenuWidth,
   menuColor,
-  logo,
   role,
 }) => {
   const [selectedKeys, setSelectedKeys] = useState(store.get('app.menu.selectedKeys') || []);
@@ -191,8 +190,7 @@ const MenuLeft = ({
         <div className={style.logoContainer}>
           <div className={style.logo}>
             <img src="resources/images/logo.svg" className="mr-2" alt="Clean UI" />
-            <div className={style.name}>{logo}</div>
-            {logo === 'Clean UI Pro' && <div className={style.descr}>React</div>}
+            <div className={style.name}>{siteConfig.siteName}</div>
           </div>
         </div>
         <PerfectScrollbar>
@@ -207,17 +205,6 @@ const MenuLeft = ({
           >
             {generateMenuItems()}
           </Menu>
-          <div className={style.banner}>
-            <p>More components, more style, more themes, and premium support!</p>
-            <a
-              href="https://themeforest.net/item/clean-ui-react-admin-template/21938700"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-sm btn-success btn-rounded px-3"
-            >
-              Buy Bundle
-            </a>
-          </div>
         </PerfectScrollbar>
       </div>
     </Layout.Sider>

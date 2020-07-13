@@ -1,4 +1,3 @@
-import qs from 'qs';
 import { appConfig } from '../config';
 import { BaseService } from './BaseService';
 
