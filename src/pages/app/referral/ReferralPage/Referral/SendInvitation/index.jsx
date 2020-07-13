@@ -4,10 +4,9 @@ import uniq from 'lodash-es/uniq';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css'; // If using WebPack and style-loader.
 import Recaptcha from 'components/app/Recaptcha';
-import classNames from 'classnames';
 import { notificationService, referralService } from 'services';
-import style from 'components/styles/custom.module.scss';
 import './style.scss';
+import Button from 'components/app/Button';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -106,9 +105,7 @@ const SendInvitation = () => {
                 </Form.Item>
               )}
               <Form.Item>
-                <button type="submit" className={classNames(style.btn, 'width-150', 'height-40')}>
-                  Send Request
-                </button>
+                <Button loading={isProcessing}>Send Request</Button>
               </Form.Item>
             </Form>
           </div>

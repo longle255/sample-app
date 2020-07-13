@@ -51,10 +51,13 @@ const routes = [
     path: APP_URLS.settings_2FA,
     Component: lazy(() => import('pages/app/settings/TwoFAPage')),
   },
-
   {
     path: APP_URLS.notFound,
-    Component: lazy(() => import('pages/404')),
+    Component: lazy(() => import('pages/app/404')),
+  },
+  {
+    path: APP_URLS.error,
+    Component: lazy(() => import('pages/app/500')),
   },
 ];
 const mapStateToProps = ({ settings }) => ({

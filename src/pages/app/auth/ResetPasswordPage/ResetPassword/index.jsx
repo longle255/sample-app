@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import qs from 'qs';
 import trim from 'lodash-es/trim';
+import Button from 'components/app/Button';
 import { Link, Redirect } from 'react-router-dom';
 import { Input, Form, Alert } from 'antd';
 import { APP_URLS } from 'constants/APP_URLS';
-import style from 'components/styles/custom.module.scss';
-import classNames from 'classnames';
 import { authService } from 'services/AuthService';
 
 const mapStateToProps = ({ dispatch, router }) => ({ dispatch, router });
@@ -140,9 +139,7 @@ const ResetPassword = ({ router }) => {
         )}
 
         <Form.Item>
-          <button type="submit" className={classNames(style.btn, 'width-150', 'height-40')}>
-            Reset Password
-          </button>
+          <Button loading={isProcessing}>Reset password</Button>
         </Form.Item>
       </Form>
       <div className="form-actions separator clearfix" />

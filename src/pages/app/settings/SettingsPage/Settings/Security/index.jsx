@@ -1,8 +1,7 @@
 import { Form, Input, Alert } from 'antd';
 import React from 'react';
-import classNames from 'classnames';
 import { profileService, notificationService } from 'services';
-import style from 'components/styles/custom.module.scss';
+import Button from 'components/app/Button';
 
 const Security = ({ userProfile }) => {
   const [isProcessing, setIsProcessing] = React.useState(false);
@@ -107,9 +106,7 @@ const Security = ({ userProfile }) => {
               )}
 
               <Form.Item>
-                <button type="submit" className={classNames(style.btn, 'width-150', 'height-40')}>
-                  Reset Password
-                </button>
+                <Button loading={isProcessing}>Reset password</Button>
               </Form.Item>
             </Form>
           </div>

@@ -7,8 +7,8 @@ import TopBar from 'components/layout/TopBar';
 import Breadcrumbs from 'components/layout/Breadcrumbs';
 import Menu from 'components/layout/Menu';
 import Footer from 'components/layout/Footer';
-import Sidebar from 'components/layout/Sidebar';
-import SupportChat from 'components/layout/SupportChat';
+// import Sidebar from 'components/layout/Sidebar';
+// import SupportChat from 'components/layout/SupportChat';
 
 const mapStateToProps = ({ settings }) => ({
   isContentMaxWidth: settings.isContentMaxWidth,

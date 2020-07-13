@@ -4,8 +4,7 @@ import { Input, Form, Alert, Checkbox } from 'antd';
 import { Link } from 'react-router-dom';
 import { APP_URLS } from 'constants/APP_URLS';
 import Recaptcha from 'components/app/Recaptcha';
-import classNames from 'classnames';
-import style from 'components/styles/custom.module.scss';
+import Button from 'components/app/Button';
 import { signInAction, AuthActions, cleanAuthErrorAction } from 'redux/auth';
 import { appConfig } from 'config.js';
 
@@ -119,9 +118,9 @@ const Login = ({ authError, doSignIn, isLoading, doCleanUp }) => {
           >
             Remember me
           </Checkbox>
-          <button type="submit" className={classNames(style.btn, 'width-150', 'height-40')}>
-            Sign In
-          </button>
+          <Form.Item>
+            <Button loading={isLoading}>Sign In</Button>
+          </Form.Item>
         </Form.Item>
       </Form>
 
@@ -161,9 +160,7 @@ const Login = ({ authError, doSignIn, isLoading, doCleanUp }) => {
         </Form.Item>
 
         <Form.Item>
-          <button type="submit" className={classNames(style.btn, 'width-150', 'height-40')}>
-            Sign In
-          </button>
+          <Button loading={isLoading}>Sign In</Button>
         </Form.Item>
       </Form>
       <div className="form-actions separator clearfix" />

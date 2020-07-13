@@ -1,12 +1,11 @@
-import { Upload, Row, Col, Button, Select, Form, Input, Alert } from 'antd';
-import classNames from 'classnames';
+import { Upload, Row, Col, Select, Form, Input, Alert } from 'antd';
+import Button from 'components/app/Button';
 import React from 'react';
 import { connect } from 'react-redux';
 import { notificationService, profileService, fileService } from 'services';
 import { updateUserProfileSuccessAction } from 'redux/user';
 import { COMMON } from 'services/../constants/COMMON';
-import style from 'components/styles/custom.module.scss';
-import styleLocal from './style.module.scss';
+import style from './style.module.scss';
 
 const { Option } = Select;
 
@@ -95,7 +94,7 @@ const ProfileDetails = ({ userProfile, updateUserProfileSuccess, countries }) =>
             <Upload
               name="file"
               listType="picture-card"
-              className={styleLocal.avatarUploader}
+              className={style.avatarUploader}
               showUploadList={false}
               action={getUploadLink}
               headers={headers}
@@ -187,10 +186,8 @@ const ProfileDetails = ({ userProfile, updateUserProfileSuccess, countries }) =>
                   <Alert message={errorMessage} type="error" />
                 </Form.Item>
               )}
-              <Form.Item className="form-actions">
-                <button type="submit" className={classNames(style.btn, 'width-150', 'height-40')}>
-                  Update
-                </button>
+              <Form.Item>
+                <Button loading={isProcessing}>Update</Button>
               </Form.Item>
             </Form>
           </div>

@@ -17,7 +17,6 @@ const mapStateToProps = ({ settings, user }) => ({
   isMenuShadow: settings.isMenuShadow,
   leftMenuWidth: settings.leftMenuWidth,
   menuColor: settings.menuColor,
-  logo: settings.logo,
   role: user.role,
 });
 
@@ -32,7 +31,6 @@ const MenuLeft = ({
   isMenuShadow,
   leftMenuWidth,
   menuColor,
-  logo,
   role,
 }) => {
   const [selectedKeys, setSelectedKeys] = useState(store.get('app.menu.selectedKeys') || []);

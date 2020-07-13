@@ -7,6 +7,12 @@ export const UserActions = {
 
   IS_LOADING_USER_PROFILE: '[USER] IS_LOADING_USER_PROFILE',
 
+  ENABLE_2FA: '[USER] ENABLE_2FA',
+  IS_UPDATING_2FA: '[USER] IS_UPDATING_2FA',
+  CONFIRM_2FA: '[USER] CONFIRM_2FA',
+
+  DISABLE_2FA: '[USER] DISABLE_2FA',
+
   SHOW_2FA_ENABLE_FORM: '[USER] SHOW_2FA_ENABLE_FORM',
   SHOW_2FA_DISABLE_FORM: '[USER] SHOW_2FA_DISABLE_FORM',
 
@@ -41,3 +47,65 @@ export const getUserProfileFailureAction = error => {
 export const updateUserProfileSuccessAction = data => {
   return action(UserActions.ACTION_SUCCEED, data, UserActions.UPDATE_USER_PROFILE);
 };
+
+export const showEnable2FAFormAction = () => {
+  return action(UserActions.SHOW_2FA_ENABLE_FORM);
+};
+
+export const showDisable2FAFormAction = () => {
+  return action(UserActions.SHOW_2FA_DISABLE_FORM);
+};
+
+/* #region enable 2FA */
+export const enable2FAAction = () => {
+  return action(UserActions.ENABLE_2FA);
+};
+
+export const isEnabling2FAAction = () => {
+  return action(UserActions.IS_UPDATING_2FA);
+};
+
+export const enable2FASuccessAction = data => {
+  return action(UserActions.ACTION_SUCCEED, data, UserActions.ENABLE_2FA);
+};
+
+export const enable2FAFailureAction = error => {
+  return action(UserActions.ACTION_FAILED, error, UserActions.ENABLE_2FA);
+};
+/* #endregion */
+
+/* #region confirm 2FA */
+export const confirm2FAAction = data => {
+  return action(UserActions.CONFIRM_2FA, data);
+};
+
+export const isConfirming2FAAction = () => {
+  return action(UserActions.IS_UPDATING_2FA);
+};
+
+export const confirm2FASuccessAction = data => {
+  return action(UserActions.ACTION_SUCCEED, data, UserActions.CONFIRM_2FA);
+};
+
+export const confirm2FAFailureAction = error => {
+  return action(UserActions.ACTION_FAILED, error, UserActions.CONFIRM_2FA);
+};
+/* #endregion */
+
+/* #region disable 2FA */
+export const disable2FAAction = data => {
+  return action(UserActions.DISABLE_2FA, data);
+};
+
+export const isDisabling2FAAction = () => {
+  return action(UserActions.IS_UPDATING_2FA);
+};
+
+export const disable2FASuccessAction = data => {
+  return action(UserActions.ACTION_SUCCEED, data, UserActions.DISABLE_2FA);
+};
+
+export const disable2FAFailureAction = error => {
+  return action(UserActions.ACTION_FAILED, error, UserActions.DISABLE_2FA);
+};
+/* #endregion */

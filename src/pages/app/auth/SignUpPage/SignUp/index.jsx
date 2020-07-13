@@ -6,9 +6,8 @@ import { Input, Form, Checkbox, Alert } from 'antd';
 import { Link } from 'react-router-dom';
 import { siteConfig, appConfig } from 'config.js';
 import Recaptcha from 'components/app/Recaptcha';
-import style from 'components/styles/custom.module.scss';
+import Button from 'components/app/Button';
 import { APP_URLS } from 'constants/APP_URLS';
-import classNames from 'classnames';
 import { signUpAction, AuthActions, cleanAuthErrorAction } from 'redux/auth';
 
 const mapStateToProps = ({ dispatch, auth, router }) => ({
@@ -173,9 +172,7 @@ const Register = ({ router, doSignUp, doCleanUp, regSuccess, regError, isLoading
         )}
 
         <Form.Item>
-          <button type="submit" className={classNames(style.btn, 'width-150', 'height-40')}>
-            Sign Up
-          </button>
+          <Button loading={isLoading}>Sign Up</Button>
         </Form.Item>
       </Form>
       <div className="form-actions separator clearfix" />

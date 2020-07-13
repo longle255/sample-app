@@ -25,7 +25,7 @@ export default function Recaptcha(props) {
     displaySize = 'medium';
   }
   return (
-    <div ref={div} className={style[`recaptcha__${displaySize || 'default'}`]}>
+    <div ref={div} className={style[`recaptcha__${displaySize || 'default'}`]} style={{ width }}>
       {width !== null ? (
         <GRecaptcha
           render="explicit"

@@ -1,0 +1,164 @@
+import { Button, Select, Form, Input, Alert, Tag } from 'antd';
+import { Upload, Icon, Row, Col } from 'antd';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { injectIntl, FormattedMessage } from 'react-intl';
+import { profileService } from 'services';
+import { notificationService } from 'services';
+import { update2FAStateSuccessAction } from 'states/auth';
+import { get2FAInfoAction } from 'states/settings';
+import { COMMON } from 'services/../constants/COMMON';
+import './style.scss';
+
+const FormItem = Form.Item;
+
+@Form.create()
+class Disable2FACard extends Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      isProcessing: false,
+      hasSubmited: false,
+      loading: false,
+    };
+  }
+
+  componentDidMount() {
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    this.setState({
+      hasSubmited: true,
+    });
+
+    this.props.form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+
+      this.disable2FA(values);
+    });
+  }
+
+  disable2FA = async (values) => {
+    const { isProcessing } = this.state;
+    if (isProcessing) {
+      return;
+    }
+
+    this.setState({
+      isProcessing: true,
+    });
+
+    const data = {
+      twoFAToken: values.code,
+      password: values.password,
+    };
+
+    try {
+      const result = await profileService.disable2FA(data);
+
+      this.setState({
+        isProcessing: false,
+        errorMessage: null,
+      });
+
+      notificationService.showSuccessMessage(this.props.intl.formatMessage({id:'Disable2FACard.TWOFACTOR_AUTHENTICATION_HAS_BEEN_DISABLED'}) );
+      this.props.update2FAStateSuccess({ twoFAEnabled: false });
+    } catch (error) {
+      const errorMessage = error.message;
+      this.setState({
+        isProcessing: false,
+        errorMessage: errorMessage,
+      });
+    }
+  }
+
+  render() {
+    const { userProfile } = this.props;
+    if (!userProfile) {
+      return null;
+    }
+
+    const { hasSubmited, isProcessing, errorMessage } = this.state;
+    const { getFieldDecorator } = this.props.form;
+
+    return (
+      <div className="card snode-card disable-2fa-card shadow-sm bg-white">
+        <div className="card-header">
+          <div className="utils__title">
+            <strong><FormattedMessage id="Disable2FACard.DISABLE_TWOFACTOR_AUTHENTICATION" /></strong>
+          </div>
+        </div>
+        <div className="card-body">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="step-item-list">
+                <div className="step-item">
+                  <h4 className="title"><FormattedMessage id="Disable2FACard.ENTER_THE_CODE_FROM_YOUR" /></h4>
+                  <div className="content">
+                    <div className="row">
+                      <div className="col-md-4">
+                        <Form onSubmit={this.handleSubmit} className="disable-2fa-form">
+                          <FormItem label={this.props.intl.formatMessage({id:'Disable2FACard.PASSWORD'})} >
+                            {getFieldDecorator('password', {
+                              rules: [{ required: true,
+                                message: this.props.intl.formatMessage({id:'Disable2FACard.PLEASE_PROVIDE_THE_PASSWORD'})
+                              }],
+                            })(
+                              <Input type="password" />
+                            )}
+                          </FormItem>
+
+                          <FormItem label={this.props.intl.formatMessage({id:'Disable2FACard.CODE'})} >
+                            {getFieldDecorator('code', {
+                              rules: [{ required: true,
+                                message: this.props.intl.formatMessage({id:'Disable2FACard.PLEASE_PROVIDE_THE_CODE'})
+                              }],
+                            })(
+                              <Input />
+                            )}
+                          </FormItem>
+                          {errorMessage &&
+                            <FormItem label=' ' colon={false}>
+                              <Alert message={errorMessage} type="error" />
+                            </FormItem>
+                          }
+                          <FormItem className="form-actions">
+                            <Button type="primary" htmlType="submit" className="btn-enable float-right"
+                              loading={isProcessing}>
+                              <FormattedMessage id="Disable2FACard.DISABLE" />
+                            </Button>
+                          </FormItem>
+                        </Form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state: any, ownProps: any) => ({
+});
+
+const mapDispatchToProps = (dispatch: any, ownProps: any) => ({
+  update2FAStateSuccess: (data) => {
+    dispatch(update2FAStateSuccessAction(data));
+  },
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectIntl(Disable2FACard));

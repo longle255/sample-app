@@ -2,7 +2,7 @@ import { Switch } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { UserActions } from 'redux/user';
+import { showEnable2FAFormAction, showDisable2FAFormAction } from 'redux/user';
 
 const TwoFactorAuth = ({ userProfile, showEnable2FAForm, showDisable2FAForm }) => {
   const onChange = checked => {
@@ -36,10 +36,10 @@ const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch: any) => ({
   showEnable2FAForm: () => {
-    dispatch({ type: UserActions.SHOW_2FA_ENABLE_FORM });
+    dispatch(showEnable2FAFormAction());
   },
   showDisable2FAForm: () => {
-    dispatch({ type: UserActions.SHOW_2FA_DISABLE_FORM });
+    dispatch(showDisable2FAFormAction());
   },
 });
 

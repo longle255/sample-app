@@ -4,12 +4,10 @@ import qs from 'qs';
 import trim from 'lodash-es/trim';
 import { Form } from 'antd';
 import { Link, Redirect } from 'react-router-dom';
-
+import Button from 'components/app/Button';
 import { APP_URLS } from 'constants/APP_URLS';
 import Recaptcha from 'components/app/Recaptcha';
-import classNames from 'classnames';
 import { authService } from 'services/AuthService';
-import style from 'components/styles/custom.module.scss';
 
 const mapStateToProps = ({ dispatch, router }) => ({ dispatch, router });
 
@@ -111,9 +109,7 @@ const VerifyEmail = ({ router }) => {
         </Form.Item>
 
         <Form.Item>
-          <button type="submit" className={classNames(style.btn, 'width-150', 'height-40')}>
-            Verify
-          </button>
+          <Button loading={isProcessing}>Verify</Button>
         </Form.Item>
       </Form>
       <div className="form-actions separator clearfix" />
