@@ -105,7 +105,7 @@ const SendInvitation = () => {
                 </Form.Item>
               )}
               <Form.Item>
-                <Button loading={isProcessing}>Send Request</Button>
+                <Button loading={isProcessing}>Send Invitation</Button>
               </Form.Item>
             </Form>
           </div>

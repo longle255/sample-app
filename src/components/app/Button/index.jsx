@@ -4,7 +4,7 @@ import omit from 'lodash-es/omit';
 import style from './style.module.scss';
 
 export default function Button(props) {
-  const { loading } = props;
+  const { loading, children } = props;
   return (
     <button
       type="submit"
@@ -12,7 +12,7 @@ export default function Button(props) {
       disabled={loading}
       {...omit(props, ['loading', 'htmlType'])}
     >
-      Send Request
+      {children}
     </button>
   );
 }
