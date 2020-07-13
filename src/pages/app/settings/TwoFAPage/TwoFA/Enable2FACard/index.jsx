@@ -1,8 +1,10 @@
-import { Form, Input, Alert } from 'antd';
+import { Form, Input, Alert, Tooltip } from 'antd';
 import Button from 'components/app/Button';
 import React from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import { CheckOutlined } from '@ant-design/icons';
 import { confirm2FAAction, enable2FAAction, UserActions } from 'redux/user';
 import './style.scss';
 
@@ -15,9 +17,19 @@ const Enable2FACard = ({
   isLoading,
   error,
 }) => {
+  const [isCopied, setIsCopied] = React.useState(null);
+
   React.useEffect(() => {
     enable2FA();
   }, [enable2FA]);
+
+  const onCopy = () => {
+    setIsCopied(true);
+
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
+  };
 
   const onFinish = async values => {
     if (isLoading) {
@@ -53,20 +65,20 @@ const Enable2FACard = ({
       <div className="card-body">
         <div className="row">
           <div className="col-md-12">
-            <h3>
+            <h5>
               <FormattedMessage id="Enable2FACard.FOLLOW_THE_STEPS_BELOW_TO" />
-            </h3>
-
+            </h5>
+            <br />
             <div className="step-item-list">
               <div className="step-item">
-                <h4 className="title">
+                <h6 className="title">
                   <FormattedMessage id="Enable2FACard.1_DOWNLOAD_A_TWOFACTOR_AUTHENTICATION" />
-                </h4>
+                </h6>
               </div>
               <div className="step-item">
-                <h4 className="title">
+                <h6 className="title">
                   <FormattedMessage id="Enable2FACard.2_SCAN_THIS_QR_CODE" />
-                </h4>
+                </h6>
                 <div className="content">
                   <div className="qr-block">
                     <img src={qrImage} alt="QR" />
@@ -75,33 +87,48 @@ const Enable2FACard = ({
                   <div className="description">
                     <strong>
                       <FormattedMessage id="Enable2FACard.CANT_SCAN_THE_CODE" />
+                      {'  '}
                     </strong>
                     <FormattedMessage id="Enable2FACard.YOU_CAN_ADD_THE_CODE" />
                   </div>
                   <div className="description">
                     <strong>
                       <FormattedMessage id="Enable2FACard.ACCOUNT" />
+                      {'  '}
                     </strong>{' '}
                     {userProfile.email}
                   </div>
                   <div className="description">
                     <strong>
                       <FormattedMessage id="Enable2FACard.KEY" />
+                      {'  '}
                     </strong>{' '}
-                    <code>{code.match(/(.{1,4})/g).join(' ')}</code>
+                    <CopyToClipboard text={code} onCopy={onCopy}>
+                      <Tooltip title="Click to copy">
+                        <code className="qr-code">{code.match(/(.{1,4})/g).join(' ')}</code>
+                      </Tooltip>
+                    </CopyToClipboard>
+                    {isCopied && (
+                      <span className="copied-text">
+                        {'  '}
+                        <CheckOutlined />
+                        <FormattedMessage id="ReferralPage.ReferralCode.COPIED" />
+                      </span>
+                    )}
                   </div>
                   <div className="description">
                     <strong>
                       <FormattedMessage id="Enable2FACard.TIME_BASED" />
-                    </strong>{' '}
+                    </strong>
+                    {'  '}
                     <FormattedMessage id="Enable2FACard.YES" />
                   </div>
                 </div>
               </div>
               <div className="step-item">
-                <h4 className="title">
+                <h6 className="title">
                   <FormattedMessage id="Enable2FACard.3_ENTER_THE_CODE_FROM" />
-                </h4>
+                </h6>
                 <div className="content">
                   <div className="row">
                     <div className="col-md-6">
