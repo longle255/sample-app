@@ -5,6 +5,7 @@ import { userReducer } from './user';
 import { settingsReducer } from './settings';
 import { authReducer } from './auth';
 import { referralsReducer } from './referrals';
+import { websocketReducer } from './websocket';
 
 export const createRootReducer = history =>
   combineReducers({
@@ -14,4 +15,5 @@ export const createRootReducer = history =>
     settings: settingsReducer,
     auth: authReducer,
     referrals: referralsReducer,
+    websocket: websocketReducer,
   });

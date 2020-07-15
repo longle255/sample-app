@@ -4,6 +4,7 @@ const appConfig = {
   appUrl: process.env.APP_URL,
   webUrl: process.env.WEB_URL,
   wsUri: process.env.WS_URI,
+  wsActionPrefix: process.env.WS_ACTION_PREFIX || '/socket',
   explorerUrl: process.env.EXPLORER_URL,
 };
 

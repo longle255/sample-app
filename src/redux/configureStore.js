@@ -1,18 +1,23 @@
+import io from 'socket.io-client';
+import createSocketIoMiddleware from 'redux-socket.io';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from 'redux';
 import { logger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'connected-react-router';
+import { appConfig } from 'config';
 import { gaMiddleware } from './analytics';
 import { createRootReducer } from './reducers';
 import { rootSaga } from './sagas';
 import { history } from './createHistory';
 
 export default function configureStore(initialState) {
+  const socket = io(process.env.WS_URI);
+  const socketIoMiddleware = createSocketIoMiddleware(socket, appConfig.wsActionPrefix);
   // middlewares
   const sagaMiddleware = createSagaMiddleware();
   const routeMiddleware = routerMiddleware(history);
-  const middlewares = [gaMiddleware, sagaMiddleware, routeMiddleware];
+  const middlewares = [gaMiddleware, sagaMiddleware, routeMiddleware, socketIoMiddleware];
 
   if (process.env.NODE_ENV === 'development') {
     middlewares.push(logger);
