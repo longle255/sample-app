@@ -29,8 +29,8 @@ const Settings = ({ getUserProfile, userProfile, ping }) => {
       <div className="row">
         <div className="col-lg-7">
           <ProfileDetails userProfile={userProfile} />
-          <button onClick={e => ping('test')} type="button">
-            Test
+          <button onClick={() => ping('test')} type="button">
+            Test Websocket
           </button>
         </div>
         <div className="col-lg-3">

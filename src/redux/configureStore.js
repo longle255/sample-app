@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from 'redux';
-import { logger } from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'connected-react-router';
 import { appConfig } from 'config';
@@ -20,6 +20,10 @@ export default function configureStore(initialState) {
   const middlewares = [gaMiddleware, sagaMiddleware, routeMiddleware, socketIoMiddleware];
 
   if (process.env.NODE_ENV === 'development') {
+    const logger = createLogger({
+      predicate: (getState, action) => action.type !== '@@router/LOCATION_CHANGE', // do not log actions of router
+      collapsed: (getState, action) => action.type, // collapse on all actions
+    });
     middlewares.push(logger);
   }
 
