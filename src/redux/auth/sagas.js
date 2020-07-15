@@ -80,7 +80,11 @@ export function* loadCurrentUser(pathname) {
     if (result) {
       yield put(signInSuccessAction(result));
       yield put(setUserProfileAction(result));
-      yield history.push(pathname);
+      if (pathname !== APP_URLS.signIn) {
+        yield history.push(pathname);
+      } else {
+        yield history.push(APP_URLS.dashboard);
+      }
     } else {
       throw new Error('Error while loadCurrentUser');
     }
