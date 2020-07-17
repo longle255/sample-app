@@ -35,7 +35,8 @@ export function* signIn({ payload }) {
         const userId = result.profile.id;
         window.ga('set', 'userId', userId);
       }
-      yield put(loadCurrentUserAction(result));
+      // eslint-disable-next-line no-restricted-globals
+      yield put(loadCurrentUserAction(location.pathname));
       yield put(signInSuccessAction(result));
       notificationService.showSuccessMessage('You have successfully logged in!', 'Logged In');
     } else {
@@ -70,7 +71,7 @@ export function* signUp({ payload }) {
   }
 }
 
-export function* loadCurrentUser(pathname) {
+export function* loadCurrentUser(action) {
   try {
     if (!StorageService.getToken()) {
       return;
@@ -80,8 +81,8 @@ export function* loadCurrentUser(pathname) {
     if (result) {
       yield put(signInSuccessAction(result));
       yield put(setUserProfileAction(result));
-      if (pathname !== APP_URLS.signIn) {
-        yield history.push(pathname);
+      if (action.payload !== APP_URLS.signIn) {
+        yield history.push(action.payload);
       } else {
         yield history.push(APP_URLS.dashboard);
       }
@@ -109,6 +110,6 @@ export default function* rootSaga() {
     takeEvery(AuthActions.LOAD_CURRENT_USER, loadCurrentUser),
     takeEvery(AuthActions.SIGN_OUT, signOut),
     // eslint-disable-next-line no-restricted-globals
-    loadCurrentUser(location.pathname), // run once on app load to check user auth
+    loadCurrentUser({ payload: location.pathname }), // run once on app load to check user auth
   ]);
 }

@@ -45,8 +45,8 @@ export const signUpFailureAction = error => {
   return action(AuthActions.ACTION_FAILED, error, AuthActions.SIGN_UP);
 };
 
-export const loadCurrentUserAction = () => {
-  return action(AuthActions.LOAD_CURRENT_USER);
+export const loadCurrentUserAction = redirect => {
+  return action(AuthActions.LOAD_CURRENT_USER, redirect);
 };
 
 export const signOutAction = () => {

@@ -12,7 +12,7 @@ import { rootSaga } from './sagas';
 import { history } from './createHistory';
 
 export default function configureStore(initialState) {
-  const socket = io(process.env.WS_URI);
+  const socket = io(appConfig.wsUri);
   const socketIoMiddleware = createSocketIoMiddleware(socket, appConfig.wsActionPrefix);
   // middlewares
   const sagaMiddleware = createSagaMiddleware();
