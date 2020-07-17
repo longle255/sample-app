@@ -1,14 +1,14 @@
-import React from 'react'
-import { Layout } from 'antd'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import classNames from 'classnames'
-import TopBar from 'components/cleanui/layout/TopBar'
-import Breadcrumbs from 'components/cleanui/layout/Breadcrumbs'
-import Menu from 'components/cleanui/layout/Menu'
-import Footer from 'components/cleanui/layout/Footer'
-import Sidebar from 'components/cleanui/layout/Sidebar'
-import SupportChat from 'components/cleanui/layout/SupportChat'
+import React from 'react';
+import { Layout } from 'antd';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import classNames from 'classnames';
+import TopBar from 'components/layout/TopBar';
+import Breadcrumbs from 'components/layout/Breadcrumbs';
+import Menu from 'components/layout/Menu';
+import Footer from 'components/layout/Footer';
+// import Sidebar from 'components/layout/Sidebar';
+// import SupportChat from 'components/layout/SupportChat';
 
 const mapStateToProps = ({ settings }) => ({
   isContentMaxWidth: settings.isContentMaxWidth,
@@ -19,7 +19,7 @@ const mapStateToProps = ({ settings }) => ({
   isBorderless: settings.isBorderless,
   isTopbarFixed: settings.isTopbarFixed,
   isGrayTopbar: settings.isGrayTopbar,
-})
+});
 
 const MainLayout = ({
   children,
@@ -44,8 +44,8 @@ const MainLayout = ({
           cui__layout__borderless: isBorderless,
         })}
       >
-        <Sidebar />
-        <SupportChat />
+        {/* <Sidebar /> */}
+        {/* <SupportChat /> */}
         <Menu />
         <Layout>
           <Layout.Header
@@ -66,7 +66,7 @@ const MainLayout = ({
         </Layout>
       </Layout>
     </div>
-  )
-}
+  );
+};
 
-export default withRouter(connect(mapStateToProps)(MainLayout))
+export default withRouter(connect(mapStateToProps)(MainLayout));

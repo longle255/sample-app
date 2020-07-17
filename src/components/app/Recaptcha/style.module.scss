@@ -1,0 +1,11 @@
+.recaptcha {
+  &__medium {
+    transform: scale(0.7);
+    transform-origin: 0 0;
+  }
+
+  &__small {
+    transform: scale(0.5);
+    transform-origin: 0 0;
+  }
+}

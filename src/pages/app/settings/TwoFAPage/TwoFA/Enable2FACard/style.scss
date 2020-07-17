@@ -1,0 +1,18 @@
+.enable-2fa-card {
+  .card-body {
+    h3 {
+      margin-bottom: 1em;
+    }
+    .qr-block {
+      margin: 0.8em;
+    }
+    .step-item-list {
+      .step-item {
+        margin-bottom: 1em;
+      }
+    }
+    .qr-code {
+      cursor: pointer;
+    }
+  }
+}

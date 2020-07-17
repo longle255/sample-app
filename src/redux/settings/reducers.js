@@ -1,17 +1,19 @@
-import store from 'store'
-import actions from './actions'
+import store from 'store';
+import { menu } from 'constants/menu';
+import { SettingActions } from './actions';
 
 const STORED_SETTINGS = storedSettings => {
-  const settings = {}
+  const settings = {};
   Object.keys(storedSettings).forEach(key => {
-    const item = store.get(`app.settings.${key}`)
-    settings[key] = typeof item !== 'undefined' ? item : storedSettings[key]
-  })
-  return settings
-}
+    const item = store.get(`app.settings.${key}`);
+    settings[key] = typeof item !== 'undefined' ? item : storedSettings[key];
+  });
+  return settings;
+};
 
 const initialState = {
   ...STORED_SETTINGS({
+    menuData: menu,
     authProvider: 'firebase', // firebase, jwt
     logo: 'Clean UI Pro',
     locale: 'en-US',
@@ -38,13 +40,13 @@ const initialState = {
     isSquaredBorders: false,
     isBorderless: false,
   }),
-}
+};
 
-export default function settingsReducer(state = initialState, action) {
+export function settingsReducer(state = initialState, action) {
   switch (action.type) {
-    case actions.SET_STATE:
-      return { ...state, ...action.payload }
+    case SettingActions.SET_STATE:
+      return { ...state, ...action.payload };
     default:
-      return state
+      return state;
   }
 }
