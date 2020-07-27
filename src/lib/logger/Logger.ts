@@ -3,6 +3,7 @@ import { format, formatWithOptions } from 'util';
 import * as winston from 'winston';
 
 import { env } from '../../env';
+import { paddingRight } from '../../utils';
 
 /**
  * core.Log
@@ -24,6 +25,9 @@ const LOG_LEVEL = {
   error: 1,
 };
 export class Logger {
+
+  public winston= winston;
+
   public static DEFAULT_SCOPE = 'app';
 
   private static parsePathToScope(filepath: string): string {
@@ -34,6 +38,7 @@ export class Logger {
       filepath = filepath.replace('.ts', '');
       filepath = filepath.replace('.js', '');
       filepath = filepath.replace(path.sep, ':');
+      filepath = filepath.replace(/Service|Controller|Middleware/, '');
     }
     return filepath;
   }
@@ -83,7 +88,6 @@ export class Logger {
   }
 
   private formatScope(): string {
-    // return `|${paddingRight(this.scope, ' ', 25)}|`;
-    return `|${this.scope}|`;
+    return `|${paddingRight(this.scope, ' ', 23)}|`;
   }
 }
