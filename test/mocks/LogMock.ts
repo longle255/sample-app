@@ -1,4 +1,4 @@
-import { Logger } from '../../../src/lib/logger';
+import { Logger } from '../../src/lib/logger';
 
 export class LogMock extends Logger {
   public debugMock = jest.fn();

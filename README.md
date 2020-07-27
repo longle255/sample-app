@@ -55,8 +55,6 @@ The swagger and the monitor route can be altered in the `.env` file.
 | Route          | Description |
 | -------------- | ----------- |
 | **/api**       | Shows us the name, description and the version of the package.json |
-| **/graphql**   | Route to the graphql editor or the query/mutations requests |
-| **/swagger**   | This is the Swagger UI with our API documentation |
 | **/monitor**   | Shows a small monitor page for the server |
 | **/api/users** | Example entity endpoint |
 | **/api/pets**  | Example entity endpoint |
@@ -83,11 +81,6 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/api/types/**                | GraphQL types ,input-types and scalar types |
 | **src/api/** schema.gql           | Generated GraphQL schema |
 | **src/api/** swagger.json         | Swagger documentation |
-| **src/auth/**                     | Authentication checkers and services |
-| **src/core/**                     | The core features like logger and env variables |
-| **src/database/factories**        | Factory the generate fake entities |
-| **src/database/migrations**       | Database migration scripts |
-| **src/database/seeds**            | Seeds to create some data in the database |
 | **src/decorators/**               | Custom decorators like @Logger & @EventDispatch |
 | **src/loaders/**                  | Loader is a place where you can configure the app |
 | **src/public/**                   | Static assets (fonts, css, js, img). |
@@ -117,9 +110,6 @@ The swagger and the monitor route can be altered in the `.env` file.
 | [Jest](http://facebook.github.io/jest/) | Delightful JavaScript Testing Library for unit and e2e tests |
 | [supertest](https://github.com/visionmedia/supertest) | Super-agent driven library for testing node.js HTTP servers using a fluent API |
 | [nock](https://github.com/node-nock/nock) | HTTP mocking and expectations library |
-| [swagger Documentation](http://swagger.io/) | API Tool to describe and document the api. |
-| [SQLite Documentation](https://www.sitepoint.com/getting-started-sqlite3-basic-commands/) | Getting Started with SQLite3 – Basic Commands. |
-| [GraphQL Documentation](http://graphql.org/graphql-js/) | A query language for the API. |
 | [DataLoader Documentation](https://github.com/facebook/dataloader) | DataLoader is a generic utility to be used as part of the application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching. |
 
 ## ❯ License

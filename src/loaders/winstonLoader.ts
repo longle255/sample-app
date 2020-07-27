@@ -20,6 +20,7 @@ export const winstonLoader: MicroframeworkLoader = () => {
         level: env.log.level,
         handleExceptions: true,
         format: _format(),
+        silent: env.isTest
       }),
     ],
   });

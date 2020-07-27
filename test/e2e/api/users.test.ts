@@ -1,64 +1,96 @@
-// import * as nock from 'nock';
-// import request from 'supertest';
-// import { runSeed } from 'typeorm-seeding';
+import request from 'supertest';
+import { Container } from 'typedi';
+import { JobService } from '../../../src/api/services/JobService';
+import { JobServiceMock } from '../../mocks/JobServiceMock';
+import { IUser } from '../../../src/api/models';
+import { bootstrapApp, BootstrapSettings } from '../utils/bootstrap';
+import { UserFactory } from '../../fixtures/UserFactory';
+import { cleanAll } from '../../lib/database';
 
-// import { User } from '../../../src/api/models/User';
-// import { CreateBruce } from '../../../src/database/seeds/CreateBruce';
-// import { BootstrapSettings } from '../utils/bootstrap';
-// import { prepareServer } from '../utils/server';
+import { AuthService } from '../../../src/api/services';
 
-// describe('/api/users', () => {
+const userFactory = new UserFactory();
 
-//     let bruce: User;
-//     let bruceAuthorization: string;
-//     let settings: BootstrapSettings;
+describe('/api/v1/users', () => {
 
-//     // -------------------------------------------------------------------------
-//     // Setup up
-//     // -------------------------------------------------------------------------
+  let user: IUser;
+  let userAuthToken: string;
 
-//     beforeAll(async () => {
-//         settings = await prepareServer({ migrate: true });
-//         bruce = await runSeed<User>(CreateBruce);
-//         bruceAuthorization = Buffer.from(`${bruce.username}:1234`).toString('base64');
-//     });
+  let admin: IUser;
+  let adminAuthToken: string;
+  let jobService: JobServiceMock
+  let settings: BootstrapSettings;
+  let authService: AuthService;
 
-//     // -------------------------------------------------------------------------
-//     // Tear down
-//     // -------------------------------------------------------------------------
+  // -------------------------------------------------------------------------
+  // Setup up
+  // -------------------------------------------------------------------------
 
-//     afterAll(async () => {
-//         nock.cleanAll();
-//         await closeDatabase(settings.connection);
-//     });
+  beforeAll(async () => {
+    // fake services that is not required;
+    Container.reset();
+    jobService = new JobServiceMock();
+    Container.set(JobService, jobService);
 
-//     // -------------------------------------------------------------------------
-//     // Test cases
-//     // -------------------------------------------------------------------------
+    settings = await bootstrapApp();
+    authService = Container.get<AuthService>(AuthService);
 
-//     test('GET: / should return a list of users', async (done) => {
-//         const response = await request(settings.app)
-//             .get('/api/users')
-//             .set('Authorization', `Basic ${bruceAuthorization}`)
-//             .expect('Content-Type', /json/)
-//             .expect(200);
+    user = await userFactory.createUser();
+    let token = await authService.generateAuthToken(user);
+    userAuthToken = `${token.token_type} ${token.access_token}`;
 
-//         expect(response.body.length).toBe(1);
-//         done();
-//     });
+    admin = await userFactory.createAdmin();
+    token = await authService.generateAuthToken(admin);
+    adminAuthToken = `${token.token_type} ${token.access_token}`;
+    await userFactory.createMany(10);
+  });
 
-//     test('GET: /:id should return bruce', async (done) => {
-//         const response = await request(settings.app)
-//             .get(`/api/users/${bruce.id}`)
-//             .set('Authorization', `Basic ${bruceAuthorization}`)
-//             .expect('Content-Type', /json/)
-//             .expect(200);
+  afterAll(async () => {
+    await cleanAll();
+    await settings.shutdown();
+  });
 
-//         expect(response.body.id).toBe(bruce.id);
-//         expect(response.body.firstName).toBe(bruce.firstName);
-//         expect(response.body.lastName).toBe(bruce.lastName);
-//         expect(response.body.email).toBe(bruce.email);
-//         done();
-//     });
 
-// });
+  // -------------------------------------------------------------------------
+  // Test cases
+  // -------------------------------------------------------------------------
+
+  test('GET: /api/v1/users/profile should return current user profile', async () => {
+    let response = await request(settings.server)
+      .get('/api/v1/users/profile')
+      .set('Authorization', userAuthToken)
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(response.body.email).toBe(user.email);
+
+    response = await request(settings.server)
+      .get('/api/v1/users/profile')
+      .set('Authorization', adminAuthToken)
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(response.body.email).toBe(admin.email);
+  });
+
+  test('GET: /api/v1/users should not be accessible for user', async () => {
+    const response = await request(settings.server)
+      .get(`/api/v1/users`)
+      .set('Authorization', userAuthToken)
+      .expect('Content-Type', /json/)
+      .expect(403);
+    expect(response.body.statusCode).toBe(403);
+  });
+
+  test('GET: /api/v1/users should be accessible for user', async () => {
+    const response = await request(settings.server)
+      .get(`/api/v1/users`)
+      .set('Authorization', adminAuthToken)
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(response.body.total).toBeDefined();
+    expect(response.body.data.length).toBeGreaterThan(1);
+  });
+
+});

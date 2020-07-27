@@ -30,6 +30,7 @@
 	"contributors": [],
 	"dependencies": {
 		"@koa/multer": "^2.0.2",
+		"@shopify/jest-koa-mocks": "^2.2.3",
 		"@typegoose/typegoose": "^6.5.0",
 		"agenda": "^3.1.0",
 		"axios": "^0.19.0",
@@ -86,28 +87,12 @@
 		"speakeasy": "^2.0.0",
 		"stop-agenda": "^0.0.6",
 		"supertest": "^4.0.2",
-		"ts-node": "8.10.2",
+		"ts-node": "^8.10.2",
 		"tslib": "^2.0.0",
 		"typedi": "0.8.0",
-		"typescript": "3.7.4",
+		"typescript": "^3.9.7",
 		"uuid": "^3.4.0",
-		"winston": "3.2.1"
-	},
-	"jest": {
-		"transform": {
-			".(ts|tsx)": "<rootDir>/test/preprocessor.js"
-		},
-		"testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-		"moduleFileExtensions": [
-			"ts",
-			"tsx",
-			"js",
-			"json"
-		],
-		"testEnvironment": "node",
-		"setupFilesAfterEnv": [
-			"./test/unit/lib/setup.ts"
-		]
+		"winston": "^3.3.3"
 	},
 	"license": "MIT",
 	"devDependencies": {
@@ -120,7 +105,8 @@
 		"@types/figlet": "^1.2.0",
 		"@types/helmet": "0.0.45",
 		"@types/http-errors": "^1.6.1",
-		"@types/jest": "24.0.25",
+		"@types/jest": "^26.0.7",
+		"@types/jsonfile": "^6.0.0",
 		"@types/jsonwebtoken": "^8.3.2",
 		"@types/koa": "^2.0.48",
 		"@types/koa-basic-auth": "^2.0.3",
@@ -148,7 +134,9 @@
 		"eslint": "^7.4.0",
 		"eslint-config-prettier": "^6.11.0",
 		"eslint-plugin-jest": "^23.18.0",
-		"jest": "24.9.0",
+		"http-terminator": "^2.0.3",
+		"istanbul-reports": "^3.0.2",
+		"jest": "^26.1.0",
 		"mock-express-request": "^0.2.0",
 		"mock-express-response": "^0.2.1",
 		"ncp": "^2.0.0",
@@ -156,7 +144,6 @@
 		"prettier": "^2.0.5",
 		"shipit-cli": "^5.1.0",
 		"shipit-deploy": "^5.1.0",
-		"sqlite3": "^4.0.0",
-		"ts-jest": "24.2.0"
+		"ts-jest": "^26.1.3"
 	}
 }

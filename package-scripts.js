@@ -150,14 +150,20 @@ module.exports = {
 		 * These run various kinds of tests. Default is unit.
 		 */
 		test: {
-			default: 'nps test.unit',
+			default: {
+				script: series(
+					'nps banner.test',
+					eslint(`./test/**/*.ts`),
+					'cross-env NODE_ENV=test jest test -i --detectOpenHandles --forceExit',
+				),
+			},
 			unit: {
 				default: {
 					script: series('nps banner.testUnit', 'nps test.unit.pretest', 'nps test.unit.run'),
 					description: 'Runs the unit tests',
 				},
 				pretest: {
-					script: tslint(`./test/unit/**.ts`),
+					script: eslint(`./test/unit/**/*.ts`),
 					hiddenFromHelp: true,
 				},
 				run: {
@@ -179,7 +185,7 @@ module.exports = {
 					description: 'Runs the integration tests',
 				},
 				pretest: {
-					script: tslint(`./test/integration/**.ts`),
+					script: eslint(`./test/integration/**/*.ts`),
 					hiddenFromHelp: true,
 				},
 				run: {
@@ -202,12 +208,12 @@ module.exports = {
 					description: 'Runs the e2e tests',
 				},
 				pretest: {
-					script: tslint(`./test/e2e/**.ts`),
+					script: eslint(`./test/e2e/**/*.ts`),
 					hiddenFromHelp: true,
 				},
 				run: {
 					// -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
-					script: 'cross-env NODE_ENV=test jest --testPathPattern=e2e -i',
+					script: 'cross-env NODE_ENV=test jest --testPathPattern=e2e -i --detectOpenHandles --forceExit',
 					hiddenFromHelp: true,
 				},
 				verbose: {
@@ -226,6 +232,7 @@ module.exports = {
 		banner: {
 			build: banner('build'),
 			serve: banner('serve'),
+			test: banner('test'),
 			testUnit: banner('test.unit'),
 			testIntegration: banner('test.integration'),
 			testE2E: banner('test.e2e'),
@@ -261,10 +268,6 @@ function run(path) {
 function runFast(path) {
 	// compile only, does not perform typecheck
 	return `ts-node-transpile-only ${path}`;
-}
-
-function tslint(path) {
-	return `tslint -c ./tslint.json ${path} --format stylish`;
 }
 
 function eslint(path) {

@@ -18,7 +18,7 @@ import { DocumentType } from '@typegoose/typegoose';
 
 import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 import { CaptchaMiddleware } from '../middlewares/CaptchaMiddleware';
-import { IUser } from '../models/User';
+import { IUser, ROLES_ALL } from '../models/User';
 import { Pagination } from '../services/Pagination';
 import { UserService } from '../services/UserService';
 import {
@@ -32,7 +32,7 @@ import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema'
 
 @JsonController('/users')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   @Get()
   @Authorized('admin')
@@ -71,13 +71,13 @@ export class UserController {
   }
 
   @Get('/profile')
-  @Authorized('user')
+  @Authorized(ROLES_ALL)
   public async findMe(@CurrentUser() user?: DocumentType<IUser>): Promise<DocumentType<IUser>> {
     return this.userService.findOne({ _id: user._id });
   }
 
   @Put('/profile/update')
-  @Authorized('user')
+  @Authorized(ROLES_ALL)
   public async updateProfile(
     @CurrentUser() user: DocumentType<IUser>,
     @Body({ validate: { whitelist: true, forbidNonWhitelisted: true } }) body: UserUpdateProfileSchema,
@@ -86,7 +86,7 @@ export class UserController {
   }
 
   @Put('/profile/change-password')
-  @Authorized('user')
+  @Authorized(ROLES_ALL)
   public async changePassword(
     @CurrentUser() user: DocumentType<IUser>,
     @Body({ validate: true }) body: UserChangePasswordSchema,
@@ -95,13 +95,13 @@ export class UserController {
   }
 
   @Put('/profile/enable-2fa')
-  @Authorized('user')
+  @Authorized(ROLES_ALL)
   public async enable2FA(@CurrentUser() user: DocumentType<IUser>): Promise<any> {
     return this.userService.enable2FA(user._id);
   }
 
   @Put('/profile/confirm-2fa')
-  @Authorized('user')
+  @Authorized(ROLES_ALL)
   public async confirm2FA(
     @CurrentUser() user: DocumentType<IUser>,
     @Body({ validate: true }) body: UserConfirm2FASchema,
@@ -110,7 +110,7 @@ export class UserController {
   }
 
   @Put('/profile/disable-2fa')
-  @Authorized('user')
+  @Authorized(ROLES_ALL)
   public async disable2FA(
     @CurrentUser() user: DocumentType<IUser>,
     @Body({ validate: true }) body: UserDisable2FASchema,
@@ -119,7 +119,7 @@ export class UserController {
   }
 
   @Post('/profile/send-invitation')
-  @Authorized('user')
+  @Authorized(ROLES_ALL)
   @UseBefore(CaptchaMiddleware)
   public async sendInvitationEmail(
     @CurrentUser() user: DocumentType<IUser>,
@@ -129,7 +129,7 @@ export class UserController {
   }
 
   @Get('/profile/referrals')
-  @Authorized('user')
+  @Authorized(ROLES_ALL)
   public async getReferrals(@CurrentUser() user: DocumentType<IUser>, @QueryParams() params: any): Promise<Pagination<IUser>> {
     return this.userService.getReferrals(user._id, {
       pageSize: params.pageSize ? parseInt(params.pageSize, 10) : 10,

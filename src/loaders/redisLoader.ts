@@ -1,4 +1,4 @@
-import { MicroframeworkLoader } from 'microframework-w3tec';
+import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
 import { createClient, RedisClient } from 'redis';
 import { Container } from 'typedi';
 
@@ -21,10 +21,11 @@ function createConnection(): Promise<RedisClient> {
   });
 }
 
-export const redisLoader: MicroframeworkLoader = async () => {
+export const redisLoader: MicroframeworkLoader = async (settings: MicroframeworkSettings | undefined) => {
   log.debug('Loading redis started');
   const now = Date.now();
   const redisClient = await createConnection();
   Container.set('redisClient', redisClient);
+  settings.setData('redisClient', redisClient);
   log.verbose('Redis loaded, took %d ms', Date.now() - now);
 };
