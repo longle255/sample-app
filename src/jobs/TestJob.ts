@@ -3,7 +3,7 @@ import { Logger } from '../lib/logger';
 export const TestJob = async (job, done) => {
 	const log = new Logger(__filename);
 	try {
-		log.debug('test job %s', job.attr);
+		log.debug('test job %o', job.attr);
 
 		log.debug('test job done %s', new Date());
 		done();

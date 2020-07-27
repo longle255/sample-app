@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { format, inspect } from 'util';
+import { format, formatWithOptions } from 'util';
 import * as winston from 'winston';
 
 import { env } from '../../env';
@@ -72,16 +72,18 @@ export class Logger {
     if (LOG_LEVEL[level] > LOG_LEVEL[env.log.level]) {
       return;
     }
-    // tslint:disable-next-line:no-null-keyword
-    const formattedArgs = args.map(a => (typeof a === 'object' ? inspect(a, { depth: null }) : a));
+
+    const formattedArgs = env.isProduction ? format(message, args) : formatWithOptions({ colors: true }, message, args);
+
     if (winston) {
       winston[level](
-        `${this.formatScope()} ${args.length ? format(message, formattedArgs) : message instanceof Error ? message.stack : message}`,
+        `${this.formatScope()} ${args.length ? formattedArgs : message instanceof Error ? message.stack : message}`,
       );
     }
   }
 
   private formatScope(): string {
-    return `[${this.scope}]`;
+    // return `|${paddingRight(this.scope, ' ', 25)}|`;
+    return `|${this.scope}|`;
   }
 }
