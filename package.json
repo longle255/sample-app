@@ -134,7 +134,6 @@
 		"eslint": "^7.4.0",
 		"eslint-config-prettier": "^6.11.0",
 		"eslint-plugin-jest": "^23.18.0",
-		"http-terminator": "^2.0.3",
 		"istanbul-reports": "^3.0.2",
 		"jest": "^26.1.0",
 		"mock-express-request": "^0.2.0",

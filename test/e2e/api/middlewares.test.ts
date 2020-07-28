@@ -31,7 +31,7 @@ describe('/api', () => {
   // Test cases
   // -------------------------------------------------------------------------
   test('GET: / should contain response time header', async () => {
-    const response = await request(settings.server)
+    const response = await request(settings.app.callback())
       .get('/api/v1')
       .expect('Content-Type', /json/)
       .expect(200);
@@ -40,7 +40,7 @@ describe('/api', () => {
   });
 
   test('GET: / should contain request id header', async () => {
-    const response = await request(settings.server)
+    const response = await request(settings.app.callback())
       .get('/api/v1')
       .expect('Content-Type', /json/)
       .expect(200);
@@ -49,7 +49,7 @@ describe('/api', () => {
   });
 
   test('GET: /api/users should return forbidden', async () => {
-    const response = await request(settings.server)
+    const response = await request(settings.app.callback())
       .get('/api/v1/users')
       .expect('Content-Type', /json/)
       .expect(403);

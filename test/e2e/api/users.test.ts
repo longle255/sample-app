@@ -56,7 +56,7 @@ describe('/api/v1/users', () => {
   // -------------------------------------------------------------------------
 
   test('GET: /api/v1/users/profile should return current user profile', async () => {
-    let response = await request(settings.server)
+    let response = await request(settings.app.callback())
       .get('/api/v1/users/profile')
       .set('Authorization', userAuthToken)
       .expect('Content-Type', /json/)
@@ -64,7 +64,7 @@ describe('/api/v1/users', () => {
 
     expect(response.body.email).toBe(user.email);
 
-    response = await request(settings.server)
+    response = await request(settings.app.callback())
       .get('/api/v1/users/profile')
       .set('Authorization', adminAuthToken)
       .expect('Content-Type', /json/)
@@ -74,8 +74,8 @@ describe('/api/v1/users', () => {
   });
 
   test('GET: /api/v1/users should not be accessible for user', async () => {
-    const response = await request(settings.server)
-      .get(`/api/v1/users`)
+    const response = await request(settings.app.callback())
+      .get('/api/v1/users')
       .set('Authorization', userAuthToken)
       .expect('Content-Type', /json/)
       .expect(403);
@@ -83,8 +83,8 @@ describe('/api/v1/users', () => {
   });
 
   test('GET: /api/v1/users should be accessible for user', async () => {
-    const response = await request(settings.server)
-      .get(`/api/v1/users`)
+    const response = await request(settings.app.callback())
+      .get('/api/v1/users')
       .set('Authorization', adminAuthToken)
       .expect('Content-Type', /json/)
       .expect(200);

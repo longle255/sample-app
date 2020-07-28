@@ -28,7 +28,7 @@ export class UserFactory {
   }
 
   public create(user: any): Promise<IUser> {
-    return User.create(user as IUser);
+    return User.create(user as any);
   }
 
   public createUser(): Promise<IUser> {

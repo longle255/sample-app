@@ -35,7 +35,7 @@ describe('/api', () => {
   // -------------------------------------------------------------------------
 
   test('GET: /api/v1 should return the api-version', async () => {
-    const response = await request(settings.server)
+    const response = await request(settings.app.callback())
       .get('/api/v1')
       .expect('Content-Type', /json/)
       .expect(200);

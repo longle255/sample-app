@@ -69,14 +69,14 @@ module.exports = {
 		 * Runs TSLint over your project
 		 */
 		lint: {
-			script: eslint(`./src/**/*.ts`),
+			script: eslint('./src/**/*.ts'),
 			hiddenFromHelp: true,
 		},
 		/**
 		 * Transpile your app into javascript
 		 */
 		transpile: {
-			script: `tsc --project ./tsconfig.build.json`,
+			script: 'tsc --project ./tsconfig.build.json',
 			hiddenFromHelp: true,
 		},
 		/**
@@ -84,7 +84,7 @@ module.exports = {
 		 */
 		clean: {
 			default: {
-				script: series(`nps banner.clean`, `nps clean.dist`),
+				script: series('nps banner.clean', 'nps clean.dist'),
 				description: 'Deletes the ./dist folder',
 			},
 			dist: {
@@ -101,7 +101,7 @@ module.exports = {
 		 */
 		copy: {
 			default: {
-				script: series(`nps copy.swagger`, `nps copy.public`, `nps copy.templates`),
+				script: series('nps copy.swagger', 'nps copy.public', 'nps copy.templates'),
 				hiddenFromHelp: true,
 			},
 			swagger: {
@@ -151,11 +151,7 @@ module.exports = {
 		 */
 		test: {
 			default: {
-				script: series(
-					'nps banner.test',
-					eslint(`./test/**/*.ts`),
-					'cross-env NODE_ENV=test jest test -i --detectOpenHandles --forceExit',
-				),
+				script: series('nps banner.test', eslint('./test/**/*.ts'), 'cross-env NODE_ENV=test jest test -i --detectOpenHandles --forceExit'),
 			},
 			unit: {
 				default: {
@@ -163,7 +159,7 @@ module.exports = {
 					description: 'Runs the unit tests',
 				},
 				pretest: {
-					script: eslint(`./test/unit/**/*.ts`),
+					script: eslint('./test/unit/**/*.ts'),
 					hiddenFromHelp: true,
 				},
 				run: {
@@ -185,7 +181,7 @@ module.exports = {
 					description: 'Runs the integration tests',
 				},
 				pretest: {
-					script: eslint(`./test/integration/**/*.ts`),
+					script: eslint('./test/integration/**/*.ts'),
 					hiddenFromHelp: true,
 				},
 				run: {
@@ -208,7 +204,7 @@ module.exports = {
 					description: 'Runs the e2e tests',
 				},
 				pretest: {
-					script: eslint(`./test/e2e/**/*.ts`),
+					script: eslint('./test/e2e/**/*.ts'),
 					hiddenFromHelp: true,
 				},
 				run: {
@@ -271,5 +267,5 @@ function runFast(path) {
 }
 
 function eslint(path) {
-	return `eslint -c ./.eslintrc.json ${path} --format stylish  --fix`;
+	return `eslint -c ./.eslintrc.json "${path}" --format stylish  --fix`;
 }
