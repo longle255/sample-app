@@ -32,7 +32,7 @@ export class IdentityTokenService extends BaseService<IIdentityToken> {
       email,
       expires,
       type: tokenType,
-    } as IIdentityToken);
+    } as any);
   }
 
   public async invalidateToken(cond: any): Promise<IIdentityToken> {

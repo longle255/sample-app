@@ -48,7 +48,7 @@ export class RequestLoggerMiddleware implements KoaMiddlewareInterface {
         resCode: ctx.res.statusCode,
         resBody: ctx.res.statusMessage,
         resTime: delta,
-      } as IRequestLog);
+      } as any);
     });
   }
 }

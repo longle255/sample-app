@@ -4,7 +4,7 @@ module.exports = {
 	moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
 	testEnvironment: 'node',
 	setupFilesAfterEnv: ['./test/lib/setup.ts'],
-	collectCoverage: true,
+	collectCoverage: false,
 	coverageReporters: ['text', 'html'],
 	coverageDirectory: '<rootDir>/coverage/',
 };

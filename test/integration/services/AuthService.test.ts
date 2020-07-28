@@ -1,13 +1,13 @@
 import { Container } from 'typedi';
 import { AuthService, ITokenInfo } from '../../../src/api/services/AuthService';
 import { UserService } from '../../../src/api/services/UserService';
-import { IUser, IdentityToken } from '../../../src/api/models';
+import { IUser, IdentityToken, User } from '../../../src/api/models';
 import { createConnection, cleanAll, disconnect } from '../../lib/database';
 import { configureLogger } from '../../lib/logger';
 import { RegisterRequestSchema } from '../../../src/api/controllers/request-schemas';
 import { JobService } from '../../../src/api/services/JobService';
 import { JobServiceMock } from '../../mocks/JobServiceMock';
-import { BadRequestError } from 'routing-controllers';
+import { BadRequestError, ForbiddenError } from 'routing-controllers';
 import { DefaultResponseSchema } from '../../../src/api/controllers/response-schemas/DefaultResponseSchema';
 
 const account: RegisterRequestSchema = {
@@ -17,7 +17,7 @@ const account: RegisterRequestSchema = {
   password: '123456',
 };
 
-describe('UserService', () => {
+describe('AuthService', () => {
   let authService: AuthService;
   let jobService: JobServiceMock
   let userService: UserService
@@ -108,8 +108,35 @@ describe('UserService', () => {
     await expect(authService.register(newAccount)).rejects.toEqual(new BadRequestError('Referral code is not valid'));
   });
 
-  test('should generate an JWT for ', async () => {
+  test('should generate an JWT for user', async () => {
     const token: ITokenInfo = await authService.generateAuthToken(user);
     expect(token.profile.email).toEqual(user.email);
+  });
+
+  test('should log user in correctly', async () => {
+    await expect(authService.login({ email: 'notexist', password: '12345', twoFAToken: null })).rejects
+      .toEqual(new BadRequestError('Email and password combination is not valid'));
+
+    await expect(authService.login({ email: account.email, password: '12345', twoFAToken: null })).rejects
+      .toEqual(new BadRequestError('Email and password combination is not valid'));
+
+    await User.updateOne({ email: account.email }, { isActive: false });
+    await expect(authService.login({ email: account.email, password: account.password, twoFAToken: null })).rejects
+      .toEqual(new ForbiddenError('Your account is locked'));
+
+    await User.updateOne({ email: account.email }, { isActive: true, isConfirmed: false });
+    await expect(authService.login({ email: account.email, password: account.password, twoFAToken: null })).rejects
+      .toEqual(new ForbiddenError('Please confirm your email address by clicking the confirmation link in your email'));
+
+    await User.updateOne({ email: account.email }, { isConfirmed: true, twoFAEnabled: true });
+    await expect(authService.login({ email: account.email, password: account.password, twoFAToken: null })).rejects
+      .toEqual(new ForbiddenError('Missing two-factor authentication token'));
+
+    // don't know how to test 2FA function. skip for now
+
+    await User.updateOne({ email: account.email }, { isConfirmed: true, twoFAEnabled: false });
+    const token = await authService.login({ email: account.email, password: account.password, twoFAToken: null });
+    expect(token).toBeDefined();
+    expect(token.profile.email).toEqual(account.email);
   });
 });
