@@ -13,7 +13,7 @@ module.exports = {
 		 * Patch some npm modulé
 		 */
 		patchNpm: {
-			script: 'bash ./npmPatches/updateTypegoose.sh',
+			script: 'bash ./npmPatches/alterModules.sh',
 			description: 'Patching NPM',
 		},
 
