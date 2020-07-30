@@ -9,9 +9,9 @@ import Socket from '../lib/websocket';
 
 export const koaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
   const log = new Logger(__filename);
-  const now = Date.now();
 
   log.debug('Loading koa started');
+  log.getWinston().profile('loading koa');
   if (settings) {
 		/**
 		 * We create a new koa server instance.
@@ -64,5 +64,5 @@ export const koaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings
     Container.set('koa_app', koaApp);
     Container.set('socket', socket);
   }
-  log.verbose('Koa loaded, took %d ms', Date.now() - now);
+  log.getWinston().profile('loading koa');
 };

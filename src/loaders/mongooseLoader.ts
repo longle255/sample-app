@@ -24,8 +24,8 @@ function createConnection(connectionOptions: any): Promise<mongoose.Connection> 
 
 export const mongooseLoader: MicroframeworkLoader = async (settings: MicroframeworkSettings | undefined) => {
   const log = new Logger(__filename);
-  const now = Date.now();
   log.debug('Loading mongoose started');
+  log.getWinston().profile('loading mongoose');
   const connectionOptions = Object.assign(
     {},
     {
@@ -39,5 +39,5 @@ export const mongooseLoader: MicroframeworkLoader = async (settings: Microframew
     settings.setData('mongoose', mongoose);
     settings.onShutdown(() => connection.close());
   }
-  log.verbose('Mongoose loaded, took %d ms', Date.now() - now);
+  log.getWinston().profile('loading mongoose');
 };

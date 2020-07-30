@@ -23,9 +23,9 @@ function createConnection(): Promise<RedisClient> {
 
 export const redisLoader: MicroframeworkLoader = async (settings: MicroframeworkSettings | undefined) => {
   log.debug('Loading redis started');
-  const now = Date.now();
+  log.getWinston().profile('loading redis');
   const redisClient = await createConnection();
   Container.set('redisClient', redisClient);
   settings.setData('redisClient', redisClient);
-  log.verbose('Redis loaded, took %d ms', Date.now() - now);
+  log.getWinston().profile('loading redis');
 };

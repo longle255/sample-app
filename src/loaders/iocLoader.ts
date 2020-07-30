@@ -7,13 +7,15 @@ import { Logger } from '../lib/logger';
 
 export const iocLoader: MicroframeworkLoader = () => {
 	const log = new Logger(__filename);
-	const now = Date.now();
-	log.debug('Loading routing controller started');
+  log.debug('Loading routing controller started');
+  log.getWinston().profile('loading ioc');
+
 
 	/**
 	 * Setup routing-controllers to use typedi container.
 	 */
 	routingUseContainer(Container);
-	classValidatorUseContainer(Container);
-	log.verbose('Routing controller loaded, took %d ms', Date.now() - now);
+  classValidatorUseContainer(Container);
+  log.getWinston().profile('loading ioc');
+
 };
