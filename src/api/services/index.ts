@@ -3,8 +3,6 @@ export * from './BaseService';
 export * from './CacheService';
 export * from './EmailService';
 export * from './IdentityTokenService';
-export * from './InvitationService';
 export * from './JobService';
 export * from './Pagination';
 export * from './UserService';
-export * from './WsService';

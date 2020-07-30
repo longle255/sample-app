@@ -93,26 +93,6 @@ export class EmailService extends BaseService<IEmail> {
 		});
 	}
 
-	public async sendInvitationEmail(user: IUser, addresses: string): Promise<void> {
-		const subject = `[${env.app.name}] You have got an invitation from ${user.fullName}`;
-		const content = {
-			subject,
-			host: env.app.host,
-			name: user.fullName,
-			email: user.email,
-			link: LINK_INVITATION + user.referralCode,
-			data: [],
-		};
-		await this.renderAndQueueJob({
-			template: 'invitation',
-			locals: content,
-			from: env.sendgrid.sender,
-			to: addresses,
-			subject,
-			user,
-		});
-	}
-
 	public async renderAndQueueJob(options: any): Promise<void> {
 		const emailTemplate = new EmailTemplate({
 			views: {

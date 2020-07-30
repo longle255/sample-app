@@ -5,7 +5,6 @@ import Container from 'typedi';
 import { authorizationChecker, currentUserChecker } from '../api/services/AuthService';
 import { env } from '../env';
 import { Logger } from '../lib/logger';
-import Socket from '../lib/websocket';
 
 export const koaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
   const log = new Logger(__filename);
@@ -50,9 +49,6 @@ export const koaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings
       currentUserChecker: currentUserChecker(),
     });
 
-    // const socket = new Socket();
-    const socket = Container.get(Socket);
-    socket.attach(koaApp);
 
     // Run application to listen on given port
     const server = env.isTest ? {} : koaApp.listen(env.app.port);
@@ -62,7 +58,6 @@ export const koaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings
 
     Container.set('koa_server', server);
     Container.set('koa_app', koaApp);
-    Container.set('socket', socket);
   }
   log.getWinston().profile('loading koa');
 };

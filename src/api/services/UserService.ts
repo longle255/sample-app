@@ -10,19 +10,16 @@ import {
 	UserChangePasswordSchema,
 	UserConfirm2FASchema,
 	UserDisable2FASchema,
-	UserSendInvitationEmailSchema,
 	UserUpdateProfileSchema,
 } from '../controllers/request-schemas';
 import { DefaultResponseSchema } from '../controllers/response-schemas/DefaultResponseSchema';
-import { IInvitation, IUser, User } from '../models';
+import {  IUser, User } from '../models';
 import { BaseService } from './BaseService';
 import { EmailService } from './EmailService';
-import { InvitationService } from './InvitationService';
-import { defaultOption, Pagination, PaginationOptionsInterface } from './Pagination';
 
 @Service()
 export class UserService extends BaseService<IUser> {
-	constructor(private invitationService: InvitationService, private emailService: EmailService) {
+	constructor(private emailService: EmailService) {
 		super(new Logger(__filename), User);
 	}
 
@@ -146,43 +143,4 @@ export class UserService extends BaseService<IUser> {
 		return new DefaultResponseSchema(true, 'Two-factor authentication has been disabled for your account');
 	}
 
-	public async sendInvitationEmail(id: any, input: UserSendInvitationEmailSchema): Promise<DefaultResponseSchema> {
-		const user = await this.findOne({ _id: id });
-		if (!user || !user.isActive) {
-			throw new BadRequestError('User does not exist, not active, or 2FA is not enabled');
-		}
-		for (const email of input.emails) {
-			await this.invitationService.create({ invitedBy: id, email } as IInvitation);
-		}
-		const addresses = input.emails.join(',');
-		this.log.verbose('Sending invitations from [%s] to addresses [%s]', user.email, addresses);
-		await this.emailService.sendInvitationEmail(user, addresses);
-		return new DefaultResponseSchema(true, 'Invitations has been sent to your friends');
-	}
-
-	public async getReferrals(id: any, options: PaginationOptionsInterface): Promise<Pagination<IUser>> {
-		options = Object.assign({}, defaultOption, options);
-		const user = await this.findOne({ _id: id });
-		if (!user || !user.isActive) {
-			throw new BadRequestError('User does not exist, not active, or 2FA is not enabled');
-		}
-		const total = user.referrals.length;
-		const pageCount = Math.ceil(total / options.pageSize);
-		const pageNumber = options.pageNumber;
-		const data = await User.find({ email: { $in: user.referrals }, isActive: true })
-			.skip(options.pageNumber * options.pageSize)
-			.limit(options.pageSize)
-			.lean();
-		return new Pagination<any>({
-			total,
-			pagesCount: pageCount,
-			pageNumber,
-			pageSize: options.pageSize,
-			data: data.map((o: any) => {
-				// o._id = o._id.toString();
-				delete o.password;
-				return o;
-			}),
-		});
-	}
 }

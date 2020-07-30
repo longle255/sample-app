@@ -10,7 +10,6 @@ import {
   RegisterRequestSchema,
   ResetPasswordRequestSchema,
 } from './request-schemas';
-import { SocialAuthRequestSchema } from './request-schemas/SocialAuthRequestSchema';
 import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
 import { RefreshTokenRequestSchema } from './request-schemas/RefreshTokenRequestSchema';
 
@@ -27,11 +26,6 @@ export class UserController {
   @Post('/refresh-token')
   public async refreshToken(@Body({ validate: true }) token: RefreshTokenRequestSchema): Promise<ITokenInfo> {
     return this.authService.refreshToken(token);
-  }
-
-  @Post('/social')
-  public async socialAuth(@Body() data: SocialAuthRequestSchema): Promise<ITokenInfo> {
-    return this.authService.socialAuth(data);
   }
 
   @Post('/register')

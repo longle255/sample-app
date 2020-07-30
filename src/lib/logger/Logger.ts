@@ -56,8 +56,6 @@ export const consoleTransport = new transports.Console({
 
 export class Logger {
 
-  public winston= winston;
-
   public static DEFAULT_SCOPE = 'app';
 
   private static parsePathToScope(filepath: string): string {

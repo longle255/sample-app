@@ -11,13 +11,11 @@ import {
   Post,
   Put,
   QueryParams,
-  UseBefore,
 } from 'routing-controllers';
 
 import { DocumentType } from '@typegoose/typegoose';
 
 import { RecordNotFoundError } from '../errors/RecordNotFoundError';
-import { CaptchaMiddleware } from '../middlewares/CaptchaMiddleware';
 import { IUser, ROLES_ALL } from '../models/User';
 import { Pagination } from '../services/Pagination';
 import { UserService } from '../services/UserService';
@@ -25,7 +23,6 @@ import {
   UserChangePasswordSchema,
   UserConfirm2FASchema,
   UserDisable2FASchema,
-  UserSendInvitationEmailSchema,
   UserUpdateProfileSchema,
 } from './request-schemas';
 import { DefaultResponseSchema } from './response-schemas/DefaultResponseSchema';
@@ -116,25 +113,5 @@ export class UserController {
     @Body({ validate: true }) body: UserDisable2FASchema,
   ): Promise<DefaultResponseSchema> {
     return this.userService.disable2FA(user._id, body);
-  }
-
-  @Post('/profile/send-invitation')
-  @Authorized(ROLES_ALL)
-  @UseBefore(CaptchaMiddleware)
-  public async sendInvitationEmail(
-    @CurrentUser() user: DocumentType<IUser>,
-    @Body({ validate: true }) body: UserSendInvitationEmailSchema,
-  ): Promise<DefaultResponseSchema> {
-    return this.userService.sendInvitationEmail(user._id, body);
-  }
-
-  @Get('/profile/referrals')
-  @Authorized(ROLES_ALL)
-  public async getReferrals(@CurrentUser() user: DocumentType<IUser>, @QueryParams() params: any): Promise<Pagination<IUser>> {
-    return this.userService.getReferrals(user._id, {
-      pageSize: params.pageSize ? parseInt(params.pageSize, 10) : 10,
-      pageNumber: params.pageNumber ? parseInt(params.pageNumber, 10) : 0,
-      cond: params.cond ? params.cond : {},
-    });
   }
 }

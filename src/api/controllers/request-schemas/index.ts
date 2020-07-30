@@ -8,5 +8,3 @@ export { UserChangePasswordSchema } from './UserChangePasswordSchema';
 export { UserConfirm2FASchema } from './UserConfirm2FASchema';
 export { UserUpdateProfileSchema } from './UserUpdateProfileSchema';
 export { UserDisable2FASchema } from './UserDisable2FASchema';
-export { UserSendInvitationEmailSchema } from './UserSendInvitationEmailSchema';
-export { SocialAuthRequestSchema } from './SocialAuthRequestSchema';

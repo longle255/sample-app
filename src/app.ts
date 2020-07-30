@@ -13,7 +13,6 @@ import { koaLoader } from './loaders/koaLoader';
 import { mongooseLoader } from './loaders/mongooseLoader';
 import { publicLoader } from './loaders/publicLoader';
 import { redisLoader } from './loaders/redisLoader';
-// import { swaggerLoader } from './loaders/swaggerLoader';
 import { winstonLoader } from './loaders/winstonLoader';
 
 Promise.config({
@@ -52,7 +51,6 @@ bootstrapMicroframework({
     agendaLoader,
     koaLoader,
     publicLoader,
-    // swaggerLoader,
   ],
 })
   .then(() => banner(log))

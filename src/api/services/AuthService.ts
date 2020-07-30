@@ -5,7 +5,6 @@ import _ from 'lodash';
 import moment from 'moment';
 import { Action, BadRequestError, ForbiddenError } from 'routing-controllers';
 import { Container, Service, Inject } from 'typedi';
-import uuid from 'uuid';
 
 import { DocumentType } from '@typegoose/typegoose';
 
@@ -19,7 +18,6 @@ import {
 	RegisterRequestSchema,
 	ResetPasswordRequestSchema,
 } from '../controllers/request-schemas';
-import { SocialAuthRequestSchema } from '../controllers/request-schemas/SocialAuthRequestSchema';
 import { DefaultResponseSchema } from '../controllers/response-schemas/DefaultResponseSchema';
 import { IIdentityToken, TokenTypes } from '../models/IdentityToken';
 import { IUser, ROLES_ALL, User } from '../models/User';
@@ -205,39 +203,6 @@ export class AuthService {
 
 		const newToken = this.generateAuthToken(user);
 		return newToken;
-	}
-
-	public async socialAuth(credential: SocialAuthRequestSchema): Promise<ITokenInfo> {
-		// first need to check if this user exist => log them in
-		let user: DocumentType<IUser> = await this.userService.findOne({ serviceUserId: credential.userId, service: credential.service });
-		// first need to fetch FB data
-		const fbProfile = await this.fetchFacebookData(credential.accessToken);
-		if (!fbProfile) {
-			throw new BadRequestError(`Can't fetch social account of user ${credential.userId} on ${credential.service}`);
-		}
-		if (!user) {
-			// user could have removed the app and install again.
-			user = await this.userService.findOne({ email: fbProfile.email });
-			if (user) {
-				await user.update({ ...fbProfile });
-			} else {
-				// if no account => create one
-				user = await this.userService.create(
-					new User({
-						...fbProfile,
-						password: uuid.v4(),
-						isConfirmed: true, // don't need to verify email for this user
-					}),
-				);
-			}
-		}
-
-		if (!user.isActive) {
-			throw new BadRequestError('Your account is locked');
-		}
-
-		const token = this.generateAuthToken(user);
-		return token;
 	}
 
 	public async confirmEmail(data: ConfirmEmailRequestSchema): Promise<DefaultResponseSchema> {
