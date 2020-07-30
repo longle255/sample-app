@@ -10,8 +10,8 @@ export const agenda: Agenda = Container.get(Agenda);
 
 export const agendaLoader: MicroframeworkLoader = async (settings: MicroframeworkSettings | undefined) => {
   const log = new Logger(__filename);
-  const now = Date.now();
   log.debug('Loading agenda started');
+  log.getWinston().profile('loading agenda');
   agenda.configure({
     logger: log,
     agendaJobDefinitions: JobDefinitions,
@@ -34,5 +34,5 @@ export const agendaLoader: MicroframeworkLoader = async (settings: Microframewor
     settings.onShutdown(graceful);
   }
   Container.set('agenda', agenda);
-  log.verbose('Agenda loaded, took %d ms', Date.now() - now);
+  log.getWinston().profile('loading agenda');
 };

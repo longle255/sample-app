@@ -1,12 +1,20 @@
 import faker from 'faker';
-import { IUser, User } from '../../src/api/models/User';
+import { IUser, User, Roles } from '../../src/api/models/User';
 
 export class UserFactory {
-  public constant = {
-    firstName: 'Bruce',
-    lastName: 'Wayne',
-    email: 'bruce.wayne@wayne-enterprises.com',
-    password: '1234',
+  public user: any = {
+    firstName: 'User',
+    lastName: 'Test',
+    email: 'user@sampleapi.com',
+    password: '123456',
+    role: Roles.USER
+  };
+  public admin: any = {
+    firstName: 'Admin',
+    lastName: 'Test',
+    email: 'admin@sampleapi.com',
+    password: '123456',
+    role: Roles.ADMIN
   };
 
   public createRandom(): Promise<IUser> {
@@ -14,22 +22,20 @@ export class UserFactory {
     const firstName = faker.name.firstName(gender);
     const lastName = faker.name.lastName(gender);
     const email = faker.internet.email(firstName, lastName);
+    const password = '123456';
 
-    const user = new User();
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.email = email;
-    user.password = '1234';
-    return User.create(user);
+    return User.create({ firstName, lastName, email, password } as any);
   }
 
-  public createConstant(): Promise<IUser> {
-    const user = new User();
-    user.firstName = this.constant.firstName;
-    user.lastName = this.constant.lastName;
-    user.email = this.constant.email;
-    user.password = this.constant.password;
-    return User.create(user);
+  public create(user: any): Promise<IUser> {
+    return User.create(user as any);
+  }
+
+  public createUser(): Promise<IUser> {
+    return User.create(this.user);
+  }
+  public createAdmin(): Promise<IUser> {
+    return User.create(this.admin);
   }
 
   public async createMany(count: number): Promise<IUser[]> {

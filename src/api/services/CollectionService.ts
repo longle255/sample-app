@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { Service } from 'typedi';
 import { BadRequestError } from 'routing-controllers';
 import { DocumentType } from '@typegoose/typegoose';

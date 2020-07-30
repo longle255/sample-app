@@ -72,7 +72,7 @@ export abstract class BaseService<E extends BaseSchema> {
 	public async create(instant: E): Promise<DocumentType<E>> {
 		this.log.verbose(`Create a new ${this.model.modelName} => `, JSON.stringify(instant));
 		try {
-			const result = await this.model.create(instant);
+			const result = await this.model.create(instant as any);
 			if (events[this.model.modelName]) {
 				this.eventDispatcher.dispatch(events[this.model.modelName].created, result);
 			}

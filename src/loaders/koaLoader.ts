@@ -9,14 +9,14 @@ import Socket from '../lib/websocket';
 
 export const koaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
   const log = new Logger(__filename);
-  const now = Date.now();
 
   log.debug('Loading koa started');
+  log.getWinston().profile('loading koa');
   if (settings) {
-    /**
-     * We create a new koa server instance.
-     * We could have also use useExpressServer here to attach controllers to an existing koa instance.
-     */
+		/**
+		 * We create a new koa server instance.
+		 * We could have also use useExpressServer here to attach controllers to an existing koa instance.
+		 */
     const koaApp = createKoaServer({
       cors: {
         origin: '*',
@@ -35,17 +35,17 @@ export const koaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings
       classTransformer: true,
       routePrefix: env.app.routePrefix,
       defaultErrorHandler: false,
-      /**
-       * We can add options about how routing-controllers should configure itself.
-       * Here we specify what controllers should be registered in our koa server.
-       */
+			/**
+			 * We can add options about how routing-controllers should configure itself.
+			 * Here we specify what controllers should be registered in our koa server.
+			 */
       controllers: env.app.dirs.controllers,
       middlewares: env.app.dirs.middlewares,
       interceptors: env.app.dirs.interceptors,
 
-      /**
-       * Authorization features
-       */
+			/**
+			 * Authorization features
+			 */
       authorizationChecker: authorizationChecker(),
       currentUserChecker: currentUserChecker(),
     });
@@ -55,7 +55,7 @@ export const koaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings
     socket.attach(koaApp);
 
     // Run application to listen on given port
-    const server = koaApp.listen(env.app.port);
+    const server = env.isTest ? {} : koaApp.listen(env.app.port);
     // Here we can set the data for other loaders
     settings.setData('koa_server', server);
     settings.setData('koa_app', koaApp);
@@ -64,5 +64,5 @@ export const koaLoader: MicroframeworkLoader = (settings: MicroframeworkSettings
     Container.set('koa_app', koaApp);
     Container.set('socket', socket);
   }
-  log.verbose('Koa loaded, took %d ms', Date.now() - now);
+  log.getWinston().profile('loading koa');
 };

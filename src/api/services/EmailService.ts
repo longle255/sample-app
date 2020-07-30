@@ -54,7 +54,7 @@ export class EmailService extends BaseService<IEmail> {
 	}
 
 	public async sendResetPasswordEmail(user: DocumentType<IUser>, token: string): Promise<void> {
-		const subject = `Reset password`;
+		const subject = 'Reset password';
 		const content = {
 			subject,
 			host: env.app.host,

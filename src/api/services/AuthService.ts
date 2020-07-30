@@ -302,13 +302,13 @@ export class AuthService {
 		return user;
 	}
 
-	private async generateConfirmTokenAndEmail(user: DocumentType<IUser>): Promise<void> {
+	public async generateConfirmTokenAndEmail(user: DocumentType<IUser>): Promise<void> {
 		const token = await this.identityTokenService.generateToken(user, TokenTypes.EMAIL_CONFIRMATION);
-		this.emailService.sendRegistrationEmail(user, token.token);
+		await this.emailService.sendRegistrationEmail(user, token.token);
 		return;
 	}
 
-	private async generateAuthToken(user: DocumentType<IUser>): Promise<ITokenInfo> {
+	public async generateAuthToken(user: IUser | DocumentType<IUser>): Promise<ITokenInfo> {
 		const payload = {
 			exp: moment().add(env.jwt.expiresIn, 'minutes').unix(),
 			iat: moment().unix(),
@@ -319,7 +319,7 @@ export class AuthService {
 		const tokenData: ITokenInfo = {
 			token_type: 'Bearer',
 			access_token,
-        refresh_token: refresh_token.token,
+      refresh_token: refresh_token.token,
 			expires_in: env.jwt.expiresIn,
 			profile: {
 				firstName: user.firstName,
@@ -334,7 +334,7 @@ export class AuthService {
 		return tokenData;
 	}
 
-	private async fetchFacebookData(access_token: string): Promise<any> {
+	public async fetchFacebookData(access_token: string): Promise<any> {
 		const fields = 'id, name, email, picture';
 		const url = 'https://graph.facebook.com/me';
 		const params = { access_token, fields };

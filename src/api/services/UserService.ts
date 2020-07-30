@@ -73,7 +73,7 @@ export class UserService extends BaseService<IUser> {
 		user.password = data.password;
 		await user.save();
 		// await this.update({ _id: id }, { $set: { password: data.password } });
-		return new DefaultResponseSchema(true, `Password has been changed successfully`);
+		return new DefaultResponseSchema(true, 'Password has been changed successfully');
 	}
 
 	public async updateProfile(id: any, data: UserUpdateProfileSchema): Promise<DocumentType<IUser>> {
@@ -112,7 +112,7 @@ export class UserService extends BaseService<IUser> {
 		user.twoFAEnabled = true;
 		user.twoFATempSecret = undefined;
 		await user.save();
-		return new DefaultResponseSchema(true, `Two-factor authentication has been enabled for your account`);
+		return new DefaultResponseSchema(true, 'Two-factor authentication has been enabled for your account');
 	}
 
 	public async disable2FA(id: any, input: UserDisable2FASchema): Promise<DefaultResponseSchema> {
@@ -143,7 +143,7 @@ export class UserService extends BaseService<IUser> {
 				},
 			},
 		);
-		return new DefaultResponseSchema(true, `Two-factor authentication has been disabled for your account`);
+		return new DefaultResponseSchema(true, 'Two-factor authentication has been disabled for your account');
 	}
 
 	public async sendInvitationEmail(id: any, input: UserSendInvitationEmailSchema): Promise<DefaultResponseSchema> {
@@ -157,7 +157,7 @@ export class UserService extends BaseService<IUser> {
 		const addresses = input.emails.join(',');
 		this.log.verbose('Sending invitations from [%s] to addresses [%s]', user.email, addresses);
 		await this.emailService.sendInvitationEmail(user, addresses);
-		return new DefaultResponseSchema(true, `Invitations has been sent to your friends`);
+		return new DefaultResponseSchema(true, 'Invitations has been sent to your friends');
 	}
 
 	public async getReferrals(id: any, options: PaginationOptionsInterface): Promise<Pagination<IUser>> {

@@ -12,8 +12,8 @@ import { Logger } from '../lib/logger';
  */
 export const eventDispatchLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
   const log = new Logger(__filename);
-  const now = Date.now();
   log.debug('Loading event dispatcher started');
+  log.getWinston().profile('loading event dispatcher');
   if (settings) {
     const patterns = env.app.dirs.subscribers;
     patterns.forEach(pattern => {
@@ -24,5 +24,5 @@ export const eventDispatchLoader: MicroframeworkLoader = (settings: Microframewo
       });
     });
   }
-  log.verbose('Event dispatcher loaded, took %d ms', Date.now() - now);
+  log.getWinston().profile('loading event dispatcher');
 };

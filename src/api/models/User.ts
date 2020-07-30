@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { arrayProp, DocumentType, getModelForClass, modelOptions, pre, prop, Ref } from '@typegoose/typegoose';
 
 import { BaseSchema, defaultOptions, defaultSchemaOptions } from './BaseModel';
+import { IsEmail, MaxLength, MinLength } from 'class-validator';
 
 export enum Roles {
   ADMIN = 'admin',
@@ -33,7 +34,7 @@ async function genUniqueReferralCode(): Promise<string> {
   return code;
 }
 
-@pre<IUser>('save', async function(next: (err?: Error) => void): Promise<void> {
+@pre<IUser>('save', async function (next: (err?: Error) => void): Promise<void> {
   try {
     if (!this.referralCode || !this.referralCode.length) {
       this.referralCode = await genUniqueReferralCode();
@@ -63,6 +64,9 @@ export class IUser extends BaseSchema {
     index: true,
     maxlength: 250,
   })
+  // class-validator check
+  @IsEmail()
+  @MaxLength(250)
   public email: string;
 
   @prop({
@@ -70,20 +74,28 @@ export class IUser extends BaseSchema {
     minlength: 6,
     maxlength: 128,
   })
+  @MinLength(6)
+  @MaxLength(128)
   public password: string;
 
   @prop({
     required: true,
     maxlength: 50,
+    minlength: 2,
     default: '',
   })
+  @MinLength(2)
+  @MaxLength(50)
   public firstName: string;
 
   @prop({
     required: true,
     maxlength: 50,
+    minlength: 2,
     default: '',
   })
+  @MinLength(2)
+  @MaxLength(50)
   public lastName: string;
 
   get fullName(): string {
@@ -91,7 +103,7 @@ export class IUser extends BaseSchema {
   }
 
   @prop({
-    maxlength: 50,
+    maxlength: 128,
     default: undefined,
   })
   public avatarUrl?: string;
